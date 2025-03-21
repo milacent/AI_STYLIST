@@ -19,12 +19,12 @@ header{
 
 }
 header h1{
-    font-size: 140px;
+    font-size: 90px;
     opacity: 0.85;
 }
 
 header p{
-    font-size: 40px;
+    font-size: 20px;
     opacity: 0.7;
 }
 
@@ -76,8 +76,8 @@ section p {
     border-radius: 5px;
     background-color: #f932fc;
     cursor: pointer;
-    width:10%;
-    height: 70px;
+    width:8%;
+    height: 55px;
     transition: background-color 0.3s, transform 0.3s;
 }
 .buttons{
