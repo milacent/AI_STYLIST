@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <header>
+        {%include 'general/header.html' %}
+    </header>
+    <h1>Choose your outfit!</h1>
+    <label for="event">Event type:</label>
+    <select id="event">
+        <option value="casual">Casual</option>
+        <option value="formal">Formal</option>
+        <option value="party">Party</option>
+        <option value="sport">Sport</option>
+    </select>
+    <br><br>
+    <label for="mood">Mood:</label>
+    <select id="mood">
+        <option value="bright">Bright</option>
+        <option value="dark">Dark</option>
+        <option value="neutral">Neutral</option>
+    </select>
+    <br><br>
+    <button onclick="generateOutfit()">Create outfit</button>
+    <div id="model"></div>
+    <h2 id="outfit"></h2>
+
+    <script>
+        function generateOutfit() {
+            const event = document.getElementById('event').value;
+            const mood = document.getElementById('mood').value;
+
+            const outfits = {
+                casual: { bright: 'T-shirt', dark: 'Hoodie', neutral: 'Shirt' },
+                formal: { bright: 'Red suit', dark: 'Black suit', neutral: 'Gray suit' },
+                party: { bright: 'Red dress', dark: 'Black dress', neutral: 'Grey dress'},
+                sport: {bright: 'Neon top', dark: 'Black shirt', neutral: 'Gray sportswear'}
+            };
+
+            document.getElementById('outfit').innerText = outfits[event][mood];
+        }
+    </script>
+
+</body>
+</html>

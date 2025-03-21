@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="{% static 'css/about.css' %}">
 </head>
 <body>
-    <header>
+    {%include 'general/header.html' %}
+    <header class="header">
         <h1>AI Fashion Stylist</h1>
         <p>Your personal fashion assistant powered by AI</p>
     </header>
@@ -18,17 +19,15 @@
         <a href="#promote">Promote</a>
     </nav>
 -->
+<main class="content">
     <section id="about">
         <h2>About Us</h2>
-        <p>At AI Fashion Stylist, we use AI technology to help you choose the perfect outfit for every occasion. Whether you are looking for a casual look or a formal ensemble, our AI assistant gives you personalized recommendations tailored to your unique style and preferences. Let us transform the way you dress!</p>
+        <p>At AI Fashion Stylist, we use AI technology to help you choose the perfect outfit for every occasion...</p>
     </section>
 
     <section id="contact">
         <h2>Contact</h2>
-        <p>If you have any questions, feel free to reach out to us:</p>
         <p>Email: <a href="mailto:support@aifashion.com">support@aifashion.com</a></p>
-        <p>Phone: +7 (903) 123-45-67</p>
-        <p>Address: 123 Fashion Street, Moscow</p>
     </section>
 
     <section id="promote">
@@ -36,6 +35,7 @@
         <p>Want to partner with us and promote your clothing brand on our platform? We offer exciting opportunities for collaborations. Reach out to us for promotional packages and partnership details.</p>
         <p>Email: <a href="mailto:promotions@aifashion.com">promotions@aifashion.com</a></p>
     </section>
+</main>
 
     <footer>
         {% include 'general/footer.html' %}

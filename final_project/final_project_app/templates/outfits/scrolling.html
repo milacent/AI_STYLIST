@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Discover</title>
     <link rel="stylesheet" href="{% static 'css/scrolling.css' %}">
 </head>
 <body>
+    <header>
+        {%include 'general/header.html' %}
+    </header>
 
     <h1>Discover Fashion</h1>
     <p>Swipe to choose your favorite looks!</p>

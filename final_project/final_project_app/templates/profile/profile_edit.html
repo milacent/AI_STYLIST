@@ -5,6 +5,9 @@
     <title>Edit Profile</title>
 </head>
 <body>
+    <header>
+        {%include 'general/header.html' %}
+    </header>
     <h1>Edit your profile</h1>
     <br>
     <form method="POST" action="{% url 'profile_edit' %}">

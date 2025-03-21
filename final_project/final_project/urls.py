@@ -34,6 +34,8 @@ urlpatterns = [
     path('scrolling/', scrolling_page, name='scrolling'),
     path('about/', about_page, name='about'),
     path('terms/', terms_page, name='terms'),
+    path('for_you/', for_you_page, name='for_you'),
+    path('log_out/', log_out, name='log_out'),
     path('post/', post_page, name='post'),
     path('post/<int:id>', post_page, name='post'),
     path('send_like_post/<int:id>', send_like_post, name='like'),
@@ -43,6 +45,7 @@ urlpatterns = [
     path('posts_all/', post_list, name='posts_all'),
     path('make/', make_post_page, name='make_post'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
 
 if settings.DEBUG:  # Только для режима разработки (DEBUG=True)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
