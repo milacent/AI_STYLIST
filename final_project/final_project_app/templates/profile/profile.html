@@ -5,7 +5,7 @@
     <title>Profile</title>
 </head>
 <body>
-
+    {%include 'general/header.html' %}
     <h1>Your profile</h1>
 
     <section>
@@ -38,5 +38,9 @@
         <p><a href="{% url 'gallery_liked' %}">View Liked Posts</a></p>
         <p><a href="{% url 'profile_edit' %}">Edit Profile</a></p>
     </section>
+
+    <footer>
+        {% include 'general/footer.html' %}
+    </footer>
 </body>
 </html>

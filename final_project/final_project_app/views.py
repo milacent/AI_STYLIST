@@ -14,6 +14,9 @@ from .forms import PostForm
 from django.urls import reverse
 
 
+from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth import login, authenticate, logout
 # Create your views here.
 
 def Handle400(request, exception = None):
@@ -163,10 +166,6 @@ def gallery_liked_page(request):
     context = {}
     return render(request, "profile/gallery_liked.html", context)
 
-def top_outfits_page(request):
-    context = {}
-    return render(request, "outfits/posts_all.html", context)
-
 def scrolling_page(request):
     context = {}
     return render(request, "outfits/scrolling.html", context)
@@ -179,5 +178,11 @@ def terms_page(request):
     context = {}
     return render(request, "general/terms.html", context)
 
+def for_you_page(request):
+    context = {}
+    return render(request, "outfits/for_you.html", context)
 
-
+def log_out(request):
+    """Выход из аккаунта пользователя"""
+    logout(request)
+    return redirect('index')

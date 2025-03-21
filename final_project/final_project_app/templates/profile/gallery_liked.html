@@ -5,6 +5,9 @@
     <title>Liked</title>
 </head>
 <body>
+    <header>
+        {%include 'general/header.html' %}
+    </header>
     <h1>Your liked posts</h1>
 
     <section>
@@ -30,6 +33,7 @@
 
     <footer>
         <p><a href="{% url 'profile' %}">Back to profile</a></p>
+        {% include 'general/footer.html' %}
     </footer>
 </body>
 </html>
