@@ -57,14 +57,10 @@ h2 {
     margin:0
 }
 
-p {
-    font-size: 1.2em;
-}
 
 .post-link {
     text-decoration: none;
     color: inherit;
-    display: block;
 }
 
 .user_desc {

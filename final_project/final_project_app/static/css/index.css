@@ -67,13 +67,6 @@ section p {
     font-size: 1.5em;
 }
 
-footer {
-    margin-top: 50px;
-    padding: 20px;
-    background-color: rgb(19, 30, 55);
-    font-size: 1.2em;
-}
-
 .first-register{
     color: white;
     text-decoration: none;
