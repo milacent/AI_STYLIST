@@ -11,47 +11,82 @@
     <br>
     <form method="POST" action="{% url 'sign_up' %}">
         {% csrf_token %}
-        <label for="username">Username:</label>
-        <input type="text" id="username" placeholder="Enter username" name="username" required><br>
+        <div id="step1">
+            <label for="username">Username:</label>
+            <input type="text" id="username" placeholder="Enter username" name="username" required><br>
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" placeholder="abc@gmail.com" name="email" required><br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" placeholder="abc@gmail.com" name="email" required><br>
 
-        <label for="password1">Password:</label>
-        <input type="password" id="password1" placeholder="Enter password" name="password1" required><br>
+            <label for="password1">Password:</label>
+            <input type="password" id="password1" placeholder="Enter password" name="password1" required><br>
 
-        <label for="password2">Confirm Password:</label>
-        <input type="password" id="password2" placeholder="Enter password again" name="password2" required><br>
+            <label for="password2">Confirm Password:</label>
+            <input type="password" id="password2" placeholder="Enter password again" name="password2" required><br>
 
-        <p>Select your gender</p>
-        <input type="radio" id="male" value="1" name="gender" required>Male<br>
-        <input type="radio" id="female" value="0" name="gender" required>Female<br>
+            <p>Select your gender</p>
+            <input type="radio" id="male" value="1" name="gender" required>Male<br>
+            <input type="radio" id="female" value="0" name="gender" required>Female<br>
 
+            <button type="button" onclick="nextStep(1)">Next</button>
 
-        <h2>Body Measurements</h2>
-        <label for="height">Height (cm):</label>
-        <input type="number" id="height" name="height" required><br>
+        </div>
 
-        <label for="weight">Weight (kg):</label>
-        <input type="number" id="weight" name="weight" required><br>
+        <div id="step2" style="display: none;">
+            <h2>Body Measurements</h2>
+            <label for="height">Height (cm):</label>
+            <input type="number" id="height" name="height" required><br>
 
-        <label for="chest">Chest (cm):</label>
-        <input type="number" id="chest" name="chest" required><br>
+            <label for="weight">Weight (kg):</label>
+            <input type="number" id="weight" name="weight" required><br>
 
-        <label for="waist">Waist (cm):</label>
-        <input type="number" id="waist" name="waist" required><br>
+            <label for="chest">Chest (cm):</label>
+            <input type="number" id="chest" name="chest" required><br>
 
-        <label for="hips">Hips (cm):</label>
-        <input type="number" id="hips" name="hips" required><br>
+            <label for="waist">Waist (cm):</label>
+            <input type="number" id="waist" name="waist" required><br>
 
-        <h2>About Yourself</h2>
-        <label for="about">Write something about yourself:</label><br>
-        <textarea id="about" name="about" rows="4" cols="50" placeholder="Tell us about yourself" required></textarea><br>
+            <label for="hips">Hips (cm):</label>
+            <input type="number" id="hips" name="hips" required><br>
 
-        <button type="submit">Sign Up</button>
-    </form>
+            <button type="button" onclick="prevStep(2)">Back</button>
+            <button type="button" onclick="nextStep(2)">Next</button>
+        </div>
+
+        <div id="step3" style="display: none;">
+            <h2>About Yourself</h2>
+            <label for="about">Write something about yourself:</label><br>
+            <textarea id="about" name="about" rows="4" cols="50" placeholder="Tell us about yourself" required></textarea><br>
+            <button type="button" onclick="prevStep(3)">Back</button>
+            <button type="submit">Sign Up</button>
+        </div>
     <br>
     <p>Already have an account? <a href="{% url 'log_in' %}">Log In here</a>.</p>
     <p>By logging in, you agree to our <a href="{% url 'terms' %}">Terms and Conditions</a>.</p>
+
+    <script>
+        function nextStep(currentStep) {
+            let valid = true;
+            let step = document.getElementById('step' + currentStep);
+            let inputs = step.querySelectorAll('input, textarea');
+
+            inputs.forEach(input => {
+                if (!input.checkValidity()) {
+                    valid = false;
+                    input.reportValidity();
+                }
+            });
+
+            if (valid) {
+                document.getElementById('step' + currentStep).style.display = 'none';
+                document.getElementById('step' + (currentStep + 1)).style.display = 'block';
+            }
+        }
+
+        function prevStep(currentStep) {
+            document.getElementById('step' + currentStep).style.display = 'none';
+            document.getElementById('step' + (currentStep - 1)).style.display = 'block';
+        }
+    </script>
 </body>
 </html>
