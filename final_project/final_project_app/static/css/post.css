@@ -56,26 +56,6 @@ input, textarea {
     color: white;
 }
 
-/* Стили для кнопки */
-button {
-    padding: 12px 24px;
-    font-size: 1.5em;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    background: linear-gradient(135deg, #d100d1, #6f21b8);
-    color: white;
-    border-top: 1px solid white;
-    box-shadow: 0 4px 10px rgba(138, 43, 226, 0.5);
-}
-
-button:hover {
-    background: linear-gradient(135deg, #ff00ff, #8e2aeb);
-    transform: scale(1.07);
-    box-shadow: 0 6px 15px rgba(138, 43, 226, 0.7);
-}
 
 /* Стили для секции комментариев и кнопки "Like" */
 .like-button {

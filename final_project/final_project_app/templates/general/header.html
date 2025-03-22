@@ -8,17 +8,16 @@
 </head>
 <body>
 
-<header class="nav-container">
-        <nav>
-            <ul class="nav-menu">
-                <li><a href = "{% url 'for_you' %}">For you</a></li>
-                <li><a href = "{% url 'scrolling' %}">Scrolling</a></li>
-                <li><a href = "{% url 'posts_all' %}">Best outfits</a></li>
-                <li><a href = "{% url 'profile' %}">Profile</a></li>
-                <li><a href = "{% url 'about' %}">About</a></li>
-                <li><a href = "{% url 'log_out' %}">Log out</a></li>
-            </ul>
-        </nav>
+    <header>
+        <div class="nav-container">
+            <button onclick="window.location.href='{% url 'for_you' %}'">For you</button>
+            <button onclick="window.location.href='{% url 'scrolling' %}'">Scrolling</button>
+            <button onclick="window.location.href='{% url 'posts_all' %}'">Best outfits</button>
+            <button onclick="window.location.href='{% url 'profile' %}'">Profile</button>
+            <button onclick="window.location.href='{% url 'about' %}'">About</button>
+            <button onclick="window.location.href='{% url 'log_out' %}'">Log out</button>
+        </div>
     </header>
+
 </body>
 </html>
