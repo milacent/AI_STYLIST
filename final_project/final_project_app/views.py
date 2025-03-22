@@ -164,6 +164,7 @@ def catalog_page(request):
 
 def gallery_liked_page(request):
     context = {}
+    context['posts'] = [i.post for i in LikePost.objects.filter(user=request.user)]
     return render(request, "profile/gallery_liked.html", context)
 
 def scrolling_page(request):
