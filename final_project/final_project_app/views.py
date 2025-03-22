@@ -1,21 +1,15 @@
-from django.http import HttpResponseServerError
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseServerError, HttpResponseRedirect
-from django.urls import path
+from django.urls import path, reverse
 
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
 from final_project_app.models import Info, Comment, Post, LikePost, LikeComment
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 
 from .models import Post
 from .forms import PostForm
-from django.urls import reverse
 
-
-from django.shortcuts import render
-from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout
 # Create your views here.
 
@@ -151,10 +145,14 @@ def post_page(request, id=0):
 def send_like_post(request, id):
     context = {}
     like = LikePost.objects.filter(user=request.user, post=Post.objects.get(id=id))
-    if len(like) == 0:
-        like = LikePost(user=request.user, post=Post.objects.get(id=id))
-        like.save()
-    return redirect('/post/'+str(id))
+
+    if like.exists():
+        like.delete()
+        return redirect('/gallery_liked')
+    else:
+        LikePost.objects.create(user=request.user, post=Post.objects.get(id=id))
+        return redirect('/post/' + str(id))
+
 
 @login_required
 def catalog_page(request):
@@ -162,9 +160,14 @@ def catalog_page(request):
     # context['items'] = Items.objects.all
     return render(request, 'outfits/catalog.html', context)
 
+@login_required
 def gallery_liked_page(request):
-    context = {}
+    liked_posts = Post.objects.filter(likepost__user=request.user)
+    context = {
+        'liked_posts': liked_posts
+    }
     return render(request, "profile/gallery_liked.html", context)
+
 
 def scrolling_page(request):
     context = {}
