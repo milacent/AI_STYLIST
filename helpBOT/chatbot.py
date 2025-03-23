@@ -1,43 +1,49 @@
-from flask import Flask, request, jsonify,render_template
-import json
+from flask import Flask, request, jsonify
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-
 from problems import problems
 
 app = Flask(__name__)
 
-vectorizer = TfidfVectorizer()
 question_texts = list(problems.keys())
-question_vectors = vectorizer.fit_transform(question_texts)
-@app.route('/')
-def home():
-    return render_template("chat_bot.html")  # Отдаём HTML-страницу
+vectorizer = TfidfVectorizer().fit(question_texts)
+question_vectors = vectorizer.transform(question_texts)
 
-@app.route('/ask', methods=['POST'])
-def ask():
-    data = request.get_json()
-    if not data or "question" not in data:
-        return jsonify({"error": "Введите ваш вопрос"}), 400
 
-    user_question = data["question"].strip().lower()
-    user_vector = vectorizer.transform([user_question])
+@app.route('/getrec', methods=['GET'])
+def get_recommendation():
+    user_problem = request.args.get('data', '').strip().lower()
+    if not user_problem:
+        return jsonify({"error": "Укажите проблему через параметр ?data=ваша_проблема"}), 400
+
+    # Если пользователь явно ввел "другое", сразу направляем к администратору
+    if user_problem in ["другое", "не знаю", "нет похожей проблемы"]:
+        response = "Ваш запрос передан администратору. Ожидайте ответа."
+        return jsonify({
+            "вы ввели": user_problem,
+            "похожесть": 0,
+            "решение": response
+        })
+
+    # Ищем наиболее похожую проблему
+    user_vector = vectorizer.transform([user_problem])
     similarities = cosine_similarity(user_vector, question_vectors).flatten()
-
     max_similarity = max(similarities)
     best_match_index = similarities.argmax()
-    best_match_question = question_texts[best_match_index]
+    best_problem = question_texts[best_match_index]
 
-    if max_similarity > 0.5:
-        response = problems[best_match_question]
+    # Если похожесть меньше порога или проблема неизвестна
+    if max_similarity < 0.3:
+        response = "Ваш запрос передан администратору. Ожидайте ответа."
     else:
-        response = "Ваш вопрос передан администратору. Ожидайте ответа."
+        response = problems[best_problem]
 
     return jsonify({
-        "user_question": user_question,
-        "matched_question": best_match_question,
-        "similarity": round(max_similarity, 2),
-        "response": response
+        "вы ввели": user_problem,
+        "похоже на": best_problem,
+        "решение": response
     })
+
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port = 8081)
+    app.run(host='0.0.0.0', port=8081, debug=True)
