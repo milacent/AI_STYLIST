@@ -42,6 +42,11 @@ class Item(models.Model):
     image = models.ImageField()
 
 
+class LikeItem(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+
+
 class UserGrade(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     info = models.ForeignKey(Info, on_delete=models.CASCADE)
