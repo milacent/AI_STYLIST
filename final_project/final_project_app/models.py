@@ -1,3 +1,5 @@
+from cgi import maxlen
+
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -35,7 +37,16 @@ class Item(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     url = models.URLField()
     image = models.ImageField()
+    # color
+    # material
+    # style
+    # whether_grade
+    #
 
+class Looks(models.Model):
+    items = models.ForeignKey(to=Item, on_delete=models.CASCADE)
+    weather_grade = models.IntegerField() # Насколько подходит по погоде -10 - зима +10 - жара
+    description = models.CharField(max_length=2058)
 
 class UserGrade(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
