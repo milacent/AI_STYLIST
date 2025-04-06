@@ -53,4 +53,22 @@ class UserGrade(models.Model):
     info = models.ForeignKey(Info, on_delete=models.CASCADE)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     grade = models.IntegerField()
-# Create your models here.
+
+
+class ClothingItem(models.Model):
+    categories= [
+        ('hats', 'Головные уборы'),
+        ('outerwear', 'Верхняя одежда'),
+        ('tops', 'Топы'),
+        ('bottoms', 'Низы'),
+        ('shoes', 'Обувь')
+    ]
+
+    category = models.CharField(max_length=10, choices=categories)
+    name = models.CharField(max_length=100)
+    image_name = models.CharField(max_length=100)
+    min_temp = models.IntegerField()
+    max_temp = models.IntegerField()
+
+    def image_url(self):
+        return f'/static/images/default_clothes/{self.category.lower()}s/{self.image_name}'
