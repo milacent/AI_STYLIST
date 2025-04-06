@@ -56,18 +56,13 @@ def sign_up_page(request):
         gender = request.POST['gender']
         about_me = request.POST['about']
         if password == password2:
-            try:
-                user = User.objects.create_user(username, email, password)
-                info = Info(user=user, height=int(height), weight=int(weight),
-                            chest=int(chest), waist=int(waist), hips=int(hips), gender=int(gender), about_me=about_me)
-                user.save()
-                info.save()
-                logout(request)
-                return redirect('/log_in')
-            except:
-                raise NotImplementedError
-        else:
-            raise NotImplementedError
+            user = User.objects.create_user(username, email, password)
+            info = Info(user=user, height=int(height), weight=int(weight),
+                        chest=int(chest), waist=int(waist), hips=int(hips), gender=int(gender), about_me=about_me)
+            user.save()
+            info.save()
+            logout(request)
+            return redirect('/log_in')
     return render(request, "auth/sign_up.html", context)
 
 
