@@ -46,13 +46,6 @@ class UserGrade(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     grade = models.IntegerField()
 
-class Materials(models.Model):
-    class Material(models.TextChoices):
-        cotton = "cotton", ("cotton")
-        polyester = "polyester", ("polyester")
-        flax = "flax", ("flax")
-    material = models.CharField(choices=Material.choices, max_length=20)
-    percent = models.IntegerField()
 
 class ClothingItem(models.Model):
     categories= [
@@ -65,12 +58,25 @@ class ClothingItem(models.Model):
 
     class Styles(models.TextChoices):
         classic = "classic", ("classic")
-        punk = "punk", ("punk")
+        casual = "casual", ("casual")
         sport = "sport", ("sport")
-        military = "military", ("military")
+        business = "business", ("business")
         streetwear = "streetwear", ("streetwear")
+        retro = "retro", ("retro")
+        punk = "punk", ("punk")
+        military = "military", ("military")
         emo = "emo", ("emo")
-        flex = "flex", ("flex")
+        grunge = "grunge", ("grunge")
+        minimalism = "minimalism", ("minimalism")
+
+    class Material(models.TextChoices):
+        cotton = "cotton", ("cotton")
+        polyester = "polyester", ("polyester")
+        wool = "wool", ("wool")
+        silk = "silk", ("silk")
+        denim = "denim", ("denim")
+        flax = "flax", ("flax")
+
 
     category = models.CharField(max_length=10, choices=categories)
     name = models.CharField(max_length=100)
@@ -78,14 +84,12 @@ class ClothingItem(models.Model):
     min_temp = models.IntegerField(default=0)
     max_temp = models.IntegerField(default=0)
     color = models.CharField(max_length=15)
-    style = models.TextField(choices=Styles.choices, default="flex")
-    material = models.ForeignKey(to=Materials, on_delete=models.CASCADE)
+    style = models.TextField(choices=Styles.choices, default="classic")
+    material = models.CharField(choices=Material.choices, max_length=20, default="cotton")
 
-    def image_url(self):
-        return f'/static/images/default_clothes/{self.category.lower()}s/{self.image_name}'
 
 class Looks(models.Model):
     items = models.ForeignKey(to=Item, on_delete=models.CASCADE)
     weather_grade = models.IntegerField()  # Насколько подходит по погоде -10 - зима +10 - жара
     description = models.CharField(max_length=2058)
-    style = models.CharField(choices=ClothingItem.Styles.choices, default="flex")
+    style = models.CharField(choices=ClothingItem.Styles.choices, default="classic")
