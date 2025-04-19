@@ -65,7 +65,6 @@ class ClothingItem(models.Model):
         retro = "retro", ("retro")
         punk = "punk", ("punk")
         military = "military", ("military")
-        emo = "emo", ("emo")
         grunge = "grunge", ("grunge")
         minimalism = "minimalism", ("minimalism")
 
@@ -73,9 +72,10 @@ class ClothingItem(models.Model):
         cotton = "cotton", ("cotton")
         polyester = "polyester", ("polyester")
         wool = "wool", ("wool")
-        silk = "silk", ("silk")
+        leather = "leather", ("leather")
         denim = "denim", ("denim")
         flax = "flax", ("flax")
+        suede = "suede", ("suede")
 
 
     category = models.CharField(max_length=10, choices=categories)
