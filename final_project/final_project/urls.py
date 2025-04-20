@@ -26,6 +26,7 @@ handler404 = Handle400
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index_page, name='index'),
+    path('api/posts/',posts_api,name='post_api'),
     path('log_in/', log_in_page, name='log_in'),
     path('sign_up/', sign_up_page, name='sign_up'),
     path('profile/', profile_page, name='profile'),

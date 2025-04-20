@@ -32,7 +32,7 @@ SECRET_KEY = 'django-insecure-5kqh9&0*fmfh6f^qm68-*ee+@#5)q-39h#8k*r4fxo&svkxy69
 DEBUG = True #ДЛЯ ПРОВЕРОК ОШИБОК ВКЛЮЧИТЬ!
 # НЕ РАБОТАЕТ CSS И КАРТИНКИ, СТАВЬТЕ DEBUG=TRUE
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 APPEND_SLASH = True
 

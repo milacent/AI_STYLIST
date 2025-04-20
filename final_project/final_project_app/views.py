@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponseServerError, HttpResponseRedirect
+from django.http import HttpResponseServerError, HttpResponseRedirect, JsonResponse
 from django.urls import path, reverse
 
 from django.contrib.auth.decorators import login_required
@@ -40,6 +40,20 @@ def log_in_page(request):
             print('1')
 
     return render(request, "auth/log_in.html", context)
+
+def posts_api(request):
+    posts = Post.objects.all()
+    data = [
+        {
+            'id': post.id,
+            'title': post.title,
+            'image': post.image.url if post.image else '',
+            'description': post.description
+        }
+        for post in posts
+    ]
+    return JsonResponse(data, safe=False)
+
 
 def sign_up_page(request):
     context = {}
