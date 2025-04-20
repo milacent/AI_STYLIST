@@ -45,6 +45,9 @@ urlpatterns = [
     path('catalog/', catalog_page, name='catalog'),
     path('posts_all/', post_list, name='posts_all'),
     path('make/', make_post_page, name='make_post'),
+    path('save_look/', save_look, name='save_look_empty'),
+    path('save_look/<int:look_id>/', save_look, name='save_look'),
+    path('regenerate_look/', regenerate_look, name='regenerate_look'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 

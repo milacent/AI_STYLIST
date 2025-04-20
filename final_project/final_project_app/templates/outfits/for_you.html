@@ -8,44 +8,95 @@
 
 </head>
 <body>
-    {%include 'general/header.html' %}
-    <h1>Choose your outfit!</h1>
-    <label for="event">Event type:</label>
-    <select id="event">
-        <option value="casual">Casual</option>
-        <option value="formal">Formal</option>
-        <option value="party">Party</option>
-        <option value="sport">Sport</option>
-    </select>
-    <br><br>
-    <label for="mood">Mood:</label>
-    <select id="mood">
-        <option value="bright">Bright</option>
-        <option value="dark">Dark</option>
-        <option value="neutral">Neutral</option>
-    </select>
-    <br><br>
-    <button onclick="generateOutfit()">Create outfit</button>
-    <div id="model"></div>
-    <h2 id="outfit"></h2>
+        {%include 'general/header.html' %}
+        {% block content %}
+        <div class="outfit-items">
+        <!-- Шапка -->
+        {% if look.head %}
+        <div class="outfit-item head-item">
+            <!-- Исправленный путь для изображения шапки -->
+            <img src="{% static 'images/default_clothes/head/' %}{{ look.get_temperature_folder }}{{ look.head.image_name }}"
+                 alt="{{ look.head.name }}" class="item-image">
 
-    <img src="{{ item.image_url }}" alt="{{ item.name }}" class="clothing-image">
+            <div class="item-info">
+                <h3>{{ look.head.name }}</h3>
+                <div class="item-meta">
+                    <span class="style-badge">{{ look.head.get_style_display }}</span>
+                    <span class="material-badge">{{ look.head.get_material_display }}</span>
+                </div>
+            </div>
+        </div>
+        {% endif %}
 
-    <script>
-        function generateOutfit() {
-            const event = document.getElementById('event').value;
-            const mood = document.getElementById('mood').value;
+        <!-- Верхняя одежда -->
+        {% if look.outerwear %}
+        <div class="outfit-item outerwear-item">
+            <img src="{% static 'images/default_clothes/outerwear/' %}{{ look.get_temperature_folder }}{{ look.outerwear.image_name }}"
+                 alt="{{ look.outerwear.name }}" class="item-image">
+            <div class="item-info">
+                <h3>{{ look.outerwear.name }}</h3>
+                <div class="item-meta">
+                    <span class="style-badge">{{ look.outerwear.get_style_display }}</span>
+                    <span class="material-badge">{{ look.outerwear.get_material_display }}</span>
+                </div>
+            </div>
+        </div>
+        {% endif %}
 
-            const outfits = {
-                casual: { bright: 'T-shirt', dark: 'Hoodie', neutral: 'Shirt' },
-                formal: { bright: 'Red suit', dark: 'Black suit', neutral: 'Gray suit' },
-                party: { bright: 'Red dress', dark: 'Black dress', neutral: 'Grey dress'},
-                sport: {bright: 'Neon top', dark: 'Black shirt', neutral: 'Gray sportswear'}
-            };
+        <!-- Верх -->
+        {% if look.top %}
+        <div class="outfit-item top-item">
+            <img src="{% static 'images/default_clothes/tops/' %}{{ look.get_temperature_folder }}{{ look.top.image_name }}"
+                 alt="{{ look.top.name }}" class="item-image">
+            <div class="item-info">
+                <h3>{{ look.top.name }}</h3>
+                <div class="item-meta">
+                    <span class="style-badge">{{ look.top.get_style_display }}</span>
+                    <span class="material-badge">{{ look.top.get_material_display }}</span>
+                </div>
+            </div>
+        </div>
+        {% endif %}
 
-            document.getElementById('outfit').innerText = outfits[event][mood];
-        }
-    </script>
+        <!-- Низ -->
+        {% if look.bottom %}
+        <div class="outfit-item bottom-item">
+            <img src="{% static 'images/default_clothes/bottoms/' %}{{ look.get_temperature_folder }}{{ look.bottom.image_name }}"
+                 alt="{{ look.bottom.name }}" class="item-image">
+            <div class="item-info">
+                <h3>{{ look.bottom.name }}</h3>
+                <div class="item-meta">
+                    <span class="style-badge">{{ look.bottom.get_style_display }}</span>
+                    <span class="material-badge">{{ look.bottom.get_material_display }}</span>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Обувь -->
+        {% if look.shoes %}
+        <div class="outfit-item shoes-item">
+            <img src="{% static 'images/default_clothes/shoes/' %}{{ look.get_temperature_folder }}{{ look.shoes.image_name }}"
+                 alt="{{ look.shoes.name }}" class="item-image">
+            <div class="item-info">
+                <h3>{{ look.shoes.name }}</h3>
+                <div class="item-meta">
+                    <span class="style-badge">{{ look.shoes.get_style_display }}</span>
+                    <span class="material-badge">{{ look.shoes.get_material_display }}</span>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    <div class="outfit-actions">
+        <form method="post" action="{% url 'save_look_empty' %}" class="save-form">
+            {% csrf_token %}
+            <button type="submit" class="save-button">Сохранить образ</button>
+        </form>
+        <a href="{% url 'regenerate_look' %}?city={{ city }}" class="regenerate-button">Новый образ</a>
+    </div>
+    {% endblock %}
+
 
 </body>
 </html>

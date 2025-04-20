@@ -145,3 +145,5 @@ LOGIN_URL= '/log_in'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+WEATHER_API_KEY = "700a9378ddeae4112c9cebb5305c7506"

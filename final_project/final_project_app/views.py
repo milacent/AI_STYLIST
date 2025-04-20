@@ -1,16 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseServerError, HttpResponseRedirect, JsonResponse
 from django.urls import path, reverse
-
 from django.contrib.auth.decorators import login_required
-from final_project_app.models import Info, Comment, Post, LikePost, LikeComment
+from final_project_app.models import Info, Comment, Post, LikePost, LikeComment, Looks
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-
-from .models import Post
 from .forms import PostForm
-
 from django.contrib.auth import login, authenticate, logout
+
 # Create your views here.
 
 def Handle400(request, exception = None):
@@ -191,8 +188,37 @@ def terms_page(request):
     return render(request, "general/terms.html", context)
 
 def for_you_page(request):
-    context = {}
-    return render(request, "outfits/for_you.html", context)
+    city = request.GET.get('city', 'Moscow')
+
+    try:
+        look = Looks.generate_for_city(city)
+
+        look.save()
+
+        context = {
+            'look': look,
+            'temperature': look.weather_grade,
+            'city': city,
+            'error': None
+        }
+    except Exception as e:
+        context = {
+            'error': f"Не удалось сгенерировать образ: {str(e)}",
+            'look': None
+        }
+
+    return render(request, 'outfits/for_you.html', context)
+
+@login_required
+def save_look(request, look_id):
+    if request.method == 'POST':
+        look = Looks.objects.get(id=look_id)
+        request.user.saved_looks.add(look)
+    return redirect('for_you')
+
+def regenerate_look(request):
+    city = request.GET.get('city', 'Moscow')
+    return redirect(f'/for-you/?city={city}')
 
 def log_out(request):
     """Выход из аккаунта пользователя"""
