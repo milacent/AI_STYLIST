@@ -1,3 +1,5 @@
+from pyexpat.errors import messages
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseServerError, HttpResponseRedirect, JsonResponse
 from django.urls import path, reverse
@@ -192,7 +194,8 @@ def for_you_page(request):
 
     try:
         look = Looks.generate_for_city(city)
-
+        if isinstance(look, str):  # Если вернулась строка с ошибкой
+            raise ValueError(look)
         look.save()
 
         context = {
@@ -214,6 +217,18 @@ def save_look(request, look_id):
     if request.method == 'POST':
         look = Looks.objects.get(id=look_id)
         request.user.saved_looks.add(look)
+    return redirect('for_you')
+
+@login_required
+def save_look_empty(request):
+    if request.method == 'POST':
+        city = request.POST.get('city', 'Moscow')
+        try:
+            look = Looks.generate_for_city(city)
+            if look:
+                request.user.saved_looks.add(look)
+        except Exception as e:
+            messages.error(request, f"Ошибка сохранения: {str(e)}")
     return redirect('for_you')
 
 def regenerate_look(request):

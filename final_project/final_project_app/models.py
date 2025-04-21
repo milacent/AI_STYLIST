@@ -89,6 +89,9 @@ class ClothingItem(models.Model):
     style = models.TextField(choices=Styles.choices, default="classic")
     material = models.CharField(choices=Material.choices, max_length=20, default="cotton")
 
+    def get_temperature_folder(self):
+        return f"{self.min_temp}_{self.max_temp}"
+
 
 class Looks(models.Model):
     # items = models.ForeignKey(to=Item, on_delete=models.CASCADE)
@@ -115,21 +118,31 @@ class Looks(models.Model):
     def get_temperature_range(self):
         return f"{self.min_temp}°C to {self.max_temp}°C"
 
-    @classmethod
-    def get_temperature_folder(cls, temp):
-        """Возвращает строку для папки с изображениями по температуре"""
-        if temp <= -10:
-            return "-20_-10"
-        elif temp <= 0:
-            return "-10_0"
-        elif temp <= 10:
-            return "0_10"
-        elif temp <= 20:
-            return "10_20"
-        else:
-            return "20_30"
+    def get_temperature_folder(self):
+        return f"{self.min_temp}_{self.max_temp}"
 
-        # Подбираем вещи
+    @classmethod
+    def generate_for_temperature(cls, temp):
+        """Генерирует образ для температуры"""
+
+        def get_folder_by_temp(temp):
+            if temp <= -10:
+                return "-20_-10"
+            elif temp <= 0:
+                return "-10_0"
+            elif temp <= 10:
+                return "0_10"
+            elif temp <= 20:
+                return "10_20"
+            else:
+                return "20_30"
+
+        temp_folder = get_folder_by_temp(temp)
+
+        min_t, max_t = map(int, temp_folder.split('_'))
+
+        print(f"\nГенерация для {temp}°C (диапазон: {temp_folder})")
+
         categories = {
             'head': 'head',
             'top': 'tops',
@@ -141,9 +154,16 @@ class Looks(models.Model):
             field: ClothingItem.objects.filter(
                 category=category,
                 min_temp__lte=max_t,
-                max_temp__gte=min_t
+                max_temp__gte=min_t,
+                min_temp=min_t,
+                max_temp=max_t
             ).order_by('?').first()
-            for field, category in categories.items()
+            for field, category in [
+                ('head', 'head'),
+                ('top', 'tops'),
+                ('bottom', 'bottoms'),
+                ('shoes', 'shoes')
+            ]
         }
 
         if max_t < 20:
@@ -161,6 +181,7 @@ class Looks(models.Model):
             **items
         )
 
+
     @classmethod
     def get_current_weather(cls, city='Moscow'):
         try:
@@ -176,4 +197,6 @@ class Looks(models.Model):
         """Генерация образа для указанного города"""
         temp = cls.get_current_weather(city)
         return cls.generate_for_temperature(temp)
+
+
 
