@@ -15,7 +15,6 @@
                 <!-- Шапка -->
                 {% if look.head %}
                 <div class="outfit-item head-item">
-                    <!-- Исправленный путь для изображения шапки -->
                     <img src="{% static 'images/default_clothes/head/' %}{{ look.head.get_temperature_folder }}/{{ look.head.image_name }}"
                          alt="{{ look.head.name }}" class="item-image">
 

@@ -143,28 +143,20 @@ class Looks(models.Model):
 
         print(f"\nГенерация для {temp}°C (диапазон: {temp_folder})")
 
-        categories = {
-            'head': 'head',
-            'top': 'tops',
-            'bottom': 'bottoms',
-            'shoes': 'shoes'
-        }
+        items = {}
+        categories = [
+            ('head', 'head'),
+            ('top', 'tops'),
+            ('bottom', 'bottoms'),
+            ('shoes', 'shoes')
+        ]
 
-        items = {
-            field: ClothingItem.objects.filter(
+        for field, category in categories:
+            items[field] = ClothingItem.objects.filter(
                 category=category,
                 min_temp__lte=max_t,
-                max_temp__gte=min_t,
-                min_temp=min_t,
-                max_temp=max_t
+                max_temp__gte=min_t
             ).order_by('?').first()
-            for field, category in [
-                ('head', 'head'),
-                ('top', 'tops'),
-                ('bottom', 'bottoms'),
-                ('shoes', 'shoes')
-            ]
-        }
 
         if max_t < 20:
             items['outerwear'] = ClothingItem.objects.filter(
@@ -180,6 +172,12 @@ class Looks(models.Model):
             description="Автоматически сгенерированный образ",
             **items
         )
+
+    saved_by = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        related_name='saved_looks',
+        blank=True
+    )
 
 
     @classmethod

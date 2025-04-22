@@ -227,8 +227,12 @@ def save_look_empty(request):
             look = Looks.generate_for_city(city)
             if look:
                 request.user.saved_looks.add(look)
+                return redirect('for_you')
         except Exception as e:
-            messages.error(request, f"Ошибка сохранения: {str(e)}")
+            return render(request, 'outfits/for_you.html', {
+                'error': f"Ошибка сохранения: {str(e)}",
+                'look': None
+            })
     return redirect('for_you')
 
 def regenerate_look(request):
