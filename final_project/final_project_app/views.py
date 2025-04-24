@@ -11,7 +11,7 @@ from .models import Post
 from .forms import PostForm
 
 from django.contrib.auth import login, authenticate, logout
-# Create your views here.
+
 
 def Handle400(request, exception = None):
     context = {}

@@ -92,4 +92,4 @@ class Looks(models.Model):
     items = models.ForeignKey(to=Item, on_delete=models.CASCADE)
     weather_grade = models.IntegerField()  # Насколько подходит по погоде -10 - зима +10 - жара
     description = models.CharField(max_length=2058)
-    style = models.CharField(choices=ClothingItem.Styles.choices, default="classic")
+    style = models.CharField(max_length=100, choices=ClothingItem.Styles.choices, default="classic")
