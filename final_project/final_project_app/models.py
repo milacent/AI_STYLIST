@@ -118,9 +118,6 @@ class Looks(models.Model):
     def get_temperature_range(self):
         return f"{self.min_temp}°C to {self.max_temp}°C"
 
-    def get_temperature_folder(self):
-        return f"{self.min_temp}_{self.max_temp}"
-
     @classmethod
     def generate_for_temperature(cls, temp):
         """Генерирует образ для температуры"""

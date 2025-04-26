@@ -212,12 +212,12 @@ def for_you_page(request):
 
     return render(request, 'outfits/for_you.html', context)
 
-@login_required
-def save_look(request, look_id):
-    if request.method == 'POST':
-        look = Looks.objects.get(id=look_id)
-        request.user.saved_looks.add(look)
-    return redirect('for_you')
+# @login_required
+# def save_look(request, look_id):
+#     if request.method == 'POST':
+#         look = Looks.objects.get(id=look_id)
+#         request.user.saved_looks.add(look)
+#     return redirect('for_you')
 
 @login_required
 def save_look_empty(request):
@@ -235,9 +235,9 @@ def save_look_empty(request):
             })
     return redirect('for_you')
 
-def regenerate_look(request):
-    city = request.GET.get('city', 'Moscow')
-    return redirect(f'/for-you/?city={city}')
+# def regenerate_look(request):
+#     city = request.GET.get('city', 'Moscow')
+#     return redirect(f'/for-you/?city={city}')
 
 def log_out(request):
     """Выход из аккаунта пользователя"""
