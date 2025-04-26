@@ -194,4 +194,20 @@ class Looks(models.Model):
         return cls.generate_for_temperature(temp)
 
 
+class LikedLook(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    look = models.ForeignKey(Looks, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'look')  # Чтобы пользователь не мог лайкнуть один образ несколько раз
+
+
+class DislikedLook(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    look = models.ForeignKey(Looks, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'look')  # Чтобы пользователь не мог дизлайкнуть один образ несколько раз
 
