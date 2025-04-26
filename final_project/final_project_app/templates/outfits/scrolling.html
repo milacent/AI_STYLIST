@@ -4,31 +4,99 @@
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Discover</title>
+    <title>Scrolling</title>
     <link rel="stylesheet" href="{% static 'css/scrolling.css' %}">
 </head>
 <body>
     {% include 'general/header.html' %}
 
-    <div class="container">
-        <h1>Discover Fashion</h1>
-        <p>Swipe to choose your favorite looks!</p>
+    <h1 class="page-title">Swipe</h1>
+    <br>
 
-        <!-- Контейнер для карточек -->
-        <div id="card-container"></div>
+    <div class="cards-container" id="cardsContainer">
+        {% for look in looks %}
+        <div class="outfit-card" data-look-id="{{ look.id }}">
+            <div class="swipe-indicator like-indicator">👍</div>
+            <div class="swipe-indicator dislike-indicator">👎</div>
+
+            <!-- Шапка -->
+            {% if look.head %}
+            <div class="outfit-item head-item">
+                <img src="{% static 'images/default_clothes/head/' %}{{ look.head.get_temperature_folder }}/{{ look.head.image_name }}"
+                     alt="{{ look.head.name }}" class="item-image">
+                <div class="item-info">
+                    <h3>{{ look.head.name }}</h3>
+                    <div class="item-meta">
+                        <span class="style-badge">{{ look.head.get_style_display }}</span>
+                        <span class="material-badge">{{ look.head.get_material_display }}</span>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Верхняя одежда -->
+                {% if look.outerwear %}
+                <div class="outfit-item outerwear-item">
+                    <img src="{% static 'images/default_clothes/outerwear/' %}{{ look.outerwear.get_temperature_folder }}/{{ look.outerwear.image_name }}"
+                         alt="{{ look.outerwear.name }}" class="item-image">
+                    <div class="item-info">
+                        <h3>{{ look.outerwear.name }}</h3>
+                        <div class="item-meta">
+                            <span class="style-badge">{{ look.outerwear.get_style_display }}</span>
+                            <span class="material-badge">{{ look.outerwear.get_material_display }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Верх -->
+                {% if look.top %}
+                <div class="outfit-item top-item">
+                    <img src="{% static 'images/default_clothes/tops/' %}{{ look.top.get_temperature_folder }}/{{ look.top.image_name }}"
+                         alt="{{ look.top.name }}" class="item-image">
+                    <div class="item-info">
+                        <h3>{{ look.top.name }}</h3>
+                        <div class="item-meta">
+                            <span class="style-badge">{{ look.top.get_style_display }}</span>
+                            <span class="material-badge">{{ look.top.get_material_display }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Низ -->
+                {% if look.bottom %}
+                <div class="outfit-item bottom-item">
+                    <img src="{% static 'images/default_clothes/bottoms/' %}{{ look.bottom.get_temperature_folder }}/{{ look.bottom.image_name }}"
+                         alt="{{ look.bottom.name }}" class="item-image">
+                    <div class="item-info">
+                        <h3>{{ look.bottom.name }}</h3>
+                        <div class="item-meta">
+                            <span class="style-badge">{{ look.bottom.get_style_display }}</span>
+                            <span class="material-badge">{{ look.bottom.get_material_display }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Обувь -->
+                {% if look.shoes %}
+                <div class="outfit-item shoes-item">
+                    <img src="{% static 'images/default_clothes/shoes/' %}{{ look.shoes.get_temperature_folder }}/{{ look.shoes.image_name }}"
+                         alt="{{ look.shoes.name }}" class="item-image">
+                    <div class="item-info">
+                        <h3>{{ look.shoes.name }}</h3>
+                        <div class="item-meta">
+                            <span class="style-badge">{{ look.shoes.get_style_display }}</span>
+                            <span class="material-badge">{{ look.shoes.get_material_display }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+        </div>
+        {% endfor %}
     </div>
 
-    <footer>
-        {% include 'general/footer.html' %}
-    </footer>
-
-    <!-- Include CSRF token -->
-    <script src="{% static 'js/app.js' %}"></script>
-    <script>
-        // Ensure CSRF token is available for POST requests
-        function getCSRFToken() {
-            return "{{ csrf_token }}";
-        }
-    </script>
+    <script src="{% static 'js/scrolling.js' %}"></script>
 </body>
 </html>
