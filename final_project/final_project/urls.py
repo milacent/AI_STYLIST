@@ -32,7 +32,6 @@ urlpatterns = [
     path('profile/', profile_page, name='profile'),
     path('profile_edit/', profile_edit_page, name='profile_edit'),
     path('gallery_liked/', gallery_liked_page, name='gallery_liked'),
-    path('scrolling/', scrolling_page, name='scrolling'),
     path('about/', about_page, name='about'),
     path('terms/', terms_page, name='terms'),
     path('for_you/', for_you_page, name='for_you'),
@@ -48,6 +47,10 @@ urlpatterns = [
     path('save_look/', save_look_empty, name='save_look_empty'),
     # path('save_look/<int:look_id>/', save_look, name='save_look'),
     # path('regenerate_look/', regenerate_look, name='regenerate_look'),
+    path('scrolling/', scrolling_page, name='scrolling'),
+    path('save_scrolling_look/', save_scrolling_look, name='save_scrolling_look'),
+    path('like_look/', like_look, name='like_look'),
+    path('dislike_look/', dislike_look, name='dislike_look'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 
