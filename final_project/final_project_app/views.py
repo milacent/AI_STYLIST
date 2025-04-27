@@ -132,6 +132,7 @@ def make_post_page(request):
 
     return render(request, 'outfits/make_post.html', {'form': form})
 
+@login_required
 def post_list(request):
     posts = Post.objects.all()
     return render(request, 'outfits/posts_all.html', {'posts': posts})
@@ -190,8 +191,9 @@ def terms_page(request):
     context = {}
     return render(request, "general/terms.html", context)
 
+@login_required
 def for_you_page(request):
-    city = request.GET.get('city', 'Moscow')
+    city = request.GET.get('city', 'London')
 
     try:
         look = Looks.generate_for_city(city)
@@ -236,13 +238,13 @@ def save_look_empty(request):
             })
     return redirect('for_you')
 
+# work in progress
 # def regenerate_look(request):
 #     city = request.GET.get('city', 'Moscow')
 #     return redirect(f'/for-you/?city={city}')
 
+@login_required
 def scrolling_page(request):
-    if not request.user.is_authenticated:
-        return redirect('log_in')
 
     temp_categories = ["-20_-10", "-10_0", "0_10", "10_20", "20_30"]
     selected_category = random.choice(temp_categories)
