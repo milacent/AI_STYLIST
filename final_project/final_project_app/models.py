@@ -135,7 +135,6 @@ class Looks(models.Model):
                 return "20_30"
 
         temp_folder = get_folder_by_temp(temp)
-
         min_t, max_t = map(int, temp_folder.split('_'))
 
         print(f"\nГенерация для {temp}°C (диапазон: {temp_folder})")
@@ -151,15 +150,15 @@ class Looks(models.Model):
         for field, category in categories:
             items[field] = ClothingItem.objects.filter(
                 category=category,
-                min_temp__lte=max_t,
-                max_temp__gte=min_t
+                min_temp=min_t,
+                max_temp=max_t
             ).order_by('?').first()
 
         if max_t < 20:
             items['outerwear'] = ClothingItem.objects.filter(
                 category='outerwear',
-                min_temp__lte=max_t,
-                max_temp__gte=min_t
+                min_temp=min_t,
+                max_temp=max_t
             ).order_by('?').first()
 
         return cls.objects.create(
