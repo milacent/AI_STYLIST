@@ -13,6 +13,7 @@ from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
 
 def Handle400(request, exception = None):
+    """ handler for 404 error """
     context = {}
     print(request.path)
     if not request.path.endswith('/'):
@@ -20,15 +21,20 @@ def Handle400(request, exception = None):
     return render(request, "Handle/Error400.html", context)
 
 def index_page(request):
+    """ main page """
     context = {}
     return render(request, "general/index.html", context)
 
 def log_out(request):
-    """Выход из аккаунта пользователя"""
+    """ logout from account """
     logout(request)
     return redirect('index')
 
 def log_in_page(request):
+    """ login page
+    if post request returns redirect
+    else return render
+    """
     context = {}
     if request.method == 'POST':
         username = request.POST['username']
@@ -46,6 +52,7 @@ def log_in_page(request):
     return render(request, "auth/log_in.html", context)
 
 def posts_api(request):
+    """ api for posts """
     posts = Post.objects.all()
     data = [
         {
@@ -60,6 +67,7 @@ def posts_api(request):
 
 
 def sign_up_page(request):
+    """ sign up page with creation of user and optional info """
     context = {}
     if request.method == 'POST':
         username = request.POST['username']
@@ -86,12 +94,14 @@ def sign_up_page(request):
 
 @login_required
 def profile_page(request):
+    """ profile page """
     context = {}
     context['info'] = Info.objects.get(user=request.user)
     return render(request, "profile/profile.html", context)
 
 @login_required
 def profile_edit_page(request):
+    """ edit the page if request == post"""
     context = {}
     context['info'] = Info.objects.get(user=request.user)
     user = request.user
@@ -120,6 +130,9 @@ def profile_edit_page(request):
 
 @login_required
 def make_post_page(request):
+    """ make post page
+    if request == post you add the form
+    """
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
@@ -134,11 +147,15 @@ def make_post_page(request):
 
 @login_required
 def post_list(request):
+    """ list all posts """
     posts = Post.objects.all()
     return render(request, 'outfits/posts_all.html', {'posts': posts})
 
 @login_required
 def post_page(request, id=0):
+    """ check the post with certain id
+    error not implemented
+    """
     print(id)
     post = Post.objects.get(id=id)
     if request.method == 'POST':
@@ -157,6 +174,7 @@ def post_page(request, id=0):
 
 @login_required
 def send_like_post(request, id):
+    """ send like to certain post with id """
     context = {}
     like = LikePost.objects.filter(user=request.user, post=Post.objects.get(id=id))
 
@@ -170,12 +188,14 @@ def send_like_post(request, id):
 
 @login_required
 def catalog_page(request):
+    """ catalog page """
     context = {}
     # context['items'] = Items.objects.all
     return render(request, 'outfits/catalog.html', context)
 
 @login_required
 def gallery_liked_page(request):
+    """ check your liked posts and list them on a page"""
     liked_posts = Post.objects.filter(likepost__user=request.user)
     context = {
         'liked_posts': liked_posts
@@ -184,16 +204,21 @@ def gallery_liked_page(request):
 
 
 def about_page(request):
+    """ about page """
     context = {}
     return render(request, "info/about.html", context)
 
 def terms_page(request):
+    """ terms page """
     context = {}
     return render(request, "general/terms.html", context)
 
 @login_required
 def for_you_page(request):
-    city = request.GET.get('city', 'London')
+    """ for you page
+    WIP based on your city return different temperate and suggest other looks
+    """
+    city = request.GET.get('city', 'Moscow')
 
     try:
         look = Looks.generate_for_city(city)
@@ -224,6 +249,7 @@ def for_you_page(request):
 
 @login_required
 def save_look_empty(request):
+    """ save the look on for_you page """
     if request.method == 'POST':
         city = request.POST.get('city', 'Moscow')
         try:
@@ -245,6 +271,7 @@ def save_look_empty(request):
 
 @login_required
 def scrolling_page(request):
+    """ scrolling page """
 
     temp_categories = ["-20_-10", "-10_0", "0_10", "10_20", "20_30"]
     selected_category = random.choice(temp_categories)
@@ -272,6 +299,7 @@ def scrolling_page(request):
     return render(request, 'outfits/scrolling.html', context)
 @login_required
 def save_scrolling_look(request):
+    """ save the id with certain id """
     if request.method == 'POST':
         look_id = request.POST.get('look_id')
         try:
@@ -287,6 +315,7 @@ def save_scrolling_look(request):
 
 @login_required
 def like_look(request):
+    """ like the certain look with id """
     if request.method == 'POST':
         look_id = request.POST.get('look_id')
         try:
@@ -307,6 +336,7 @@ def like_look(request):
 
 @login_required
 def dislike_look(request):
+    """ dislike the certain look with id """
     if request.method == 'POST':
         look_id = request.POST.get('look_id')
         try:

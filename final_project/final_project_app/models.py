@@ -179,6 +179,7 @@ class Looks(models.Model):
 
     @classmethod
     def get_current_weather(cls, city='Moscow'):
+        print(city)
         try:
             url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={settings.WEATHER_API_KEY}&units=metric"
             response = requests.get(url, timeout=5)
