@@ -97,7 +97,7 @@ class Looks(models.Model):
     # items = models.ForeignKey(to=Item, on_delete=models.CASCADE)
     weather_grade = models.IntegerField()  # Насколько подходит по погоде -10 - зима +10 - жара
     description = models.CharField(max_length=2058)
-    style = models.CharField(choices=ClothingItem.Styles.choices, default="classic")
+    style = models.CharField(choices=ClothingItem.Styles.choices, default="classic", max_length=100)
 
     head = models.ForeignKey(ClothingItem, related_name='head_looks', null=True, blank=True, on_delete=models.SET_NULL)
     outerwear = models.ForeignKey(ClothingItem, related_name='outerwear_looks', null=True, blank=True,
@@ -184,7 +184,7 @@ class Looks(models.Model):
             response = requests.get(url, timeout=5)
             data = response.json()
             return data['main']['temp']
-        except:
+        except IndexError:
             return 0
 
     @classmethod
