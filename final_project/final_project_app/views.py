@@ -8,8 +8,11 @@ from final_project_app.models import Info, Comment, Post, LikePost, LikeComment,
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from .forms import PostForm
-from django.contrib.auth import login, authenticate, logout
 from django.core.exceptions import ObjectDoesNotExist
+
+from .models import get_current_weather
+
+
 # Create your views here.
 
 def Handle400(request, exception = None):
@@ -193,44 +196,50 @@ def terms_page(request):
 
 @login_required
 def for_you_page(request):
-    city = request.GET.get('city', 'London')
+    city = request.GET.get('city', 'Moscow')
+    error = None
+    look = None
+    temperature = None
 
     try:
-        look = Looks.generate_for_city(city)
-        if isinstance(look, str):  # Если вернулась строка с ошибкой
-            raise ValueError(look)
-        look.save()
+        temperature = get_current_weather(city)
+        if temperature is None:
+            raise ValueError("Не удалось получить данные о погоде")
 
-        context = {
-            'look': look,
-            'temperature': look.weather_grade,
-            'city': city,
-            'error': None
-        }
+        print(f"[INFO] Текущая погода в городе {city}: {temperature}°C")
+        look = Looks.get_for_temperature(temperature)
+        if not look:
+            raise ValueError("Не найдены подходящие образы для этой температуры")
+
     except Exception as e:
-        context = {
-            'error': f"Не удалось сгенерировать образ: {str(e)}",
-            'look': None
-        }
+        error = str(e)
 
+    context = {
+        'look': look,
+        'temperature': temperature,
+        'city': city,
+        'error': error
+    }
     return render(request, 'outfits/for_you.html', context)
-
-# @login_required
-# def save_look(request, look_id):
-#     if request.method == 'POST':
-#         look = Looks.objects.get(id=look_id)
-#         request.user.saved_looks.add(look)
-#     return redirect('for_you')
 
 @login_required
 def save_look_empty(request):
     if request.method == 'POST':
-        city = request.POST.get('city', 'Moscow')
+        look_id = request.POST.get('look_id')
+        if not look_id:
+            return render(request, 'outfits/for_you.html', {
+                'error': "Не удалось определить образ для сохранения.",
+                'look': None
+            })
         try:
-            look = Looks.generate_for_city(city)
-            if look:
-                request.user.saved_looks.add(look)
-                return redirect('for_you')
+            look = Looks.objects.get(id=look_id)
+            request.user.saved_looks.add(look)
+            return redirect('for_you')
+        except Looks.DoesNotExist:
+            return render(request, 'outfits/for_you.html', {
+                'error': "Образ не найден.",
+                'look': None
+            })
         except Exception as e:
             return render(request, 'outfits/for_you.html', {
                 'error': f"Ошибка сохранения: {str(e)}",
@@ -238,52 +247,21 @@ def save_look_empty(request):
             })
     return redirect('for_you')
 
-# work in progress
-# def regenerate_look(request):
-#     city = request.GET.get('city', 'Moscow')
-#     return redirect(f'/for-you/?city={city}')
 
 @login_required
 def scrolling_page(request):
-
-    temp_categories = ["-20_-10", "-10_0", "0_10", "10_20", "20_30"]
-    selected_category = random.choice(temp_categories)
-    min_t, max_t = map(int, selected_category.split('_'))
-
-    # Получаем ID уже оцененных образов
     liked_look_ids = LikedLook.objects.filter(user=request.user).values_list('look_id', flat=True)
     disliked_look_ids = DislikedLook.objects.filter(user=request.user).values_list('look_id', flat=True)
+    excluded_ids = list(liked_look_ids) + list(disliked_look_ids)
 
-    looks = []
-    attempts = 0
-    max_attempts = 10  # Максимальное количество попыток генерации уникальных образов
-
-    while len(looks) < 5 and attempts < max_attempts:
-        look = Looks.generate_for_temperature((min_t + max_t) // 2)
-        if look.head and look.top and look.bottom:
-            looks.append(look)
-        attempts += 1
+    looks = Looks.objects.exclude(id__in=excluded_ids).order_by('?')[:5]
 
     context = {
         'looks': looks,
-        'temperature_range': f"{min_t}°C - {max_t}°C",
-        'error': None if looks else "Не удалось сгенерировать новые образы для вас. Попробуйте позже."
+        'error': None if looks else "Не найдено ни одного нового образа"
     }
     return render(request, 'outfits/scrolling.html', context)
-@login_required
-def save_scrolling_look(request):
-    if request.method == 'POST':
-        look_id = request.POST.get('look_id')
-        try:
-            look = Looks.objects.get(id=look_id)
-            request.user.saved_looks.add(look)
-            return redirect('scrolling')
-        except Exception as e:
-            return render(request, 'outfits/scrolling.html', {
-                'error': f"Ошибка сохранения: {str(e)}",
-                'looks': []
-            })
-    return redirect('scrolling')
+
 
 @login_required
 def like_look(request):
@@ -292,18 +270,11 @@ def like_look(request):
         try:
             look = Looks.objects.get(id=look_id)
             LikedLook.objects.get_or_create(user=request.user, look=look)
-            return redirect('scrolling')
-        except ObjectDoesNotExist:
-            return render(request, 'outfits/scrolling.html', {
-                'error': "Образ не найден",
-                'looks': []
-            })
+            return JsonResponse({'status': 'success'})
         except Exception as e:
-            return render(request, 'outfits/scrolling.html', {
-                'error': f"Ошибка при сохранении лайка: {str(e)}",
-                'looks': []
-            })
-    return redirect('scrolling')
+            return JsonResponse({'status': 'error', 'message': str(e)})
+    return JsonResponse({'status': 'invalid request'})
+
 
 @login_required
 def dislike_look(request):
@@ -312,15 +283,7 @@ def dislike_look(request):
         try:
             look = Looks.objects.get(id=look_id)
             DislikedLook.objects.get_or_create(user=request.user, look=look)
-            return redirect('scrolling')
-        except ObjectDoesNotExist:
-            return render(request, 'outfits/scrolling.html', {
-                'error': "Образ не найден",
-                'looks': []
-            })
+            return JsonResponse({'status': 'success'})
         except Exception as e:
-            return render(request, 'outfits/scrolling.html', {
-                'error': f"Ошибка при сохранении дизлайка: {str(e)}",
-                'looks': []
-            })
-    return redirect('scrolling')
+            return JsonResponse({'status': 'error', 'message': str(e)})
+    return JsonResponse({'status': 'invalid request'})

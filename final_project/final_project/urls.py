@@ -48,7 +48,6 @@ urlpatterns = [
     # path('save_look/<int:look_id>/', save_look, name='save_look'),
     # path('regenerate_look/', regenerate_look, name='regenerate_look'),
     path('scrolling/', scrolling_page, name='scrolling'),
-    path('save_scrolling_look/', save_scrolling_look, name='save_scrolling_look'),
     path('like_look/', like_look, name='like_look'),
     path('dislike_look/', dislike_look, name='dislike_look'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

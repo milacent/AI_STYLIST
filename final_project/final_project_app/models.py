@@ -94,103 +94,83 @@ class ClothingItem(models.Model):
 
 
 class Looks(models.Model):
-    # items = models.ForeignKey(to=Item, on_delete=models.CASCADE)
-    weather_grade = models.IntegerField()  # Насколько подходит по погоде -10 - зима +10 - жара
-    description = models.CharField(max_length=2058)
-    style = models.CharField(choices=ClothingItem.Styles.choices, default="classic", max_length=100)
+    temp_range = models.CharField(max_length=20, default='unknown_range')
 
-    head = models.ForeignKey(ClothingItem, related_name='head_looks', null=True, blank=True, on_delete=models.SET_NULL)
-    outerwear = models.ForeignKey(ClothingItem, related_name='outerwear_looks', null=True, blank=True,
-                                  on_delete=models.SET_NULL)
-    top = models.ForeignKey(ClothingItem, related_name='top_looks', null=True, blank=True, on_delete=models.SET_NULL)
-    bottom = models.ForeignKey(ClothingItem, related_name='bottom_looks', null=True, blank=True,
-                               on_delete=models.SET_NULL)
-    shoes = models.ForeignKey(ClothingItem, related_name='shoes_looks', null=True, blank=True,
-                              on_delete=models.SET_NULL)
+    # Head
+    head = models.CharField(max_length=255, default='no_head')
+    head_image = models.CharField(max_length=255, default='default.png')
+    head_color = models.CharField(max_length=100, default='unknown')
+    head_material = models.CharField(max_length=100, default='unknown')
+    head_style = models.CharField(max_length=100, default='unknown')
+    head_vector = models.CharField(max_length=255, default='no_vector')
 
-    min_temp = models.IntegerField(default=0)
-    max_temp = models.IntegerField(default=0)
-    created_at = models.DateTimeField(default=timezone.now)
+    # Outerwear
+    outerwear = models.CharField(max_length=255, default='no_outerwear')
+    outerwear_image = models.CharField(max_length=255, default='default.png')
+    outerwear_color = models.CharField(max_length=100, default='unknown')
+    outerwear_material = models.CharField(max_length=100, default='unknown')
+    outerwear_style = models.CharField(max_length=100, default='unknown')
+    outerwear_vector = models.CharField(max_length=255, default='no_vector')
 
-    def __str__(self):
-        return f"Look for {self.get_temperature_range()} ({self.style})"
+    # Top
+    top = models.CharField(max_length=255, default='no_top')
+    top_image = models.CharField(max_length=255, default='default.png')
+    top_color = models.CharField(max_length=100, default='unknown')
+    top_material = models.CharField(max_length=100, default='unknown')
+    top_style = models.CharField(max_length=100, default='unknown')
+    top_vector = models.CharField(max_length=255, default='no_vector')
 
-    def get_temperature_range(self):
-        return f"{self.min_temp}°C to {self.max_temp}°C"
+    # Bottom
+    bottom = models.CharField(max_length=255, default='no_bottom')
+    bottom_image = models.CharField(max_length=255, default='default.png')
+    bottom_color = models.CharField(max_length=100, default='unknown')
+    bottom_material = models.CharField(max_length=100, default='unknown')
+    bottom_style = models.CharField(max_length=100, default='unknown')
+    bottom_vector = models.CharField(max_length=255, default='no_vector')
 
-    @classmethod
-    def generate_for_temperature(cls, temp):
-        """Генерирует образ для температуры"""
+    # Shoes
+    shoes = models.CharField(max_length=255, default='no_shoes')
+    shoes_image = models.CharField(max_length=255, default='default.png')
+    shoes_color = models.CharField(max_length=100, default='unknown')
+    shoes_material = models.CharField(max_length=100, default='unknown')
+    shoes_style = models.CharField(max_length=100, default='unknown')
+    shoes_vector = models.CharField(max_length=255, default='no_vector')
 
-        def get_folder_by_temp(temp):
-            if temp <= -10:
-                return "-20_-10"
-            elif temp <= 0:
-                return "-10_0"
-            elif temp <= 10:
-                return "0_10"
-            elif temp <= 20:
-                return "10_20"
-            else:
-                return "20_30"
-
-        temp_folder = get_folder_by_temp(temp)
-        min_t, max_t = map(int, temp_folder.split('_'))
-
-        print(f"\nГенерация для {temp}°C (диапазон: {temp_folder})")
-
-        items = {}
-        categories = [
-            ('head', 'head'),
-            ('top', 'tops'),
-            ('bottom', 'bottoms'),
-            ('shoes', 'shoes')
-        ]
-
-        for field, category in categories:
-            items[field] = ClothingItem.objects.filter(
-                category=category,
-                min_temp=min_t,
-                max_temp=max_t
-            ).order_by('?').first()
-
-        if max_t < 20:
-            items['outerwear'] = ClothingItem.objects.filter(
-                category='outerwear',
-                min_temp=min_t,
-                max_temp=max_t
-            ).order_by('?').first()
-
-        return cls.objects.create(
-            min_temp=min_t,
-            max_temp=max_t,
-            weather_grade=temp,
-            description="Автоматически сгенерированный образ",
-            **items
-        )
-
+    # General
+    general_vector = models.CharField(max_length=1024, default='no_general_vector')
     saved_by = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
         related_name='saved_looks',
         blank=True
     )
 
+    def __str__(self):
+        return f"Look for {self.temp_range}"
 
     @classmethod
-    def get_current_weather(cls, city='Moscow'):
-        try:
-            url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={settings.WEATHER_API_KEY}&units=metric"
-            response = requests.get(url, timeout=5)
-            data = response.json()
-            return data['main']['temp']
-        except IndexError:
-            return 0
+    def get_for_temperature(cls, temp):
+        temp_ranges = {
+            (-20, -10): "-20_-10",
+            (-10, 0): "-10_0",
+            (0, 10): "0_10",
+            (10, 20): "10_20",
+            (20, 30): "20_30"
+        }
 
-    @classmethod
-    def generate_for_city(cls, city='Moscow'):
-        """Генерация образа для указанного города"""
-        temp = cls.get_current_weather(city)
-        return cls.generate_for_temperature(temp)
+        for (min_t, max_t), range_str in temp_ranges.items():
+            if min_t <= temp <= max_t:
+                return cls.objects.filter(temp_range=range_str).order_by('?').first()
+        return None
+
+
+def get_current_weather(city='Moscow'):
+    try:
+        url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={settings.WEATHER_API_KEY}&units=metric"
+        response = requests.get(url, timeout=5)
+        data = response.json()
+        return data['main']['temp']
+    except Exception as e:
+        return None
 
 
 class LikedLook(models.Model):
@@ -199,7 +179,7 @@ class LikedLook(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        unique_together = ('user', 'look')  # Чтобы пользователь не мог лайкнуть один образ несколько раз
+        unique_together = ('user', 'look')
 
 
 class DislikedLook(models.Model):
@@ -208,5 +188,5 @@ class DislikedLook(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        unique_together = ('user', 'look')  # Чтобы пользователь не мог дизлайкнуть один образ несколько раз
+        unique_together = ('user', 'look')
 
