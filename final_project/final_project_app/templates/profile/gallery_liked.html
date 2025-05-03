@@ -3,37 +3,39 @@
 <head>
     {% load static %}
     <meta charset="UTF-8">
-    <title>Liked</title>
+    <title>Liked Posts</title>
     <link rel="stylesheet" href="{% static 'css/gallery_liked.css' %}">
 </head>
 <body>
-    <header>
-        {%include 'general/header.html' %}
-    </header>
-    <h1>Your liked posts</h1>
-    {% if liked_posts %}
+    {% include 'general/header.html' %}
+
+    <div class="container">
+        <h1>Your Liked Posts</h1>
+
+        {% if liked_posts %}
         <div class="gallery">
             {% for post in liked_posts %}
-                <div class="gallery-item">
-                     <a href="/post/{{ post.id }}">
-                        <h2 class="post-link">{{ post.title }}</h2>
-                        {% if post.image %}
-                            <img src="{{ post.image.url }}" alt="Post Image">
-                        {% endif %}
-                        <p>{{ post.description }}</p>
-                        <p><strong>Author:</strong> {{ post.user.username }}</p>
-                        <a href="/send_like_post/{{ post.id }}" class="button1">Remove Like</a>
-                     </a>
-                </div>
+            <div class="gallery-item">
+                <a href="{% url 'post' post.id %}" class="post-link">
+                    <h2>{{ post.title }}</h2>
+                    {% if post.image %}
+                    <img src="{{ post.image.url }}" alt="Post Image">
+                    {% endif %}
+                    <p>{{ post.description|truncatechars:100 }}</p>
+                    <p><strong>Author:</strong> {{ post.user.username }}</p>
+                </a>
+                <a href="{% url 'like' post.id %}" class="button1">Remove Like</a>
+
+            </div>
             {% endfor %}
         </div>
-    {% else %}
+        {% else %}
         <p>You haven't liked any posts yet.</p>
-    {% endif %}
+        {% endif %}
 
-    <a href="{% url 'profile' %}" class="button1">Back to profile</a>
-    <footer>
-        {% include 'general/footer.html' %}
-    </footer>
+        <a href="{% url 'profile' %}" class="button1">Back to profile</a>
+    </div>
+
+    {% include 'general/footer.html' %}
 </body>
 </html>

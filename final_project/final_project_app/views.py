@@ -1,4 +1,5 @@
 from pyexpat.errors import messages
+from django.contrib import messages
 import random
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseServerError, HttpResponseRedirect, JsonResponse
@@ -91,7 +92,68 @@ def sign_up_page(request):
 def profile_page(request):
     context = {}
     context['info'] = Info.objects.get(user=request.user)
+    context['liked_posts'] = Post.objects.filter(
+        likepost__user=request.user
+    )[:4]
+    context['look_sections'] = [
+        {
+            'title': '⭐ Сохранённые образы',
+            'looks': request.user.saved_looks.all()[:4],
+            'status': 'saved',
+            'view_all_url': 'view_all_saved'
+        },
+        {
+            'title': '❤️ Понравившиеся образы',
+            'looks': Looks.objects.filter(likedlook__user=request.user)[:4],
+            'status': 'liked',
+            'view_all_url': 'view_all_liked'
+        },
+        {
+            'title': '💔 Не понравившиеся образы',
+            'looks': Looks.objects.filter(dislikedlook__user=request.user)[:4],
+            'status': 'disliked',
+            'view_all_url': 'view_all_disliked'
+        }]
+
     return render(request, "profile/profile.html", context)
+
+@login_required
+def unsave_look(request, look_id):
+    if request.method == 'POST':
+        look = get_object_or_404(Looks, id=look_id)
+        request.user.saved_looks.remove(look)
+        messages.success(request, 'Образ удалён из сохранённых')
+        if request.POST.get('source') == 'view_all':
+            return redirect('view_all_saved')
+        return redirect('profile')
+    return redirect('profile')
+
+@login_required
+def view_all_saved(request):
+    looks = request.user.saved_looks.all()
+    return render(request, 'profile/view_all.html', {
+        'looks': looks,
+        'title': 'Все сохранённые образы',
+        'status': 'saved'
+    })
+
+@login_required
+def view_all_liked(request):
+    looks = Looks.objects.filter(likedlook__user=request.user)
+    return render(request, 'profile/view_all.html', {
+        'looks': looks,
+        'title': 'Все понравившиеся образы',
+        'status': 'liked'
+    })
+
+@login_required
+def view_all_disliked(request):
+    looks = Looks.objects.filter(dislikedlook__user=request.user)
+    return render(request, 'profile/view_all.html', {
+        'looks': looks,
+        'title': 'Все не понравившиеся образы',
+        'status': 'disliked'
+    })
 
 @login_required
 def profile_edit_page(request):
@@ -158,17 +220,30 @@ def post_page(request, id=0):
     }
     return render(request, "outfits/post.html", context)
 
+
 @login_required
 def send_like_post(request, id):
-    context = {}
-    like = LikePost.objects.filter(user=request.user, post=Post.objects.get(id=id))
+    post = get_object_or_404(Post, id=id)
+    like = LikePost.objects.filter(user=request.user, post=post)
+
+    # Определяем откуда пришел запрос
+    referer = request.META.get('HTTP_REFERER', '')
+
+    next_page = request.GET.get('next')
 
     if like.exists():
         like.delete()
-        return redirect('/gallery_liked')
+        # Приоритет у явного параметра next
+        if next_page == 'gallery_liked':
+            return redirect('gallery_liked')
+        # Если пришли со страницы лайкнутых постов
+        elif 'gallery_liked' in referer:
+            return redirect('gallery_liked')
+        # По умолчанию остаемся на текущей странице
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', reverse('post', args=[post.id])))
     else:
-        LikePost.objects.create(user=request.user, post=Post.objects.get(id=id))
-        return redirect('/post/' + str(id))
+        LikePost.objects.create(user=request.user, post=post)
+        return redirect('post', post.id)
 
 
 @login_required

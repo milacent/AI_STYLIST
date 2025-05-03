@@ -13,7 +13,17 @@
             <button onclick="window.location.href='{% url 'for_you' %}'">For you</button>
             <button onclick="window.location.href='{% url 'scrolling' %}'">Scrolling</button>
             <button onclick="window.location.href='{% url 'posts_all' %}'">Posts</button>
-            <button onclick="window.location.href='{% url 'profile' %}'">Profile</button>
+            <div class="dropdown">
+              <a href="{% url 'profile' %}" class="dropbtn">Profile</a>
+              <div class="dropdown-content">
+                <a href="{% url 'profile' %}">Перейти в профиль</a>
+                <a href="{% url 'profile_edit' %}">Редактировать профиль</a>
+                <a href="{% url 'view_all_saved' %}">Сохраненные образы</a>
+                <a href="{% url 'view_all_liked' %}">Понравившиеся образы</a>
+                <a href="{% url 'view_all_disliked' %}">Не понравившиеся образы</a>
+                <a href="{% url 'gallery_liked' %}">Понравившиеся посты</a>
+              </div>
+            </div>
             <button onclick="window.location.href='{% url 'about' %}'">About</button>
             <button onclick="window.location.href='{% url 'log_out' %}'">Log out</button>
         </div>

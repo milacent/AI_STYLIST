@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+
+</head>
+<body>
+    {% include 'general/header.html' %}
+
+    <div class="profile-container">
+        <a href="{% url 'profile' %}" class="back-to-profile">← Вернуться в профиль</a>
+        <h1>{{ title }}</h1>
+
+        <div class="looks-container">
+            {% for look in looks %}
+            <div class="outfit-card">
+                <div class="status-badge {{ status }}-badge">
+                    {% if status == 'saved' %}⭐ Сохранён
+                    {% elif status == 'liked' %}❤️ Понравился
+                    {% else %}💔 Не понравился{% endif %}
+                </div>
+
+                {% if look.head != 'no_head' %}
+                <div class="outfit-item head-item">
+                    <img src="{% static 'images/default_clothes/head/' %}{{ look.temp_range }}/{{ look.head_image }}"
+                         alt="{{ look.head }}" class="item-image">
+                    <div class="item-info">
+                        <h3>{{ look.head }}</h3>
+                        <div class="item-meta">
+                            <span class="style-badge">{{ look.head_style }}</span>
+                            <span class="material-badge">{{ look.head_material }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Верхняя одежда -->
+                {% if look.outerwear != 'no_outerwear' and look.outerwear_image != 'nan' %}
+                <div class="outfit-item outerwear-item">
+                    <img src="{% static 'images/default_clothes/outerwear/' %}{{ look.temp_range }}/{{ look.outerwear_image }}"
+                         alt="{{ look.outerwear }}" class="item-image">
+                    <div class="item-info">
+                        <h3>{{ look.outerwear }}</h3>
+                        <div class="item-meta">
+                            <span class="style-badge">{{ look.outerwear_style }}</span>
+                            <span class="material-badge">{{ look.outerwear_material }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Верх -->
+                {% if look.top != 'no_top' %}
+                <div class="outfit-item top-item">
+                    <img src="{% static 'images/default_clothes/tops/' %}{{ look.temp_range }}/{{ look.top_image }}"
+                         alt="{{ look.top }}" class="item-image">
+                    <div class="item-info">
+                        <h3>{{ look.top }}</h3>
+                        <div class="item-meta">
+                            <span class="style-badge">{{ look.top_style }}</span>
+                            <span class="material-badge">{{ look.top_material }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Низ -->
+                {% if look.bottom != 'no_bottom' %}
+                <div class="outfit-item bottom-item">
+                    <img src="{% static 'images/default_clothes/bottoms/' %}{{ look.temp_range }}/{{ look.bottom_image }}"
+                         alt="{{ look.bottom }}" class="item-image">
+                    <div class="item-info">
+                        <h3>{{ look.bottom }}</h3>
+                        <div class="item-meta">
+                            <span class="style-badge">{{ look.bottom_style }}</span>
+                            <span class="material-badge">{{ look.bottom_material }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Обувь -->
+                {% if look.shoes != 'no_shoes' %}
+                <div class="outfit-item shoes-item">
+                    <img src="{% static 'images/default_clothes/shoes/' %}{{ look.temp_range }}/{{ look.shoes_image }}"
+                         alt="{{ look.shoes }}" class="item-image">
+                    <div class="item-info">
+                        <h3>{{ look.shoes }}</h3>
+                        <div class="item-meta">
+                            <span class="style-badge">{{ look.shoes_style }}</span>
+                            <span class="material-badge">{{ look.shoes_material }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Действия -->
+                {% if status == 'saved' %}
+                <div class="look-actions">
+                    <form method="post" action="{% url 'unsave_look' look.id %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="source" value="view_all">
+                        <button type="submit" class="save-button">Удалить из сохранённых</button>
+                    </form>
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% include 'general/footer.html' %}
+</body>
+</html>
