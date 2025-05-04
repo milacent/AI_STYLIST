@@ -3,164 +3,197 @@
 <head>
     {% load static %}
     <meta charset="UTF-8">
-    <title>Your Profile</title>
+    <title>{% if is_own_profile %}Your{% else %}{{ profile_user.username }}'s{% endif %} Profile</title>
     <link rel="stylesheet" href="{% static 'css/profile.css' %}">
 </head>
 <body>
     {% include 'general/header.html' %}
 
     <div class="profile-container">
-        <h1>Your Profile</h1>
+        <h1>{% if is_own_profile %}Your{% else %}{{ profile_user.username }}'s{% endif %} Profile</h1>
 
 
         <!-- Основная информация -->
         <section class="personal-info">
             <h2>Personal Information</h2>
-            <p><strong>Username:</strong> {{ user.username }}</p>
-            <p><strong>Email:</strong> {{ user.email }}</p>
-            <p><strong>Gender:</strong>
-                {% if info.gender == 1 %}Male{% else %}Female{% endif %}
-            </p>
-            <p><a href="{% url 'profile_edit' %}">Edit Profile</a></p>
+            <p><strong>Username:</strong> {{ profile_user.username }}</p>
+            <p><strong>Email:</strong> {{ profile_user.email }}</p>
+            {% if info %}
+                <p><strong>Gender:</strong>
+                    {% if info.gender == 1 %}Male{% else %}Female{% endif %}
+                </p>
+                {% if info.about_me %}
+                    <p><strong>About:</strong> {{ info.about_me }}</p>
+                {% endif %}
+            {% endif %}
+
+            {% if is_own_profile %}
+                <p><a href="{% url 'profile_edit' %}">Edit Profile</a></p>
+            {% endif %}
         </section>
 
-        <!-- Вывод образов -->
-        {% for section in look_sections %}
-            {% if section.looks.exists %}
+        {% if user_posts %}
+        <section class="posts-section">
+            <h2>{% if is_own_profile %}Your{% else %}{{ profile_user.username }}'s{% endif %} Posts</h2>
+            <div class="posts-grid">
+                {% for post in user_posts %}
+                <div class="post-grid-item">
+                    <a href="{% url 'post' post.id %}">
+                        {% if post.image %}
+                            <img src="{{ post.image.url }}" alt="{{ post.title }}" class="post-image">
+                        {% endif %}
+                        <div class="post-info">
+                            <h3>{{ post.title }}</h3>
+                            <p class="post-likes">❤️ {{ post.likepost_set.count }}</p>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        {% else %}
+            <p>No posts yet.</p>
+        {% endif %}
+
+        {% if is_own_profile %}
+            <!-- Вывод образов -->
+            {% for section in look_sections %}
+                {% if section.looks.exists %}
+                <section class="look-section">
+                    <div class="section-header">
+                        <h2 class="section-title">{{ section.title }}</h2>
+                        {% if section.looks|length >= 4 %}
+                        <a href="{% url section.view_all_url %}" class="view-all-link">Показать все</a>
+                        {% endif %}
+                    </div>
+                    <div class="looks-container">
+                        {% for look in section.looks %}
+                        <div class="outfit-card">
+                            <!-- Статус образа -->
+                            <div class="status-badge {{ section.status }}-badge">
+                                {% if section.status == 'saved' %}⭐ Сохранён
+                                {% elif section.status == 'liked' %}❤️ Понравился
+                                {% else %}💔 Не понравился{% endif %}
+                            </div>
+
+                            <!-- head -->
+                            {% if look.head != 'no_head' %}
+                            <div class="outfit-item head-item">
+                                <img src="{% static 'images/default_clothes/head/' %}{{ look.temp_range }}/{{ look.head_image }}"
+                                     alt="{{ look.head }}" class="item-image">
+                                <div class="item-info">
+                                    <h3>{{ look.head }}</h3>
+                                    <div class="item-meta">
+                                        <span class="style-badge">{{ look.head_style }}</span>
+                                        <span class="material-badge">{{ look.head_material }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+
+                            <!-- Верхняя одежда -->
+                            {% if look.outerwear != 'no_outerwear' and look.outerwear_image != 'nan' %}
+                            <div class="outfit-item outerwear-item">
+                                <img src="{% static 'images/default_clothes/outerwear/' %}{{ look.temp_range }}/{{ look.outerwear_image }}"
+                                     alt="{{ look.outerwear }}" class="item-image">
+                                <div class="item-info">
+                                    <h3>{{ look.outerwear }}</h3>
+                                    <div class="item-meta">
+                                        <span class="style-badge">{{ look.outerwear_style }}</span>
+                                        <span class="material-badge">{{ look.outerwear_material }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+
+                            <!-- Верх -->
+                            {% if look.top != 'no_top' %}
+                            <div class="outfit-item top-item">
+                                <img src="{% static 'images/default_clothes/tops/' %}{{ look.temp_range }}/{{ look.top_image }}"
+                                     alt="{{ look.top }}" class="item-image">
+                                <div class="item-info">
+                                    <h3>{{ look.top }}</h3>
+                                    <div class="item-meta">
+                                        <span class="style-badge">{{ look.top_style }}</span>
+                                        <span class="material-badge">{{ look.top_material }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+
+                            <!-- Низ -->
+                            {% if look.bottom != 'no_bottom' %}
+                            <div class="outfit-item bottom-item">
+                                <img src="{% static 'images/default_clothes/bottoms/' %}{{ look.temp_range }}/{{ look.bottom_image }}"
+                                     alt="{{ look.bottom }}" class="item-image">
+                                <div class="item-info">
+                                    <h3>{{ look.bottom }}</h3>
+                                    <div class="item-meta">
+                                        <span class="style-badge">{{ look.bottom_style }}</span>
+                                        <span class="material-badge">{{ look.bottom_material }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+
+                            <!-- Обувь -->
+                            {% if look.shoes != 'no_shoes' %}
+                            <div class="outfit-item shoes-item">
+                                <img src="{% static 'images/default_clothes/shoes/' %}{{ look.temp_range }}/{{ look.shoes_image }}"
+                                     alt="{{ look.shoes }}" class="item-image">
+                                <div class="item-info">
+                                    <h3>{{ look.shoes }}</h3>
+                                    <div class="item-meta">
+                                        <span class="style-badge">{{ look.shoes_style }}</span>
+                                        <span class="material-badge">{{ look.shoes_material }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+
+                            <!-- Действия -->
+                            <div class="look-actions">
+                                {% if section.status == 'saved' %}
+                                <form method="post" action="{% url 'unsave_look' look.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="save-button">Удалить из сохранённых</button>
+                                </form>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </section>
+                {% endif %}
+            {% endfor %}
+
+            {% if liked_posts %}
             <section class="look-section">
                 <div class="section-header">
-                    <h2 class="section-title">{{ section.title }}</h2>
-                    {% if section.looks|length >= 4 %}
-                    <a href="{% url section.view_all_url %}" class="view-all-link">Показать все</a>
+                    <h2 class="section-title">👍 Понравившиеся посты</h2>
+                    {% if liked_posts|length >= 4 %}
+                    <a href="{% url 'gallery_liked' %}" class="view-all-link">Показать все</a>
                     {% endif %}
                 </div>
+
                 <div class="looks-container">
-                    {% for look in section.looks %}
+                    {% for post in liked_posts %}
                     <div class="outfit-card">
-                        <!-- Статус образа -->
-                        <div class="status-badge {{ section.status }}-badge">
-                            {% if section.status == 'saved' %}⭐ Сохранён
-                            {% elif section.status == 'liked' %}❤️ Понравился
-                            {% else %}💔 Не понравился{% endif %}
-                        </div>
-
-                        <!-- head -->
-                        {% if look.head != 'no_head' %}
-                        <div class="outfit-item head-item">
-                            <img src="{% static 'images/default_clothes/head/' %}{{ look.temp_range }}/{{ look.head_image }}"
-                                 alt="{{ look.head }}" class="item-image">
-                            <div class="item-info">
-                                <h3>{{ look.head }}</h3>
-                                <div class="item-meta">
-                                    <span class="style-badge">{{ look.head_style }}</span>
-                                    <span class="material-badge">{{ look.head_material }}</span>
-                                </div>
-                            </div>
-                        </div>
-                        {% endif %}
-
-                        <!-- Верхняя одежда -->
-                        {% if look.outerwear != 'no_outerwear' and look.outerwear_image != 'nan' %}
-                        <div class="outfit-item outerwear-item">
-                            <img src="{% static 'images/default_clothes/outerwear/' %}{{ look.temp_range }}/{{ look.outerwear_image }}"
-                                 alt="{{ look.outerwear }}" class="item-image">
-                            <div class="item-info">
-                                <h3>{{ look.outerwear }}</h3>
-                                <div class="item-meta">
-                                    <span class="style-badge">{{ look.outerwear_style }}</span>
-                                    <span class="material-badge">{{ look.outerwear_material }}</span>
-                                </div>
-                            </div>
-                        </div>
-                        {% endif %}
-
-                        <!-- Верх -->
-                        {% if look.top != 'no_top' %}
-                        <div class="outfit-item top-item">
-                            <img src="{% static 'images/default_clothes/tops/' %}{{ look.temp_range }}/{{ look.top_image }}"
-                                 alt="{{ look.top }}" class="item-image">
-                            <div class="item-info">
-                                <h3>{{ look.top }}</h3>
-                                <div class="item-meta">
-                                    <span class="style-badge">{{ look.top_style }}</span>
-                                    <span class="material-badge">{{ look.top_material }}</span>
-                                </div>
-                            </div>
-                        </div>
-                        {% endif %}
-
-                        <!-- Низ -->
-                        {% if look.bottom != 'no_bottom' %}
-                        <div class="outfit-item bottom-item">
-                            <img src="{% static 'images/default_clothes/bottoms/' %}{{ look.temp_range }}/{{ look.bottom_image }}"
-                                 alt="{{ look.bottom }}" class="item-image">
-                            <div class="item-info">
-                                <h3>{{ look.bottom }}</h3>
-                                <div class="item-meta">
-                                    <span class="style-badge">{{ look.bottom_style }}</span>
-                                    <span class="material-badge">{{ look.bottom_material }}</span>
-                                </div>
-                            </div>
-                        </div>
-                        {% endif %}
-
-                        <!-- Обувь -->
-                        {% if look.shoes != 'no_shoes' %}
-                        <div class="outfit-item shoes-item">
-                            <img src="{% static 'images/default_clothes/shoes/' %}{{ look.temp_range }}/{{ look.shoes_image }}"
-                                 alt="{{ look.shoes }}" class="item-image">
-                            <div class="item-info">
-                                <h3>{{ look.shoes }}</h3>
-                                <div class="item-meta">
-                                    <span class="style-badge">{{ look.shoes_style }}</span>
-                                    <span class="material-badge">{{ look.shoes_material }}</span>
-                                </div>
-                            </div>
-                        </div>
-                        {% endif %}
-
-                        <!-- Действия -->
-                        <div class="look-actions">
-                            {% if section.status == 'saved' %}
-                            <form method="post" action="{% url 'unsave_look' look.id %}">
-                                {% csrf_token %}
-                                <button type="submit" class="save-button">Удалить из сохранённых</button>
-                            </form>
+                        <a href="{% url 'post' post.id %}" class="post-link">
+                            {% if post.image %}
+                            <img src="{{ post.image.url }}" alt="{{ post.title }}" class="post-image">
                             {% endif %}
-                        </div>
+                            <h3>{{ post.title }}</h3>
+                            <p class="post-description">{{ post.description|truncatechars:100 }}</p>
+                            <p class="post-author">By {{ post.user.username }}</p>
+                        </a>
+                        <a href="{% url 'like' post.id %}" class="button1">Remove Like</a>
+
                     </div>
                     {% endfor %}
                 </div>
             </section>
             {% endif %}
-        {% endfor %}
-
-        {% if liked_posts %}
-        <section class="look-section">
-            <div class="section-header">
-                <h2 class="section-title">👍 Понравившиеся посты</h2>
-                {% if liked_posts|length >= 4 %}
-                <a href="{% url 'gallery_liked' %}" class="view-all-link">Показать все</a>
-                {% endif %}
-            </div>
-
-            <div class="looks-container">
-                {% for post in liked_posts %}
-                <div class="outfit-card">
-                    <a href="{% url 'post' post.id %}" class="post-link">
-                        {% if post.image %}
-                        <img src="{{ post.image.url }}" alt="{{ post.title }}" class="post-image">
-                        {% endif %}
-                        <h3>{{ post.title }}</h3>
-                        <p class="post-description">{{ post.description|truncatechars:100 }}</p>
-                        <p class="post-author">By {{ post.user.username }}</p>
-                    </a>
-                    <a href="{% url 'like' post.id %}" class="button1">Remove Like</a>
-
-                </div>
-                {% endfor %}
-            </div>
-        </section>
         {% endif %}
     </div>
 

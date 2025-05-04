@@ -15,9 +15,9 @@
             <button onclick="window.location.href='{% url 'scrolling' %}'">Scrolling</button>
             <button onclick="window.location.href='{% url 'posts_all' %}'">Posts</button>
             <div class="dropdown">
-              <a href="{% url 'profile' %}" class="dropbtn">Profile</a>
+                <a href="{% url 'profile' request.user.username %}" class="dropbtn">Profile</a>
               <div class="dropdown-content">
-                <a href="{% url 'profile' %}">Перейти в профиль</a>
+                <a href="{% url 'profile' request.user.username %}">Перейти в профиль</a>
                 <a href="{% url 'profile_edit' %}">Редактировать профиль</a>
                 <a href="{% url 'view_all_saved' %}">Сохраненные образы</a>
                 <a href="{% url 'view_all_liked' %}">Понравившиеся образы</a>

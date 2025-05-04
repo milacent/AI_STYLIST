@@ -54,7 +54,7 @@ def log_in_page(request):
 
         if user is not None:
             login(request, user)
-            return redirect("/profile")
+            return redirect("profile", username=user.username)
         else:
             context['error'] = "Invalid username or password"
             print('1')
@@ -96,32 +96,53 @@ def sign_up_page(request):
 
 
 @login_required
-def profile_page(request):
-    context = {}
-    context['info'] = Info.objects.get(user=request.user)
-    context['liked_posts'] = Post.objects.filter(
-        likepost__user=request.user
-    )[:4]
-    context['look_sections'] = [
-        {
-            'title': '⭐ Сохранённые образы',
-            'looks': request.user.saved_looks.all()[:4],
-            'status': 'saved',
-            'view_all_url': 'view_all_saved'
-        },
-        {
-            'title': '❤️ Понравившиеся образы',
-            'looks': Looks.objects.filter(likedlook__user=request.user)[:4],
-            'status': 'liked',
-            'view_all_url': 'view_all_liked'
-        },
-        {
-            'title': '💔 Не понравившиеся образы',
-            'looks': Looks.objects.filter(dislikedlook__user=request.user)[:4],
-            'status': 'disliked',
-            'view_all_url': 'view_all_disliked'
-        }]
+def profile_page(request, username=None):
+    profile_user = get_object_or_404(User, username=username)
+    is_own_profile = (request.user == profile_user)
 
+    try:
+        info = Info.objects.get(user=profile_user)
+    except Info.DoesNotExist:
+        info = None
+
+    # Получаем посты пользователя
+    user_posts = Post.objects.filter(user=profile_user).order_by('-id')
+
+    # Для своего профиля показываем сохраненные образы
+    if is_own_profile:
+        look_sections = [
+            {
+                'title': '⭐ Сохранённые образы',
+                'looks': request.user.saved_looks.all()[:4],
+                'status': 'saved',
+                'view_all_url': 'view_all_saved'
+            },
+            {
+                'title': '❤️ Понравившиеся образы',
+                'looks': Looks.objects.filter(likedlook__user=request.user)[:4],
+                'status': 'liked',
+                'view_all_url': 'view_all_liked'
+            },
+            {
+                'title': '💔 Не понравившиеся образы',
+                'looks': Looks.objects.filter(dislikedlook__user=request.user)[:4],
+                'status': 'disliked',
+                'view_all_url': 'view_all_disliked'
+            }]
+
+        liked_posts = Post.objects.filter(likepost__user=request.user)[:4]
+    else:
+        look_sections = []
+        liked_posts = []
+
+    context = {
+        'profile_user': profile_user,
+        'info': info,
+        'is_own_profile': is_own_profile,
+        'user_posts': user_posts,
+        'look_sections': look_sections,
+        'liked_posts': liked_posts,
+    }
     return render(request, "profile/profile.html", context)
 
 @login_required
