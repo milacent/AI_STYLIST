@@ -6,11 +6,11 @@ from django.utils import timezone
 
 class Info(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    height = models.IntegerField()
-    weight = models.IntegerField()
-    chest = models.IntegerField()
-    waist = models.IntegerField()
-    hips = models.IntegerField()
+    # height = models.IntegerField()
+    # weight = models.IntegerField()
+    # chest = models.IntegerField()
+    # waist = models.IntegerField()
+    # hips = models.IntegerField()
     gender = models.IntegerField()
     about_me = models.CharField(max_length=300)
 

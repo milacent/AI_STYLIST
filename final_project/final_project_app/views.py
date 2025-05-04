@@ -82,17 +82,12 @@ def sign_up_page(request):
         email = request.POST['email']
         password = request.POST['password1']
         password2 = request.POST['password2']
-        height = request.POST['height']
-        weight = request.POST['weight']
-        chest = request.POST['chest']
-        waist = request.POST['waist']
-        hips = request.POST['hips']
         gender = request.POST['gender']
         about_me = request.POST['about']
         if password == password2:
             user = User.objects.create_user(username, email, password)
-            info = Info(user=user, height=int(height), weight=int(weight),
-                        chest=int(chest), waist=int(waist), hips=int(hips), gender=int(gender), about_me=about_me)
+            info = Info(user=user,
+                        gender=int(gender), about_me=about_me)
             user.save()
             info.save()
             logout(request)
@@ -180,11 +175,6 @@ def profile_edit_page(request):
                 user.set_password(request.POST['password1'])
             user.save()
             info = Info.objects.get(user=user)
-            info.height = int(request.POST['height'])
-            info.weight = int(request.POST['weight'])
-            info.chest = int(request.POST['chest'])
-            info.waist = int(request.POST['waist'])
-            info.hips = int(request.POST['hips'])
             info.gender = int(request.POST['gender'])
             info.about_me = request.POST['about']
             info.save()
@@ -261,7 +251,6 @@ def send_like_post(request, id):
 @login_required
 def catalog_page(request):
     context = {}
-    # context['items'] = Items.objects.all
     return render(request, 'outfits/catalog.html', context)
 
 @login_required
