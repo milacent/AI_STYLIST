@@ -11,7 +11,7 @@
     {% include 'general/header.html' %}
 
     <div class="profile-container">
-        <a href="{% url 'profile' %}" class="back-to-profile">← Вернуться в профиль</a>
+        <a href="{% url 'profile' request.user.username %}" class="back-to-profile">← Вернуться в профиль</a>
         <h1>{{ title }}</h1>
 
         <div class="looks-container">
