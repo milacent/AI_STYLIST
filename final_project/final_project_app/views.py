@@ -1,5 +1,6 @@
 from pyexpat.errors import messages
 from django.contrib import messages
+import requests
 import random
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseServerError, HttpResponseRedirect, JsonResponse
@@ -384,3 +385,21 @@ def dislike_look(request):
         except Exception as e:
             return JsonResponse({'status': 'error', 'message': str(e)})
     return JsonResponse({'status': 'invalid request'})
+
+def get_city_by_coords(request):
+    lat = request.GET.get('lat')
+    lon = request.GET.get('lon')
+    if not lat or not lon:
+        return JsonResponse({'error': 'Missing coordinates'}, status=400)
+
+    try:
+        url = f'https://nominatim.openstreetmap.org/reverse?format=json&lat={lat}&lon={lon}'
+        response = requests.get(url, headers={'User-Agent': 'final_project_app'})
+        data = response.json()
+        city = data.get('address', {}).get('city') or data.get('address', {}).get('town') or data.get('address', {}).get('village')
+        if city:
+            return JsonResponse({'city': city})
+        else:
+            return JsonResponse({'error': 'City not found'}, status=404)
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)

@@ -53,7 +53,7 @@ urlpatterns = [
     path('like_look/', like_look, name='like_look'),
     path('dislike_look/', dislike_look, name='dislike_look'),
     path('user/<str:username>/', profile_page, name='profile'),
-
+    path('get_city_by_coords/', get_city_by_coords, name='get_city_by_coords'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 

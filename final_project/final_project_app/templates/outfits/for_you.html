@@ -7,6 +7,88 @@
     <link rel="stylesheet" href="{% static 'css/for_you.css' %}">
 
 </head>
+
+<!-- Модальное окно выбора города -->
+<div id="cityModal" class="modal">
+    <div class="modal-content">
+        <h2>Ваш город - Москва?</h2>
+        <button id="confirmMoscowBtn">Да</button>
+        <button id="chooseCityBtn">Нет, выбрать другой</button>
+
+        <div id="citySelectDiv">
+            <label for="citySelect">Выберите город:</label>
+            <select id="citySelect">
+                <option value="Moscow">Москва</option>
+                <option value="Saint Petersburg">Санкт-Петербург</option>
+                <option value="Novosibirsk">Новосибирск</option>
+                <option value="Yekaterinburg">Екатеринбург</option>
+                <option value="Kazan">Казань</option>
+            </select>
+            <button id="submitCityBtn">Подтвердить</button>
+        </div>
+
+        <div>
+            <button id="useGeoBtn">Определить по геолокации</button>
+        </div>
+    </div>
+</div>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Проверяем, есть ли сохраненный город в localStorage
+    let savedCity = localStorage.getItem('userCity');
+    if (!savedCity) {
+        // Показываем модальное окно
+        document.getElementById('cityModal').style.display = 'block';
+    } else {
+        // Если город есть, перезагружаем страницу с параметром city
+        if (!window.location.search.includes('city=')) {
+            window.location.href = window.location.pathname + '?city=' + encodeURIComponent(savedCity);
+        }
+    }
+
+    document.getElementById('confirmMoscowBtn').onclick = function() {
+        localStorage.setItem('userCity', 'Moscow');
+        window.location.href = window.location.pathname + '?city=Moscow';
+    };
+
+    document.getElementById('chooseCityBtn').onclick = function() {
+        document.getElementById('citySelectDiv').style.display = 'block';
+    };
+
+    document.getElementById('submitCityBtn').onclick = function() {
+        let city = document.getElementById('citySelect').value;
+        localStorage.setItem('userCity', city);
+        window.location.href = window.location.pathname + '?city=' + encodeURIComponent(city);
+    };
+
+    document.getElementById('useGeoBtn').onclick = function() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                // Отправляем координаты на сервер для определения города
+                fetch(`/get_city_by_coords/?lat=${position.coords.latitude}&lon=${position.coords.longitude}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.city) {
+                        localStorage.setItem('userCity', data.city);
+                        window.location.href = window.location.pathname + '?city=' + encodeURIComponent(data.city);
+                    } else {
+                        alert('Не удалось определить город по геолокации.');
+                    }
+                })
+                .catch(() => alert('Ошибка при определении города.'));
+            }, function() {
+                alert('Геолокация отклонена пользователем.');
+            });
+        } else {
+            alert('Геолокация не поддерживается вашим браузером.');
+        }
+    };
+});
+</script>
+
+
 <body>
         {%include 'general/header.html' %}
         {% block content %}
