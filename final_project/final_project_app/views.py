@@ -24,7 +24,19 @@ def Handle400(request, exception = None):
     return render(request, "Handle/Error400.html", context)
 
 def index_page(request):
-    context = {}
+    top_post = None
+    max_likes = -1
+
+    for post in Post.objects.all():
+        likes_count = LikePost.objects.filter(post=post).count()
+        if likes_count > max_likes:
+            max_likes = likes_count
+            top_post = post
+
+    context = {
+        'top_post': top_post,
+        'max_likes': max_likes if max_likes != -1 else 0,
+    }
     return render(request, "general/index.html", context)
 
 def log_out(request):

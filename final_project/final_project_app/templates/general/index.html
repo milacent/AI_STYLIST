@@ -18,9 +18,16 @@
     </div>
     <div class="sections">
         <section class="section-animate">
-            <h2>Outfit of the day</h2>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmuUqkZ96bcMLggccaTiDcl5AUUSpGxYuu2w&s">
-            <p>Stay trendy with our AI-picked outfit of the day!</p>
+            <h2>Post of the day</h2>
+            {% if top_post %}
+                <img src="{{ top_post.image.url }}" alt="Top outfit">
+                <h3>{{ top_post.title }}</h3>
+                <p>{{ top_post.description }}</p>
+                <p>Likes: {{ max_likes }}</p>
+            {% else %}
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmuUqkZ96bcMLggccaTiDcl5AUUSpGxYuu2w&s">
+                <p>Stay trendy with our AI-picked outfit of the day!</p>
+            {% endif %}
         </section>
 
         <section class="why-choose-us section-animate">

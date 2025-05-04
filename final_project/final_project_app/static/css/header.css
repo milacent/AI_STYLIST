@@ -66,11 +66,13 @@ header {
   text-decoration: none;
   display: inline-block;
   text-align: center;
+  width:100%
 }
 
 .dropbtn:hover {
-  background-color: #d400d4;
-  color: #ff00d9;
+  transform: scale(1.05);
+    box-shadow: 0px 5px 15px rgba(255, 0, 255, 0.9);
+    color: #ff00d9;
 }
 
 button, .dropbtn {
