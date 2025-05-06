@@ -141,9 +141,6 @@ class Looks(models.Model):
         blank=True
     )
 
-    def __str__(self):
-        return f"Look for {self.temp_range}"
-
     @classmethod
     def get_for_temperature(cls, temp):
         temp_ranges = {

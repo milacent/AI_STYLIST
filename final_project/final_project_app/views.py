@@ -1,7 +1,5 @@
-from pyexpat.errors import messages
 from django.contrib import messages
 import requests
-import random
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseServerError, HttpResponseRedirect, JsonResponse
 from django.urls import path, reverse
@@ -10,10 +8,7 @@ from final_project_app.models import Info, Comment, Post, LikePost, LikeComment,
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from .forms import PostForm
-from django.core.exceptions import ObjectDoesNotExist
-
 from .models import get_current_weather
-
 
 # Create your views here.
 
@@ -185,6 +180,14 @@ def view_all_disliked(request):
     })
 
 @login_required
+def gallery_liked_page(request):
+    liked_posts = Post.objects.filter(likepost__user=request.user)
+    context = {
+        'liked_posts': liked_posts
+    }
+    return render(request, "profile/gallery_liked.html", context)
+
+@login_required
 def profile_edit_page(request):
     context = {}
     context['info'] = Info.objects.get(user=request.user)
@@ -257,10 +260,8 @@ def send_like_post(request, id):
 
     if like.exists():
         like.delete()
-        # Приоритет у явного параметра next
         if next_page == 'gallery_liked':
             return redirect('gallery_liked')
-        # Если пришли со страницы лайкнутых постов
         elif 'gallery_liked' in referer:
             return redirect('gallery_liked')
         # По умолчанию остаемся на текущей странице
@@ -274,14 +275,6 @@ def send_like_post(request, id):
 def catalog_page(request):
     context = {}
     return render(request, 'outfits/catalog.html', context)
-
-@login_required
-def gallery_liked_page(request):
-    liked_posts = Post.objects.filter(likepost__user=request.user)
-    context = {
-        'liked_posts': liked_posts
-    }
-    return render(request, "profile/gallery_liked.html", context)
 
 
 def about_page(request):

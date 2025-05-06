@@ -12,7 +12,7 @@
 
     <section>
         <h2>Content: {{ description }}</h2>
-        <p><strong>Author:</strong> <i>{{ author }}</i></p>
+        <p><strong>Author:</strong> <a href="{% url 'profile' author %}"><i>{{ author }}</i></a></p>
         <p><strong>Likes:</strong> <i>{{ likes }}</i></p>
     </section>
 
