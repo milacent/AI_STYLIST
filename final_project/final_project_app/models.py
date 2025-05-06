@@ -89,9 +89,6 @@ class ClothingItem(models.Model):
     style = models.TextField(choices=Styles.choices, default="classic")
     material = models.CharField(choices=Material.choices, max_length=20, default="cotton")
 
-    def get_temperature_folder(self):
-        return f"{self.min_temp}_{self.max_temp}"
-
 
 class Looks(models.Model):
     temp_range = models.CharField(max_length=20, default='unknown_range')
