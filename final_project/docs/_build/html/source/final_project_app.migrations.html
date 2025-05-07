@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+
+<html lang="ru" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>final_project_app.migrations package &#8212; документация project </title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=27fed22d" />
+    <script src="../_static/documentation_options.js?v=372fde1a"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/translations.js?v=cd1d70c9"></script>
+    <link rel="index" title="Алфавитный указатель" href="../genindex.html" />
+    <link rel="search" title="Поиск" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="final-project-app-migrations-package">
+<h1>final_project_app.migrations package<a class="headerlink" href="#final-project-app-migrations-package" title="Ссылка на этот заголовок">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Ссылка на этот заголовок">¶</a></h2>
+</section>
+<section id="module-final_project_app.migrations.0001_initial">
+<span id="final-project-app-migrations-0001-initial-module"></span><h2>final_project_app.migrations.0001_initial module<a class="headerlink" href="#module-final_project_app.migrations.0001_initial" title="Ссылка на этот заголовок">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="final_project_app.migrations.0001_initial.Migration">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">final_project_app.migrations.0001_initial.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/migrations/0001_initial.html#Migration"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.migrations.0001_initial.Migration" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="final_project_app.migrations.0001_initial.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('auth',</span> <span class="pre">'__first__')]</span></em><a class="headerlink" href="#final_project_app.migrations.0001_initial.Migration.dependencies" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="final_project_app.migrations.0001_initial.Migration.initial">
+<span class="sig-name descname"><span class="pre">initial</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#final_project_app.migrations.0001_initial.Migration.initial" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="final_project_app.migrations.0001_initial.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;CreateModel</span>&#160; <span class="pre">name='Materials',</span> <span class="pre">fields=[('id',</span> <span class="pre">&lt;django.db.models.fields.BigAutoField&gt;),</span> <span class="pre">('material',</span> <span class="pre">&lt;django.db.models.fields.CharField&gt;),</span> <span class="pre">('percent',</span> <span class="pre">&lt;django.db.models.fields.IntegerField&gt;)]&gt;,</span> <span class="pre">&lt;CreateModel</span>&#160; <span class="pre">name='Comment',</span> <span class="pre">fields=[('id',</span> <span class="pre">&lt;django.db.models.fields.BigAutoField&gt;),</span> <span class="pre">('content',</span> <span class="pre">&lt;django.db.models.fields.CharField&gt;),</span> <span class="pre">('user',</span> <span class="pre">&lt;django.db.models.fields.related.ForeignKey&gt;)]&gt;,</span> <span class="pre">&lt;CreateModel</span>&#160; <span class="pre">name='Info',</span> <span class="pre">fields=[('id',</span> <span class="pre">&lt;django.db.models.fields.BigAutoField&gt;),</span> <span class="pre">('height',</span> <span class="pre">&lt;django.db.models.fields.IntegerField&gt;),</span> <span class="pre">('weight',</span> <span class="pre">&lt;django.db.models.fields.IntegerField&gt;),</span> <span class="pre">('chest',</span> <span class="pre">&lt;django.db.models.fields.IntegerField&gt;),</span> <span class="pre">('waist',</span> <span class="pre">&lt;django.db.models.fields.IntegerField&gt;),</span> <span class="pre">('hips',</span> <span class="pre">&lt;django.db.models.fields.IntegerField&gt;),</span> <span class="pre">('gender',</span> <span class="pre">&lt;django.db.models.fields.IntegerField&gt;),</span> <span class="pre">('about_me',</span> <span class="pre">&lt;django.db.models.fields.CharField&gt;),</span> <span class="pre">('user',</span> <span class="pre">&lt;django.db.models.fields.related.ForeignKey&gt;)]&gt;,</span> <span class="pre">&lt;CreateModel</span>&#160; <span class="pre">name='Item',</span> <span class="pre">fields=[('id',</span> <span class="pre">&lt;django.db.models.fields.BigAutoField&gt;),</span> <span class="pre">('url',</span> <span class="pre">&lt;django.db.models.fields.URLField&gt;),</span> <span class="pre">('image',</span> <span class="pre">&lt;django.db.models.fields.files.ImageField&gt;),</span> <span class="pre">('user',</span> <span class="pre">&lt;django.db.models.fields.related.ForeignKey&gt;)]&gt;,</span> <span class="pre">&lt;CreateModel</span>&#160; <span class="pre">name='LikeComment',</span> <span class="pre">fields=[('id',</span> <span class="pre">&lt;django.db.models.fields.BigAutoField&gt;),</span> <span class="pre">('comment',</span> <span class="pre">&lt;django.db.models.fields.related.ForeignKey&gt;),</span> <span class="pre">('user',</span> <span class="pre">&lt;django.db.models.fields.related.ForeignKey&gt;)]&gt;,</span> <span class="pre">&lt;CreateModel</span>&#160; <span class="pre">name='Looks',</span> <span class="pre">fields=[('id',</span> <span class="pre">&lt;django.db.models.fields.BigAutoField&gt;),</span> <span class="pre">('weather_grade',</span> <span class="pre">&lt;django.db.models.fields.IntegerField&gt;),</span> <span class="pre">('description',</span> <span class="pre">&lt;django.db.models.fields.CharField&gt;),</span> <span class="pre">('style',</span> <span class="pre">&lt;django.db.models.fields.CharField&gt;),</span> <span class="pre">('items',</span> <span class="pre">&lt;django.db.models.fields.related.ForeignKey&gt;)]&gt;,</span> <span class="pre">&lt;CreateModel</span>&#160; <span class="pre">name='ClothingItem',</span> <span class="pre">fields=[('id',</span> <span class="pre">&lt;django.db.models.fields.BigAutoField&gt;),</span> <span class="pre">('category',</span> <span class="pre">&lt;django.db.models.fields.CharField&gt;),</span> <span class="pre">('name',</span> <span class="pre">&lt;django.db.models.fields.CharField&gt;),</span> <span class="pre">('image_name',</span> <span class="pre">&lt;django.db.models.fields.CharField&gt;),</span> <span class="pre">('min_temp',</span> <span class="pre">&lt;django.db.models.fields.IntegerField&gt;),</span> <span class="pre">('max_temp',</span> <span class="pre">&lt;django.db.models.fields.IntegerField&gt;),</span> <span class="pre">('color',</span> <span class="pre">&lt;django.db.models.fields.CharField&gt;),</span> <span class="pre">('style',</span> <span class="pre">&lt;django.db.models.fields.TextField&gt;),</span> <span class="pre">('material',</span> <span class="pre">&lt;django.db.models.fields.related.ForeignKey&gt;)]&gt;,</span> <span class="pre">&lt;CreateModel</span>&#160; <span class="pre">name='Post',</span> <span class="pre">fields=[('id',</span> <span class="pre">&lt;django.db.models.fields.BigAutoField&gt;),</span> <span class="pre">('title',</span> <span class="pre">&lt;django.db.models.fields.CharField&gt;),</span> <span class="pre">('image',</span> <span class="pre">&lt;django.db.models.fields.files.ImageField&gt;),</span> <span class="pre">('description',</span> <span class="pre">&lt;django.db.models.fields.CharField&gt;),</span> <span class="pre">('user',</span> <span class="pre">&lt;django.db.models.fields.related.ForeignKey&gt;)]&gt;,</span> <span class="pre">&lt;CreateModel</span>&#160; <span class="pre">name='LikePost',</span> <span class="pre">fields=[('id',</span> <span class="pre">&lt;django.db.models.fields.BigAutoField&gt;),</span> <span class="pre">('user',</span> <span class="pre">&lt;django.db.models.fields.related.ForeignKey&gt;),</span> <span class="pre">('post',</span> <span class="pre">&lt;django.db.models.fields.related.ForeignKey&gt;)]&gt;,</span> <span class="pre">&lt;AddField</span>&#160; <span class="pre">model_name='comment',</span> <span class="pre">name='post',</span> <span class="pre">field=&lt;django.db.models.fields.related.ForeignKey&gt;&gt;,</span> <span class="pre">&lt;CreateModel</span>&#160; <span class="pre">name='UserGrade',</span> <span class="pre">fields=[('id',</span> <span class="pre">&lt;django.db.models.fields.BigAutoField&gt;),</span> <span class="pre">('grade',</span> <span class="pre">&lt;django.db.models.fields.IntegerField&gt;),</span> <span class="pre">('info',</span> <span class="pre">&lt;django.db.models.fields.related.ForeignKey&gt;),</span> <span class="pre">('item',</span> <span class="pre">&lt;django.db.models.fields.related.ForeignKey&gt;),</span> <span class="pre">('user',</span> <span class="pre">&lt;django.db.models.fields.related.ForeignKey&gt;)]&gt;]</span></em><a class="headerlink" href="#final_project_app.migrations.0001_initial.Migration.operations" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-final_project_app.migrations.0002_alter_clothingitem_material_delete_materials">
+<span id="final-project-app-migrations-0002-alter-clothingitem-material-delete-materials-module"></span><h2>final_project_app.migrations.0002_alter_clothingitem_material_delete_materials module<a class="headerlink" href="#module-final_project_app.migrations.0002_alter_clothingitem_material_delete_materials" title="Ссылка на этот заголовок">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="final_project_app.migrations.0002_alter_clothingitem_material_delete_materials.Migration">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">final_project_app.migrations.0002_alter_clothingitem_material_delete_materials.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/migrations/0002_alter_clothingitem_material_delete_materials.html#Migration"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.migrations.0002_alter_clothingitem_material_delete_materials.Migration" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="final_project_app.migrations.0002_alter_clothingitem_material_delete_materials.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('final_project_app',</span> <span class="pre">'0001_initial')]</span></em><a class="headerlink" href="#final_project_app.migrations.0002_alter_clothingitem_material_delete_materials.Migration.dependencies" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="final_project_app.migrations.0002_alter_clothingitem_material_delete_materials.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;AlterField</span>&#160; <span class="pre">model_name='clothingitem',</span> <span class="pre">name='material',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;,</span> <span class="pre">&lt;DeleteModel</span>&#160; <span class="pre">name='Materials'&gt;]</span></em><a class="headerlink" href="#final_project_app.migrations.0002_alter_clothingitem_material_delete_materials.Migration.operations" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-final_project_app.migrations.0003_remove_clothingitem_material_and_more">
+<span id="final-project-app-migrations-0003-remove-clothingitem-material-and-more-module"></span><h2>final_project_app.migrations.0003_remove_clothingitem_material_and_more module<a class="headerlink" href="#module-final_project_app.migrations.0003_remove_clothingitem_material_and_more" title="Ссылка на этот заголовок">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="final_project_app.migrations.0003_remove_clothingitem_material_and_more.Migration">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">final_project_app.migrations.0003_remove_clothingitem_material_and_more.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/migrations/0003_remove_clothingitem_material_and_more.html#Migration"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.migrations.0003_remove_clothingitem_material_and_more.Migration" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="final_project_app.migrations.0003_remove_clothingitem_material_and_more.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('final_project_app',</span> <span class="pre">'0002_alter_clothingitem_material_delete_materials')]</span></em><a class="headerlink" href="#final_project_app.migrations.0003_remove_clothingitem_material_and_more.Migration.dependencies" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="final_project_app.migrations.0003_remove_clothingitem_material_and_more.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;RemoveField</span>&#160; <span class="pre">model_name='clothingitem',</span> <span class="pre">name='material'&gt;,</span> <span class="pre">&lt;AlterField</span>&#160; <span class="pre">model_name='clothingitem',</span> <span class="pre">name='style',</span> <span class="pre">field=&lt;django.db.models.fields.TextField&gt;&gt;,</span> <span class="pre">&lt;AlterField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='style',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;]</span></em><a class="headerlink" href="#final_project_app.migrations.0003_remove_clothingitem_material_and_more.Migration.operations" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-final_project_app.migrations.0004_clothingitem_material">
+<span id="final-project-app-migrations-0004-clothingitem-material-module"></span><h2>final_project_app.migrations.0004_clothingitem_material module<a class="headerlink" href="#module-final_project_app.migrations.0004_clothingitem_material" title="Ссылка на этот заголовок">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="final_project_app.migrations.0004_clothingitem_material.Migration">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">final_project_app.migrations.0004_clothingitem_material.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/migrations/0004_clothingitem_material.html#Migration"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.migrations.0004_clothingitem_material.Migration" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="final_project_app.migrations.0004_clothingitem_material.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('final_project_app',</span> <span class="pre">'0003_remove_clothingitem_material_and_more')]</span></em><a class="headerlink" href="#final_project_app.migrations.0004_clothingitem_material.Migration.dependencies" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="final_project_app.migrations.0004_clothingitem_material.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;AddField</span>&#160; <span class="pre">model_name='clothingitem',</span> <span class="pre">name='material',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;]</span></em><a class="headerlink" href="#final_project_app.migrations.0004_clothingitem_material.Migration.operations" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-final_project_app.migrations.0005_alter_clothingitem_material_alter_clothingitem_style_and_more">
+<span id="final-project-app-migrations-0005-alter-clothingitem-material-alter-clothingitem-style-and-more-module"></span><h2>final_project_app.migrations.0005_alter_clothingitem_material_alter_clothingitem_style_and_more module<a class="headerlink" href="#module-final_project_app.migrations.0005_alter_clothingitem_material_alter_clothingitem_style_and_more" title="Ссылка на этот заголовок">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="final_project_app.migrations.0005_alter_clothingitem_material_alter_clothingitem_style_and_more.Migration">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">final_project_app.migrations.0005_alter_clothingitem_material_alter_clothingitem_style_and_more.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/migrations/0005_alter_clothingitem_material_alter_clothingitem_style_and_more.html#Migration"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.migrations.0005_alter_clothingitem_material_alter_clothingitem_style_and_more.Migration" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="final_project_app.migrations.0005_alter_clothingitem_material_alter_clothingitem_style_and_more.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('final_project_app',</span> <span class="pre">'0004_clothingitem_material')]</span></em><a class="headerlink" href="#final_project_app.migrations.0005_alter_clothingitem_material_alter_clothingitem_style_and_more.Migration.dependencies" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="final_project_app.migrations.0005_alter_clothingitem_material_alter_clothingitem_style_and_more.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;AlterField</span>&#160; <span class="pre">model_name='clothingitem',</span> <span class="pre">name='material',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;,</span> <span class="pre">&lt;AlterField</span>&#160; <span class="pre">model_name='clothingitem',</span> <span class="pre">name='style',</span> <span class="pre">field=&lt;django.db.models.fields.TextField&gt;&gt;,</span> <span class="pre">&lt;AlterField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='style',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;]</span></em><a class="headerlink" href="#final_project_app.migrations.0005_alter_clothingitem_material_alter_clothingitem_style_and_more.Migration.operations" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-final_project_app.migrations.0006_alter_clothingitem_material_alter_clothingitem_style_and_more">
+<span id="final-project-app-migrations-0006-alter-clothingitem-material-alter-clothingitem-style-and-more-module"></span><h2>final_project_app.migrations.0006_alter_clothingitem_material_alter_clothingitem_style_and_more module<a class="headerlink" href="#module-final_project_app.migrations.0006_alter_clothingitem_material_alter_clothingitem_style_and_more" title="Ссылка на этот заголовок">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="final_project_app.migrations.0006_alter_clothingitem_material_alter_clothingitem_style_and_more.Migration">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">final_project_app.migrations.0006_alter_clothingitem_material_alter_clothingitem_style_and_more.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/migrations/0006_alter_clothingitem_material_alter_clothingitem_style_and_more.html#Migration"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.migrations.0006_alter_clothingitem_material_alter_clothingitem_style_and_more.Migration" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="final_project_app.migrations.0006_alter_clothingitem_material_alter_clothingitem_style_and_more.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('final_project_app',</span> <span class="pre">'0005_alter_clothingitem_material_alter_clothingitem_style_and_more')]</span></em><a class="headerlink" href="#final_project_app.migrations.0006_alter_clothingitem_material_alter_clothingitem_style_and_more.Migration.dependencies" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="final_project_app.migrations.0006_alter_clothingitem_material_alter_clothingitem_style_and_more.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;AlterField</span>&#160; <span class="pre">model_name='clothingitem',</span> <span class="pre">name='material',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;,</span> <span class="pre">&lt;AlterField</span>&#160; <span class="pre">model_name='clothingitem',</span> <span class="pre">name='style',</span> <span class="pre">field=&lt;django.db.models.fields.TextField&gt;&gt;,</span> <span class="pre">&lt;AlterField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='style',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;]</span></em><a class="headerlink" href="#final_project_app.migrations.0006_alter_clothingitem_material_alter_clothingitem_style_and_more.Migration.operations" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-final_project_app.migrations.0006_looks_bottom_looks_created_at_looks_head_and_more">
+<span id="final-project-app-migrations-0006-looks-bottom-looks-created-at-looks-head-and-more-module"></span><h2>final_project_app.migrations.0006_looks_bottom_looks_created_at_looks_head_and_more module<a class="headerlink" href="#module-final_project_app.migrations.0006_looks_bottom_looks_created_at_looks_head_and_more" title="Ссылка на этот заголовок">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="final_project_app.migrations.0006_looks_bottom_looks_created_at_looks_head_and_more.Migration">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">final_project_app.migrations.0006_looks_bottom_looks_created_at_looks_head_and_more.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/migrations/0006_looks_bottom_looks_created_at_looks_head_and_more.html#Migration"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.migrations.0006_looks_bottom_looks_created_at_looks_head_and_more.Migration" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="final_project_app.migrations.0006_looks_bottom_looks_created_at_looks_head_and_more.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('final_project_app',</span> <span class="pre">'0005_alter_clothingitem_material_alter_clothingitem_style_and_more')]</span></em><a class="headerlink" href="#final_project_app.migrations.0006_looks_bottom_looks_created_at_looks_head_and_more.Migration.dependencies" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="final_project_app.migrations.0006_looks_bottom_looks_created_at_looks_head_and_more.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;AddField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='bottom',</span> <span class="pre">field=&lt;django.db.models.fields.related.ForeignKey&gt;&gt;,</span> <span class="pre">&lt;AddField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='created_at',</span> <span class="pre">field=&lt;django.db.models.fields.DateTimeField&gt;&gt;,</span> <span class="pre">&lt;AddField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='head',</span> <span class="pre">field=&lt;django.db.models.fields.related.ForeignKey&gt;&gt;,</span> <span class="pre">&lt;AddField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='max_temp',</span> <span class="pre">field=&lt;django.db.models.fields.IntegerField&gt;&gt;,</span> <span class="pre">&lt;AddField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='min_temp',</span> <span class="pre">field=&lt;django.db.models.fields.IntegerField&gt;&gt;,</span> <span class="pre">&lt;AddField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='outerwear',</span> <span class="pre">field=&lt;django.db.models.fields.related.ForeignKey&gt;&gt;,</span> <span class="pre">&lt;AddField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='shoes',</span> <span class="pre">field=&lt;django.db.models.fields.related.ForeignKey&gt;&gt;,</span> <span class="pre">&lt;AddField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='top',</span> <span class="pre">field=&lt;django.db.models.fields.related.ForeignKey&gt;&gt;,</span> <span class="pre">&lt;AlterField</span>&#160; <span class="pre">model_name='clothingitem',</span> <span class="pre">name='material',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;,</span> <span class="pre">&lt;AlterField</span>&#160; <span class="pre">model_name='clothingitem',</span> <span class="pre">name='style',</span> <span class="pre">field=&lt;django.db.models.fields.TextField&gt;&gt;,</span> <span class="pre">&lt;AlterField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='style',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;]</span></em><a class="headerlink" href="#final_project_app.migrations.0006_looks_bottom_looks_created_at_looks_head_and_more.Migration.operations" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-final_project_app.migrations.0007_remove_looks_items">
+<span id="final-project-app-migrations-0007-remove-looks-items-module"></span><h2>final_project_app.migrations.0007_remove_looks_items module<a class="headerlink" href="#module-final_project_app.migrations.0007_remove_looks_items" title="Ссылка на этот заголовок">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="final_project_app.migrations.0007_remove_looks_items.Migration">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">final_project_app.migrations.0007_remove_looks_items.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/migrations/0007_remove_looks_items.html#Migration"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.migrations.0007_remove_looks_items.Migration" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="final_project_app.migrations.0007_remove_looks_items.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('final_project_app',</span> <span class="pre">'0006_looks_bottom_looks_created_at_looks_head_and_more')]</span></em><a class="headerlink" href="#final_project_app.migrations.0007_remove_looks_items.Migration.dependencies" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="final_project_app.migrations.0007_remove_looks_items.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;RemoveField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='items'&gt;]</span></em><a class="headerlink" href="#final_project_app.migrations.0007_remove_looks_items.Migration.operations" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-final_project_app.migrations.0008_merge_20250421_2118">
+<span id="final-project-app-migrations-0008-merge-20250421-2118-module"></span><h2>final_project_app.migrations.0008_merge_20250421_2118 module<a class="headerlink" href="#module-final_project_app.migrations.0008_merge_20250421_2118" title="Ссылка на этот заголовок">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="final_project_app.migrations.0008_merge_20250421_2118.Migration">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">final_project_app.migrations.0008_merge_20250421_2118.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/migrations/0008_merge_20250421_2118.html#Migration"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.migrations.0008_merge_20250421_2118.Migration" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="final_project_app.migrations.0008_merge_20250421_2118.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('final_project_app',</span> <span class="pre">'0006_alter_clothingitem_material_alter_clothingitem_style_and_more'),</span> <span class="pre">('final_project_app',</span> <span class="pre">'0007_remove_looks_items')]</span></em><a class="headerlink" href="#final_project_app.migrations.0008_merge_20250421_2118.Migration.dependencies" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="final_project_app.migrations.0008_merge_20250421_2118.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#final_project_app.migrations.0008_merge_20250421_2118.Migration.operations" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-final_project_app.migrations.0009_looks_saved_by">
+<span id="final-project-app-migrations-0009-looks-saved-by-module"></span><h2>final_project_app.migrations.0009_looks_saved_by module<a class="headerlink" href="#module-final_project_app.migrations.0009_looks_saved_by" title="Ссылка на этот заголовок">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="final_project_app.migrations.0009_looks_saved_by.Migration">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">final_project_app.migrations.0009_looks_saved_by.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/migrations/0009_looks_saved_by.html#Migration"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.migrations.0009_looks_saved_by.Migration" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="final_project_app.migrations.0009_looks_saved_by.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('final_project_app',</span> <span class="pre">'0008_merge_20250421_2118'),</span> <span class="pre">('auth',</span> <span class="pre">'__first__')]</span></em><a class="headerlink" href="#final_project_app.migrations.0009_looks_saved_by.Migration.dependencies" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="final_project_app.migrations.0009_looks_saved_by.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;AddField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='saved_by',</span> <span class="pre">field=&lt;django.db.models.fields.related.ManyToManyField&gt;&gt;]</span></em><a class="headerlink" href="#final_project_app.migrations.0009_looks_saved_by.Migration.operations" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-final_project_app.migrations.0010_dislikedlook_likedlook">
+<span id="final-project-app-migrations-0010-dislikedlook-likedlook-module"></span><h2>final_project_app.migrations.0010_dislikedlook_likedlook module<a class="headerlink" href="#module-final_project_app.migrations.0010_dislikedlook_likedlook" title="Ссылка на этот заголовок">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="final_project_app.migrations.0010_dislikedlook_likedlook.Migration">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">final_project_app.migrations.0010_dislikedlook_likedlook.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/migrations/0010_dislikedlook_likedlook.html#Migration"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.migrations.0010_dislikedlook_likedlook.Migration" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="final_project_app.migrations.0010_dislikedlook_likedlook.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('final_project_app',</span> <span class="pre">'0009_looks_saved_by'),</span> <span class="pre">('auth',</span> <span class="pre">'__first__')]</span></em><a class="headerlink" href="#final_project_app.migrations.0010_dislikedlook_likedlook.Migration.dependencies" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="final_project_app.migrations.0010_dislikedlook_likedlook.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;CreateModel</span>&#160; <span class="pre">name='DislikedLook',</span> <span class="pre">fields=[('id',</span> <span class="pre">&lt;django.db.models.fields.BigAutoField&gt;),</span> <span class="pre">('created_at',</span> <span class="pre">&lt;django.db.models.fields.DateTimeField&gt;),</span> <span class="pre">('look',</span> <span class="pre">&lt;django.db.models.fields.related.ForeignKey&gt;),</span> <span class="pre">('user',</span> <span class="pre">&lt;django.db.models.fields.related.ForeignKey&gt;)],</span> <span class="pre">options={'unique_together':</span> <span class="pre">{('user',</span> <span class="pre">'look')}}&gt;,</span> <span class="pre">&lt;CreateModel</span>&#160; <span class="pre">name='LikedLook',</span> <span class="pre">fields=[('id',</span> <span class="pre">&lt;django.db.models.fields.BigAutoField&gt;),</span> <span class="pre">('created_at',</span> <span class="pre">&lt;django.db.models.fields.DateTimeField&gt;),</span> <span class="pre">('look',</span> <span class="pre">&lt;django.db.models.fields.related.ForeignKey&gt;),</span> <span class="pre">('user',</span> <span class="pre">&lt;django.db.models.fields.related.ForeignKey&gt;)],</span> <span class="pre">options={'unique_together':</span> <span class="pre">{('user',</span> <span class="pre">'look')}}&gt;]</span></em><a class="headerlink" href="#final_project_app.migrations.0010_dislikedlook_likedlook.Migration.operations" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-final_project_app.migrations.0011_remove_looks_description_remove_looks_max_temp_and_more">
+<span id="final-project-app-migrations-0011-remove-looks-description-remove-looks-max-temp-and-more-module"></span><h2>final_project_app.migrations.0011_remove_looks_description_remove_looks_max_temp_and_more module<a class="headerlink" href="#module-final_project_app.migrations.0011_remove_looks_description_remove_looks_max_temp_and_more" title="Ссылка на этот заголовок">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="final_project_app.migrations.0011_remove_looks_description_remove_looks_max_temp_and_more.Migration">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">final_project_app.migrations.0011_remove_looks_description_remove_looks_max_temp_and_more.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/migrations/0011_remove_looks_description_remove_looks_max_temp_and_more.html#Migration"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.migrations.0011_remove_looks_description_remove_looks_max_temp_and_more.Migration" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="final_project_app.migrations.0011_remove_looks_description_remove_looks_max_temp_and_more.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('final_project_app',</span> <span class="pre">'0010_dislikedlook_likedlook')]</span></em><a class="headerlink" href="#final_project_app.migrations.0011_remove_looks_description_remove_looks_max_temp_and_more.Migration.dependencies" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="final_project_app.migrations.0011_remove_looks_description_remove_looks_max_temp_and_more.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;RemoveField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='description'&gt;,</span> <span class="pre">&lt;RemoveField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='max_temp'&gt;,</span> <span class="pre">&lt;RemoveField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='min_temp'&gt;,</span> <span class="pre">&lt;RemoveField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='style'&gt;,</span> <span class="pre">&lt;RemoveField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='weather_grade'&gt;,</span> <span class="pre">&lt;AddField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='bottom_color',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;,</span> <span class="pre">&lt;AddField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='bottom_image',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;,</span> <span class="pre">&lt;AddField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='bottom_material',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;,</span> <span class="pre">&lt;AddField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='bottom_style',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;,</span> <span class="pre">&lt;AddField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='head_color',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;,</span> <span class="pre">&lt;AddField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='head_image',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;,</span> <span class="pre">&lt;AddField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='head_material',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;,</span> <span class="pre">&lt;AddField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='head_style',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;,</span> <span class="pre">&lt;AddField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='outerwear_color',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;,</span> <span class="pre">&lt;AddField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='outerwear_image',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;,</span> <span class="pre">&lt;AddField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='outerwear_material',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;,</span> <span class="pre">&lt;AddField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='outerwear_style',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;,</span> <span class="pre">&lt;AddField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='shoes_color',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;,</span> <span class="pre">&lt;AddField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='shoes_image',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;,</span> <span class="pre">&lt;AddField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='shoes_material',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;,</span> <span class="pre">&lt;AddField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='shoes_style',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;,</span> <span class="pre">&lt;AddField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='temp_range',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;,</span> <span class="pre">&lt;AddField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='top_color',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;,</span> <span class="pre">&lt;AddField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='top_image',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;,</span> <span class="pre">&lt;AddField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='top_material',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;,</span> <span class="pre">&lt;AddField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='top_style',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;,</span> <span class="pre">&lt;AlterField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='bottom',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;,</span> <span class="pre">&lt;AlterField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='head',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;,</span> <span class="pre">&lt;AlterField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='outerwear',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;,</span> <span class="pre">&lt;AlterField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='shoes',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;,</span> <span class="pre">&lt;AlterField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='top',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;]</span></em><a class="headerlink" href="#final_project_app.migrations.0011_remove_looks_description_remove_looks_max_temp_and_more.Migration.operations" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-final_project_app.migrations.0012_looks_bottom_vector_looks_general_vector_and_more">
+<span id="final-project-app-migrations-0012-looks-bottom-vector-looks-general-vector-and-more-module"></span><h2>final_project_app.migrations.0012_looks_bottom_vector_looks_general_vector_and_more module<a class="headerlink" href="#module-final_project_app.migrations.0012_looks_bottom_vector_looks_general_vector_and_more" title="Ссылка на этот заголовок">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="final_project_app.migrations.0012_looks_bottom_vector_looks_general_vector_and_more.Migration">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">final_project_app.migrations.0012_looks_bottom_vector_looks_general_vector_and_more.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/migrations/0012_looks_bottom_vector_looks_general_vector_and_more.html#Migration"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.migrations.0012_looks_bottom_vector_looks_general_vector_and_more.Migration" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="final_project_app.migrations.0012_looks_bottom_vector_looks_general_vector_and_more.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('final_project_app',</span> <span class="pre">'0011_remove_looks_description_remove_looks_max_temp_and_more')]</span></em><a class="headerlink" href="#final_project_app.migrations.0012_looks_bottom_vector_looks_general_vector_and_more.Migration.dependencies" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="final_project_app.migrations.0012_looks_bottom_vector_looks_general_vector_and_more.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;AddField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='bottom_vector',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;,</span> <span class="pre">&lt;AddField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='general_vector',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;,</span> <span class="pre">&lt;AddField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='head_vector',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;,</span> <span class="pre">&lt;AddField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='outerwear_vector',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;,</span> <span class="pre">&lt;AddField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='shoes_vector',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;,</span> <span class="pre">&lt;AddField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='top_vector',</span> <span class="pre">field=&lt;django.db.models.fields.CharField&gt;&gt;]</span></em><a class="headerlink" href="#final_project_app.migrations.0012_looks_bottom_vector_looks_general_vector_and_more.Migration.operations" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-final_project_app.migrations.0013_remove_looks_created_at">
+<span id="final-project-app-migrations-0013-remove-looks-created-at-module"></span><h2>final_project_app.migrations.0013_remove_looks_created_at module<a class="headerlink" href="#module-final_project_app.migrations.0013_remove_looks_created_at" title="Ссылка на этот заголовок">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="final_project_app.migrations.0013_remove_looks_created_at.Migration">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">final_project_app.migrations.0013_remove_looks_created_at.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/migrations/0013_remove_looks_created_at.html#Migration"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.migrations.0013_remove_looks_created_at.Migration" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="final_project_app.migrations.0013_remove_looks_created_at.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('final_project_app',</span> <span class="pre">'0012_looks_bottom_vector_looks_general_vector_and_more')]</span></em><a class="headerlink" href="#final_project_app.migrations.0013_remove_looks_created_at.Migration.dependencies" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="final_project_app.migrations.0013_remove_looks_created_at.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;RemoveField</span>&#160; <span class="pre">model_name='looks',</span> <span class="pre">name='created_at'&gt;]</span></em><a class="headerlink" href="#final_project_app.migrations.0013_remove_looks_created_at.Migration.operations" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-final_project_app.migrations.0014_create_looks_table">
+<span id="final-project-app-migrations-0014-create-looks-table-module"></span><h2>final_project_app.migrations.0014_create_looks_table module<a class="headerlink" href="#module-final_project_app.migrations.0014_create_looks_table" title="Ссылка на этот заголовок">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="final_project_app.migrations.0014_create_looks_table.Migration">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">final_project_app.migrations.0014_create_looks_table.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/migrations/0014_create_looks_table.html#Migration"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.migrations.0014_create_looks_table.Migration" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="final_project_app.migrations.0014_create_looks_table.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('final_project_app',</span> <span class="pre">'0013_remove_looks_created_at')]</span></em><a class="headerlink" href="#final_project_app.migrations.0014_create_looks_table.Migration.dependencies" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="final_project_app.migrations.0014_create_looks_table.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#final_project_app.migrations.0014_create_looks_table.Migration.operations" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-final_project_app.migrations.0015_create_looks_table">
+<span id="final-project-app-migrations-0015-create-looks-table-module"></span><h2>final_project_app.migrations.0015_create_looks_table module<a class="headerlink" href="#module-final_project_app.migrations.0015_create_looks_table" title="Ссылка на этот заголовок">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="final_project_app.migrations.0015_create_looks_table.Migration">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">final_project_app.migrations.0015_create_looks_table.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/migrations/0015_create_looks_table.html#Migration"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.migrations.0015_create_looks_table.Migration" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="final_project_app.migrations.0015_create_looks_table.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('final_project_app',</span> <span class="pre">'0014_create_looks_table')]</span></em><a class="headerlink" href="#final_project_app.migrations.0015_create_looks_table.Migration.dependencies" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="final_project_app.migrations.0015_create_looks_table.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#final_project_app.migrations.0015_create_looks_table.Migration.operations" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-final_project_app.migrations.0016_create_looks_table">
+<span id="final-project-app-migrations-0016-create-looks-table-module"></span><h2>final_project_app.migrations.0016_create_looks_table module<a class="headerlink" href="#module-final_project_app.migrations.0016_create_looks_table" title="Ссылка на этот заголовок">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="final_project_app.migrations.0016_create_looks_table.Migration">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">final_project_app.migrations.0016_create_looks_table.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/migrations/0016_create_looks_table.html#Migration"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.migrations.0016_create_looks_table.Migration" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="final_project_app.migrations.0016_create_looks_table.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('final_project_app',</span> <span class="pre">'0015_create_looks_table')]</span></em><a class="headerlink" href="#final_project_app.migrations.0016_create_looks_table.Migration.dependencies" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="final_project_app.migrations.0016_create_looks_table.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#final_project_app.migrations.0016_create_looks_table.Migration.operations" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-final_project_app.migrations.0017_remove_info_chest_remove_info_height_and_more">
+<span id="final-project-app-migrations-0017-remove-info-chest-remove-info-height-and-more-module"></span><h2>final_project_app.migrations.0017_remove_info_chest_remove_info_height_and_more module<a class="headerlink" href="#module-final_project_app.migrations.0017_remove_info_chest_remove_info_height_and_more" title="Ссылка на этот заголовок">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="final_project_app.migrations.0017_remove_info_chest_remove_info_height_and_more.Migration">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">final_project_app.migrations.0017_remove_info_chest_remove_info_height_and_more.</span></span><span class="sig-name descname"><span class="pre">Migration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/migrations/0017_remove_info_chest_remove_info_height_and_more.html#Migration"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.migrations.0017_remove_info_chest_remove_info_height_and_more.Migration" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="final_project_app.migrations.0017_remove_info_chest_remove_info_height_and_more.Migration.dependencies">
+<span class="sig-name descname"><span class="pre">dependencies</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[('final_project_app',</span> <span class="pre">'0016_create_looks_table')]</span></em><a class="headerlink" href="#final_project_app.migrations.0017_remove_info_chest_remove_info_height_and_more.Migration.dependencies" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="final_project_app.migrations.0017_remove_info_chest_remove_info_height_and_more.Migration.operations">
+<span class="sig-name descname"><span class="pre">operations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;RemoveField</span>&#160; <span class="pre">model_name='info',</span> <span class="pre">name='chest'&gt;,</span> <span class="pre">&lt;RemoveField</span>&#160; <span class="pre">model_name='info',</span> <span class="pre">name='height'&gt;,</span> <span class="pre">&lt;RemoveField</span>&#160; <span class="pre">model_name='info',</span> <span class="pre">name='hips'&gt;,</span> <span class="pre">&lt;RemoveField</span>&#160; <span class="pre">model_name='info',</span> <span class="pre">name='waist'&gt;,</span> <span class="pre">&lt;RemoveField</span>&#160; <span class="pre">model_name='info',</span> <span class="pre">name='weight'&gt;]</span></em><a class="headerlink" href="#final_project_app.migrations.0017_remove_info_chest_remove_info_height_and_more.Migration.operations" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-final_project_app.migrations">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-final_project_app.migrations" title="Ссылка на этот заголовок">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">project</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Искать" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Навигация</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, Ratmir.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../_sources/source/final_project_app.migrations.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
