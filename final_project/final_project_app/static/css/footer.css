@@ -3,9 +3,27 @@ footer {
     padding: 20px;
     background-color: rgb(19, 30, 55);
     font-size: 1.2em;
-    color: white
+    color: white;
 }
+
 a {
     color: #00ffe5;
     text-decoration: none;
+}
+
+/* Стиль для кнопки */
+.chat-button {
+    display: inline-block;
+    background-color: #00ffe5; /* Яркий бирюзовый цвет */
+    color: #131e37;            /* Тёмный текст для контраста */
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+}
+
+.chat-button:hover {
+    background-color: #00ccbb; /* Темнее при наведении */
+    transform: scale(1.05);     /* Лёгкое увеличение */
 }
