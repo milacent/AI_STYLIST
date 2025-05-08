@@ -3,13 +3,14 @@ from django.contrib.auth.models import User
 from django.conf import settings
 import requests
 from django.utils import timezone
-import numpy as np
-from sklearn.metrics.pairwise import cosine_similarity
-import json
-from collections import Counter
 
 class Info(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    # height = models.IntegerField()
+    # weight = models.IntegerField()
+    # chest = models.IntegerField()
+    # waist = models.IntegerField()
+    # hips = models.IntegerField()
     gender = models.IntegerField()
     about_me = models.CharField(max_length=300)
 
@@ -36,6 +37,10 @@ class Item(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     url = models.URLField()
     image = models.ImageField()
+    # color
+    # material
+    # style
+    # whether_grade
 
 class UserGrade(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -43,8 +48,9 @@ class UserGrade(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     grade = models.IntegerField()
 
+
 class ClothingItem(models.Model):
-    categories = [
+    categories= [
         ('hats', 'Головные уборы'),
         ('outerwear', 'Верхняя одежда'),
         ('tops', 'Топы'),
@@ -53,25 +59,26 @@ class ClothingItem(models.Model):
     ]
 
     class Styles(models.TextChoices):
-        classic = "classic", "classic"
-        casual = "casual", "casual"
-        sport = "sport", "sport"
-        business = "business", "business"
-        streetwear = "streetwear", "streetwear"
-        retro = "retro", "retro"
-        punk = "punk", "punk"
-        military = "military", "military"
-        grunge = "grunge", "grunge"
-        minimalism = "minimalism", "minimalism"
+        classic = "classic", ("classic")
+        casual = "casual", ("casual")
+        sport = "sport", ("sport")
+        business = "business", ("business")
+        streetwear = "streetwear", ("streetwear")
+        retro = "retro", ("retro")
+        punk = "punk", ("punk")
+        military = "military", ("military")
+        grunge = "grunge", ("grunge")
+        minimalism = "minimalism", ("minimalism")
 
     class Material(models.TextChoices):
-        cotton = "cotton", "cotton"
-        polyester = "polyester", "polyester"
-        wool = "wool", "wool"
-        leather = "leather", "leather"
-        denim = "denim", "denim"
-        flax = "flax", "flax"
-        suede = "suede", "suede"
+        cotton = "cotton", ("cotton")
+        polyester = "polyester", ("polyester")
+        wool = "wool", ("wool")
+        leather = "leather", ("leather")
+        denim = "denim", ("denim")
+        flax = "flax", ("flax")
+        suede = "suede", ("suede")
+
 
     category = models.CharField(max_length=10, choices=categories)
     name = models.CharField(max_length=100)
@@ -81,17 +88,12 @@ class ClothingItem(models.Model):
     color = models.CharField(max_length=15)
     style = models.TextField(choices=Styles.choices, default="classic")
     material = models.CharField(choices=Material.choices, max_length=20, default="cotton")
-    vector = models.TextField(null=True, blank=True)
 
-    def get_vector(self):
-        try:
-            return np.array(json.loads(self.vector))
-        except Exception:
-            return None
 
 class Looks(models.Model):
     temp_range = models.CharField(max_length=20, default='unknown_range')
 
+    # Head
     head = models.CharField(max_length=255, default='no_head')
     head_image = models.CharField(max_length=255, default='default.png')
     head_color = models.CharField(max_length=100, default='unknown')
@@ -99,6 +101,7 @@ class Looks(models.Model):
     head_style = models.CharField(max_length=100, default='unknown')
     head_vector = models.CharField(max_length=255, default='no_vector')
 
+    # Outerwear
     outerwear = models.CharField(max_length=255, default='no_outerwear')
     outerwear_image = models.CharField(max_length=255, default='default.png')
     outerwear_color = models.CharField(max_length=100, default='unknown')
@@ -106,6 +109,7 @@ class Looks(models.Model):
     outerwear_style = models.CharField(max_length=100, default='unknown')
     outerwear_vector = models.CharField(max_length=255, default='no_vector')
 
+    # Top
     top = models.CharField(max_length=255, default='no_top')
     top_image = models.CharField(max_length=255, default='default.png')
     top_color = models.CharField(max_length=100, default='unknown')
@@ -113,6 +117,7 @@ class Looks(models.Model):
     top_style = models.CharField(max_length=100, default='unknown')
     top_vector = models.CharField(max_length=255, default='no_vector')
 
+    # Bottom
     bottom = models.CharField(max_length=255, default='no_bottom')
     bottom_image = models.CharField(max_length=255, default='default.png')
     bottom_color = models.CharField(max_length=100, default='unknown')
@@ -120,6 +125,7 @@ class Looks(models.Model):
     bottom_style = models.CharField(max_length=100, default='unknown')
     bottom_vector = models.CharField(max_length=255, default='no_vector')
 
+    # Shoes
     shoes = models.CharField(max_length=255, default='no_shoes')
     shoes_image = models.CharField(max_length=255, default='default.png')
     shoes_color = models.CharField(max_length=100, default='unknown')
@@ -127,96 +133,13 @@ class Looks(models.Model):
     shoes_style = models.CharField(max_length=100, default='unknown')
     shoes_vector = models.CharField(max_length=255, default='no_vector')
 
+    # General
     general_vector = models.CharField(max_length=1024, default='no_general_vector')
-    saved_by = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='saved_looks', blank=True)
-
-    def get_vector(self):
-        try:
-            return np.array(json.loads(self.general_vector))
-        except Exception:
-            return None
-
-    @classmethod
-    def get_recommendations(cls, user, top_n=5):
-        liked_looks = LikedLook.objects.filter(user=user)
-        liked_vectors = []
-
-        for liked in liked_looks:
-            vec = liked.look.get_vector()
-            if vec is not None:
-                liked_vectors.append(vec)
-
-        if not liked_vectors:
-            return cls.objects.exclude(
-                id__in=DislikedLook.objects.filter(user=user).values_list('look_id', flat=True)).order_by('?')[:top_n]
-
-        user_pref_vector = np.mean(liked_vectors, axis=0).reshape(1, -1)
-
-        candidates = cls.objects.exclude(id__in=liked_looks.values_list('look_id', flat=True)).exclude(
-            id__in=DislikedLook.objects.filter(user=user).values_list('look_id', flat=True))
-
-        scored = []
-        for look in candidates:
-            vec = look.get_vector()
-            if vec is not None:
-                sim = cosine_similarity(user_pref_vector, vec.reshape(1, -1))[0][0]
-                if sim > 0.6:
-                    scored.append((sim, look))
-
-        scored.sort(reverse=True, key=lambda x: x[0])
-        return [look for _, look in scored[:top_n]]
-
-    @classmethod
-    def generate_from_preferences(cls, user):
-        liked_looks = LikedLook.objects.filter(user=user).select_related('look')
-        if not liked_looks.exists():
-            return None
-
-        styles = []
-        materials = []
-
-        for like in liked_looks:
-            look = like.look
-            styles += [look.top_style, look.bottom_style, look.outerwear_style, look.shoes_style]
-            materials += [look.top_material, look.bottom_material, look.outerwear_material, look.shoes_material]
-
-        top_style = Counter(styles).most_common(1)[0][0]
-        top_material = Counter(materials).most_common(1)[0][0]
-
-        top = ClothingItem.objects.filter(category='tops', style=top_style, material=top_material).order_by('?').first()
-        bottom = ClothingItem.objects.filter(category='bottoms', style=top_style, material=top_material).order_by('?').first()
-        shoes = ClothingItem.objects.filter(category='shoes', style=top_style, material=top_material).order_by('?').first()
-
-        if not (top and bottom and shoes):
-            return None
-
-        items = [top, bottom, shoes]
-        vectors = [item.get_vector() for item in items if item.get_vector() is not None]
-        if not vectors:
-            return None
-        general_vector = json.dumps(np.mean(vectors, axis=0).tolist())
-
-        return cls.objects.create(
-            top=top.name,
-            top_image=top.image_name,
-            top_color=top.color,
-            top_style=top.style,
-            top_material=top.material,
-
-            bottom=bottom.name,
-            bottom_image=bottom.image_name,
-            bottom_color=bottom.color,
-            bottom_style=bottom.style,
-            bottom_material=bottom.material,
-
-            shoes=shoes.name,
-            shoes_image=shoes.image_name,
-            shoes_color=shoes.color,
-            shoes_style=shoes.style,
-            shoes_material=shoes.material,
-
-            general_vector=general_vector
-        )
+    saved_by = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        related_name='saved_looks',
+        blank=True
+    )
 
     @classmethod
     def get_for_temperature(cls, temp):
@@ -233,14 +156,16 @@ class Looks(models.Model):
                 return cls.objects.filter(temp_range=range_str).order_by('?').first()
         return None
 
+
 def get_current_weather(city='Moscow'):
     try:
         url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={settings.WEATHER_API_KEY}&units=metric"
         response = requests.get(url, timeout=5)
         data = response.json()
         return data['main']['temp']
-    except Exception:
+    except Exception as e:
         return None
+
 
 class LikedLook(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -250,6 +175,7 @@ class LikedLook(models.Model):
     class Meta:
         unique_together = ('user', 'look')
 
+
 class DislikedLook(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     look = models.ForeignKey(Looks, on_delete=models.CASCADE)
@@ -257,3 +183,4 @@ class DislikedLook(models.Model):
 
     class Meta:
         unique_together = ('user', 'look')
+
