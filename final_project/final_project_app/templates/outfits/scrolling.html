@@ -14,88 +14,91 @@
     <br>
 
     <div class="cards-container" id="cardsContainer">
-        {% for look in looks %}
-        <div class="outfit-card" data-look-id="{{ look.id }}">
-            <div class="swipe-indicator like-indicator">👍</div>
-            <div class="swipe-indicator dislike-indicator">👎</div>
-            <!-- Шапка -->
-            {% if look.head %}
-            <div class="outfit-item head-item">
-                <img src="{% static 'images/default_clothes/head/' %}{{look.temp_range}}/{{ look.head_image }}"
-                     alt="{{ look.head }}" class="item-image">
-                <div class="item-info">
-                    <h3>{{ look.head }}</h3>
-                    <div class="item-meta">
-                        <span class="style-badge">{{ look.head_style }}</span>
-                        <span class="material-badge">{{ look.head_material }}</span>
+        {% if looks %}
+            {% for look in looks %}
+            <div class="outfit-card" data-look-id="{{ look.id }}">
+                <div class="swipe-indicator like-indicator">👍</div>
+                <div class="swipe-indicator dislike-indicator">👎</div>
+
+                {% if look.head %}
+                <div class="outfit-item head-item">
+                    <img src="{% static 'images/default_clothes/head/' %}{{ look.temp_range }}/{{ look.head_image }}"
+                         alt="{{ look.head }}" class="item-image">
+                    <div class="item-info">
+                        <h3>{{ look.head }}</h3>
+                        <div class="item-meta">
+                            <span class="style-badge">{{ look.head_style }}</span>
+                            <span class="material-badge">{{ look.head_material }}</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            {% endif %}
+                {% endif %}
 
-            <!-- Верхняя одежда -->
-            {% if look.outerwear and look.outerwear_image and look.outerwear_image != 'nan' %}
-            <div class="outfit-item outerwear-item">
-                <img src="{% static 'images/default_clothes/outerwear/' %}{{ look.temp_range }}/{{ look.outerwear_image }}"
-                     alt="{{ look.outerwear }}" class="item-image">
-                <div class="item-info">
-                    <h3>{{ look.outerwear }}</h3>
-                    <div class="item-meta">
-                        <span class="style-badge">{{ look.outerwear_style }}</span>
-                        <span class="material-badge">{{ look.outerwear_material }}</span>
+                {% if look.outerwear and look.outerwear_image and look.outerwear_image != 'nan' %}
+                <div class="outfit-item outerwear-item">
+                    <img src="{% static 'images/default_clothes/outerwear/' %}{{ look.temp_range }}/{{ look.outerwear_image }}"
+                         alt="{{ look.outerwear }}" class="item-image">
+                    <div class="item-info">
+                        <h3>{{ look.outerwear }}</h3>
+                        <div class="item-meta">
+                            <span class="style-badge">{{ look.outerwear_style }}</span>
+                            <span class="material-badge">{{ look.outerwear_material }}</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            {% endif %}
+                {% endif %}
 
-
-            <!-- Верх -->
-            {% if look.top %}
-            <div class="outfit-item top-item">
-                <img src="{% static 'images/default_clothes/tops/' %}{{look.temp_range}}/{{ look.top_image }}"
-                     alt="{{ look.top }}" class="item-image">
-                <div class="item-info">
-                    <h3>{{ look.top }}</h3>
-                    <div class="item-meta">
-                        <span class="style-badge">{{ look.top_style }}</span>
-                        <span class="material-badge">{{ look.top_material }}</span>
+                {% if look.top %}
+                <div class="outfit-item top-item">
+                    <img src="{% static 'images/default_clothes/tops/' %}{{ look.temp_range }}/{{ look.top_image }}"
+                         alt="{{ look.top }}" class="item-image">
+                    <div class="item-info">
+                        <h3>{{ look.top }}</h3>
+                        <div class="item-meta">
+                            <span class="style-badge">{{ look.top_style }}</span>
+                            <span class="material-badge">{{ look.top_material }}</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            {% endif %}
+                {% endif %}
 
-            <!-- Низ -->
-            {% if look.bottom %}
-            <div class="outfit-item bottom-item">
-                <img src="{% static 'images/default_clothes/bottoms/' %}{{look.temp_range}}/{{ look.bottom_image }}"
-                     alt="{{ look.bottom }}" class="item-image">
-                <div class="item-info">
-                    <h3>{{ look.bottom }}</h3>
-                    <div class="item-meta">
-                        <span class="style-badge">{{ look.bottom_style }}</span>
-                        <span class="material-badge">{{ look.bottom_material }}</span>
+                {% if look.bottom %}
+                <div class="outfit-item bottom-item">
+                    <img src="{% static 'images/default_clothes/bottoms/' %}{{ look.temp_range }}/{{ look.bottom_image }}"
+                         alt="{{ look.bottom }}" class="item-image">
+                    <div class="item-info">
+                        <h3>{{ look.bottom }}</h3>
+                        <div class="item-meta">
+                            <span class="style-badge">{{ look.bottom_style }}</span>
+                            <span class="material-badge">{{ look.bottom_material }}</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            {% endif %}
+                {% endif %}
 
-            <!-- Обувь -->
-            {% if look.shoes %}
-            <div class="outfit-item shoes-item">
-                <img src="{% static 'images/default_clothes/shoes/' %}{{look.temp_range}}/{{ look.shoes_image }}"
-                     alt="{{ look.shoes }}" class="item-image">
-                <div class="item-info">
-                    <h3>{{ look.shoes }}</h3>
-                    <div class="item-meta">
-                        <span class="style-badge">{{ look.shoes_style }}</span>
-                        <span class="material-badge">{{ look.shoes_material }}</span>
+                {% if look.shoes %}
+                <div class="outfit-item shoes-item">
+                    <img src="{% static 'images/default_clothes/shoes/' %}{{ look.temp_range }}/{{ look.shoes_image }}"
+                         alt="{{ look.shoes }}" class="item-image">
+                    <div class="item-info">
+                        <h3>{{ look.shoes }}</h3>
+                        <div class="item-meta">
+                            <span class="style-badge">{{ look.shoes_style }}</span>
+                            <span class="material-badge">{{ look.shoes_material }}</span>
+                        </div>
                     </div>
                 </div>
+                {% endif %}
             </div>
-            {% endif %}
-        </div>
-        {% endfor %}
-
+            {% endfor %}
+        {% else %}
+            <div class="no-looks-message" style="text-align: center; margin-top: 20px;">
+                <p>Не найдено ни одного нового образа</p>
+                <button id="loadMoreButton" style="font-size: 16px; cursor: pointer;">
+                    Показать ещё
+                </button>
+            </div>
+        {% endif %}
     </div>
 
     <script src="{% static 'js/scrolling.js' %}"></script>
