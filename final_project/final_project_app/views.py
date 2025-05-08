@@ -9,6 +9,11 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from .forms import PostForm
 from .models import get_current_weather
+from sklearn.metrics.pairwise import cosine_similarity
+import numpy as np
+import json
+from .models import Looks, LikedLook, DislikedLook
+
 
 # Create your views here.
 
@@ -149,8 +154,8 @@ def unsave_look(request, look_id):
         messages.success(request, 'Образ удалён из сохранённых')
         if request.POST.get('source') == 'view_all':
             return redirect('view_all_saved')
-        return redirect('profile', username=request.user.username)
-    return redirect('profile', username=request.user.username)
+        return redirect('profile')
+    return redirect('profile')
 
 @login_required
 def view_all_saved(request):
@@ -204,7 +209,7 @@ def profile_edit_page(request):
             info.about_me = request.POST['about']
             info.save()
             login(request, user)
-            return redirect('profile', username=request.user.username)
+            return redirect('/profile')
         except:
             raise SystemError
 
@@ -338,20 +343,82 @@ def save_look_empty(request):
             })
     return redirect('for_you')
 
-
 @login_required
 def scrolling_page(request):
+
+    # Получаем ID лайков и дизлайков
     liked_look_ids = LikedLook.objects.filter(user=request.user).values_list('look_id', flat=True)
     disliked_look_ids = DislikedLook.objects.filter(user=request.user).values_list('look_id', flat=True)
     excluded_ids = list(liked_look_ids) + list(disliked_look_ids)
 
-    looks = Looks.objects.exclude(id__in=excluded_ids).order_by('?')[:5]
+    # Получаем вектора понравившихся образов
+    liked_looks = Looks.objects.filter(id__in=liked_look_ids)
+    user_like_vectors = []
+    for look in liked_looks:
+        try:
+            vec = json.loads(look.general_vector)
+            user_like_vectors.append(vec)
+        except:
+            continue
+
+    # Получаем вектора не понравившихся образов
+    disliked_looks = Looks.objects.filter(id__in=disliked_look_ids)
+    user_dislike_vectors = []
+    for look in disliked_looks:
+        try:
+            vec = json.loads(look.general_vector)
+            user_dislike_vectors.append(vec)
+        except:
+            continue
+
+    if not user_like_vectors and not user_dislike_vectors:
+        # Показываем 5 случайных образов, если нет лайков и дизлайков
+        looks = Looks.objects.exclude(id__in=excluded_ids).order_by('?')[:10]
+    else:
+        user_like_vector = None
+        user_dislike_vector = None
+        has_likes = bool(user_like_vectors)
+        has_dislikes = bool(user_dislike_vectors)
+
+        if has_likes:
+            user_like_vector = np.mean(np.array(user_like_vectors), axis=0).reshape(1, -1)
+        if has_dislikes:
+            user_dislike_vector = np.mean(np.array(user_dislike_vectors), axis=0).reshape(1, -1)
+
+        candidate_looks = Looks.objects.exclude(id__in=excluded_ids)
+        scored_looks = []
+
+        for look in candidate_looks:
+            try:
+                vec = np.array(json.loads(look.general_vector)).reshape(1, -1)
+                sim_liked = cosine_similarity(user_like_vector, vec)[0][0] if has_likes else 0
+                sim_disliked = cosine_similarity(user_dislike_vector, vec)[0][0] if has_dislikes else 0
+
+                alpha = 0.8
+                final_score = sim_liked - alpha * sim_disliked
+                scored_looks.append((look, final_score))
+            except:
+                continue
+
+        filtered_looks = [(look, score) for look, score in scored_looks if score > 0.6]
+        filtered_looks.sort(key=lambda x: x[1], reverse=True)
+        looks = [look for look, score in filtered_looks[:10]]
+
+        # Если нет хороших совпадений — fallback на случайные
+        if not looks:
+            looks = Looks.objects.exclude(id__in=excluded_ids).order_by('?')[:10]
+
+    # Сохраняем просмотренные образы (как просмотренные пользователем, если есть такая модель)
+    for look in looks:
+        request.user.saved_looks.add(look)
 
     context = {
         'looks': looks,
         'error': None if looks else "Не найдено ни одного нового образа"
     }
     return render(request, 'outfits/scrolling.html', context)
+
+
 
 
 @login_required
