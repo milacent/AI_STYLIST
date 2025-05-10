@@ -3,11 +3,11 @@
 <head>
     {% load static %}
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Header</title>
     <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-
     <header>
         {% if user.is_authenticated %}
         <div class="nav-container">
@@ -16,20 +16,19 @@
             <button onclick="window.location.href='{% url 'posts_all' %}'">Posts</button>
             <div class="dropdown">
                 <a href="{% url 'profile' request.user.username %}" class="dropbtn">Profile</a>
-              <div class="dropdown-content">
-                <a href="{% url 'profile' request.user.username %}">Перейти в профиль</a>
-                <a href="{% url 'profile_edit' %}">Редактировать профиль</a>
-                <a href="{% url 'view_all_saved' %}">Сохраненные образы</a>
-                <a href="{% url 'view_all_liked' %}">Понравившиеся образы</a>
-                <a href="{% url 'view_all_disliked' %}">Не понравившиеся образы</a>
-                <a href="{% url 'gallery_liked' %}">Понравившиеся посты</a>
-              </div>
+                <div class="dropdown-content">
+                    <a href="{% url 'profile' request.user.username %}">Перейти в профиль</a>
+                    <a href="{% url 'profile_edit' %}">Редактировать профиль</a>
+                    <a href="{% url 'view_all_saved' %}">Сохраненные образы</a>
+                    <a href="{% url 'view_all_liked' %}">Понравившиеся образы</a>
+                    <a href="{% url 'view_all_disliked' %}">Не понравившиеся образы</a>
+                    <a href="{% url 'gallery_liked' %}">Понравившиеся посты</a>
+                </div>
             </div>
             <button onclick="window.location.href='{% url 'about' %}'">About</button>
             <button onclick="window.location.href='{% url 'log_out' %}'">Log out</button>
         </div>
         {% endif %}
     </header>
-
 </body>
 </html>
