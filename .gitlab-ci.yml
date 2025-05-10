@@ -1,0 +1,38 @@
+stages:
+  - test
+  - build
+  - deploy
+
+variables:
+  DJANGO_SETTINGS_MODULE: "final_project.settings"
+  PYTHONPATH: "$CI_PROJECT_DIR"
+  DOCKER_IMAGE: "meow-web"
+  DOCKER_REGISTRY: "registry.gitlab.com"
+  GIT_SUBMODULE_STRATEGY: recursive
+
+before_script:
+  - python -V
+  - pip install -r requirements.txt
+
+test:
+  stage: test
+  script:
+    - python manage.py test
+
+build:
+  stage: build
+  script:
+    - docker-compose -f docker-compose.yml build
+
+deploy:
+  stage: deploy
+  only:
+    - main
+  script:
+    - docker-compose -f docker-compose.yml up -d
+    - docker-compose -f docker-compose.yml exec web python manage.py migrate
+    - docker-compose -f docker-compose.yml exec web python manage.py collectstatic --noinput
+    - docker-compose -f docker-compose.yml restart web
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker tag meow-web:latest $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_NAME
+    - docker push $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_NAME
