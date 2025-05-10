@@ -8,9 +8,13 @@
 </head>
 <body>
         <header>
-            <h1>Welcome to<br>AI Fashion Stylist!</h1>
-            <p>Your personal AI assistant for perfect outfits</p>
+            <h1>
+                <span class="highlight-large">Welcome</span> to<br>
+                <span class="highlight-medium">AI Fashion</span> <span class="highlight-medium">Stylist</span>!
+            </h1>
+            <p>Your <span class="highlight-color">personal</span> AI assistant for <span class="highlight-color">perfect</span> outfits</p>
         </header>
+
 
     <div class="buttons">
         <button id="log-in" class="first-register"><a id="log-in-a" href="{% url 'log_in' %}">Log In</a></button>
@@ -66,6 +70,9 @@
             </div>
         </section>
     </div>
+        <br>
+        <br>
+        <br>
     <footer>
         {% include 'general/footer.html' %}
     </footer>

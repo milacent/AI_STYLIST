@@ -1,249 +1,291 @@
-/*
-@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
-*/
-
+/* Основной фон и шрифты */
 body {
-    font-family: 'Lora', sans-serif;
-    background-image: radial-gradient(#610261 0%, #16213e 70%);
-    color: white;
-    text-align: center;
     margin: 0;
     padding: 0;
+    font-family: 'SF Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #161616; /* Очень тёмный фон */
+    color: #fff; /* Основной текст белый */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
-header{
-    padding: 20px;
+/* Заголовок */
+header {
+    padding: 60px 20px 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header h1 {
+    font-size: 3.5em;
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.2;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+header p {
+    font-size: 1.3em;
+    color: #ccc;
+    margin-top: 10px;
+}
+
+/* Выделение ключевых слов в заголовке */
+.highlight-large {
+    font-size: 1.3em;
+    color: #fff; /* Using white for minimal contrast */
     font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-
-}
-header h1{
-    font-size: 90px;
-    opacity: 0.85;
 }
 
-header p{
-    font-size: 20px;
-    opacity: 0.7;
+.highlight-medium {
+    font-size: 1.1em;
+    color: #aaa; /* Light gray for subtle emphasis */
+    font-weight: bold;
 }
 
-section {
-    margin: 50px auto;
-    width: 70%;
-    padding: 30px;
-    background-color: #16213e;
-    border-radius: 10px;
-    box-shadow: 0px 5px 20px rgba(255, 0, 255, 0.7);
+.highlight-color {
+    color: #4a90e2; /* Soft blue for a touch of color */
+    font-weight: bold;
 }
-section div[id="a"]{
-    font-size: 30px;
-    margin-top:80px
-}
-.sections{
-    margin-top:150px;
-    display:flex;
+/* Контейнер секций */
+.sections {
+    margin-top: 80px;
+    display: flex;
     flex-wrap: wrap;
-}
-h2 {
-    color: #e000e0;
-    font-size: 80px;
-}
-a {
-    color: #00ffe5;
-    text-decoration: none;
-}
-
-a[id="log-in-a"]{
-    color:white;
-    text-decoration: none;
-}
-a[id="sign-up-a"]{
-    color:white;
-    text-decoration: none;
-}
-
-section p {
-    font-size: 1.5em;
-}
-
-.first-register{
-    color: white;
-    text-decoration: none;
-    font-size: 1.2em;
-    padding: 10px 20px;
-    border: 2px solid #00ffe5;
-    border-radius: 5px;
-    background-color: #f932fc;
-    cursor: pointer;
-    width:8%;
-    height: 55px;
-    transition: background-color 0.3s, transform 0.3s;
-}
-.buttons{
-    margin-top: 50px;
     justify-content: center;
-    display:flex;
-    gap:100px
-}
-button:hover {
-    background-color: #00ffe5;
-    color: #16213e;
-    transform: scale(1.05);
+    gap: 40px;
+    width: 90%;
+    max-width: 1200px;
 }
 
+/* Секции */
+section {
+    background-color: #1f1f1f; /* Карточка чуть светлее */
+    border-radius: 16px;
+    padding: 35px 40px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    flex: 1 1 350px;
+    max-width: 500px;
+    color: #eee;
+    user-select: none;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(74, 144, 226, 0.7);
+}
+
+/* Заголовки секций */
+h2 {
+    font-size: 1.8em;
+    font-weight: 600;
+    color: #4a90e2; /* Акцентный голубой */
+    margin-bottom: 25px;
+}
+
+/* Текст в секциях */
+section p, section h3 {
+    color: #aaa;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.1em;
+}
+
+/* Выделение ключевых слов */
+.highlight {
+    color: #4a90e2;
+    font-weight: bold;
+    text-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+}
+
+/* Изображения */
+section img {
+    max-width: 100%;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+}
+
+/* Ссылка "More about us" */
+section div#a a {
+    color: #4a90e2;
+    font-weight: 600;
+    font-size: 1.2em;
+    text-decoration: none;
+    border: 2px solid #4a90e2;
+    padding: 10px 25px;
+    border-radius: 10px;
+    display: inline-block;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    user-select: none;
+}
+
+section div#a a:hover,
+section div#a a:focus {
+    background-color: #4a90e2;
+    color: #161616;
+    transform: scale(1.05);
+    outline: none;
+}
+
+/* Кнопки Log In и Sign Up */
+.buttons {
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    margin-bottom: 60px;
+}
+
+.first-register {
+    font-size: 1.3em;
+    padding: 15px 35px;
+    border-radius: 12px;
+    cursor: pointer;
+    border: none;
+    font-weight: 600;
+    width: 180px;
+    height: 60px;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+}
+
+.first-register a {
+    color: #fff;
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Login button - muted green */
+#log-in {
+    background-color: #798c1b;
+    box-shadow: 0 8px 25px #93c416;
+}
+
+#log-in:hover,
+#log-in:focus {
+    background-color: #93c416;
+    box-shadow: 0 12px 35px #93c416;
+    transform: scale(1.07);
+    outline: none;
+}
+
+/* Sign Up button - deep pinkish-purple */
+#sign-up {
+    background-color: #8c164f;
+    box-shadow: 0 8px 25px #c9166e;
+}
+
+#sign-up:hover,
+#sign-up:focus {
+    background-color: #c9166e;
+    box-shadow: 0 12px 35px #c9166e;
+    transform: scale(1.07);
+    outline: none;
+}
+
+/* Цитаты */
 .quotes {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 30px;
+    justify-content: center;
 }
 
 blockquote {
-    flex: 1 1 calc(50% - 20px);
-    background-color: rgba(22, 33, 62, 0.8);
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0px 5px 20px rgba(255, 0, 255, 0.7);
-    color: rgba(255, 255, 255, 0.9);
+    flex: 1 1 calc(50% - 30px);
+    background-color: #2a2a2a;
+    padding: 30px 35px;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    color: #ccc;
     font-style: italic;
     font-size: 1.2em;
-    border-left: 5px solid #f932fc;
+    border-left: 5px solid #4a90e2;
     margin: 0;
     position: relative;
+    user-select: text;
 }
 
 blockquote::before {
     content: "“";
-    font-size: 3em;
-    color: #f932fc;
+    font-size: 4em;
+    color: #4a90e2;
     position: absolute;
-    left: 10px;
-    top: -10px;
+    left: 15px;
+    top: -15px;
 }
 
 blockquote::after {
     content: "”";
-    font-size: 3em;
-    color: #f932fc;
+    font-size: 4em;
+    color: #4a90e2;
     position: absolute;
-    right: 10px;
-    bottom: -20px;
+    right: 15px;
+    bottom: -25px;
 }
 
-.why-choose-us a {
-    color: #00ffe5;
-    text-decoration: none;
-    font-size: 1.2em;
-    padding: 10px 20px;
-    border: 2px solid #00ffe5;
-    border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.why-choose-us a:hover {
-    background-color: #00ffe5;
-    color: #16213e;
-}
-
-.without-acc button{
-    padding: 12px 24px;
-    font-size: 1.5em;
+/* Кнопки в формах */
+.without-acc button,
+.log-in-have-acc button {
+    padding: 15px 35px;
+    font-size: 1.4em;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
     border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
     transition: all 0.3s ease;
+    user-select: none;
+}
 
-    background: linear-gradient(135deg, #d100d1, #6f21b8);
+/* Sign Up button in form */
+.without-acc button {
+    background-color: #8c164f;
     color: white;
-    border-top: 1px solid white;
-    box-shadow: 0 4px 10px rgba(138, 43, 226, 0.5);
+    box-shadow: 0 8px 25px #c9166e;
 }
 
-.without-acc button:hover {
-    background: linear-gradient(135deg, #ff00ff, #8e2aeb);
+.without-acc button:hover,
+.without-acc button:focus {
+    background-color: #c9166e;
+    box-shadow: 0 12px 35px #c9166e;
     transform: scale(1.07);
-    box-shadow: 0 6px 15px rgba(138, 43, 226, 0.7);
+    outline: none;
 }
 
-.log-in-have-acc button{
-    background: transparent;
+/* Log In button in form */
+.log-in-have-acc button {
+    background-color: #798c1b;
     color: white;
-    border: 2px solid white;
-    padding: 12px 24px;
-    font-size: 1.5em;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: all 0.3s ease;
-
-}
-
-.log-in-have-acc button:hover{
-    background: rgba(255, 255, 255, 0.2);
-    transform: scale(1.07);
-    box-shadow: 0 6px 10px rgba(138, 43, 226, 0.5);
-}
-
-.buttons {
-    display: flex;
-    gap: 70px;
-    justify-content: center;
-}
-
-button[id="log-in"], button[id="sign-up"] {
-    padding: 12px 24px;
-    font-size: 1.5em;
+    box-shadow: 0 8px 25px #93c416;
     border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: all 0.3s ease;
 }
 
-button[id="log-in"] {
-    background: linear-gradient(135deg, #d100d1, #6f21b8);
-    color: white;
-    border-top: 1px solid white;
-    box-shadow: 0 4px 10px rgba(138, 43, 226, 0.5);
-}
-
-button[id="log-in"]:hover {
-    background: linear-gradient(135deg, #ff00ff, #8e2aeb);
+.log-in-have-acc button:hover,
+.log-in-have-acc button:focus {
+    background-color: #93c416;
+    box-shadow: 0 12px 35px #93c416;
     transform: scale(1.07);
-    box-shadow: 0 6px 15px rgba(138, 43, 226, 0.7);
+    outline: none;
 }
 
-button[id="sign-up"] {
-    background: transparent;
-    color: white;
-    border: 2px solid white;
-}
-
-button[id="sign-up"]:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: scale(1.07);
-    box-shadow: 0 6px 10px rgba(138, 43, 226, 0.5);
-}
-
+/* Анимация появления */
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes slideUp {
-    from {
-        transform: translateY(50px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .section-animate {
@@ -255,6 +297,35 @@ button[id="sign-up"]:hover {
     animation: fadeIn 1.5s ease forwards;
 }
 
-.section-animate.slide-up {
-    animation: slideUp 1.5s ease forwards;
+/* Адаптивность */
+@media (max-width: 900px) {
+    .sections {
+        flex-direction: column;
+        align-items: center;
+    }
+    section {
+        max-width: 90%;
+        flex: none;
+    }
+    .buttons {
+        flex-direction: column;
+        gap: 30px;
+        margin-top: 50px;
+    }
+    .first-register {
+        width: 180px;
+        height: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 2.2em;
+    }
+    header p {
+        font-size: 1em;
+    }
+    h2 {
+        font-size: 1.5em;
+    }
 }
