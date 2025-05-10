@@ -154,8 +154,8 @@ def unsave_look(request, look_id):
         messages.success(request, 'Образ удалён из сохранённых')
         if request.POST.get('source') == 'view_all':
             return redirect('view_all_saved')
-        return redirect('profile')
-    return redirect('profile')
+        return redirect('profile',request.user)
+    return redirect('profile', request.user)
 
 @login_required
 def view_all_saved(request):
