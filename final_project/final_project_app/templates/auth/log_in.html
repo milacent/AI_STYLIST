@@ -8,6 +8,15 @@
 </head>
 <body>
     <h1>Log In</h1>
+    <!--    ошибки/сообщения -->
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <!--    ошибки/сообщения -->
     <br>
     <form method="POST" action="{% url 'log_in' %}">
         {% csrf_token %}

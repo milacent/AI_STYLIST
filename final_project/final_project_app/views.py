@@ -50,15 +50,13 @@ def log_in_page(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-
         user = authenticate(request, username=username, password=password)
 
         if user is not None:
             login(request, user)
             return redirect("profile", username=user.username)
-        else:
-            context['error'] = "Invalid username or password"
-            print('1')
+        elif username != '' and password != '':
+            messages.add_message(request, messages.ERROR,'Incorrect password and/or username')
 
     return render(request, "auth/log_in.html", context)
 
