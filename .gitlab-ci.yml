@@ -2,6 +2,7 @@ stages:
   - test
   - build
   - deploy
+  - trigger_pipeline  # Добавил новый этап для триггера
 
 variables:
   DJANGO_SETTINGS_MODULE: "final_project.settings"
@@ -36,3 +37,8 @@ deploy:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker tag meow-web:latest $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_NAME
     - docker push $CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_NAME
+
+trigger_pipeline:
+  stage: trigger_pipeline
+  script:
+    - "curl -X POST --fail -F token=glptt-c04d4bddaa612f2dfd415138bf87253722ae6137 -F ref=debvops https://gitlab.informatics.ru/api/v4/projects/10015/trigger/pipeline"
