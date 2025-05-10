@@ -8,15 +8,18 @@
 </head>
 <body>
     <h1>Sign Up</h1>
-    <!--    ошибки/сообщения -->
+    <!-- Сообщения/ошибки -->
     {% if messages %}
-    <ul class="messages">
+    <div class="messages-container">
         {% for message in messages %}
-        <li>{{ message }}</li>
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
         {% endfor %}
-    </ul>
+    </div>
     {% endif %}
-    <!--    ошибки/сообщения -->
+    <!-- Сообщения/ошибки -->
+
     <br>
     <form method="POST" action="{% url 'sign_up' %}">
         {% csrf_token %}

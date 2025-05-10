@@ -31,15 +31,17 @@
         {% endif %}
     </header>
 
-    <!--    ошибки/сообщения -->
+    <!-- Сообщения/ошибки -->
     {% if messages %}
-    <ul class="messages">
+    <div class="messages-container">
         {% for message in messages %}
-        <li>{{ message }}</li>
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
         {% endfor %}
-    </ul>
+    </div>
     {% endif %}
-    <!--    ошибки/сообщения -->
+    <!-- Сообщения/ошибки -->
 
 </body>
 </html>
