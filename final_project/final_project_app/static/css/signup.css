@@ -93,6 +93,10 @@ a:hover {
     width: 100%;
 }
 
+radio {
+    margin-top: 50px;
+}
+
 .alert {
     padding: 15px;
     margin-bottom: 10px;

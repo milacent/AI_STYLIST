@@ -73,6 +73,32 @@ def posts_api(request):
     ]
     return JsonResponse(data, safe=False)
 
+def checker(string):
+    upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    lower = upper.lower()
+    numbers = '1234567890'
+    special = '!@#$%^&*()_+/?.,:;[]}{<>'
+    if len(string) < 8:
+        return False
+    up = 0
+    low = 0
+    num = 0
+    sp = 0
+    for char in string:
+        if char in upper:
+            up += 1
+        elif char in lower:
+            low += 1
+        elif char in numbers:
+            num += 1
+        elif char in special:
+            sp += 1
+        else:
+            return False
+
+    if up < 1 or low < 1 or num < 1 or sp < 1:
+        return False
+    return True
 
 def sign_up_page(request):
     context = {}
@@ -83,14 +109,18 @@ def sign_up_page(request):
         password2 = request.POST['password2']
         gender = request.POST['gender']
         about_me = request.POST['about']
-        if password == password2:
-            user = User.objects.create_user(username, email, password)
-            info = Info(user=user,
-                        gender=int(gender), about_me=about_me)
-            user.save()
-            info.save()
-            logout(request)
-            return redirect('/log_in')
+        if password != password2:
+            messages.error(request, 'Passwords do not match')
+            return redirect('/sign_up')
+        if not checker(password):
+            messages.error(request, 'Password does not meet the requirements')
+            return redirect('/sign_up')
+        user = User.objects.create_user(username, email, password)
+        info = Info(user=user, gender=int(gender), about_me=about_me)
+        user.save()
+        info.save()
+        logout(request)
+        return redirect('/log_in')
     return render(request, "auth/sign_up.html", context)
 
 
@@ -456,7 +486,7 @@ def get_city_by_coords(request):
         data = response.json()
         city = data.get('address', {}).get('city') or data.get('address', {}).get('town') or data.get('address', {}).get('village')
         if city:
-            return JsonResponse({'city': city})
+            return JsonResponse({'city': city}, status=200)
         else:
             return JsonResponse({'error': 'City not found'}, status=404)
     except Exception as e:
