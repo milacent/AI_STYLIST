@@ -296,6 +296,7 @@ body {
 #cityModal button:focus {
     background: #4a90e2;
     box-shadow: 0 4px 16px rgba(74, 144, 226, 0.15);
+    color: black
 }
 
 #cityModal #citySelectDiv {
