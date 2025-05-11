@@ -1,8 +1,8 @@
 from django.contrib import messages
 import requests
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponseServerError, HttpResponseRedirect, JsonResponse
-from django.urls import path, reverse
+from django.http import HttpResponseRedirect, JsonResponse
+from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from final_project_app.models import Info, Comment, Post, LikePost, LikeComment, Looks, LikedLook, DislikedLook
 from django.contrib.auth.models import User
@@ -380,24 +380,7 @@ def scrolling_page(request):
     excluded_ids = list(liked_look_ids) + list(disliked_look_ids)
 
     # Получаем вектора понравившихся образов
-    liked_looks = Looks.objects.filter(id__in=liked_look_ids)
-    user_like_vectors = []
-    for look in liked_looks:
-        try:
-            vec = json.loads(look.general_vector)
-            user_like_vectors.append(vec)
-        except:
-            continue
-
-    # Получаем вектора не понравившихся образов
-    disliked_looks = Looks.objects.filter(id__in=disliked_look_ids)
-    user_dislike_vectors = []
-    for look in disliked_looks:
-        try:
-            vec = json.loads(look.general_vector)
-            user_dislike_vectors.append(vec)
-        except:
-            continue
+    user_dislike_vectors, user_like_vectors = find_liked_disliked(disliked_look_ids, liked_look_ids)
 
     if not user_like_vectors and not user_dislike_vectors:
         # Показываем 5 случайных образов, если нет лайков и дизлайков
@@ -416,17 +399,7 @@ def scrolling_page(request):
         candidate_looks = Looks.objects.exclude(id__in=excluded_ids)
         scored_looks = []
 
-        for look in candidate_looks:
-            try:
-                vec = np.array(json.loads(look.general_vector)).reshape(1, -1)
-                sim_liked = cosine_similarity(user_like_vector, vec)[0][0] if has_likes else 0
-                sim_disliked = cosine_similarity(user_dislike_vector, vec)[0][0] if has_dislikes else 0
-
-                alpha = 0.8
-                final_score = sim_liked - alpha * sim_disliked
-                scored_looks.append((look, final_score))
-            except:
-                continue
+        get_vector(candidate_looks, has_dislikes, has_likes, scored_looks, user_dislike_vector, user_like_vector)
 
         filtered_looks = [(look, score) for look, score in scored_looks if score > 0.6]
         filtered_looks.sort(key=lambda x: x[1], reverse=True)
@@ -447,6 +420,39 @@ def scrolling_page(request):
     return render(request, 'outfits/scrolling.html', context)
 
 
+def find_liked_disliked(disliked_look_ids, liked_look_ids):
+    liked_looks = Looks.objects.filter(id__in=liked_look_ids)
+    user_like_vectors = []
+    for look in liked_looks:
+        try:
+            vec = json.loads(look.general_vector)
+            user_like_vectors.append(vec)
+        except:
+            continue
+    # Получаем вектора не понравившихся образов
+    disliked_looks = Looks.objects.filter(id__in=disliked_look_ids)
+    user_dislike_vectors = []
+    for look in disliked_looks:
+        try:
+            vec = json.loads(look.general_vector)
+            user_dislike_vectors.append(vec)
+        except:
+            continue
+    return user_dislike_vectors, user_like_vectors
+
+
+def get_vector(candidate_looks, has_dislikes, has_likes, scored_looks, user_dislike_vector, user_like_vector):
+    for look in candidate_looks:
+        try:
+            vec = np.array(json.loads(look.general_vector)).reshape(1, -1)
+            sim_liked = cosine_similarity(user_like_vector, vec)[0][0] if has_likes else 0
+            sim_disliked = cosine_similarity(user_dislike_vector, vec)[0][0] if has_dislikes else 0
+
+            alpha = 0.8
+            final_score = sim_liked - alpha * sim_disliked
+            scored_looks.append((look, final_score))
+        except:
+            continue
 
 
 @login_required
