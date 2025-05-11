@@ -29,7 +29,7 @@ author = 'Ratmir'
 
 
 templates_path = ['_templates']
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', 'final_project/final_project_app/migrations']
 
 language = 'ru'
 

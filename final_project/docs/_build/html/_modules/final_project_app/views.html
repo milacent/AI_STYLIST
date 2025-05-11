@@ -6,12 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>final_project_app.views &#8212; документация project </title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
-    <link rel="stylesheet" type="text/css" href="../../_static/basic.css?v=b08954a9" />
-    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=27fed22d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=12dfc556" />
     <script src="../../_static/documentation_options.js?v=372fde1a"></script>
-    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../../_static/translations.js?v=cd1d70c9"></script>
+    <script src="../../_static/translations.js?v=29b1f277"></script>
     <link rel="index" title="Алфавитный указатель" href="../../genindex.html" />
     <link rel="search" title="Поиск" href="../../search.html" />
    
@@ -43,6 +42,11 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib.auth</span><span class="w"> </span><span class="kn">import</span> <span class="n">authenticate</span><span class="p">,</span> <span class="n">login</span><span class="p">,</span> <span class="n">logout</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.forms</span><span class="w"> </span><span class="kn">import</span> <span class="n">PostForm</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_current_weather</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics.pairwise</span><span class="w"> </span><span class="kn">import</span> <span class="n">cosine_similarity</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Looks</span><span class="p">,</span> <span class="n">LikedLook</span><span class="p">,</span> <span class="n">DislikedLook</span>
+
 
 <span class="c1"># Create your views here.</span>
 
@@ -90,15 +94,13 @@
     <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
         <span class="n">username</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span>
         <span class="n">password</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]</span>
-
         <span class="n">user</span> <span class="o">=</span> <span class="n">authenticate</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">user</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">login</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s2">&quot;profile&quot;</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="n">user</span><span class="o">.</span><span class="n">username</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">context</span><span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Invalid username or password&quot;</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">username</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span> <span class="ow">and</span> <span class="n">password</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">messages</span><span class="o">.</span><span class="n">add_message</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">messages</span><span class="o">.</span><span class="n">ERROR</span><span class="p">,</span><span class="s1">&#39;Incorrect password and/or username&#39;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s2">&quot;auth/log_in.html&quot;</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span></div>
 
@@ -119,6 +121,35 @@
     <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">safe</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
 
 
+<div class="viewcode-block" id="checker">
+<a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.views.checker">[документация]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">checker</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
+    <span class="n">upper</span> <span class="o">=</span> <span class="s2">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;</span>
+    <span class="n">lower</span> <span class="o">=</span> <span class="n">upper</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="n">numbers</span> <span class="o">=</span> <span class="s1">&#39;1234567890&#39;</span>
+    <span class="n">special</span> <span class="o">=</span> <span class="s1">&#39;!@#$%^&amp;*()_+/?.,:;[]}{&lt;&gt;&#39;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">string</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">8</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="n">up</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">low</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">sp</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">string</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">upper</span><span class="p">:</span>
+            <span class="n">up</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">lower</span><span class="p">:</span>
+            <span class="n">low</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">:</span>
+            <span class="n">num</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">special</span><span class="p">:</span>
+            <span class="n">sp</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">if</span> <span class="n">up</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">low</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">sp</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="kc">True</span></div>
+
 
 <div class="viewcode-block" id="sign_up_page">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.views.sign_up_page">[документация]</a>
@@ -131,14 +162,18 @@
         <span class="n">password2</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s1">&#39;password2&#39;</span><span class="p">]</span>
         <span class="n">gender</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s1">&#39;gender&#39;</span><span class="p">]</span>
         <span class="n">about_me</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s1">&#39;about&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">password</span> <span class="o">==</span> <span class="n">password2</span><span class="p">:</span>
-            <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
-            <span class="n">info</span> <span class="o">=</span> <span class="n">Info</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span>
-                        <span class="n">gender</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">gender</span><span class="p">),</span> <span class="n">about_me</span><span class="o">=</span><span class="n">about_me</span><span class="p">)</span>
-            <span class="n">user</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-            <span class="n">info</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-            <span class="n">logout</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;/log_in&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">password</span> <span class="o">!=</span> <span class="n">password2</span><span class="p">:</span>
+            <span class="n">messages</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;Passwords do not match&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;/sign_up&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">checker</span><span class="p">(</span><span class="n">password</span><span class="p">):</span>
+            <span class="n">messages</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;Password does not meet the requirements&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;/sign_up&#39;</span><span class="p">)</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="n">Info</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">gender</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">gender</span><span class="p">),</span> <span class="n">about_me</span><span class="o">=</span><span class="n">about_me</span><span class="p">)</span>
+        <span class="n">user</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="n">info</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="n">logout</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;/log_in&#39;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s2">&quot;auth/sign_up.html&quot;</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span></div>
 
 
@@ -206,8 +241,8 @@
         <span class="n">messages</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;Образ удалён из сохранённых&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;source&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;view_all&#39;</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;view_all_saved&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;profile&#39;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;profile&#39;</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;profile&#39;</span><span class="p">,</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;profile&#39;</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="view_all_saved">
@@ -438,22 +473,84 @@
     <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;for_you&#39;</span><span class="p">)</span></div>
 
 
-
 <div class="viewcode-block" id="scrolling_page">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.views.scrolling_page">[документация]</a>
 <span class="nd">@login_required</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">scrolling_page</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+
+    <span class="c1"># Получаем ID лайков и дизлайков</span>
     <span class="n">liked_look_ids</span> <span class="o">=</span> <span class="n">LikedLook</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span><span class="o">.</span><span class="n">values_list</span><span class="p">(</span><span class="s1">&#39;look_id&#39;</span><span class="p">,</span> <span class="n">flat</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">disliked_look_ids</span> <span class="o">=</span> <span class="n">DislikedLook</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span><span class="o">.</span><span class="n">values_list</span><span class="p">(</span><span class="s1">&#39;look_id&#39;</span><span class="p">,</span> <span class="n">flat</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">excluded_ids</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">liked_look_ids</span><span class="p">)</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">disliked_look_ids</span><span class="p">)</span>
 
-    <span class="n">looks</span> <span class="o">=</span> <span class="n">Looks</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">exclude</span><span class="p">(</span><span class="n">id__in</span><span class="o">=</span><span class="n">excluded_ids</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;?&#39;</span><span class="p">)[:</span><span class="mi">5</span><span class="p">]</span>
+    <span class="c1"># Получаем вектора понравившихся образов</span>
+    <span class="n">liked_looks</span> <span class="o">=</span> <span class="n">Looks</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">id__in</span><span class="o">=</span><span class="n">liked_look_ids</span><span class="p">)</span>
+    <span class="n">user_like_vectors</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">look</span> <span class="ow">in</span> <span class="n">liked_looks</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">vec</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">look</span><span class="o">.</span><span class="n">general_vector</span><span class="p">)</span>
+            <span class="n">user_like_vectors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+    <span class="c1"># Получаем вектора не понравившихся образов</span>
+    <span class="n">disliked_looks</span> <span class="o">=</span> <span class="n">Looks</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">id__in</span><span class="o">=</span><span class="n">disliked_look_ids</span><span class="p">)</span>
+    <span class="n">user_dislike_vectors</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">look</span> <span class="ow">in</span> <span class="n">disliked_looks</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">vec</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">look</span><span class="o">.</span><span class="n">general_vector</span><span class="p">)</span>
+            <span class="n">user_dislike_vectors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">user_like_vectors</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">user_dislike_vectors</span><span class="p">:</span>
+        <span class="c1"># Показываем 5 случайных образов, если нет лайков и дизлайков</span>
+        <span class="n">looks</span> <span class="o">=</span> <span class="n">Looks</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">exclude</span><span class="p">(</span><span class="n">id__in</span><span class="o">=</span><span class="n">excluded_ids</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;?&#39;</span><span class="p">)[:</span><span class="mi">10</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">user_like_vector</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">user_dislike_vector</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">has_likes</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">user_like_vectors</span><span class="p">)</span>
+        <span class="n">has_dislikes</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">user_dislike_vectors</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">has_likes</span><span class="p">:</span>
+            <span class="n">user_like_vector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">user_like_vectors</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">has_dislikes</span><span class="p">:</span>
+            <span class="n">user_dislike_vector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">user_dislike_vectors</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">candidate_looks</span> <span class="o">=</span> <span class="n">Looks</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">exclude</span><span class="p">(</span><span class="n">id__in</span><span class="o">=</span><span class="n">excluded_ids</span><span class="p">)</span>
+        <span class="n">scored_looks</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">look</span> <span class="ow">in</span> <span class="n">candidate_looks</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">look</span><span class="o">.</span><span class="n">general_vector</span><span class="p">))</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">sim_liked</span> <span class="o">=</span> <span class="n">cosine_similarity</span><span class="p">(</span><span class="n">user_like_vector</span><span class="p">,</span> <span class="n">vec</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">has_likes</span> <span class="k">else</span> <span class="mi">0</span>
+                <span class="n">sim_disliked</span> <span class="o">=</span> <span class="n">cosine_similarity</span><span class="p">(</span><span class="n">user_dislike_vector</span><span class="p">,</span> <span class="n">vec</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">has_dislikes</span> <span class="k">else</span> <span class="mi">0</span>
+
+                <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.8</span>
+                <span class="n">final_score</span> <span class="o">=</span> <span class="n">sim_liked</span> <span class="o">-</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">sim_disliked</span>
+                <span class="n">scored_looks</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">look</span><span class="p">,</span> <span class="n">final_score</span><span class="p">))</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+        <span class="n">filtered_looks</span> <span class="o">=</span> <span class="p">[(</span><span class="n">look</span><span class="p">,</span> <span class="n">score</span><span class="p">)</span> <span class="k">for</span> <span class="n">look</span><span class="p">,</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">scored_looks</span> <span class="k">if</span> <span class="n">score</span> <span class="o">&gt;</span> <span class="mf">0.6</span><span class="p">]</span>
+        <span class="n">filtered_looks</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">looks</span> <span class="o">=</span> <span class="p">[</span><span class="n">look</span> <span class="k">for</span> <span class="n">look</span><span class="p">,</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">filtered_looks</span><span class="p">[:</span><span class="mi">10</span><span class="p">]]</span>
+
+        <span class="c1"># Если нет хороших совпадений — fallback на случайные</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">looks</span><span class="p">:</span>
+            <span class="n">looks</span> <span class="o">=</span> <span class="n">Looks</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">exclude</span><span class="p">(</span><span class="n">id__in</span><span class="o">=</span><span class="n">excluded_ids</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;?&#39;</span><span class="p">)[:</span><span class="mi">10</span><span class="p">]</span>
+
+    <span class="c1"># Сохраняем просмотренные образы (как просмотренные пользователем, если есть такая модель)</span>
+    <span class="k">for</span> <span class="n">look</span> <span class="ow">in</span> <span class="n">looks</span><span class="p">:</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">saved_looks</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">look</span><span class="p">)</span>
 
     <span class="n">context</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s1">&#39;looks&#39;</span><span class="p">:</span> <span class="n">looks</span><span class="p">,</span>
         <span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">looks</span> <span class="k">else</span> <span class="s2">&quot;Не найдено ни одного нового образа&quot;</span>
     <span class="p">}</span>
     <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;outfits/scrolling.html&#39;</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span></div>
+
+
 
 
 
@@ -502,7 +599,7 @@
         <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
         <span class="n">city</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;address&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;city&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;address&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;town&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;address&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;village&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">city</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="n">city</span><span class="p">})</span>
+            <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="n">city</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;City not found&#39;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="mi">404</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
@@ -514,7 +611,7 @@
           
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
 <h1 class="logo"><a href="../../index.html">project</a></h1>
 
@@ -525,16 +622,11 @@
 
 
 
-
-<search id="searchbox" style="display: none" role="search">
-    <div class="searchformwrapper">
-    <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
-      <input type="submit" value="Искать" />
-    </form>
-    </div>
-</search>
-<script>document.getElementById('searchbox').style.display = "block"</script><h3>Навигация</h3>
+<h3>Навигация</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/modules.html">final_project_app</a></li>
+</ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
@@ -545,6 +637,16 @@
   </ul></li>
 </ul>
 </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Быстрый поиск</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Искать" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 
@@ -561,8 +663,8 @@
       &#169;2025, Ratmir.
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
-      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.2.6</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
       
     </div>
 

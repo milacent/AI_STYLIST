@@ -9,41 +9,116 @@ import json
 from collections import Counter
 
 class Info(models.Model):
+    """
+       Дополнительная информация о пользователе профиля.
+
+       Attributes:
+           user (User): Связь один-ко-многим с моделью User
+           gender (int): Пол пользователя (1 - мужской, 2 - женский)
+           about_me (str): Краткая биография или описание пользователя (макс. 300 символов)
+       """
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     gender = models.IntegerField()
     about_me = models.CharField(max_length=300)
 
 class Post(models.Model):
+    """
+        Модель пользовательского поста с возможностью добавления изображения.
+
+        Attributes:
+            user (User): Автор поста
+            title (str): Заголовок поста (макс. 50 символов)
+            image (ImageField): Опциональное изображение для поста
+            description (str): Основной текст поста (макс. 5000 символов)
+        """
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     image = models.ImageField(upload_to='post_images/', blank=True, null=True)
     description = models.CharField(max_length=5000)
 
 class Comment(models.Model):
+    """
+        Комментарии к постам пользователей.
+
+        Attributes:
+            user (User): Автор комментария
+            content (str): Текст комментария (макс. 500 символов)
+            post (Post): Связанный пост, к которому оставлен комментарий
+        """
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.CharField(max_length=500)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
 
 class LikePost(models.Model):
+    """
+        Система лайков для постов.
+
+        Attributes:
+            user (User): Пользователь, поставивший лайк
+            post (Post): Пост, который был лайкнут
+        """
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
 
 class LikeComment(models.Model):
+    """
+        Система лайков для комментариев.
+
+        Attributes:
+            user (User): Пользователь, поставивший лайк
+            comment (Comment): Комментарий, который был лайкнут
+        """
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
 
 class Item(models.Model):
+    """
+        Пользовательские предметы/ссылки для системы рекомендаций.
+
+        Attributes:
+            user (User): Владелец предмета
+            url (URLField): Ссылка на внешний ресурс с описанием предмета
+            image (ImageField): Визуальное представление предмета
+        """
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     url = models.URLField()
     image = models.ImageField()
 
 class UserGrade(models.Model):
+    """
+       Система оценки пользователей и предметов.
+
+       Attributes:
+           user (User): Пользователь, выставляющий оценку
+           info (Info): Связанная информация профиля
+           item (Item): Оцениваемый предмет
+           grade (int): Значение оценки от 1 до 5
+       """
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     info = models.ForeignKey(Info, on_delete=models.CASCADE)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     grade = models.IntegerField()
 
 class ClothingItem(models.Model):
+    """
+        База данных элементов одежды с характеристиками для рекомендательной системы.
+
+        Attributes:
+            category (str): Категория одежды из предопределенного списка
+            name (str): Название элемента одежды
+            image_name (str): Название файла изображения элемента
+            min_temp (int): Минимальная рекомендованная температура ношения
+            max_temp (int): Максимальная рекомендованная температура ношения
+            color (str): Основной цвет элемента
+            style (str): Стилевая принадлежность из предопределенных вариантов
+            material (str): Материал изготовления из предопределенных вариантов
+            vector (str): Сериализованный вектор для расчетов схожести
+
+        Choices:
+            categories: Варианты категорий одежды
+            Styles: Доступные стилевые направления
+            Material: Типы материалов изготовления
+        """
     categories = [
         ('hats', 'Головные уборы'),
         ('outerwear', 'Верхняя одежда'),
@@ -53,6 +128,7 @@ class ClothingItem(models.Model):
     ]
 
     class Styles(models.TextChoices):
+        """Доступные стилевые направления элементов одежды."""
         classic = "classic", "classic"
         casual = "casual", "casual"
         sport = "sport", "sport"
@@ -65,6 +141,7 @@ class ClothingItem(models.Model):
         minimalism = "minimalism", "minimalism"
 
     class Material(models.TextChoices):
+        """Типы материалов для элементов одежды."""
         cotton = "cotton", "cotton"
         polyester = "polyester", "polyester"
         wool = "wool", "wool"
@@ -84,12 +161,41 @@ class ClothingItem(models.Model):
     vector = models.TextField(null=True, blank=True)
 
     def get_vector(self):
+        """
+                Преобразует сериализованный вектор в numpy array.
+
+                Returns:
+                    np.ndarray or None: Векторное представление элемента одежды
+                """
         try:
             return np.array(json.loads(self.vector))
         except Exception:
             return None
 
 class Looks(models.Model):
+    """
+        Полные комплекты одежды с метаданными для рекомендаций.
+
+        Содержит информацию о всех элементах комплекта:
+        - Головные уборы
+        - Верхняя одежда
+        - Топы
+        - Низы
+        - Обувь
+
+        Для каждого элемента хранятся:
+        - Название
+        - Изображение
+        - Цвет
+        - Материал
+        - Стиль
+        - Векторное представление
+
+        Attributes:
+            temp_range (str): Температурный диапазон для комплекта
+            general_vector (str): Объединенное векторное представление комплекта
+            saved_by (ManyToManyField): Пользователи, сохранившие комплект
+        """
     temp_range = models.CharField(max_length=20, default='unknown_range')
 
     head = models.CharField(max_length=255, default='no_head')
@@ -131,6 +237,12 @@ class Looks(models.Model):
     saved_by = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='saved_looks', blank=True)
 
     def get_vector(self):
+        """
+                Декодирует общий вектор комплекта из строки в numpy array.
+
+                Returns:
+                    np.ndarray or None: Векторное представление комплекта
+                """
         try:
             return np.array(json.loads(self.general_vector))
         except Exception:
@@ -138,6 +250,16 @@ class Looks(models.Model):
 
     @classmethod
     def get_recommendations(cls, user, top_n=5):
+        """
+                Генерирует персонализированные рекомендации комплектов на основе предпочтений.
+
+                Args:
+                    user (User): Целевой пользователь
+                    top_n (int): Количество возвращаемых рекомендаций
+
+                Returns:
+                    list[Looks]: Список рекомендованных комплектов
+                """
         liked_looks = LikedLook.objects.filter(user=user)
         liked_vectors = []
 
@@ -168,6 +290,15 @@ class Looks(models.Model):
 
     @classmethod
     def generate_from_preferences(cls, user):
+        """
+                Генерирует новый комплект на основе предпочтений пользователя.
+
+                Args:
+                    user (User): Целевой пользователь
+
+                Returns:
+                    Looks or None: Сгенерированный комплект или None при ошибке
+                """
         liked_looks = LikedLook.objects.filter(user=user).select_related('look')
         if not liked_looks.exists():
             return None
@@ -220,6 +351,15 @@ class Looks(models.Model):
 
     @classmethod
     def get_for_temperature(cls, temp):
+        """
+                Подбирает подходящий комплект для указанной температуры.
+
+                Args:
+                    temp (int): Текущая температура в градусах Цельсия
+
+                Returns:
+                    Looks or None: Подходящий комплект или None если не найден
+                """
         temp_ranges = {
             (-20, -10): "-20_-10",
             (-10, 0): "-10_0",
@@ -234,6 +374,15 @@ class Looks(models.Model):
         return None
 
 def get_current_weather(city='Moscow'):
+    """
+        Получает текущую температуру для указанного города через OpenWeatherMap API.
+
+        Args:
+            city (str): Название города на английском языке
+
+        Returns:
+            float or None: Температура в градусах Цельсия или None при ошибке
+        """
     try:
         url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={settings.WEATHER_API_KEY}&units=metric"
         response = requests.get(url, timeout=5)
@@ -243,6 +392,14 @@ def get_current_weather(city='Moscow'):
         return None
 
 class LikedLook(models.Model):
+    """
+        История лайков пользователей для системы рекомендаций.
+
+        Attributes:
+            user (User): Пользователь, которому понравился комплект
+            look (Looks): Понравившийся комплект
+            created_at (datetime): Дата и время лайка
+        """
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     look = models.ForeignKey(Looks, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -251,6 +408,14 @@ class LikedLook(models.Model):
         unique_together = ('user', 'look')
 
 class DislikedLook(models.Model):
+    """
+       История дизлайков пользователей для улучшения рекомендаций.
+
+       Attributes:
+           user (User): Пользователь, отклонивший комплект
+           look (Looks): Отклоненный комплект
+           created_at (datetime): Дата и время дизлайка
+       """
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     look = models.ForeignKey(Looks, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
