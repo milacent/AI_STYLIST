@@ -594,9 +594,6 @@ def scrolling_page(request):
         if not looks:
             looks = Looks.objects.exclude(id__in=excluded_ids).order_by('?')[:10]
 
-    # Сохраняем просмотренные образы (как просмотренные пользователем, если есть такая модель)
-    for look in looks:
-        request.user.saved_looks.add(look)
 
     context = {
         'looks': looks,
