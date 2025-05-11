@@ -147,17 +147,19 @@ section div#a a:focus {
     padding: 15px 35px;
     border-radius: 12px;
     cursor: pointer;
-    border: none;
     font-weight: 600;
-    width: 180px;
-    height: 60px;
+    width: 100px;
+    height: 40px;
     transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 6px 20px rgba(0,0,0,0.6);
     display: flex;
     align-items: center;
     justify-content: center;
+    text-decoration: none;
+    color: #fff;
     user-select: none;
 }
+
 
 .first-register a {
     color: #fff;
@@ -171,9 +173,11 @@ section div#a a:focus {
 
 /* Login button - muted green */
 #log-in {
-    background-color: #798c1b;
-    box-shadow: 0 8px 25px #93c416;
+    background-color: rgba(121, 140, 27, 0.1); /* Используем rgba для прозрачности */
+    box-shadow: 0 8px 25px rgba(147, 196, 22, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
 }
+
 
 #log-in:hover,
 #log-in:focus {
@@ -187,6 +191,7 @@ section div#a a:focus {
 #sign-up {
     background-color: #8c164f;
     box-shadow: 0 8px 25px #c9166e;
+    border: 2px solid rgba(255, 255, 255, 0.5);
 }
 
 #sign-up:hover,

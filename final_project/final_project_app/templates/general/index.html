@@ -17,9 +17,10 @@
 
 
     <div class="buttons">
-        <button id="log-in" class="first-register"><a id="log-in-a" href="{% url 'log_in' %}">Log In</a></button>
-        <button id="sign-up" class="first-register"><a id="sign-up-a" href="{% url 'sign_up' %}">Sign Up</a></button>
+        <a id="log-in" class="first-register" href="{% url 'log_in' %}"><span>Log In</span></a>
+        <a id="sign-up" class="first-register" href="{% url 'sign_up' %}"><span>Sign Up</span></a>
     </div>
+
     <div class="sections">
         <section class="section-animate">
             <h2>Post of the day</h2>
