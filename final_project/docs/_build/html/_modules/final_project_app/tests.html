@@ -33,8 +33,8 @@
   <h1>Исходный код final_project_app.tests</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span><span class="w"> </span><span class="nn">django.test</span><span class="w"> </span><span class="kn">import</span> <span class="n">TestCase</span><span class="p">,</span> <span class="n">Client</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">django.urls</span><span class="w"> </span><span class="kn">import</span> <span class="n">reverse</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib.auth.models</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib.auth.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">User</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Post</span><span class="p">,</span> <span class="n">Comment</span><span class="p">,</span> <span class="n">Info</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">django.core.files.uploadedfile</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimpleUploadedFile</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">final_project_app.views</span><span class="w"> </span><span class="kn">import</span> <span class="n">checker</span>
 
@@ -175,15 +175,6 @@
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;catalog&#39;</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span></div>
 
-
-    <span class="c1"># def test_gallery_liked_page(self):</span>
-    <span class="c1">#     &quot;&quot;&quot;Проверка загрузки страницы с лайкнутыми постами.&quot;&quot;&quot;</span>
-    <span class="c1">#     self.login()</span>
-    <span class="c1">#     post = Post.objects.create(user=self.user, title=&#39;Test Post&#39;, description=&#39;desc&#39;)</span>
-    <span class="c1">#     LikePost.objects.create(user=self.user, post=post)</span>
-    <span class="c1">#     response = self.client.get(reverse(&#39;gallery_liked&#39;)+self.user.username)</span>
-    <span class="c1">#     self.assertEqual(response.status_code, 200)</span>
-    <span class="c1">#     self.assertContains(response, post.title)</span>
 
 <div class="viewcode-block" id="ProjectTests.test_scrolling_page">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_scrolling_page">[документация]</a>
@@ -591,7 +582,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">login</span><span class="p">()</span>
         <span class="c1"># Создаем тестовый look</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;save_look_empty&#39;</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">302</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ProjectTests.test_scrolling_page_with_liked_disliked_looks">

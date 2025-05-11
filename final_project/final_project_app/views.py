@@ -18,6 +18,16 @@ from .models import Looks, LikedLook, DislikedLook
 # Create your views here.
 
 def Handle400(request, exception = None):
+    """
+        Обработчик ошибки 400 (Bad Request).
+
+        Args:
+            request (HttpRequest): Объект запроса
+            exception (Exception): Исключение, вызвавшее ошибку
+
+        Returns:
+            HttpResponseRedirect или HttpResponse: Редирект или страница ошибки
+        """
     context = {}
     print(request.path)
     if not request.path.endswith('/'):
@@ -25,6 +35,17 @@ def Handle400(request, exception = None):
     return render(request, "Handle/Error400.html", context)
 
 def index_page(request):
+    """
+        Главная страница приложения. Отображает самый популярный пост по количеству лайков.
+
+        Args:
+            request (HttpRequest): Объект запроса
+
+        Returns:
+            HttpResponse: Рендер главной страницы с контекстом:
+                - top_post: Самый популярный пост
+                - max_likes: Количество лайков топового поста
+        """
     top_post = None
     max_likes = -1
 
@@ -46,6 +67,15 @@ def log_out(request):
     return redirect('index')
 
 def log_in_page(request):
+    """
+        Страница авторизации пользователя.
+
+        Обрабатывает POST-запрос с данными для входа:
+        - username: Логин пользователя
+        - password: Пароль
+
+        При успешной аутентификации перенаправляет на страницу профиля.
+        """
     context = {}
     if request.method == 'POST':
         username = request.POST['username']
@@ -61,6 +91,16 @@ def log_in_page(request):
     return render(request, "auth/log_in.html", context)
 
 def posts_api(request):
+    """
+        API-эндпоинт для получения списка постов в формате JSON.
+
+        Returns:
+            JsonResponse: Список постов с полями:
+                - id: Идентификатор поста
+                - title: Заголовок
+                - image: URL изображения
+                - description: Текст поста
+        """
     posts = Post.objects.all()
     data = [
         {
@@ -74,6 +114,21 @@ def posts_api(request):
     return JsonResponse(data, safe=False)
 
 def checker(string):
+    """
+        Валидатор сложности пароля.
+
+        Проверяет, что пароль содержит:
+        - Минимум 8 символов
+        - Хотя бы одну заглавную и строчную букву
+        - Хотя бы одну цифру
+        - Хотя бы один специальный символ
+
+        Args:
+            string (str): Пароль для проверки
+
+        Returns:
+            bool: Результат проверки
+        """
     upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     lower = upper.lower()
     numbers = '1234567890'
@@ -101,6 +156,19 @@ def checker(string):
     return True
 
 def sign_up_page(request):
+    """
+        Страница регистрации нового пользователя.
+
+        Обрабатывает POST-запрос с данными:
+        - username: Логин
+        - email: Email
+        - password1: Пароль
+        - password2: Подтверждение пароля
+        - gender: Пол (1-мужской, 2-женский)
+        - about: О себе
+
+        Создает нового пользователя и связанную информацию профиля.
+        """
     context = {}
     if request.method == 'POST':
         username = request.POST['username']
@@ -126,6 +194,22 @@ def sign_up_page(request):
 
 @login_required
 def profile_page(request, username=None):
+    """
+       Страница профиля пользователя.
+
+       Args:
+           request (HttpRequest): Объект запроса
+           username (str): Имя пользователя (опционально)
+
+       Returns:
+           HttpResponse: Рендер страницы профиля с контекстом:
+               - profile_user: Объект пользователя
+               - info: Дополнительная информация профиля
+               - is_own_profile: Флаг принадлежности профиля
+               - user_posts: Посты пользователя
+               - look_sections: Секции с образами
+               - liked_posts: Понравившиеся посты
+       """
     profile_user = get_object_or_404(User, username=username)
     is_own_profile = (request.user == profile_user)
 
@@ -176,6 +260,16 @@ def profile_page(request, username=None):
 
 @login_required
 def unsave_look(request, look_id):
+    """
+        Удаление образа из сохраненных.
+
+        Args:
+            request (HttpRequest): Объект запроса
+            look_id (int): ID образа
+
+        Returns:
+            HttpResponseRedirect: Редирект на страницу профиля
+        """
     if request.method == 'POST':
         look = get_object_or_404(Looks, id=look_id)
         request.user.saved_looks.remove(look)
@@ -187,6 +281,12 @@ def unsave_look(request, look_id):
 
 @login_required
 def view_all_saved(request):
+    """
+        Просмотр всех сохраненных образов.
+
+        Returns:
+            HttpResponse: Рендер страницы со всеми сохраненными образами
+        """
     looks = request.user.saved_looks.all()
     return render(request, 'profile/view_all.html', {
         'looks': looks,
@@ -196,6 +296,12 @@ def view_all_saved(request):
 
 @login_required
 def view_all_liked(request):
+    """
+        Просмотр всех понравившихся образов.
+
+        Returns:
+            HttpResponse: Рендер страницы с понравившимися образами
+        """
     looks = Looks.objects.filter(likedlook__user=request.user)
     return render(request, 'profile/view_all.html', {
         'looks': looks,
@@ -205,6 +311,12 @@ def view_all_liked(request):
 
 @login_required
 def view_all_disliked(request):
+    """
+        Просмотр всех не понравившихся образов.
+
+        Returns:
+            HttpResponse: Рендер страницы с не понравившимися образами
+        """
     looks = Looks.objects.filter(dislikedlook__user=request.user)
     return render(request, 'profile/view_all.html', {
         'looks': looks,
@@ -214,6 +326,12 @@ def view_all_disliked(request):
 
 @login_required
 def gallery_liked_page(request):
+    """
+        Галерея понравившихся постов.
+
+        Returns:
+            HttpResponse: Рендер страницы с лайкнутыми постами
+        """
     liked_posts = Post.objects.filter(likepost__user=request.user)
     context = {
         'liked_posts': liked_posts
@@ -222,6 +340,16 @@ def gallery_liked_page(request):
 
 @login_required
 def profile_edit_page(request):
+    """
+        Страница редактирования профиля.
+
+        Обрабатывает обновление данных пользователя:
+        - Логин
+        - Email
+        - Пароль
+        - Пол
+        - О себе
+        """
     context = {}
     context['info'] = Info.objects.get(user=request.user)
     user = request.user
@@ -245,6 +373,11 @@ def profile_edit_page(request):
 
 @login_required
 def make_post_page(request):
+    """
+        Страница создания нового поста.
+
+        Использует PostForm для валидации данных.
+        """
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
@@ -259,11 +392,26 @@ def make_post_page(request):
 
 @login_required
 def post_list(request):
+    """
+       Список всех постов в системе.
+
+       Returns:
+           HttpResponse: Рендер страницы со всеми постами
+       """
     posts = Post.objects.all()
     return render(request, 'outfits/posts_all.html', {'posts': posts})
 
 @login_required
 def post_page(request, id=0):
+    """
+        Страница просмотра отдельного поста.
+
+        Args:
+            id (int): ID поста
+
+        Returns:
+            HttpResponse: Рендер страницы поста с комментариями
+        """
     print(id)
     post = Post.objects.get(id=id)
     if request.method == 'POST':
@@ -283,6 +431,15 @@ def post_page(request, id=0):
 
 @login_required
 def send_like_post(request, id):
+    """
+        Обработка лайка/дизлайка поста.
+
+        Args:
+            id (int): ID поста
+
+        Returns:
+            HttpResponseRedirect: Редирект на предыдущую страницу
+        """
     post = get_object_or_404(Post, id=id)
     like = LikePost.objects.filter(user=request.user, post=post)
 
@@ -306,20 +463,32 @@ def send_like_post(request, id):
 
 @login_required
 def catalog_page(request):
+    """Страница каталога образов."""
     context = {}
     return render(request, 'outfits/catalog.html', context)
 
 
 def about_page(request):
+    """Страница 'О проекте'."""
     context = {}
     return render(request, "info/about.html", context)
 
 def terms_page(request):
+    """Страница с пользовательским соглашением."""
     context = {}
     return render(request, "general/terms.html", context)
 
 @login_required
 def for_you_page(request):
+    """
+       Персональные рекомендации образов на основе погоды.
+
+       Args:
+           city (str): Город для погодного запроса
+
+       Returns:
+           HttpResponse: Рендер страницы с рекомендованным образом
+       """
     city = request.GET.get('city', 'Moscow')
     error = None
     look = None
@@ -348,6 +517,15 @@ def for_you_page(request):
 
 @login_required
 def save_look_empty(request):
+    """
+        Сохранение рекомендованного образа.
+
+        Args:
+            look_id (int): ID сохраняемого образа
+
+        Returns:
+            HttpResponseRedirect: Редирект на страницу рекомендаций
+        """
     if request.method == 'POST':
         look_id = request.POST.get('look_id')
         if not look_id:
@@ -373,6 +551,13 @@ def save_look_empty(request):
 
 @login_required
 def scrolling_page(request):
+    """
+        Лента рекомендаций образов с учетом предпочтений.
+
+        Использует алгоритмы машинного обучения для подбора образов:
+        - Анализ лайков/дизлайков
+        - Расчет косинусной близости векторов
+        """
 
     # Получаем ID лайков и дизлайков
     liked_look_ids = LikedLook.objects.filter(user=request.user).values_list('look_id', flat=True)
@@ -421,6 +606,18 @@ def scrolling_page(request):
 
 
 def find_liked_disliked(disliked_look_ids, liked_look_ids):
+    """
+        Извлекает векторные представления лайкнутых и дизлайкнутых образов.
+
+        Args:
+            disliked_look_ids (QuerySet): ID дизлайкнутых образов
+            liked_look_ids (QuerySet): ID лайкнутых образов
+
+        Returns:
+            tuple: Кортеж содержащий:
+                - user_dislike_vectors (list): Вектора дизлайкнутых образов
+                - user_like_vectors (list): Вектора лайкнутых образов
+        """
     liked_looks = Looks.objects.filter(id__in=liked_look_ids)
     user_like_vectors = []
     for look in liked_looks:
@@ -442,6 +639,17 @@ def find_liked_disliked(disliked_look_ids, liked_look_ids):
 
 
 def get_vector(candidate_looks, has_dislikes, has_likes, scored_looks, user_dislike_vector, user_like_vector):
+    """
+        Обработчик лайка образа через AJAX.
+
+        Args:
+            request (HttpRequest): POST-запрос с параметром look_id
+
+        Returns:
+            JsonResponse: Результат операции:
+                - status: success/error
+                - message: Сообщение об ошибке (при наличии)
+    """
     for look in candidate_looks:
         try:
             vec = np.array(json.loads(look.general_vector)).reshape(1, -1)
@@ -470,6 +678,17 @@ def like_look(request):
 
 @login_required
 def dislike_look(request):
+    """
+        Обработчик дизлайка образа через AJAX.
+
+        Args:
+            request (HttpRequest): POST-запрос с параметром look_id
+
+        Returns:
+            JsonResponse: Результат операции:
+                - status: success/error
+                - message: Сообщение об ошибке (при наличии)
+        """
     if request.method == 'POST':
         look_id = request.POST.get('look_id')
         try:
@@ -481,6 +700,19 @@ def dislike_look(request):
     return JsonResponse({'status': 'invalid request'})
 
 def get_city_by_coords(request):
+    """
+        Определение города по географическим координатам через OpenStreetMap API.
+
+        Args:
+            request (HttpRequest): GET-запрос с параметрами:
+                - lat: Широта
+                - lon: Долгота
+
+        Returns:
+            JsonResponse: Результат с названием города или ошибкой:
+                - city: Название города (при успехе)
+                - error: Сообщение об ошибке (при неудаче)
+        """
     lat = request.GET.get('lat')
     lon = request.GET.get('lon')
     if not lat or not lon:

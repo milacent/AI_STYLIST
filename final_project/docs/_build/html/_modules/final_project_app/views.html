@@ -34,8 +34,8 @@
 <span></span><span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib</span><span class="w"> </span><span class="kn">import</span> <span class="n">messages</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">django.shortcuts</span><span class="w"> </span><span class="kn">import</span> <span class="n">render</span><span class="p">,</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">get_object_or_404</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">django.http</span><span class="w"> </span><span class="kn">import</span> <span class="n">HttpResponseServerError</span><span class="p">,</span> <span class="n">HttpResponseRedirect</span><span class="p">,</span> <span class="n">JsonResponse</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">django.urls</span><span class="w"> </span><span class="kn">import</span> <span class="n">path</span><span class="p">,</span> <span class="n">reverse</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.http</span><span class="w"> </span><span class="kn">import</span> <span class="n">HttpResponseRedirect</span><span class="p">,</span> <span class="n">JsonResponse</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.urls</span><span class="w"> </span><span class="kn">import</span> <span class="n">reverse</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib.auth.decorators</span><span class="w"> </span><span class="kn">import</span> <span class="n">login_required</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">final_project_app.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Info</span><span class="p">,</span> <span class="n">Comment</span><span class="p">,</span> <span class="n">Post</span><span class="p">,</span> <span class="n">LikePost</span><span class="p">,</span> <span class="n">LikeComment</span><span class="p">,</span> <span class="n">Looks</span><span class="p">,</span> <span class="n">LikedLook</span><span class="p">,</span> <span class="n">DislikedLook</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib.auth.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">User</span>
@@ -53,6 +53,16 @@
 <div class="viewcode-block" id="Handle400">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.views.Handle400">[документация]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">Handle400</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">exception</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Обработчик ошибки 400 (Bad Request).</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            request (HttpRequest): Объект запроса</span>
+<span class="sd">            exception (Exception): Исключение, вызвавшее ошибку</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            HttpResponseRedirect или HttpResponse: Редирект или страница ошибки</span>
+<span class="sd">        &quot;&quot;&quot;</span>
     <span class="n">context</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">request</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">):</span>
@@ -63,6 +73,17 @@
 <div class="viewcode-block" id="index_page">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.views.index_page">[документация]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">index_page</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Главная страница приложения. Отображает самый популярный пост по количеству лайков.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            request (HttpRequest): Объект запроса</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            HttpResponse: Рендер главной страницы с контекстом:</span>
+<span class="sd">                - top_post: Самый популярный пост</span>
+<span class="sd">                - max_likes: Количество лайков топового поста</span>
+<span class="sd">        &quot;&quot;&quot;</span>
     <span class="n">top_post</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">max_likes</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
 
@@ -90,6 +111,15 @@
 <div class="viewcode-block" id="log_in_page">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.views.log_in_page">[документация]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">log_in_page</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Страница авторизации пользователя.</span>
+
+<span class="sd">        Обрабатывает POST-запрос с данными для входа:</span>
+<span class="sd">        - username: Логин пользователя</span>
+<span class="sd">        - password: Пароль</span>
+
+<span class="sd">        При успешной аутентификации перенаправляет на страницу профиля.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
     <span class="n">context</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
         <span class="n">username</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span>
@@ -108,6 +138,16 @@
 <div class="viewcode-block" id="posts_api">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.views.posts_api">[документация]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">posts_api</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        API-эндпоинт для получения списка постов в формате JSON.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            JsonResponse: Список постов с полями:</span>
+<span class="sd">                - id: Идентификатор поста</span>
+<span class="sd">                - title: Заголовок</span>
+<span class="sd">                - image: URL изображения</span>
+<span class="sd">                - description: Текст поста</span>
+<span class="sd">        &quot;&quot;&quot;</span>
     <span class="n">posts</span> <span class="o">=</span> <span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
     <span class="n">data</span> <span class="o">=</span> <span class="p">[</span>
         <span class="p">{</span>
@@ -124,6 +164,21 @@
 <div class="viewcode-block" id="checker">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.views.checker">[документация]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">checker</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Валидатор сложности пароля.</span>
+
+<span class="sd">        Проверяет, что пароль содержит:</span>
+<span class="sd">        - Минимум 8 символов</span>
+<span class="sd">        - Хотя бы одну заглавную и строчную букву</span>
+<span class="sd">        - Хотя бы одну цифру</span>
+<span class="sd">        - Хотя бы один специальный символ</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            string (str): Пароль для проверки</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: Результат проверки</span>
+<span class="sd">        &quot;&quot;&quot;</span>
     <span class="n">upper</span> <span class="o">=</span> <span class="s2">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;</span>
     <span class="n">lower</span> <span class="o">=</span> <span class="n">upper</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
     <span class="n">numbers</span> <span class="o">=</span> <span class="s1">&#39;1234567890&#39;</span>
@@ -154,6 +209,19 @@
 <div class="viewcode-block" id="sign_up_page">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.views.sign_up_page">[документация]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">sign_up_page</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Страница регистрации нового пользователя.</span>
+
+<span class="sd">        Обрабатывает POST-запрос с данными:</span>
+<span class="sd">        - username: Логин</span>
+<span class="sd">        - email: Email</span>
+<span class="sd">        - password1: Пароль</span>
+<span class="sd">        - password2: Подтверждение пароля</span>
+<span class="sd">        - gender: Пол (1-мужской, 2-женский)</span>
+<span class="sd">        - about: О себе</span>
+
+<span class="sd">        Создает нового пользователя и связанную информацию профиля.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
     <span class="n">context</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
         <span class="n">username</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span>
@@ -182,6 +250,22 @@
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.views.profile_page">[документация]</a>
 <span class="nd">@login_required</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">profile_page</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">       Страница профиля пользователя.</span>
+
+<span class="sd">       Args:</span>
+<span class="sd">           request (HttpRequest): Объект запроса</span>
+<span class="sd">           username (str): Имя пользователя (опционально)</span>
+
+<span class="sd">       Returns:</span>
+<span class="sd">           HttpResponse: Рендер страницы профиля с контекстом:</span>
+<span class="sd">               - profile_user: Объект пользователя</span>
+<span class="sd">               - info: Дополнительная информация профиля</span>
+<span class="sd">               - is_own_profile: Флаг принадлежности профиля</span>
+<span class="sd">               - user_posts: Посты пользователя</span>
+<span class="sd">               - look_sections: Секции с образами</span>
+<span class="sd">               - liked_posts: Понравившиеся посты</span>
+<span class="sd">       &quot;&quot;&quot;</span>
     <span class="n">profile_user</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="n">username</span><span class="p">)</span>
     <span class="n">is_own_profile</span> <span class="o">=</span> <span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">user</span> <span class="o">==</span> <span class="n">profile_user</span><span class="p">)</span>
 
@@ -235,6 +319,16 @@
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.views.unsave_look">[документация]</a>
 <span class="nd">@login_required</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">unsave_look</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">look_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Удаление образа из сохраненных.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            request (HttpRequest): Объект запроса</span>
+<span class="sd">            look_id (int): ID образа</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            HttpResponseRedirect: Редирект на страницу профиля</span>
+<span class="sd">        &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
         <span class="n">look</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">Looks</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">look_id</span><span class="p">)</span>
         <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">saved_looks</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">look</span><span class="p">)</span>
@@ -249,6 +343,12 @@
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.views.view_all_saved">[документация]</a>
 <span class="nd">@login_required</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">view_all_saved</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Просмотр всех сохраненных образов.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            HttpResponse: Рендер страницы со всеми сохраненными образами</span>
+<span class="sd">        &quot;&quot;&quot;</span>
     <span class="n">looks</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">saved_looks</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;profile/view_all.html&#39;</span><span class="p">,</span> <span class="p">{</span>
         <span class="s1">&#39;looks&#39;</span><span class="p">:</span> <span class="n">looks</span><span class="p">,</span>
@@ -261,6 +361,12 @@
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.views.view_all_liked">[документация]</a>
 <span class="nd">@login_required</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">view_all_liked</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Просмотр всех понравившихся образов.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            HttpResponse: Рендер страницы с понравившимися образами</span>
+<span class="sd">        &quot;&quot;&quot;</span>
     <span class="n">looks</span> <span class="o">=</span> <span class="n">Looks</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">likedlook__user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;profile/view_all.html&#39;</span><span class="p">,</span> <span class="p">{</span>
         <span class="s1">&#39;looks&#39;</span><span class="p">:</span> <span class="n">looks</span><span class="p">,</span>
@@ -273,6 +379,12 @@
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.views.view_all_disliked">[документация]</a>
 <span class="nd">@login_required</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">view_all_disliked</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Просмотр всех не понравившихся образов.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            HttpResponse: Рендер страницы с не понравившимися образами</span>
+<span class="sd">        &quot;&quot;&quot;</span>
     <span class="n">looks</span> <span class="o">=</span> <span class="n">Looks</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">dislikedlook__user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;profile/view_all.html&#39;</span><span class="p">,</span> <span class="p">{</span>
         <span class="s1">&#39;looks&#39;</span><span class="p">:</span> <span class="n">looks</span><span class="p">,</span>
@@ -285,6 +397,12 @@
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.views.gallery_liked_page">[документация]</a>
 <span class="nd">@login_required</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">gallery_liked_page</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Галерея понравившихся постов.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            HttpResponse: Рендер страницы с лайкнутыми постами</span>
+<span class="sd">        &quot;&quot;&quot;</span>
     <span class="n">liked_posts</span> <span class="o">=</span> <span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">likepost__user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
     <span class="n">context</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s1">&#39;liked_posts&#39;</span><span class="p">:</span> <span class="n">liked_posts</span>
@@ -296,6 +414,16 @@
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.views.profile_edit_page">[документация]</a>
 <span class="nd">@login_required</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">profile_edit_page</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Страница редактирования профиля.</span>
+
+<span class="sd">        Обрабатывает обновление данных пользователя:</span>
+<span class="sd">        - Логин</span>
+<span class="sd">        - Email</span>
+<span class="sd">        - Пароль</span>
+<span class="sd">        - Пол</span>
+<span class="sd">        - О себе</span>
+<span class="sd">        &quot;&quot;&quot;</span>
     <span class="n">context</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="n">context</span><span class="p">[</span><span class="s1">&#39;info&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Info</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
     <span class="n">user</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
@@ -322,6 +450,11 @@
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.views.make_post_page">[документация]</a>
 <span class="nd">@login_required</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">make_post_page</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Страница создания нового поста.</span>
+
+<span class="sd">        Использует PostForm для валидации данных.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
         <span class="n">form</span> <span class="o">=</span> <span class="n">PostForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">FILES</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
@@ -339,6 +472,12 @@
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.views.post_list">[документация]</a>
 <span class="nd">@login_required</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">post_list</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">       Список всех постов в системе.</span>
+
+<span class="sd">       Returns:</span>
+<span class="sd">           HttpResponse: Рендер страницы со всеми постами</span>
+<span class="sd">       &quot;&quot;&quot;</span>
     <span class="n">posts</span> <span class="o">=</span> <span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;outfits/posts_all.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;posts&#39;</span><span class="p">:</span> <span class="n">posts</span><span class="p">})</span></div>
 
@@ -347,6 +486,15 @@
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.views.post_page">[документация]</a>
 <span class="nd">@login_required</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">post_page</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Страница просмотра отдельного поста.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            id (int): ID поста</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            HttpResponse: Рендер страницы поста с комментариями</span>
+<span class="sd">        &quot;&quot;&quot;</span>
     <span class="nb">print</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
     <span class="n">post</span> <span class="o">=</span> <span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
@@ -369,6 +517,15 @@
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.views.send_like_post">[документация]</a>
 <span class="nd">@login_required</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">send_like_post</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Обработка лайка/дизлайка поста.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            id (int): ID поста</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            HttpResponseRedirect: Редирект на предыдущую страницу</span>
+<span class="sd">        &quot;&quot;&quot;</span>
     <span class="n">post</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">Post</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">)</span>
     <span class="n">like</span> <span class="o">=</span> <span class="n">LikePost</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="n">post</span><span class="o">=</span><span class="n">post</span><span class="p">)</span>
 
@@ -395,6 +552,7 @@
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.views.catalog_page">[документация]</a>
 <span class="nd">@login_required</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">catalog_page</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Страница каталога образов.&quot;&quot;&quot;</span>
     <span class="n">context</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;outfits/catalog.html&#39;</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span></div>
 
@@ -403,6 +561,7 @@
 <div class="viewcode-block" id="about_page">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.views.about_page">[документация]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">about_page</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Страница &#39;О проекте&#39;.&quot;&quot;&quot;</span>
     <span class="n">context</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s2">&quot;info/about.html&quot;</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span></div>
 
@@ -410,6 +569,7 @@
 <div class="viewcode-block" id="terms_page">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.views.terms_page">[документация]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">terms_page</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Страница с пользовательским соглашением.&quot;&quot;&quot;</span>
     <span class="n">context</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s2">&quot;general/terms.html&quot;</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span></div>
 
@@ -418,6 +578,15 @@
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.views.for_you_page">[документация]</a>
 <span class="nd">@login_required</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">for_you_page</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">       Персональные рекомендации образов на основе погоды.</span>
+
+<span class="sd">       Args:</span>
+<span class="sd">           city (str): Город для погодного запроса</span>
+
+<span class="sd">       Returns:</span>
+<span class="sd">           HttpResponse: Рендер страницы с рекомендованным образом</span>
+<span class="sd">       &quot;&quot;&quot;</span>
     <span class="n">city</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;city&#39;</span><span class="p">,</span> <span class="s1">&#39;Moscow&#39;</span><span class="p">)</span>
     <span class="n">error</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">look</span> <span class="o">=</span> <span class="kc">None</span>
@@ -449,6 +618,15 @@
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.views.save_look_empty">[документация]</a>
 <span class="nd">@login_required</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">save_look_empty</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Сохранение рекомендованного образа.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            look_id (int): ID сохраняемого образа</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            HttpResponseRedirect: Редирект на страницу рекомендаций</span>
+<span class="sd">        &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
         <span class="n">look_id</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;look_id&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">look_id</span><span class="p">:</span>
@@ -477,6 +655,13 @@
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.views.scrolling_page">[документация]</a>
 <span class="nd">@login_required</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">scrolling_page</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Лента рекомендаций образов с учетом предпочтений.</span>
+
+<span class="sd">        Использует алгоритмы машинного обучения для подбора образов:</span>
+<span class="sd">        - Анализ лайков/дизлайков</span>
+<span class="sd">        - Расчет косинусной близости векторов</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
     <span class="c1"># Получаем ID лайков и дизлайков</span>
     <span class="n">liked_look_ids</span> <span class="o">=</span> <span class="n">LikedLook</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span><span class="o">.</span><span class="n">values_list</span><span class="p">(</span><span class="s1">&#39;look_id&#39;</span><span class="p">,</span> <span class="n">flat</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -484,24 +669,7 @@
     <span class="n">excluded_ids</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">liked_look_ids</span><span class="p">)</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">disliked_look_ids</span><span class="p">)</span>
 
     <span class="c1"># Получаем вектора понравившихся образов</span>
-    <span class="n">liked_looks</span> <span class="o">=</span> <span class="n">Looks</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">id__in</span><span class="o">=</span><span class="n">liked_look_ids</span><span class="p">)</span>
-    <span class="n">user_like_vectors</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">look</span> <span class="ow">in</span> <span class="n">liked_looks</span><span class="p">:</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">vec</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">look</span><span class="o">.</span><span class="n">general_vector</span><span class="p">)</span>
-            <span class="n">user_like_vectors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span>
-        <span class="k">except</span><span class="p">:</span>
-            <span class="k">continue</span>
-
-    <span class="c1"># Получаем вектора не понравившихся образов</span>
-    <span class="n">disliked_looks</span> <span class="o">=</span> <span class="n">Looks</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">id__in</span><span class="o">=</span><span class="n">disliked_look_ids</span><span class="p">)</span>
-    <span class="n">user_dislike_vectors</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">look</span> <span class="ow">in</span> <span class="n">disliked_looks</span><span class="p">:</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">vec</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">look</span><span class="o">.</span><span class="n">general_vector</span><span class="p">)</span>
-            <span class="n">user_dislike_vectors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span>
-        <span class="k">except</span><span class="p">:</span>
-            <span class="k">continue</span>
+    <span class="n">user_dislike_vectors</span><span class="p">,</span> <span class="n">user_like_vectors</span> <span class="o">=</span> <span class="n">find_liked_disliked</span><span class="p">(</span><span class="n">disliked_look_ids</span><span class="p">,</span> <span class="n">liked_look_ids</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">user_like_vectors</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">user_dislike_vectors</span><span class="p">:</span>
         <span class="c1"># Показываем 5 случайных образов, если нет лайков и дизлайков</span>
@@ -520,17 +688,7 @@
         <span class="n">candidate_looks</span> <span class="o">=</span> <span class="n">Looks</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">exclude</span><span class="p">(</span><span class="n">id__in</span><span class="o">=</span><span class="n">excluded_ids</span><span class="p">)</span>
         <span class="n">scored_looks</span> <span class="o">=</span> <span class="p">[]</span>
 
-        <span class="k">for</span> <span class="n">look</span> <span class="ow">in</span> <span class="n">candidate_looks</span><span class="p">:</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">look</span><span class="o">.</span><span class="n">general_vector</span><span class="p">))</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-                <span class="n">sim_liked</span> <span class="o">=</span> <span class="n">cosine_similarity</span><span class="p">(</span><span class="n">user_like_vector</span><span class="p">,</span> <span class="n">vec</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">has_likes</span> <span class="k">else</span> <span class="mi">0</span>
-                <span class="n">sim_disliked</span> <span class="o">=</span> <span class="n">cosine_similarity</span><span class="p">(</span><span class="n">user_dislike_vector</span><span class="p">,</span> <span class="n">vec</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">has_dislikes</span> <span class="k">else</span> <span class="mi">0</span>
-
-                <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.8</span>
-                <span class="n">final_score</span> <span class="o">=</span> <span class="n">sim_liked</span> <span class="o">-</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">sim_disliked</span>
-                <span class="n">scored_looks</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">look</span><span class="p">,</span> <span class="n">final_score</span><span class="p">))</span>
-            <span class="k">except</span><span class="p">:</span>
-                <span class="k">continue</span>
+        <span class="n">get_vector</span><span class="p">(</span><span class="n">candidate_looks</span><span class="p">,</span> <span class="n">has_dislikes</span><span class="p">,</span> <span class="n">has_likes</span><span class="p">,</span> <span class="n">scored_looks</span><span class="p">,</span> <span class="n">user_dislike_vector</span><span class="p">,</span> <span class="n">user_like_vector</span><span class="p">)</span>
 
         <span class="n">filtered_looks</span> <span class="o">=</span> <span class="p">[(</span><span class="n">look</span><span class="p">,</span> <span class="n">score</span><span class="p">)</span> <span class="k">for</span> <span class="n">look</span><span class="p">,</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">scored_looks</span> <span class="k">if</span> <span class="n">score</span> <span class="o">&gt;</span> <span class="mf">0.6</span><span class="p">]</span>
         <span class="n">filtered_looks</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -551,6 +709,68 @@
     <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;outfits/scrolling.html&#39;</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span></div>
 
 
+
+<div class="viewcode-block" id="find_liked_disliked">
+<a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.views.find_liked_disliked">[документация]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">find_liked_disliked</span><span class="p">(</span><span class="n">disliked_look_ids</span><span class="p">,</span> <span class="n">liked_look_ids</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Извлекает векторные представления лайкнутых и дизлайкнутых образов.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            disliked_look_ids (QuerySet): ID дизлайкнутых образов</span>
+<span class="sd">            liked_look_ids (QuerySet): ID лайкнутых образов</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            tuple: Кортеж содержащий:</span>
+<span class="sd">                - user_dislike_vectors (list): Вектора дизлайкнутых образов</span>
+<span class="sd">                - user_like_vectors (list): Вектора лайкнутых образов</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+    <span class="n">liked_looks</span> <span class="o">=</span> <span class="n">Looks</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">id__in</span><span class="o">=</span><span class="n">liked_look_ids</span><span class="p">)</span>
+    <span class="n">user_like_vectors</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">look</span> <span class="ow">in</span> <span class="n">liked_looks</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">vec</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">look</span><span class="o">.</span><span class="n">general_vector</span><span class="p">)</span>
+            <span class="n">user_like_vectors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">continue</span>
+    <span class="c1"># Получаем вектора не понравившихся образов</span>
+    <span class="n">disliked_looks</span> <span class="o">=</span> <span class="n">Looks</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">id__in</span><span class="o">=</span><span class="n">disliked_look_ids</span><span class="p">)</span>
+    <span class="n">user_dislike_vectors</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">look</span> <span class="ow">in</span> <span class="n">disliked_looks</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">vec</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">look</span><span class="o">.</span><span class="n">general_vector</span><span class="p">)</span>
+            <span class="n">user_dislike_vectors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">continue</span>
+    <span class="k">return</span> <span class="n">user_dislike_vectors</span><span class="p">,</span> <span class="n">user_like_vectors</span></div>
+
+
+
+<div class="viewcode-block" id="get_vector">
+<a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.views.get_vector">[документация]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_vector</span><span class="p">(</span><span class="n">candidate_looks</span><span class="p">,</span> <span class="n">has_dislikes</span><span class="p">,</span> <span class="n">has_likes</span><span class="p">,</span> <span class="n">scored_looks</span><span class="p">,</span> <span class="n">user_dislike_vector</span><span class="p">,</span> <span class="n">user_like_vector</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Обработчик лайка образа через AJAX.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            request (HttpRequest): POST-запрос с параметром look_id</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            JsonResponse: Результат операции:</span>
+<span class="sd">                - status: success/error</span>
+<span class="sd">                - message: Сообщение об ошибке (при наличии)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">look</span> <span class="ow">in</span> <span class="n">candidate_looks</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">look</span><span class="o">.</span><span class="n">general_vector</span><span class="p">))</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">sim_liked</span> <span class="o">=</span> <span class="n">cosine_similarity</span><span class="p">(</span><span class="n">user_like_vector</span><span class="p">,</span> <span class="n">vec</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">has_likes</span> <span class="k">else</span> <span class="mi">0</span>
+            <span class="n">sim_disliked</span> <span class="o">=</span> <span class="n">cosine_similarity</span><span class="p">(</span><span class="n">user_dislike_vector</span><span class="p">,</span> <span class="n">vec</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">has_dislikes</span> <span class="k">else</span> <span class="mi">0</span>
+
+            <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.8</span>
+            <span class="n">final_score</span> <span class="o">=</span> <span class="n">sim_liked</span> <span class="o">-</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">sim_disliked</span>
+            <span class="n">scored_looks</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">look</span><span class="p">,</span> <span class="n">final_score</span><span class="p">))</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">continue</span></div>
 
 
 
@@ -574,6 +794,17 @@
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.views.dislike_look">[документация]</a>
 <span class="nd">@login_required</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">dislike_look</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Обработчик дизлайка образа через AJAX.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            request (HttpRequest): POST-запрос с параметром look_id</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            JsonResponse: Результат операции:</span>
+<span class="sd">                - status: success/error</span>
+<span class="sd">                - message: Сообщение об ошибке (при наличии)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
         <span class="n">look_id</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;look_id&#39;</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
@@ -588,6 +819,19 @@
 <div class="viewcode-block" id="get_city_by_coords">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.views.get_city_by_coords">[документация]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_city_by_coords</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Определение города по географическим координатам через OpenStreetMap API.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            request (HttpRequest): GET-запрос с параметрами:</span>
+<span class="sd">                - lat: Широта</span>
+<span class="sd">                - lon: Долгота</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            JsonResponse: Результат с названием города или ошибкой:</span>
+<span class="sd">                - city: Название города (при успехе)</span>
+<span class="sd">                - error: Сообщение об ошибке (при неудаче)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
     <span class="n">lat</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;lat&#39;</span><span class="p">)</span>
     <span class="n">lon</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;lon&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">lat</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">lon</span><span class="p">:</span>

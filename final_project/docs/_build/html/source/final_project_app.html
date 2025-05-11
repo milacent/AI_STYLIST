@@ -2259,47 +2259,212 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="final_project_app.views.Handle400">
 <span class="sig-prename descclassname"><span class="pre">final_project_app.views.</span></span><span class="sig-name descname"><span class="pre">Handle400</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exception</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/views.html#Handle400"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.views.Handle400" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Обработчик ошибки 400 (Bad Request).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> (<em>HttpRequest</em>) – Объект запроса</p></li>
+<li><p><strong>exception</strong> (<em>Exception</em>) – Исключение, вызвавшее ошибку</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Редирект или страница ошибки</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>HttpResponseRedirect или HttpResponse</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="final_project_app.views.about_page">
 <span class="sig-prename descclassname"><span class="pre">final_project_app.views.</span></span><span class="sig-name descname"><span class="pre">about_page</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/views.html#about_page"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.views.about_page" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Страница „О проекте“.</p>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="final_project_app.views.catalog_page">
 <span class="sig-prename descclassname"><span class="pre">final_project_app.views.</span></span><span class="sig-name descname"><span class="pre">catalog_page</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/views.html#catalog_page"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.views.catalog_page" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Страница каталога образов.</p>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="final_project_app.views.checker">
 <span class="sig-prename descclassname"><span class="pre">final_project_app.views.</span></span><span class="sig-name descname"><span class="pre">checker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/views.html#checker"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.views.checker" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Валидатор сложности пароля.</p>
+<p>Проверяет, что пароль содержит:
+- Минимум 8 символов
+- Хотя бы одну заглавную и строчную букву
+- Хотя бы одну цифру
+- Хотя бы один специальный символ</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>string</strong> (<em>str</em>) – Пароль для проверки</p>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Результат проверки</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="final_project_app.views.dislike_look">
 <span class="sig-prename descclassname"><span class="pre">final_project_app.views.</span></span><span class="sig-name descname"><span class="pre">dislike_look</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/views.html#dislike_look"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.views.dislike_look" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Обработчик дизлайка образа через AJAX.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> (<em>HttpRequest</em>) – POST-запрос с параметром look_id</p>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Результат операции:</dt><dd><ul class="simple">
+<li><p>status: success/error</p></li>
+<li><p>message: Сообщение об ошибке (при наличии)</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>JsonResponse</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="final_project_app.views.find_liked_disliked">
+<span class="sig-prename descclassname"><span class="pre">final_project_app.views.</span></span><span class="sig-name descname"><span class="pre">find_liked_disliked</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">disliked_look_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">liked_look_ids</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/views.html#find_liked_disliked"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.views.find_liked_disliked" title="Link to this definition">¶</a></dt>
+<dd><p>Извлекает векторные представления лайкнутых и дизлайкнутых образов.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>disliked_look_ids</strong> (<em>QuerySet</em>) – ID дизлайкнутых образов</p></li>
+<li><p><strong>liked_look_ids</strong> (<em>QuerySet</em>) – ID лайкнутых образов</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Кортеж содержащий:</dt><dd><ul class="simple">
+<li><p>user_dislike_vectors (list): Вектора дизлайкнутых образов</p></li>
+<li><p>user_like_vectors (list): Вектора лайкнутых образов</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="final_project_app.views.for_you_page">
 <span class="sig-prename descclassname"><span class="pre">final_project_app.views.</span></span><span class="sig-name descname"><span class="pre">for_you_page</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/views.html#for_you_page"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.views.for_you_page" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Персональные рекомендации образов на основе погоды.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>city</strong> (<em>str</em>) – Город для погодного запроса</p>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Рендер страницы с рекомендованным образом</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>HttpResponse</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="final_project_app.views.gallery_liked_page">
 <span class="sig-prename descclassname"><span class="pre">final_project_app.views.</span></span><span class="sig-name descname"><span class="pre">gallery_liked_page</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/views.html#gallery_liked_page"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.views.gallery_liked_page" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Галерея понравившихся постов.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Результат<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Рендер страницы с лайкнутыми постами</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>HttpResponse</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="final_project_app.views.get_city_by_coords">
 <span class="sig-prename descclassname"><span class="pre">final_project_app.views.</span></span><span class="sig-name descname"><span class="pre">get_city_by_coords</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/views.html#get_city_by_coords"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.views.get_city_by_coords" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Определение города по географическим координатам через OpenStreetMap API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> (<em>HttpRequest</em>) – GET-запрос с параметрами:
+- lat: Широта
+- lon: Долгота</p>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Результат с названием города или ошибкой:</dt><dd><ul class="simple">
+<li><p>city: Название города (при успехе)</p></li>
+<li><p>error: Сообщение об ошибке (при неудаче)</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>JsonResponse</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="final_project_app.views.get_vector">
+<span class="sig-prename descclassname"><span class="pre">final_project_app.views.</span></span><span class="sig-name descname"><span class="pre">get_vector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">candidate_looks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">has_dislikes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">has_likes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scored_looks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_dislike_vector</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_like_vector</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/views.html#get_vector"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.views.get_vector" title="Link to this definition">¶</a></dt>
+<dd><p>Обработчик лайка образа через AJAX.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> (<em>HttpRequest</em>) – POST-запрос с параметром look_id</p>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Результат операции:</dt><dd><ul class="simple">
+<li><p>status: success/error</p></li>
+<li><p>message: Сообщение об ошибке (при наличии)</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>JsonResponse</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="final_project_app.views.index_page">
 <span class="sig-prename descclassname"><span class="pre">final_project_app.views.</span></span><span class="sig-name descname"><span class="pre">index_page</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/views.html#index_page"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.views.index_page" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Главная страница приложения. Отображает самый популярный пост по количеству лайков.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> (<em>HttpRequest</em>) – Объект запроса</p>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Рендер главной страницы с контекстом:</dt><dd><ul class="simple">
+<li><p>top_post: Самый популярный пост</p></li>
+<li><p>max_likes: Количество лайков топового поста</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>HttpResponse</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="final_project_app.views.like_look">
@@ -2309,7 +2474,12 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="final_project_app.views.log_in_page">
 <span class="sig-prename descclassname"><span class="pre">final_project_app.views.</span></span><span class="sig-name descname"><span class="pre">log_in_page</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/views.html#log_in_page"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.views.log_in_page" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Страница авторизации пользователя.</p>
+<p>Обрабатывает POST-запрос с данными для входа:
+- username: Логин пользователя
+- password: Пароль</p>
+<p>При успешной аутентификации перенаправляет на страницу профиля.</p>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="final_project_app.views.log_out">
@@ -2320,77 +2490,231 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="final_project_app.views.make_post_page">
 <span class="sig-prename descclassname"><span class="pre">final_project_app.views.</span></span><span class="sig-name descname"><span class="pre">make_post_page</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/views.html#make_post_page"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.views.make_post_page" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Страница создания нового поста.</p>
+<p>Использует PostForm для валидации данных.</p>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="final_project_app.views.post_list">
 <span class="sig-prename descclassname"><span class="pre">final_project_app.views.</span></span><span class="sig-name descname"><span class="pre">post_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/views.html#post_list"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.views.post_list" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Список всех постов в системе.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Результат<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Рендер страницы со всеми постами</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>HttpResponse</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="final_project_app.views.post_page">
 <span class="sig-prename descclassname"><span class="pre">final_project_app.views.</span></span><span class="sig-name descname"><span class="pre">post_page</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/views.html#post_page"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.views.post_page" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Страница просмотра отдельного поста.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>id</strong> (<em>int</em>) – ID поста</p>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Рендер страницы поста с комментариями</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>HttpResponse</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="final_project_app.views.posts_api">
 <span class="sig-prename descclassname"><span class="pre">final_project_app.views.</span></span><span class="sig-name descname"><span class="pre">posts_api</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/views.html#posts_api"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.views.posts_api" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>API-эндпоинт для получения списка постов в формате JSON.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Результат<span class="colon">:</span></dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>Список постов с полями:</dt><dd><ul class="simple">
+<li><p>id: Идентификатор поста</p></li>
+<li><p>title: Заголовок</p></li>
+<li><p>image: URL изображения</p></li>
+<li><p>description: Текст поста</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>JsonResponse</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="final_project_app.views.profile_edit_page">
 <span class="sig-prename descclassname"><span class="pre">final_project_app.views.</span></span><span class="sig-name descname"><span class="pre">profile_edit_page</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/views.html#profile_edit_page"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.views.profile_edit_page" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Страница редактирования профиля.</p>
+<p>Обрабатывает обновление данных пользователя:
+- Логин
+- Email
+- Пароль
+- Пол
+- О себе</p>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="final_project_app.views.profile_page">
 <span class="sig-prename descclassname"><span class="pre">final_project_app.views.</span></span><span class="sig-name descname"><span class="pre">profile_page</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/views.html#profile_page"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.views.profile_page" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Страница профиля пользователя.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> (<em>HttpRequest</em>) – Объект запроса</p></li>
+<li><p><strong>username</strong> (<em>str</em>) – Имя пользователя (опционально)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Рендер страницы профиля с контекстом:</dt><dd><ul class="simple">
+<li><p>profile_user: Объект пользователя</p></li>
+<li><p>info: Дополнительная информация профиля</p></li>
+<li><p>is_own_profile: Флаг принадлежности профиля</p></li>
+<li><p>user_posts: Посты пользователя</p></li>
+<li><p>look_sections: Секции с образами</p></li>
+<li><p>liked_posts: Понравившиеся посты</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>HttpResponse</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="final_project_app.views.save_look_empty">
 <span class="sig-prename descclassname"><span class="pre">final_project_app.views.</span></span><span class="sig-name descname"><span class="pre">save_look_empty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/views.html#save_look_empty"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.views.save_look_empty" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Сохранение рекомендованного образа.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>look_id</strong> (<em>int</em>) – ID сохраняемого образа</p>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Редирект на страницу рекомендаций</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>HttpResponseRedirect</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="final_project_app.views.scrolling_page">
 <span class="sig-prename descclassname"><span class="pre">final_project_app.views.</span></span><span class="sig-name descname"><span class="pre">scrolling_page</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/views.html#scrolling_page"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.views.scrolling_page" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Лента рекомендаций образов с учетом предпочтений.</p>
+<p>Использует алгоритмы машинного обучения для подбора образов:
+- Анализ лайков/дизлайков
+- Расчет косинусной близости векторов</p>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="final_project_app.views.send_like_post">
 <span class="sig-prename descclassname"><span class="pre">final_project_app.views.</span></span><span class="sig-name descname"><span class="pre">send_like_post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/views.html#send_like_post"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.views.send_like_post" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Обработка лайка/дизлайка поста.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>id</strong> (<em>int</em>) – ID поста</p>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Редирект на предыдущую страницу</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>HttpResponseRedirect</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="final_project_app.views.sign_up_page">
 <span class="sig-prename descclassname"><span class="pre">final_project_app.views.</span></span><span class="sig-name descname"><span class="pre">sign_up_page</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/views.html#sign_up_page"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.views.sign_up_page" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Страница регистрации нового пользователя.</p>
+<p>Обрабатывает POST-запрос с данными:
+- username: Логин
+- email: Email
+- password1: Пароль
+- password2: Подтверждение пароля
+- gender: Пол (1-мужской, 2-женский)
+- about: О себе</p>
+<p>Создает нового пользователя и связанную информацию профиля.</p>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="final_project_app.views.terms_page">
 <span class="sig-prename descclassname"><span class="pre">final_project_app.views.</span></span><span class="sig-name descname"><span class="pre">terms_page</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/views.html#terms_page"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.views.terms_page" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Страница с пользовательским соглашением.</p>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="final_project_app.views.unsave_look">
 <span class="sig-prename descclassname"><span class="pre">final_project_app.views.</span></span><span class="sig-name descname"><span class="pre">unsave_look</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">look_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/views.html#unsave_look"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.views.unsave_look" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Удаление образа из сохраненных.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> (<em>HttpRequest</em>) – Объект запроса</p></li>
+<li><p><strong>look_id</strong> (<em>int</em>) – ID образа</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Редирект на страницу профиля</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>HttpResponseRedirect</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="final_project_app.views.view_all_disliked">
 <span class="sig-prename descclassname"><span class="pre">final_project_app.views.</span></span><span class="sig-name descname"><span class="pre">view_all_disliked</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/views.html#view_all_disliked"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.views.view_all_disliked" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Просмотр всех не понравившихся образов.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Результат<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Рендер страницы с не понравившимися образами</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>HttpResponse</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="final_project_app.views.view_all_liked">
 <span class="sig-prename descclassname"><span class="pre">final_project_app.views.</span></span><span class="sig-name descname"><span class="pre">view_all_liked</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/views.html#view_all_liked"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.views.view_all_liked" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Просмотр всех понравившихся образов.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Результат<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Рендер страницы с понравившимися образами</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>HttpResponse</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="final_project_app.views.view_all_saved">
 <span class="sig-prename descclassname"><span class="pre">final_project_app.views.</span></span><span class="sig-name descname"><span class="pre">view_all_saved</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/views.html#view_all_saved"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.views.view_all_saved" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Просмотр всех сохраненных образов.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Результат<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Рендер страницы со всеми сохраненными образами</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>HttpResponse</p>
+</dd>
+</dl>
+</dd></dl>
 
 </section>
 <section id="module-final_project_app">
