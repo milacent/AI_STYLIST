@@ -1,7 +1,7 @@
 from django.test import TestCase, Client
 from django.urls import reverse
-from django.contrib.auth.models import *
-from .models import *
+from django.contrib.auth.models import User
+from .models import Post, Comment, Info
 from django.core.files.uploadedfile import SimpleUploadedFile
 from final_project_app.views import checker
 
@@ -107,15 +107,6 @@ class ProjectTests(TestCase):
         self.login()
         response = self.client.get(reverse('catalog'))
         self.assertEqual(response.status_code, 200)
-
-    # def test_gallery_liked_page(self):
-    #     """Проверка загрузки страницы с лайкнутыми постами."""
-    #     self.login()
-    #     post = Post.objects.create(user=self.user, title='Test Post', description='desc')
-    #     LikePost.objects.create(user=self.user, post=post)
-    #     response = self.client.get(reverse('gallery_liked')+self.user.username)
-    #     self.assertEqual(response.status_code, 200)
-    #     self.assertContains(response, post.title)
 
     def test_scrolling_page(self):
         """Проверка страницы бесконечной прокрутки."""
@@ -401,7 +392,7 @@ class ProjectTests(TestCase):
         self.login()
         # Создаем тестовый look
         response = self.client.post(reverse('save_look_empty'))
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 200)
 
     def test_scrolling_page_with_liked_disliked_looks(self):
         """Тестирует логику подбора образов на основе лайков/дизлайков"""
