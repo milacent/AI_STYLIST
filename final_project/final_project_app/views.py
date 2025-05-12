@@ -13,6 +13,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 import json
 from .models import Looks, LikedLook, DislikedLook
+from .utils import checker  # Функция для проверки пароля
 
 
 # Create your views here.
@@ -168,8 +169,9 @@ def sign_up_page(request):
         - about: О себе
 
         Создает нового пользователя и связанную информацию профиля.
-        """
+    """
     context = {}
+
     if request.method == 'POST':
         username = request.POST['username']
         email = request.POST['email']
@@ -177,18 +179,34 @@ def sign_up_page(request):
         password2 = request.POST['password2']
         gender = request.POST['gender']
         about_me = request.POST['about']
+
+        # Проверка совпадения паролей
         if password != password2:
             messages.error(request, 'Passwords do not match')
-            return redirect('/sign_up')
+            return render(request, "auth/sign_up.html", context, status=200)
+
+        # Проверка соблюдения требований к паролю
         if not checker(password):
             messages.error(request, 'Password does not meet the requirements')
-            return redirect('/sign_up')
-        user = User.objects.create_user(username, email, password)
-        info = Info(user=user, gender=int(gender), about_me=about_me)
-        user.save()
-        info.save()
-        logout(request)
-        return redirect('/log_in')
+            return render(request, "auth/sign_up.html", context, status=200)
+
+        try:
+            # Создание пользователя
+            user = User.objects.create_user(username=username, email=email, password=password)
+            user.save()
+
+            # Создание профиля пользователя
+            info = Info(user=user, gender=int(gender), about_me=about_me)
+            info.save()
+
+            # После успешной регистрации, logout текущего пользователя (если он был авторизован)
+            logout(request)
+            return redirect('/log_in')
+        except Exception as e:
+            # Обработка ошибок (например, если имя пользователя или email уже существует)
+            messages.error(request, f"Error: {str(e)}")
+            return render(request, "auth/sign_up.html", context, status=200)
+
     return render(request, "auth/sign_up.html", context)
 
 
@@ -375,20 +393,28 @@ def profile_edit_page(request):
 def make_post_page(request):
     """
         Страница создания нового поста.
-
         Использует PostForm для валидации данных.
-        """
+    """
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
+
+        # Проверка валидности формы
         if form.is_valid():
             post = form.save(commit=False)
-            post.user = request.user
+            post.user = request.user  # Привязка поста к текущему пользователю
             post.save()
-            return redirect(reverse('posts_all'))
+            return redirect(reverse('posts_all'))  # Редирект после успешного сохранения
+
+        else:
+            # Ошибка формы, рендерим страницу с ошибками
+            print(form.errors)
+            return render(request, 'outfits/make_post.html', {'form': form})
+
     else:
         form = PostForm()
 
     return render(request, 'outfits/make_post.html', {'form': form})
+
 
 @login_required
 def post_list(request):
@@ -413,7 +439,7 @@ def post_page(request, id=0):
             HttpResponse: Рендер страницы поста с комментариями
         """
     print(id)
-    post = Post.objects.get(id=id)
+    post = get_object_or_404(Post, id=id)
     if request.method == 'POST':
         comment = Comment(user=request.user, content=request.POST['text'], post=post)
         comment.save()
@@ -706,6 +732,7 @@ def get_city_by_coords(request):
                 - lon: Долгота
 
         Returns:
+            JsonResponse: Результат с названием города или ошибкой:
             JsonResponse: Результат с названием города или ошибкой:
                 - city: Название города (при успехе)
                 - error: Сообщение об ошибке (при неудаче)
