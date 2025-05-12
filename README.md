@@ -23,49 +23,49 @@ Follow these steps to set up the AI-Stylist application locally:
 ### 1. Clone the repository
 
 Open your terminal and run:
-
+```
 git clone https://gitlab.informatics.ru/2024-2025/hse/s101/mshp-final-project-meow.git
 cd first_project
-
+```
 
 ### 2. Create and activate a virtual environment
 
 It is recommended to use a virtual environment to isolate project dependencies.
 
 - On Linux/macOS:
-
+```
 python3 -m venv venv
 source venv/bin/activate
-
+```
 
 - On Windows (PowerShell):
-
+```
 python -m venv venv
 venv\Scripts\Activate
-
+```
 
 ### 3. Install dependencies
 
 With the virtual environment activated, install the required packages:
-
+```
 pip install -r requirements.txt
-
+```
 
 ## Usage
 
 ### 4. Run the development server
 
 Start the Django development server by running:
-
+```
 python manage.py runserver
-
+```
 
 ### 5. Access the application
 
 Open your web browser and go to:
-
+```
 http://127.0.0.1:8000/
-
+```
 
 You should see the AI-Stylist app running locally.
 
@@ -73,13 +73,13 @@ You should see the AI-Stylist app running locally.
 
 - Make sure you have Python 3.6 or higher installed.
 - To update dependencies after adding new packages, run:
-
+```
 pip freeze > requirements.txt
-
+```
 - To deactivate the virtual environment, simply run:
-
+```
 deactivate
-
+```
 This setup ensures a clean, isolated environment for development and testing of AI-Stylist on your local machine.
 
 ## Roadmap
@@ -104,16 +104,16 @@ We welcome contributions to AI-Stylist! Whether you want to report bugs, suggest
    Create your own copy of the project by forking the repo on GitLab.
 
 2. **Clone your fork**
-
+```
 git clone https://gitlab.informatics.ru/2024-2025/hse/s101/mshp-final-project-meow.git
 cd first_project
-
+```
 
 3. **Create a new branch**  
    Use a descriptive name for your branch:
-
+```
 git checkout -b feature/your-feature-name
-
+```
 
 4. **Make your changes**  
    Implement your feature or fix the bug. Make sure your code follows the existing style and conventions.
@@ -122,11 +122,11 @@ git checkout -b feature/your-feature-name
    Run the application and any tests to ensure your changes work correctly.
 
 6. **Commit and push**
-
+```
 git add .
 git commit -m "Description of your changes"
 git push origin feature/your-feature-name
-
+```
 7. **Create a merge request (MR)**  
    Open a merge request on GitLab from your branch to the main branch. Describe your changes clearly.
 
