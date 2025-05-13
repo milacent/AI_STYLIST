@@ -1931,324 +1931,333 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ProjectTests</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests" title="Link to this definition">¶</a></dt>
 <dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
-<p>Набор тестов для проверки основных пользовательских функций веб-приложения:
-аутентификация, работа с постами, профилем, лайками и навигационными страницами.</p>
+<p>Набор интеграционных и unit-тестов для проверки основных пользовательских сценариев и API приложения.</p>
+<dl class="simple">
+<dt>Методы тестируют:</dt><dd><ul class="simple">
+<li><p>регистрацию, аутентификацию</p></li>
+<li><p>работу профиля, постов, комментариев, лайков, дизлайков</p></li>
+<li><p>работу с изображениями</p></li>
+<li><p>различные страницы и API endpoints</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.login">
 <span class="sig-name descname"><span class="pre">login</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.login"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.login" title="Link to this definition">¶</a></dt>
-<dd><p>Утилита для логина пользователя.</p>
+<dd><p>Авторизует тестового пользователя.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.setUp">
 <span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.setUp"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.setUp" title="Link to this definition">¶</a></dt>
-<dd><p>Подготовка тестовых данных: создание пользователя и информации о нём.</p>
+<dd><p>Подготавливает тестовые данные.</p>
+<p>Создаёт тестового пользователя, профиль и инициализирует клиент для имитации запросов.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_about_page">
 <span class="sig-name descname"><span class="pre">test_about_page</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_about_page"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_about_page" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка загрузки страницы „О нас“.</p>
+<dd><p>Проверяет доступность страницы «О проекте».</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_admin_page">
 <span class="sig-name descname"><span class="pre">test_admin_page</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_admin_page"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_admin_page" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка доступности админки.</p>
+<dd><p>Проверяет, что неавторизованный пользователь получает редирект при попытке доступа к /admin/.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_catalog_page">
 <span class="sig-name descname"><span class="pre">test_catalog_page</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_catalog_page"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_catalog_page" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка загрузки каталога.</p>
+<dd><p>Проверяет доступность страницы каталога.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_checker_password_validation">
 <span class="sig-name descname"><span class="pre">test_checker_password_validation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_checker_password_validation"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_checker_password_validation" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка валидации паролей через функцию checker()</p>
+<dd><p>Проверяет функцию checker для валидации паролей.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_dislike_look">
 <span class="sig-name descname"><span class="pre">test_dislike_look</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_dislike_look"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_dislike_look" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка дизлайка look.</p>
+<dd><p>Проверяет возможность дизлайкнуть лук.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_dislike_look_authorized">
 <span class="sig-name descname"><span class="pre">test_dislike_look_authorized</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_dislike_look_authorized"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_dislike_look_authorized" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка дизлайка look после авторизации.</p>
+<dd><p>Проверяет возможность дизлайкнуть лук авторизованным пользователем.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_for_you_page">
 <span class="sig-name descname"><span class="pre">test_for_you_page</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_for_you_page"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_for_you_page" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка страницы персональных рекомендаций.</p>
+<dd><p>Проверяет, что неавторизованный пользователь получает редирект со страницы рекомендаций.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_for_you_page_authorized">
 <span class="sig-name descname"><span class="pre">test_for_you_page_authorized</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_for_you_page_authorized"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_for_you_page_authorized" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка страницы персональных рекомендаций после авторизации.</p>
+<dd><p>Проверяет доступность страницы рекомендаций для авторизованного пользователя.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_for_you_page_with_city">
 <span class="sig-name descname"><span class="pre">test_for_you_page_with_city</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_for_you_page_with_city"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_for_you_page_with_city" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка страницы персональных рекомендаций с указанием города</p>
+<dd><p>Проверяет работу страницы рекомендаций с передачей параметра города.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_gallery_liked_page_unauthorized">
 <span class="sig-name descname"><span class="pre">test_gallery_liked_page_unauthorized</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_gallery_liked_page_unauthorized"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_gallery_liked_page_unauthorized" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка доступа к лайкнутым постам без авторизации.</p>
+<dd><p>Проверяет, что неавторизованный пользователь не может просматривать понравившиеся луки.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_get_city_by_coords">
 <span class="sig-name descname"><span class="pre">test_get_city_by_coords</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_get_city_by_coords"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_get_city_by_coords" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка API получения города по координатам.</p>
+<dd><p>Проверяет, что без координат возвращается ошибка 400.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_get_city_by_coords_valid">
 <span class="sig-name descname"><span class="pre">test_get_city_by_coords_valid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_get_city_by_coords_valid"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_get_city_by_coords_valid" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка API получения города по валидным координатам.</p>
+<dd><p>Проверяет корректную работу определения города по координатам.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_index_page">
 <span class="sig-name descname"><span class="pre">test_index_page</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_index_page"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_index_page" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка доступности главной страницы.</p>
+<dd><p>Проверяет доступность главной страницы.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_like_look">
 <span class="sig-name descname"><span class="pre">test_like_look</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_like_look"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_like_look" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка лайка look.</p>
+<dd><p>Проверяет возможность лайкнуть лук.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_like_look_authorized">
 <span class="sig-name descname"><span class="pre">test_like_look_authorized</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_like_look_authorized"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_like_look_authorized" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка лайка look после авторизации.</p>
+<dd><p>Проверяет возможность лайкнуть лук авторизованным пользователем.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_login_invalid">
 <span class="sig-name descname"><span class="pre">test_login_invalid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_login_invalid"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_login_invalid" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка логина с некорректными данными.</p>
+<dd><p>Проверяет обработку неверных данных при входе.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_login_valid">
 <span class="sig-name descname"><span class="pre">test_login_valid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_login_valid"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_login_valid" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка логина с корректными данными.</p>
+<dd><p>Проверяет успешный вход с валидными данными.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_logout">
 <span class="sig-name descname"><span class="pre">test_logout</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_logout"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_logout" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка выхода из аккаунта.</p>
+<dd><p>Проверяет корректность выхода пользователя из системы.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_make_post_creation">
 <span class="sig-name descname"><span class="pre">test_make_post_creation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_make_post_creation"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_make_post_creation" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка создания поста.</p>
+<dd><p>Проверяет создание нового поста через форму.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_make_post_page">
 <span class="sig-name descname"><span class="pre">test_make_post_page</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_make_post_page"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_make_post_page" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка страницы создания поста.</p>
+<dd><p>Проверяет доступность страницы создания поста для авторизованного пользователя.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_make_post_unauthorized">
 <span class="sig-name descname"><span class="pre">test_make_post_unauthorized</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_make_post_unauthorized"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_make_post_unauthorized" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка доступа к созданию поста без авторизации.</p>
+<dd><p>Проверяет, что неавторизованный пользователь не может попасть на страницу создания поста.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_make_post_with_image">
 <span class="sig-name descname"><span class="pre">test_make_post_with_image</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_make_post_with_image"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_make_post_with_image" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка создания поста с изображением.</p>
+<dd><p>Проверяет создание поста с изображением (некорректный кейс).</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_post_api_content">
 <span class="sig-name descname"><span class="pre">test_post_api_content</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_post_api_content"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_post_api_content" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка содержимого API постов.</p>
+<dd><p>Проверяет, что созданный пост отображается в API.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_post_comment">
 <span class="sig-name descname"><span class="pre">test_post_comment</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_post_comment"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_post_comment" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка добавления комментария к посту.</p>
+<dd><p>Проверяет возможность оставить комментарий к посту.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_post_comment_unauthorized">
 <span class="sig-name descname"><span class="pre">test_post_comment_unauthorized</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_post_comment_unauthorized"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_post_comment_unauthorized" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка добавления комментария без авторизации.</p>
+<dd><p>Проверяет, что неавторизованный пользователь не может оставить комментарий.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_post_list">
 <span class="sig-name descname"><span class="pre">test_post_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_post_list"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_post_list" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка загрузки списка постов.</p>
+<dd><p>Проверяет доступность страницы со списком постов.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_post_list_content">
 <span class="sig-name descname"><span class="pre">test_post_list_content</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_post_list_content"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_post_list_content" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка содержимого списка постов.</p>
+<dd><p>Проверяет, что созданный пост отображается в списке постов.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_post_page">
 <span class="sig-name descname"><span class="pre">test_post_page</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_post_page"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_post_page" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка открытия конкретного поста.</p>
+<dd><p>Проверяет доступность страницы отдельного поста.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_post_page_unauthorized">
 <span class="sig-name descname"><span class="pre">test_post_page_unauthorized</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_post_page_unauthorized"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_post_page_unauthorized" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка доступа к странице поста без авторизации.</p>
+<dd><p>Проверяет, что неавторизованный пользователь не может просматривать страницу поста.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_posts_api">
 <span class="sig-name descname"><span class="pre">test_posts_api</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_posts_api"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_posts_api" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка API постов.</p>
+<dd><p>Проверяет доступность API списка постов.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_profile_edit">
 <span class="sig-name descname"><span class="pre">test_profile_edit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_profile_edit"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_profile_edit" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка изменения данных профиля пользователя.</p>
+<dd><p>Проверяет возможность редактирования профиля.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_profile_edit_password_change">
 <span class="sig-name descname"><span class="pre">test_profile_edit_password_change</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_profile_edit_password_change"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_profile_edit_password_change" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка изменения пароля в профиле.</p>
+<dd><p>Проверяет смену пароля через редактирование профиля.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_profile_edit_unauthorized">
 <span class="sig-name descname"><span class="pre">test_profile_edit_unauthorized</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_profile_edit_unauthorized"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_profile_edit_unauthorized" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка доступа к редактированию профиля без авторизации.</p>
+<dd><p>Проверяет, что неавторизованный пользователь не может редактировать профиль.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_profile_page">
 <span class="sig-name descname"><span class="pre">test_profile_page</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_profile_page"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_profile_page" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка загрузки страницы профиля при авторизации.</p>
+<dd><p>Проверяет доступность страницы профиля для авторизованного пользователя.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_profile_page_invalid_user">
 <span class="sig-name descname"><span class="pre">test_profile_page_invalid_user</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_profile_page_invalid_user"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_profile_page_invalid_user" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка страницы профиля для несуществующего пользователя.</p>
+<dd><p>Проверяет, что при попытке доступа к несуществующему профилю происходит редирект.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_save_look_empty">
 <span class="sig-name descname"><span class="pre">test_save_look_empty</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_save_look_empty"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_save_look_empty" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка страницы сохранения look (без параметров).</p>
+<dd><p>Проверяет, что при отсутствии look_id происходит редирект.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_save_look_empty_authorized">
 <span class="sig-name descname"><span class="pre">test_save_look_empty_authorized</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_save_look_empty_authorized"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_save_look_empty_authorized" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка сохранения look после авторизации.</p>
+<dd><p>Проверяет сохранение лука авторизованным пользователем по look_id.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_save_look_empty_with_look_id">
 <span class="sig-name descname"><span class="pre">test_save_look_empty_with_look_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_save_look_empty_with_look_id"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_save_look_empty_with_look_id" title="Link to this definition">¶</a></dt>
-<dd><p>Тестирует ветку кода в save_look_empty при передаче look_id</p>
+<dd><p>Проверяет сохранение лука по look_id.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_scrolling_page">
 <span class="sig-name descname"><span class="pre">test_scrolling_page</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_scrolling_page"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_scrolling_page" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка страницы бесконечной прокрутки.</p>
+<dd><p>Проверяет, что неавторизованный пользователь получает редирект со страницы скроллинга.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_scrolling_page_authorized">
 <span class="sig-name descname"><span class="pre">test_scrolling_page_authorized</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_scrolling_page_authorized"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_scrolling_page_authorized" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка страницы бесконечной прокрутки после авторизации.</p>
+<dd><p>Проверяет доступность страницы скроллинга для авторизованного пользователя.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_scrolling_page_with_liked_disliked_looks">
 <span class="sig-name descname"><span class="pre">test_scrolling_page_with_liked_disliked_looks</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_scrolling_page_with_liked_disliked_looks"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_scrolling_page_with_liked_disliked_looks" title="Link to this definition">¶</a></dt>
-<dd><p>Тестирует логику подбора образов на основе лайков/дизлайков</p>
+<dd><p>Проверяет доступность страницы скроллинга при наличии лайкнутых и дизлайкнутых луков.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_send_like_post">
 <span class="sig-name descname"><span class="pre">test_send_like_post</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_send_like_post"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_send_like_post" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка отправки лайка посту.</p>
+<dd><p>Проверяет возможность поставить лайк посту.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_send_like_post_unauthorized">
 <span class="sig-name descname"><span class="pre">test_send_like_post_unauthorized</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_send_like_post_unauthorized"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_send_like_post_unauthorized" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка отправки лайка без авторизации.</p>
+<dd><p>Проверяет, что неавторизованный пользователь не может лайкнуть пост.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_sign_up_invalid_password">
 <span class="sig-name descname"><span class="pre">test_sign_up_invalid_password</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_sign_up_invalid_password"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_sign_up_invalid_password" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка регистрации с невалидным паролем.</p>
+<dd><p>Проверяет обработку некорректного пароля при регистрации.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_sign_up_page">
 <span class="sig-name descname"><span class="pre">test_sign_up_page</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_sign_up_page"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_sign_up_page" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка регистрации нового пользователя.</p>
+<dd><p>Проверяет успешную регистрацию нового пользователя.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_sign_up_password_mismatch">
 <span class="sig-name descname"><span class="pre">test_sign_up_password_mismatch</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_sign_up_password_mismatch"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_sign_up_password_mismatch" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка регистрации с несовпадающими паролями.</p>
+<dd><p>Проверяет обработку несовпадения паролей при регистрации.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_terms_page">
 <span class="sig-name descname"><span class="pre">test_terms_page</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_terms_page"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_terms_page" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка загрузки страницы „Условия использования“.</p>
+<dd><p>Проверяет доступность страницы с условиями использования.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_unsave_look_page">
 <span class="sig-name descname"><span class="pre">test_unsave_look_page</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_unsave_look_page"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_unsave_look_page" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка страницы удаления сохранённого look.</p>
+<dd><p>Проверяет, что страница удаления сохранённого лука требует авторизации.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_view_all_disliked">
 <span class="sig-name descname"><span class="pre">test_view_all_disliked</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_view_all_disliked"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_view_all_disliked" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка страницы всех дизлайкнутых постов.</p>
+<dd><p>Проверяет доступность страницы всех дизлайкнутых луков.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_view_all_liked">
 <span class="sig-name descname"><span class="pre">test_view_all_liked</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_view_all_liked"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_view_all_liked" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка страницы всех лайкнутых постов.</p>
+<dd><p>Проверяет доступность страницы всех понравившихся луков.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.tests.ProjectTests.test_view_all_saved">
 <span class="sig-name descname"><span class="pre">test_view_all_saved</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/tests.html#ProjectTests.test_view_all_saved"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.tests.ProjectTests.test_view_all_saved" title="Link to this definition">¶</a></dt>
-<dd><p>Проверка страницы всех сохранённых постов.</p>
+<dd><p>Проверяет доступность страницы всех сохранённых луков.</p>
 </dd></dl>
 
 </dd></dl>
@@ -2403,13 +2412,14 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 - lon: Долгота</p>
 </dd>
 <dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>Результат с названием города или ошибкой:</dt><dd><ul class="simple">
+<dd class="field-even"><p><p>Результат с названием города или ошибкой:
+JsonResponse: Результат с названием города или ошибкой:</p>
+<blockquote>
+<div><ul class="simple">
 <li><p>city: Название города (при успехе)</p></li>
 <li><p>error: Сообщение об ошибке (при неудаче)</p></li>
 </ul>
-</dd>
-</dl>
+</div></blockquote>
 </p>
 </dd>
 <dt class="field-odd">Тип результата<span class="colon">:</span></dt>
@@ -2490,8 +2500,8 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="final_project_app.views.make_post_page">
 <span class="sig-name descname"><span class="pre">make_post_page</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/views.html#make_post_page"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.views.make_post_page" title="Link to this definition">¶</a></dt>
-<dd><p>Страница создания нового поста.</p>
-<p>Использует PostForm для валидации данных.</p>
+<dd><p>Страница создания нового поста.
+Использует PostForm для валидации данных.</p>
 </dd></dl>
 
 <dl class="py function">

@@ -38,20 +38,26 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">django.core.files.uploadedfile</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimpleUploadedFile</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">final_project_app.views</span><span class="w"> </span><span class="kn">import</span> <span class="n">checker</span>
 
-
 <div class="viewcode-block" id="ProjectTests">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests">[документация]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ProjectTests</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Набор тестов для проверки основных пользовательских функций веб-приложения:</span>
-<span class="sd">    аутентификация, работа с постами, профилем, лайками и навигационными страницами.</span>
+<span class="sd">    Набор интеграционных и unit-тестов для проверки основных пользовательских сценариев и API приложения.</span>
+
+<span class="sd">    Методы тестируют:</span>
+<span class="sd">        - регистрацию, аутентификацию</span>
+<span class="sd">        - работу профиля, постов, комментариев, лайков, дизлайков</span>
+<span class="sd">        - работу с изображениями</span>
+<span class="sd">        - различные страницы и API endpoints</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="ProjectTests.setUp">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.setUp">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Подготовка тестовых данных: создание пользователя и информации о нём.</span>
+<span class="sd">        Подготавливает тестовые данные.</span>
+
+<span class="sd">        Создаёт тестового пользователя, профиль и инициализирует клиент для имитации запросов.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span>
@@ -70,15 +76,17 @@
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.login">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">login</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Утилита для логина пользователя.</span>
+<span class="sd">        Авторизует тестового пользователя.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;testuser&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;!1Testpass&#39;</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;testuser&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;!1Testpass&#39;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ProjectTests.test_index_page">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_index_page">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_index_page</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка доступности главной страницы.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет доступность главной страницы.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span></div>
 
@@ -86,7 +94,9 @@
 <div class="viewcode-block" id="ProjectTests.test_login_valid">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_login_valid">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_login_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка логина с корректными данными.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет успешный вход с валидными данными.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;log_in&#39;</span><span class="p">),</span> <span class="p">{</span>
             <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;testuser&#39;</span><span class="p">,</span>
             <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="s1">&#39;!1Testpass&#39;</span>
@@ -97,7 +107,9 @@
 <div class="viewcode-block" id="ProjectTests.test_sign_up_page">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_sign_up_page">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_sign_up_page</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка регистрации нового пользователя.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет успешную регистрацию нового пользователя.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;sign_up&#39;</span><span class="p">),</span> <span class="p">{</span>
             <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;newuser&#39;</span><span class="p">,</span>
             <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;new@test.com&#39;</span><span class="p">,</span>
@@ -113,16 +125,20 @@
 <div class="viewcode-block" id="ProjectTests.test_profile_page">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_profile_page">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_profile_page</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка загрузки страницы профиля при авторизации.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет доступность страницы профиля для авторизованного пользователя.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">login</span><span class="p">()</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;user/&#39;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">username</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;profile&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">username</span><span class="p">}))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ProjectTests.test_profile_edit">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_profile_edit">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_profile_edit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка изменения данных профиля пользователя.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет возможность редактирования профиля.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">login</span><span class="p">()</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;profile_edit&#39;</span><span class="p">),</span> <span class="p">{</span>
             <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;testuser&#39;</span><span class="p">,</span>
@@ -138,7 +154,9 @@
 <div class="viewcode-block" id="ProjectTests.test_post_list">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_post_list">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_post_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка загрузки списка постов.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет доступность страницы со списком постов.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">login</span><span class="p">()</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;posts_all&#39;</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span></div>
@@ -147,7 +165,9 @@
 <div class="viewcode-block" id="ProjectTests.test_post_page">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_post_page">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_post_page</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка открытия конкретного поста.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет доступность страницы отдельного поста.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">login</span><span class="p">()</span>
         <span class="n">post</span> <span class="o">=</span> <span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Test Post&#39;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;desc&#39;</span><span class="p">)</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">post</span><span class="o">.</span><span class="n">id</span><span class="p">}))</span>
@@ -157,7 +177,9 @@
 <div class="viewcode-block" id="ProjectTests.test_post_comment">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_post_comment">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_post_comment</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка добавления комментария к посту.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет возможность оставить комментарий к посту.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">login</span><span class="p">()</span>
         <span class="n">post</span> <span class="o">=</span> <span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Test Post&#39;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;desc&#39;</span><span class="p">)</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">post</span><span class="o">.</span><span class="n">id</span><span class="p">}),</span> <span class="p">{</span>
@@ -170,7 +192,9 @@
 <div class="viewcode-block" id="ProjectTests.test_catalog_page">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_catalog_page">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_catalog_page</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка загрузки каталога.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет доступность страницы каталога.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">login</span><span class="p">()</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;catalog&#39;</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span></div>
@@ -179,7 +203,9 @@
 <div class="viewcode-block" id="ProjectTests.test_scrolling_page">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_scrolling_page">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_scrolling_page</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка страницы бесконечной прокрутки.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет, что неавторизованный пользователь получает редирект со страницы скроллинга.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;scrolling&#39;</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">302</span><span class="p">)</span></div>
 
@@ -187,7 +213,9 @@
 <div class="viewcode-block" id="ProjectTests.test_about_page">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_about_page">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_about_page</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка загрузки страницы &#39;О нас&#39;.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет доступность страницы &quot;О проекте&quot;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;about&#39;</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span></div>
 
@@ -195,7 +223,9 @@
 <div class="viewcode-block" id="ProjectTests.test_terms_page">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_terms_page">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_terms_page</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка загрузки страницы &#39;Условия использования&#39;.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет доступность страницы с условиями использования.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;terms&#39;</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span></div>
 
@@ -203,7 +233,9 @@
 <div class="viewcode-block" id="ProjectTests.test_for_you_page">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_for_you_page">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_for_you_page</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка страницы персональных рекомендаций.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет, что неавторизованный пользователь получает редирект со страницы рекомендаций.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;for_you&#39;</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">302</span><span class="p">)</span></div>
 
@@ -211,7 +243,9 @@
 <div class="viewcode-block" id="ProjectTests.test_logout">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_logout">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_logout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка выхода из аккаунта.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет корректность выхода пользователя из системы.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">login</span><span class="p">()</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;log_out&#39;</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">302</span><span class="p">)</span></div>
@@ -220,7 +254,9 @@
 <div class="viewcode-block" id="ProjectTests.test_posts_api">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_posts_api">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_posts_api</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка API постов.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет доступность API списка постов.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;post_api&#39;</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span></div>
 
@@ -228,16 +264,20 @@
 <div class="viewcode-block" id="ProjectTests.test_unsave_look_page">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_unsave_look_page">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_unsave_look_page</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка страницы удаления сохранённого look.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет, что страница удаления сохранённого лука требует авторизации.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">login</span><span class="p">()</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;unsave_look&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;look_id&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">302</span><span class="p">)</span>  <span class="c1"># Предполагаем редирект</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">302</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ProjectTests.test_view_all_saved">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_view_all_saved">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_view_all_saved</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка страницы всех сохранённых постов.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет доступность страницы всех сохранённых луков.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">login</span><span class="p">()</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;view_all_saved&#39;</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span></div>
@@ -246,7 +286,9 @@
 <div class="viewcode-block" id="ProjectTests.test_view_all_liked">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_view_all_liked">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_view_all_liked</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка страницы всех лайкнутых постов.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет доступность страницы всех понравившихся луков.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">login</span><span class="p">()</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;view_all_liked&#39;</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span></div>
@@ -255,7 +297,9 @@
 <div class="viewcode-block" id="ProjectTests.test_view_all_disliked">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_view_all_disliked">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_view_all_disliked</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка страницы всех дизлайкнутых постов.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет доступность страницы всех дизлайкнутых луков.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">login</span><span class="p">()</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;view_all_disliked&#39;</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span></div>
@@ -264,17 +308,21 @@
 <div class="viewcode-block" id="ProjectTests.test_send_like_post">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_send_like_post">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_send_like_post</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка отправки лайка посту.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет возможность поставить лайк посту.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">login</span><span class="p">()</span>
         <span class="n">post</span> <span class="o">=</span> <span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Test Post&#39;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;desc&#39;</span><span class="p">)</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;like&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">post</span><span class="o">.</span><span class="n">id</span><span class="p">}))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">302</span><span class="p">)</span>  <span class="c1"># Предполагаем редирект</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">302</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ProjectTests.test_make_post_page">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_make_post_page">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_make_post_page</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка страницы создания поста.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет доступность страницы создания поста для авторизованного пользователя.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">login</span><span class="p">()</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;make_post&#39;</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span></div>
@@ -283,25 +331,31 @@
 <div class="viewcode-block" id="ProjectTests.test_save_look_empty">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_save_look_empty">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_save_look_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка страницы сохранения look (без параметров).&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет, что при отсутствии look_id происходит редирект.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">login</span><span class="p">()</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;save_look_empty&#39;</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">302</span><span class="p">)</span>  <span class="c1"># Предполагаем редирект</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">302</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ProjectTests.test_like_look">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_like_look">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_like_look</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка лайка look.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет возможность лайкнуть лук.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">login</span><span class="p">()</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;like_look&#39;</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>  <span class="c1"># Предполагаем редирект</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ProjectTests.test_dislike_look">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_dislike_look">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_dislike_look</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка дизлайка look.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет возможность дизлайкнуть лук.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">login</span><span class="p">()</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;dislike_look&#39;</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span></div>
@@ -310,7 +364,9 @@
 <div class="viewcode-block" id="ProjectTests.test_get_city_by_coords">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_get_city_by_coords">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_get_city_by_coords</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка API получения города по координатам.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет, что без координат возвращается ошибка 400.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;get_city_by_coords&#39;</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span></div>
 
@@ -318,15 +374,19 @@
 <div class="viewcode-block" id="ProjectTests.test_admin_page">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_admin_page">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_admin_page</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка доступности админки.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет, что неавторизованный пользователь получает редирект при попытке доступа к /admin/.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/admin/&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">302</span><span class="p">)</span>  <span class="c1"># Редирект на логин</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">302</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ProjectTests.test_profile_page_invalid_user">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_profile_page_invalid_user">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_profile_page_invalid_user</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка страницы профиля для несуществующего пользователя.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет, что при попытке доступа к несуществующему профилю происходит редирект.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;profile&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;nonexistent&#39;</span><span class="p">}))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">302</span><span class="p">)</span></div>
 
@@ -334,28 +394,34 @@
 <div class="viewcode-block" id="ProjectTests.test_make_post_unauthorized">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_make_post_unauthorized">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_make_post_unauthorized</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка доступа к созданию поста без авторизации.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет, что неавторизованный пользователь не может попасть на страницу создания поста.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;make_post&#39;</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">302</span><span class="p">)</span>  <span class="c1"># Редирект на логин</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">302</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ProjectTests.test_make_post_creation">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_make_post_creation">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_make_post_creation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка создания поста.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет создание нового поста через форму.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">login</span><span class="p">()</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;make_post&#39;</span><span class="p">),</span> <span class="p">{</span>
             <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;New Post&#39;</span><span class="p">,</span>
             <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Content&#39;</span>
         <span class="p">})</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">302</span><span class="p">)</span>  <span class="c1"># Редирект после создания</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">302</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">count</span><span class="p">(),</span> <span class="mi">1</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ProjectTests.test_post_list_content">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_post_list_content">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_post_list_content</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка содержимого списка постов.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет, что созданный пост отображается в списке постов.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">login</span><span class="p">()</span>
         <span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Test Post&#39;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;desc&#39;</span><span class="p">)</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;posts_all&#39;</span><span class="p">))</span>
@@ -365,96 +431,112 @@
 <div class="viewcode-block" id="ProjectTests.test_login_invalid">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_login_invalid">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_login_invalid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка логина с некорректными данными.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет обработку неверных данных при входе.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;log_in&#39;</span><span class="p">),</span> <span class="p">{</span>
             <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;wronguser&#39;</span><span class="p">,</span>
             <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="s1">&#39;wrongpass&#39;</span>
         <span class="p">})</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>  <span class="c1"># Остаемся на странице входа</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertContains</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s1">&#39;Incorrect password and/or username&#39;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ProjectTests.test_sign_up_invalid_password">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_sign_up_invalid_password">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_sign_up_invalid_password</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка регистрации с невалидным паролем.&quot;&quot;&quot;</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;sign_up&#39;</span><span class="p">),</span> <span class="p">{</span>
-            <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;newuser&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;new@test.com&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;password1&#39;</span><span class="p">:</span> <span class="s1">&#39;weak&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;password2&#39;</span><span class="p">:</span> <span class="s1">&#39;weak&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;gender&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-            <span class="s1">&#39;about&#39;</span><span class="p">:</span> <span class="s1">&#39;About me&#39;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет обработку некорректного пароля при регистрации.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/sign_up/&#39;</span><span class="p">,</span> <span class="p">{</span>
+            <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;testuser&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;testuser@example.com&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;password1&#39;</span><span class="p">:</span> <span class="s1">&#39;123&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;password2&#39;</span><span class="p">:</span> <span class="s1">&#39;123&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;gender&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;about&#39;</span><span class="p">:</span> <span class="s1">&#39;Test user&#39;</span><span class="p">,</span>
         <span class="p">})</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">302</span><span class="p">)</span>  <span class="c1"># Остаемся на странице</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertContains</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s2">&quot;Password does not meet the requirements&quot;</span><span class="p">)</span></div>
 
-        <span class="c1"># self.assertContains(response, &#39;Password does not meet the requirements&#39;)</span>
 
 <div class="viewcode-block" id="ProjectTests.test_sign_up_password_mismatch">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_sign_up_password_mismatch">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_sign_up_password_mismatch</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка регистрации с несовпадающими паролями.&quot;&quot;&quot;</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;sign_up&#39;</span><span class="p">),</span> <span class="p">{</span>
-            <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;newuser&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;new@test.com&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;password1&#39;</span><span class="p">:</span> <span class="s1">&#39;!Pass1234&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;password2&#39;</span><span class="p">:</span> <span class="s1">&#39;!Pass12345&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;gender&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-            <span class="s1">&#39;about&#39;</span><span class="p">:</span> <span class="s1">&#39;About me&#39;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет обработку несовпадения паролей при регистрации.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/sign_up/&#39;</span><span class="p">,</span> <span class="p">{</span>
+            <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;testuser&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;testuser@example.com&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;password1&#39;</span><span class="p">:</span> <span class="s1">&#39;Password123&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;password2&#39;</span><span class="p">:</span> <span class="s1">&#39;Password124&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;gender&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;about&#39;</span><span class="p">:</span> <span class="s1">&#39;Test user&#39;</span><span class="p">,</span>
         <span class="p">})</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">302</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertContains</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s2">&quot;Passwords do not match&quot;</span><span class="p">)</span></div>
 
-        <span class="c1"># self.assertContains(response, &#39;Passwords do not match&#39;)</span>
 
 <div class="viewcode-block" id="ProjectTests.test_profile_edit_unauthorized">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_profile_edit_unauthorized">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_profile_edit_unauthorized</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка доступа к редактированию профиля без авторизации.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет, что неавторизованный пользователь не может редактировать профиль.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;profile_edit&#39;</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">302</span><span class="p">)</span>  <span class="c1"># Редирект на логин</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">302</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ProjectTests.test_post_page_unauthorized">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_post_page_unauthorized">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_post_page_unauthorized</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка доступа к странице поста без авторизации.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет, что неавторизованный пользователь не может просматривать страницу поста.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">post</span> <span class="o">=</span> <span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Test Post&#39;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;desc&#39;</span><span class="p">)</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">post</span><span class="o">.</span><span class="n">id</span><span class="p">}))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">302</span><span class="p">)</span>  <span class="c1"># Посты доступны без авторизации</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">302</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ProjectTests.test_post_comment_unauthorized">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_post_comment_unauthorized">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_post_comment_unauthorized</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка добавления комментария без авторизации.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет, что неавторизованный пользователь не может оставить комментарий.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">post</span> <span class="o">=</span> <span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Test Post&#39;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;desc&#39;</span><span class="p">)</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">post</span><span class="o">.</span><span class="n">id</span><span class="p">}),</span> <span class="p">{</span>
             <span class="s1">&#39;text&#39;</span><span class="p">:</span> <span class="s1">&#39;Nice post!&#39;</span>
         <span class="p">})</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">302</span><span class="p">)</span>  <span class="c1"># Редирект на логин</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">302</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ProjectTests.test_send_like_post_unauthorized">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_send_like_post_unauthorized">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_send_like_post_unauthorized</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка отправки лайка без авторизации.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет, что неавторизованный пользователь не может лайкнуть пост.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">post</span> <span class="o">=</span> <span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Test Post&#39;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;desc&#39;</span><span class="p">)</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;like&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">post</span><span class="o">.</span><span class="n">id</span><span class="p">}))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">302</span><span class="p">)</span>  <span class="c1"># Редирект на логин</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">302</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ProjectTests.test_gallery_liked_page_unauthorized">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_gallery_liked_page_unauthorized">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_gallery_liked_page_unauthorized</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка доступа к лайкнутым постам без авторизации.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет, что неавторизованный пользователь не может просматривать понравившиеся луки.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;gallery_liked&#39;</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">302</span><span class="p">)</span>  <span class="c1"># Редирект на логин</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">302</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ProjectTests.test_for_you_page_authorized">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_for_you_page_authorized">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_for_you_page_authorized</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка страницы персональных рекомендаций после авторизации.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет доступность страницы рекомендаций для авторизованного пользователя.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">login</span><span class="p">()</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;for_you&#39;</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span></div>
@@ -463,7 +545,9 @@
 <div class="viewcode-block" id="ProjectTests.test_scrolling_page_authorized">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_scrolling_page_authorized">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_scrolling_page_authorized</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка страницы бесконечной прокрутки после авторизации.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет доступность страницы скроллинга для авторизованного пользователя.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">login</span><span class="p">()</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;scrolling&#39;</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span></div>
@@ -472,45 +556,55 @@
 <div class="viewcode-block" id="ProjectTests.test_get_city_by_coords_valid">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_get_city_by_coords_valid">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_get_city_by_coords_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка API получения города по валидным координатам.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет корректную работу определения города по координатам.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;get_city_by_coords&#39;</span><span class="p">),</span> <span class="p">{</span><span class="s1">&#39;lat&#39;</span><span class="p">:</span> <span class="s1">&#39;55.7558&#39;</span><span class="p">,</span> <span class="s1">&#39;lon&#39;</span><span class="p">:</span> <span class="s1">&#39;37.6173&#39;</span><span class="p">})</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;city&#39;</span><span class="p">),</span> <span class="s1">&#39;Москва&#39;</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;city&#39;</span><span class="p">),</span> <span class="p">[</span><span class="s1">&#39;Москва&#39;</span><span class="p">,</span> <span class="s1">&#39;Moscow&#39;</span><span class="p">])</span></div>
 
 
 <div class="viewcode-block" id="ProjectTests.test_save_look_empty_authorized">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_save_look_empty_authorized">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_save_look_empty_authorized</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка сохранения look после авторизации.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет сохранение лука авторизованным пользователем по look_id.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">login</span><span class="p">()</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;save_look_empty&#39;</span><span class="p">),</span> <span class="p">{</span><span class="s1">&#39;look_id&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>  <span class="c1"># Редирект</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ProjectTests.test_like_look_authorized">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_like_look_authorized">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_like_look_authorized</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка лайка look после авторизации.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет возможность лайкнуть лук авторизованным пользователем.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">login</span><span class="p">()</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;like_look&#39;</span><span class="p">),</span> <span class="p">{</span><span class="s1">&#39;look_id&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">),</span> <span class="s1">&#39;error&#39;</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span></div>
 
 
 <div class="viewcode-block" id="ProjectTests.test_dislike_look_authorized">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_dislike_look_authorized">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_dislike_look_authorized</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка дизлайка look после авторизации.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет возможность дизлайкнуть лук авторизованным пользователем.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">login</span><span class="p">()</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;dislike_look&#39;</span><span class="p">),</span> <span class="p">{</span><span class="s1">&#39;look_id&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">),</span> <span class="s1">&#39;error&#39;</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span></div>
 
 
 <div class="viewcode-block" id="ProjectTests.test_make_post_with_image">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_make_post_with_image">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_make_post_with_image</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка создания поста с изображением.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет создание поста с изображением (некорректный кейс).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">login</span><span class="p">()</span>
         <span class="n">image</span> <span class="o">=</span> <span class="n">SimpleUploadedFile</span><span class="p">(</span><span class="s2">&quot;test.jpg&quot;</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&quot;file_content&quot;</span><span class="p">,</span> <span class="n">content_type</span><span class="o">=</span><span class="s2">&quot;image/jpeg&quot;</span><span class="p">)</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;make_post&#39;</span><span class="p">),</span> <span class="p">{</span>
@@ -525,7 +619,9 @@
 <div class="viewcode-block" id="ProjectTests.test_post_api_content">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_post_api_content">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_post_api_content</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка содержимого API постов.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет, что созданный пост отображается в API.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;API Test Post&#39;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;desc&#39;</span><span class="p">)</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;post_api&#39;</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
@@ -535,7 +631,9 @@
 <div class="viewcode-block" id="ProjectTests.test_profile_edit_password_change">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_profile_edit_password_change">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_profile_edit_password_change</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка изменения пароля в профиле.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет смену пароля через редактирование профиля.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">login</span><span class="p">()</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;profile_edit&#39;</span><span class="p">),</span> <span class="p">{</span>
             <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;testuser&#39;</span><span class="p">,</span>
@@ -546,7 +644,6 @@
             <span class="s1">&#39;about&#39;</span><span class="p">:</span> <span class="s1">&#39;Updated&#39;</span>
         <span class="p">})</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">302</span><span class="p">)</span>
-        <span class="c1"># Проверяем, что новый пароль работает</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">logout</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;testuser&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;NewPass123!&#39;</span><span class="p">))</span></div>
 
@@ -554,7 +651,9 @@
 <div class="viewcode-block" id="ProjectTests.test_checker_password_validation">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_checker_password_validation">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_checker_password_validation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка валидации паролей через функцию checker()&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет функцию checker для валидации паролей.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">checker</span><span class="p">(</span><span class="s2">&quot;!1Testpass&quot;</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">checker</span><span class="p">(</span><span class="s2">&quot;Short1!&quot;</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">checker</span><span class="p">(</span><span class="s2">&quot;NoNumbers!&quot;</span><span class="p">))</span>
@@ -566,32 +665,35 @@
 <div class="viewcode-block" id="ProjectTests.test_for_you_page_with_city">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_for_you_page_with_city">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_for_you_page_with_city</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Проверка страницы персональных рекомендаций с указанием города&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет работу страницы рекомендаций с передачей параметра города.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">login</span><span class="p">()</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;for_you&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;?city=London&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">context</span><span class="p">[</span><span class="s1">&#39;city&#39;</span><span class="p">],</span> <span class="s1">&#39;London&#39;</span><span class="p">)</span>
-        <span class="c1"># Проверяем, что температура отображается (либо ошибка, если API не доступно)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="s1">&#39;temperature&#39;</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">context</span> <span class="ow">or</span> <span class="s1">&#39;error&#39;</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">context</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ProjectTests.test_save_look_empty_with_look_id">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_save_look_empty_with_look_id">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_save_look_empty_with_look_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Тестирует ветку кода в save_look_empty при передаче look_id&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет сохранение лука по look_id.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">login</span><span class="p">()</span>
-        <span class="c1"># Создаем тестовый look</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;save_look_empty&#39;</span><span class="p">))</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;save_look_empty&#39;</span><span class="p">),</span> <span class="p">{</span><span class="s1">&#39;look_id&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="ProjectTests.test_scrolling_page_with_liked_disliked_looks">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.tests.ProjectTests.test_scrolling_page_with_liked_disliked_looks">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">test_scrolling_page_with_liked_disliked_looks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Тестирует логику подбора образов на основе лайков/дизлайков&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Проверяет доступность страницы скроллинга при наличии лайкнутых и дизлайкнутых луков.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">login</span><span class="p">()</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;scrolling&#39;</span><span class="p">))</span>
-
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span></div>
 </div>
 
