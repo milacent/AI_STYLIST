@@ -1,5 +1,5 @@
 /* Основной фон и стиль header */
-header {
+.mainheader {
     background-color: #2a2a2a;
     padding: 15px 20px;
     display: flex;
@@ -8,6 +8,9 @@ header {
     box-shadow: 0 2px 10px rgba(0,0,0,0.7);
     position: relative;
     z-index: 100;
+    width: 100%;
+    left: 0;
+    top: 0;
 }
 
 /* Контейнер навигации */

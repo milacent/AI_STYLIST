@@ -1,8 +1,8 @@
 /* Основной стиль страницы */
 body {
     font-family: 'Lora', sans-serif;
-    background-image: radial-gradient(#610261 0%, #16213e 70%);
-    color: white;
+    background-color: #161616; /* Очень тёмный фон */
+    color: #fff; /* Основной текст белый */
     text-align: center;
     margin: 0;
     padding: 0;
@@ -12,13 +12,13 @@ body {
 header {
     padding: 20px;
     font-weight: bold;
-    text-transform: uppercase;
     letter-spacing: 2px;
 }
 
 header h1 {
     font-size: 70px;
     opacity: 0.85;
+    color: #fff; /* Основной текст белый */
 }
 
 /* Стили для формы */
@@ -26,9 +26,9 @@ form {
     margin: 50px auto;
     width: 50%;
     padding: 30px;
-    background-color: #16213e;
+    background-color: #1f1f1f; /* Темный фон для формы */
     border-radius: 10px;
-    box-shadow: 0px 5px 20px rgba(255, 0, 255, 0.7);
+    box-shadow: 0px 5px 20px rgba(74, 144, 226, 0.7); /* Голубой цвет для тени */
 }
 
 /* Стили для меток, полей ввода и textarea */
@@ -37,6 +37,7 @@ label, input, textarea {
     width: 100%;
     margin-bottom: 15px;
     font-size: 1.2em;
+    color: #fff; /* Основной текст белый */
 }
 
 input[id="image"] {
@@ -56,7 +57,6 @@ input, textarea {
     color: white;
 }
 
-
 /* Стили для секции комментариев и кнопки "Like" */
 .like-button {
     padding: 12px 24px;
@@ -67,23 +67,23 @@ input, textarea {
     display: inline-block;
     border-radius: 8px;
     cursor: pointer;
-    background: linear-gradient(135deg, #d100d1, #6f21b8);
+    background-color: #4a90e2; /* Акцентный голубой */
     color: white;
     border-top: 1px solid white;
-    box-shadow: 0 4px 10px rgba(138, 43, 226, 0.5);
+    box-shadow: 0 4px 10px rgba(74, 144, 226, 0.5);
     margin-top: 20px;
     transition: all 0.3s ease;
 }
 
 .like-button:hover {
-    background: linear-gradient(135deg, #ff00ff, #8e2aeb);
+    background-color: #3a7bc8; /* Темнее голубой */
     transform: scale(1.07);
-    box-shadow: 0 6px 15px rgba(138, 43, 226, 0.7);
+    box-shadow: 0 6px 15px rgba(74, 144, 226, 0.7);
 }
 
 /* Стили для секции комментариев */
 .comment {
-    background-color: #f9f9f9;
+    background-color: #2a2a2a; /* Темный фон для комментариев */
     padding: 15px;
     margin-bottom: 15px;
     border-radius: 8px;
@@ -92,8 +92,62 @@ input, textarea {
 
 .comment p {
     margin: 5px 0;
+    color: #ccc; /* Светло-серый текст */
 }
 
 .comment strong {
-    color: #000000;
+    color: #fff; /* Основной текст белый */
+}
+/* Стили для кнопки отправки комментария */
+.comment-submit-button {
+    padding: 12px 24px;
+    font-size: 1.2em;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #4a90e2; /* Акцентный голубой */
+    color: white;
+    border: none;
+    border-top: 1px solid white;
+    box-shadow: 0 4px 10px rgba(74, 144, 226, 0.5);
+    margin-top: 20px;
+    transition: all 0.3s ease;
+}
+
+.comment-submit-button:hover {
+    background-color: #3a7bc8; /* Темнее голубой */
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(74, 144, 226, 0.7);
+}
+
+.comment-submit-button:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 5px rgba(74, 144, 226, 0.7);
+}
+
+/* Стили для ссылки автора */
+.author-link {
+    color: #4a90e2; /* Акцентный голубой */
+    text-decoration: none;
+    font-weight: 600;
+    font-style: normal; /* Убираем курсив */
+    transition: color 0.3s ease;
+}
+
+.author-link:hover {
+    color: #3a7bc8; /* Темнее голубой */
+    text-decoration: underline;
+}
+
+/* Стили для параграфа автора */
+.author-paragraph {
+    margin: 10px 0;
+    font-size: 1.1em;
+}
+
+.author-paragraph strong {
+    color: #fff; /* Основной текст белый */
 }

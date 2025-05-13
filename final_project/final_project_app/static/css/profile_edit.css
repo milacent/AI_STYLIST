@@ -1,0 +1,102 @@
+body {
+    font-family: 'Lora', sans-serif;
+    background-color: #161616; /* Очень тёмный фон */
+    color: #fff; /* Основной текст белый */
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    padding: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+h1 {
+    font-size: 2.5em;
+    color: #fff; /* Основной текст белый */
+    margin: 20px 0;
+}
+
+form {
+    margin: 50px auto;
+    width: 50%;
+    padding: 30px;
+    background-color: #1f1f1f; /* Темный фон для формы */
+    border-radius: 10px;
+    box-shadow: 0px 5px 20px rgba(74, 144, 226, 0.7); /* Голубой цвет для тени */
+}
+
+label, input, textarea {
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+    color: #fff; /* Основной текст белый */
+}
+
+input, textarea {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+input[type="radio"] {
+    display: inline-block;
+    width: auto;
+    margin-right: 10px;
+}
+
+h2 {
+    color: #4a90e2; /* Акцентный голубой */
+    font-size: 1.8em;
+    margin: 20px 0 10px;
+}
+
+button[type="submit"] {
+    padding: 12px 24px;
+    font-size: 1.2em;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #4a90e2; /* Акцентный голубой */
+    color: white;
+    border: none;
+    border-top: 1px solid white;
+    box-shadow: 0 4px 10px rgba(74, 144, 226, 0.5);
+    margin-top: 20px;
+    transition: all 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #3a7bc8; /* Темнее голубой */
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(74, 144, 226, 0.7);
+}
+
+a {
+    color: #4a90e2; /* Акцентный голубой */
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #3a7bc8; /* Темнее голубой */
+    text-decoration: underline;
+}
+
+footer {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #1f1f1f; /* Темный фон для футера */
+    color: #fff; /* Основной текст белый */
+    border-top: 1px solid #444; /* Темная граница */
+}

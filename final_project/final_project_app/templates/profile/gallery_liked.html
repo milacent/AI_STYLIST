@@ -33,7 +33,7 @@
         <p>You haven't liked any posts yet.</p>
         {% endif %}
 
-        <a href="{% url 'profile' %}" class="button1">Back to profile</a>
+        <a href="{% url 'profile' request.user.username %}" class="button1">Back to profile</a>
     </div>
 
     {% include 'general/footer.html' %}

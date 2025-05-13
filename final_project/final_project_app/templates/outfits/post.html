@@ -12,7 +12,8 @@
 
     <section>
         <h2>Content: {{ description }}</h2>
-        <p><strong>Author:</strong> <a href="{% url 'profile' author %}"><i>{{ author }}</i></a></p>
+        <p class="author-paragraph"><strong>Author:</strong> <a href="{% url 'profile' author %}" class="author-link"><i>{{ author }}</i></a></p>
+
         <p><strong>Likes:</strong> <i>{{ likes }}</i></p>
     </section>
 
@@ -25,7 +26,7 @@
             <label for="text">Text:</label>
             <textarea id="text" name="text" rows="4" cols="50" placeholder="Enter your text here" required></textarea><br>
 
-            <button type="submit">Send comment</button>
+            <button type="submit" class="comment-submit-button">Send comment</button>
         </form>
         {% for comment in comments %}
         <div class="comment">

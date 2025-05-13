@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <header>
-        {% if user.is_authenticated %}
+{% if user.is_authenticated %}
+    <header class="mainheader">
         <div class="nav-container">
             <button onclick="window.location.href='{% url 'for_you' %}'">For you</button>
             <button onclick="window.location.href='{% url 'scrolling' %}'">Scrolling</button>
@@ -28,7 +28,7 @@
             <button onclick="window.location.href='{% url 'about' %}'">About</button>
             <button onclick="window.location.href='{% url 'log_out' %}'">Log out</button>
         </div>
-        {% endif %}
     </header>
+        {% endif %}
 </body>
 </html>

@@ -154,7 +154,7 @@ def unsave_look(request, look_id):
         messages.success(request, 'Образ удалён из сохранённых')
         if request.POST.get('source') == 'view_all':
             return redirect('view_all_saved')
-        return redirect('profile')
+        return redirect('profile', username=request.user.username)
     return redirect('profile')
 
 @login_required
@@ -209,7 +209,7 @@ def profile_edit_page(request):
             info.about_me = request.POST['about']
             info.save()
             login(request, user)
-            return redirect('/profile')
+            return redirect('profile', username=request.user.username)
         except:
             raise SystemError
 

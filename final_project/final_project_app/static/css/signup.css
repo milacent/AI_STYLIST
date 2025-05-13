@@ -142,3 +142,15 @@ textarea {
     margin-right: 8px;
     transform: scale(1.1);
 }
+
+.author-link {
+    color: #4a90e2; /* Акцентный голубой */
+    text-decoration: none;
+    font-style: normal; /* Убираем курсив */
+    transition: color 0.3s ease;
+}
+
+.author-link:hover {
+    color: #3a7bc8; /* Темнее голубой */
+    text-decoration: underline;
+}
