@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from final_project_app.models import Info, Comment, Post, LikePost, LikeComment, Looks, LikedLook, DislikedLook
+from .models import Info, Comment, Post, LikePost, Looks, LikedLook, DislikedLook
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from .forms import PostForm
@@ -12,8 +12,8 @@ from .models import get_current_weather
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 import json
-from .models import Looks, LikedLook, DislikedLook
 from .utils import checker  # Функция для проверки пароля
+from .look_factory import LookFactory
 
 
 # Create your views here.
@@ -526,7 +526,8 @@ def for_you_page(request):
             raise ValueError("Не удалось получить данные о погоде")
 
         print(f"[INFO] Текущая погода в городе {city}: {temperature}°C")
-        look = Looks.get_for_temperature(temperature)
+        strategy = LookFactory.get_strategy("temperature")
+        look = strategy.get_look(temperature=temperature)
         if not look:
             raise ValueError("Не найдены подходящие образы для этой температуры")
 
