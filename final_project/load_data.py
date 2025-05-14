@@ -1,5 +1,5 @@
 import os
-from final_project_app.models import *
+from final_project_app.models import ClothingItem
 
 
 def load_clothes():
@@ -21,7 +21,11 @@ def load_clothes():
 
     for cat_code, cat_name in categories.items():
         # Путь к папке категории
-        category_folder = os.path.join('final_project_app', 'static', 'images', 'default_clothes', cat_name)
+        category_folder = os.path.join('final_project_app',
+                                       'static',
+                                       'images',
+                                       'default_clothes',
+                                       cat_name)
 
         if not os.path.exists(category_folder):
             print(f"Папка не найдена: {category_folder}")

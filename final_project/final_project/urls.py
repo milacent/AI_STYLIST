@@ -16,10 +16,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from final_project_app.views import *
 from django.conf import settings
 from django.conf.urls.static import static
-
+from final_project_app.views import index_page, posts_api, log_in_page, sign_up_page
+from final_project_app.views import profile_edit_page, gallery_liked_page, unsave_look
+from final_project_app.views import view_all_saved, view_all_liked, view_all_disliked
+from final_project_app.views import about_page, terms_page, for_you_page
+from final_project_app.views import log_out, post_page, send_like_post
+from final_project_app.views import catalog_page, post_list, make_post_page
+from final_project_app.views import save_look_empty, scrolling_page, like_look
+from final_project_app.views import dislike_look, profile_page, get_city_by_coords
 
 handler404 = Handle400
 
@@ -41,7 +47,7 @@ urlpatterns = [
     path('log_out/', log_out, name='log_out'),
     path('post/<int:id>', post_page, name='post'),
     path('send_like_post/<int:id>', send_like_post, name='like'),
-    # path('item/', item_page, name='items'),
+    # patlh('item/', item_page, name='items'),
     # path('item/<int:id>', item_page, name='item'),
     path('catalog/', catalog_page, name='catalog'),
     path('posts_all/', post_list, name='posts_all'),
