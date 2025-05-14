@@ -16,10 +16,75 @@ HTML_TEMPLATE = """
     <meta charset="UTF-8">
     <title>Чат-бот поддержки</title>
     <style>
-        body { font-family: Arial, sans-serif; padding: 20px; }
-        .problem-item { margin: 10px 0; }
-        .problem-button { margin-left: 10px; }
-        .solution-block { margin-top: 30px; color: green; font-weight: bold; }
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #161616; /* Dark background */
+            color: #fff; /* White text */
+        }
+
+        h1 {
+            color: #fff; /* White text */
+        }
+
+        input[type="text"] {
+            width: 400px;
+            padding: 10px;
+            border: 1px solid #4a90e2; /* Soft blue border */
+            border-radius: 5px;
+            background-color: #2a2a2a; /* Dark input background */
+            color: #fff; /* White text */
+            font-size: 16px;
+        }
+
+        button[type="submit"] {
+            background-color: #4a90e2; /* Soft blue background */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #93c416; /* Muted green on hover */
+        }
+
+        .solution-block {
+            margin-top: 30px;
+            color: #93c416; /* Muted green text */
+            font-weight: bold;
+            background-color: #1f1f1f; /* Slightly lighter dark background */
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        .problem-item {
+            margin: 10px 0;
+            color: #aaa; /* Light gray text */
+        }
+
+        .problem-button {
+            margin-left: 10px;
+            background-color: #4a90e2; /* Soft blue background */
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .problem-button:hover {
+            background-color: #93c416; /* Muted green on hover */
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: #4a90e2; /* Soft blue line */
+            margin: 20px 0;
+        }
     </style>
 </head>
 <body>
