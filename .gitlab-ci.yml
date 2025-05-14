@@ -9,8 +9,8 @@ variables:
 test:
   image: python:3.10
   stage: test
+  working_directory: $CI_PROJECT_DIR/final_project
   before_script:
-    - cd final_project
     - pip install --upgrade pip
     - pip install -r requirements.txt
     - python manage.py makemigrations
