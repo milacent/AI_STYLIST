@@ -457,7 +457,7 @@
             <span class="n">info</span><span class="o">.</span><span class="n">about_me</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">[</span><span class="s1">&#39;about&#39;</span><span class="p">]</span>
             <span class="n">info</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
             <span class="n">login</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;/profile&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;profile&#39;</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">username</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">SystemError</span>
 
@@ -760,6 +760,7 @@
             <span class="n">user_like_vectors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="k">continue</span>
+
     <span class="c1"># Получаем вектора не понравившихся образов</span>
     <span class="n">disliked_looks</span> <span class="o">=</span> <span class="n">Looks</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">id__in</span><span class="o">=</span><span class="n">disliked_look_ids</span><span class="p">)</span>
     <span class="n">user_dislike_vectors</span> <span class="o">=</span> <span class="p">[]</span>

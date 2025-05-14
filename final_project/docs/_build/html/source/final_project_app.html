@@ -126,114 +126,8 @@
 <span id="final-project-app-models-module"></span><h2>final_project_app.models module<a class="headerlink" href="#module-final_project_app.models" title="Link to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="final_project_app.models.ClothingItem">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ClothingItem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/models.html#ClothingItem"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.models.ClothingItem" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ClothingItem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_temp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_temp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">material</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vector</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/models.html#ClothingItem"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.models.ClothingItem" title="Link to this definition">¶</a></dt>
 <dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
-<p>База данных элементов одежды с характеристиками для рекомендательной системы.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="final_project_app.models.ClothingItem.category">
-<span class="sig-name descname"><span class="pre">category</span></span><a class="headerlink" href="#final_project_app.models.ClothingItem.category" title="Link to this definition">¶</a></dt>
-<dd><p>Категория одежды из предопределенного списка</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="final_project_app.models.ClothingItem.name">
-<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#final_project_app.models.ClothingItem.name" title="Link to this definition">¶</a></dt>
-<dd><p>Название элемента одежды</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="final_project_app.models.ClothingItem.image_name">
-<span class="sig-name descname"><span class="pre">image_name</span></span><a class="headerlink" href="#final_project_app.models.ClothingItem.image_name" title="Link to this definition">¶</a></dt>
-<dd><p>Название файла изображения элемента</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="final_project_app.models.ClothingItem.min_temp">
-<span class="sig-name descname"><span class="pre">min_temp</span></span><a class="headerlink" href="#final_project_app.models.ClothingItem.min_temp" title="Link to this definition">¶</a></dt>
-<dd><p>Минимальная рекомендованная температура ношения</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="final_project_app.models.ClothingItem.max_temp">
-<span class="sig-name descname"><span class="pre">max_temp</span></span><a class="headerlink" href="#final_project_app.models.ClothingItem.max_temp" title="Link to this definition">¶</a></dt>
-<dd><p>Максимальная рекомендованная температура ношения</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="final_project_app.models.ClothingItem.color">
-<span class="sig-name descname"><span class="pre">color</span></span><a class="headerlink" href="#final_project_app.models.ClothingItem.color" title="Link to this definition">¶</a></dt>
-<dd><p>Основной цвет элемента</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="final_project_app.models.ClothingItem.style">
-<span class="sig-name descname"><span class="pre">style</span></span><a class="headerlink" href="#final_project_app.models.ClothingItem.style" title="Link to this definition">¶</a></dt>
-<dd><p>Стилевая принадлежность из предопределенных вариантов</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="final_project_app.models.ClothingItem.material">
-<span class="sig-name descname"><span class="pre">material</span></span><a class="headerlink" href="#final_project_app.models.ClothingItem.material" title="Link to this definition">¶</a></dt>
-<dd><p>Материал изготовления из предопределенных вариантов</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="final_project_app.models.ClothingItem.vector">
-<span class="sig-name descname"><span class="pre">vector</span></span><a class="headerlink" href="#final_project_app.models.ClothingItem.vector" title="Link to this definition">¶</a></dt>
-<dd><p>Сериализованный вектор для расчетов схожести</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="simple">
-<dt>Choices:</dt><dd><p>categories: Варианты категорий одежды
-Styles: Доступные стилевые направления
-Material: Типы материалов изготовления</p>
-</dd>
-</dl>
 <dl class="py exception">
 <dt class="sig sig-object py" id="final_project_app.models.ClothingItem.DoesNotExist">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#final_project_app.models.ClothingItem.DoesNotExist" title="Link to this definition">¶</a></dt>
@@ -244,7 +138,6 @@ Material: Типы материалов изготовления</p>
 <dt class="sig sig-object py" id="final_project_app.models.ClothingItem.Material">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Material</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names=&lt;not</span> <span class="pre">given&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">*values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start=1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary=None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/models.html#ClothingItem.Material"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.models.ClothingItem.Material" title="Link to this definition">¶</a></dt>
 <dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">TextChoices</span></code></p>
-<p>Типы материалов для элементов одежды.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="final_project_app.models.ClothingItem.Material.cotton">
 <span class="sig-name descname"><span class="pre">cotton</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cotton'</span></em><a class="headerlink" href="#final_project_app.models.ClothingItem.Material.cotton" title="Link to this definition">¶</a></dt>
@@ -292,7 +185,6 @@ Material: Типы материалов изготовления</p>
 <dt class="sig sig-object py" id="final_project_app.models.ClothingItem.Styles">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Styles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names=&lt;not</span> <span class="pre">given&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">*values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start=1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary=None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/models.html#ClothingItem.Styles"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.models.ClothingItem.Styles" title="Link to this definition">¶</a></dt>
 <dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">TextChoices</span></code></p>
-<p>Доступные стилевые направления элементов одежды.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="final_project_app.models.ClothingItem.Styles.business">
 <span class="sig-name descname"><span class="pre">business</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'business'</span></em><a class="headerlink" href="#final_project_app.models.ClothingItem.Styles.business" title="Link to this definition">¶</a></dt>
@@ -351,15 +243,15 @@ Material: Типы материалов изготовления</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id0">
-<span class="sig-name descname"><span class="pre">category</span></span><a class="headerlink" href="#id0" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="final_project_app.models.ClothingItem.category">
+<span class="sig-name descname"><span class="pre">category</span></span><a class="headerlink" href="#final_project_app.models.ClothingItem.category" title="Link to this definition">¶</a></dt>
 <dd><p>A wrapper for a deferred-loading field. When the value is read from this
 object the first time, the query is executed.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id1">
-<span class="sig-name descname"><span class="pre">color</span></span><a class="headerlink" href="#id1" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="final_project_app.models.ClothingItem.color">
+<span class="sig-name descname"><span class="pre">color</span></span><a class="headerlink" href="#final_project_app.models.ClothingItem.color" title="Link to this definition">¶</a></dt>
 <dd><p>A wrapper for a deferred-loading field. When the value is read from this
 object the first time, the query is executed.</p>
 </dd></dl>
@@ -382,16 +274,7 @@ object the first time, the query is executed.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.models.ClothingItem.get_vector">
 <span class="sig-name descname"><span class="pre">get_vector</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/models.html#ClothingItem.get_vector"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.models.ClothingItem.get_vector" title="Link to this definition">¶</a></dt>
-<dd><p>Преобразует сериализованный вектор в numpy array.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Результат<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Векторное представление элемента одежды</p>
-</dd>
-<dt class="field-even">Тип результата<span class="colon">:</span></dt>
-<dd class="field-even"><p>np.ndarray or None</p>
-</dd>
-</dl>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="final_project_app.models.ClothingItem.id">
@@ -401,36 +284,36 @@ object the first time, the query is executed.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id2">
-<span class="sig-name descname"><span class="pre">image_name</span></span><a class="headerlink" href="#id2" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="final_project_app.models.ClothingItem.image_name">
+<span class="sig-name descname"><span class="pre">image_name</span></span><a class="headerlink" href="#final_project_app.models.ClothingItem.image_name" title="Link to this definition">¶</a></dt>
 <dd><p>A wrapper for a deferred-loading field. When the value is read from this
 object the first time, the query is executed.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id3">
-<span class="sig-name descname"><span class="pre">material</span></span><a class="headerlink" href="#id3" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="final_project_app.models.ClothingItem.material">
+<span class="sig-name descname"><span class="pre">material</span></span><a class="headerlink" href="#final_project_app.models.ClothingItem.material" title="Link to this definition">¶</a></dt>
 <dd><p>A wrapper for a deferred-loading field. When the value is read from this
 object the first time, the query is executed.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id4">
-<span class="sig-name descname"><span class="pre">max_temp</span></span><a class="headerlink" href="#id4" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="final_project_app.models.ClothingItem.max_temp">
+<span class="sig-name descname"><span class="pre">max_temp</span></span><a class="headerlink" href="#final_project_app.models.ClothingItem.max_temp" title="Link to this definition">¶</a></dt>
 <dd><p>A wrapper for a deferred-loading field. When the value is read from this
 object the first time, the query is executed.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id5">
-<span class="sig-name descname"><span class="pre">min_temp</span></span><a class="headerlink" href="#id5" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="final_project_app.models.ClothingItem.min_temp">
+<span class="sig-name descname"><span class="pre">min_temp</span></span><a class="headerlink" href="#final_project_app.models.ClothingItem.min_temp" title="Link to this definition">¶</a></dt>
 <dd><p>A wrapper for a deferred-loading field. When the value is read from this
 object the first time, the query is executed.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id6">
-<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#id6" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="final_project_app.models.ClothingItem.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#final_project_app.models.ClothingItem.name" title="Link to this definition">¶</a></dt>
 <dd><p>A wrapper for a deferred-loading field. When the value is read from this
 object the first time, the query is executed.</p>
 </dd></dl>
@@ -441,15 +324,15 @@ object the first time, the query is executed.</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id7">
-<span class="sig-name descname"><span class="pre">style</span></span><a class="headerlink" href="#id7" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="final_project_app.models.ClothingItem.style">
+<span class="sig-name descname"><span class="pre">style</span></span><a class="headerlink" href="#final_project_app.models.ClothingItem.style" title="Link to this definition">¶</a></dt>
 <dd><p>A wrapper for a deferred-loading field. When the value is read from this
 object the first time, the query is executed.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id8">
-<span class="sig-name descname"><span class="pre">vector</span></span><a class="headerlink" href="#id8" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="final_project_app.models.ClothingItem.vector">
+<span class="sig-name descname"><span class="pre">vector</span></span><a class="headerlink" href="#final_project_app.models.ClothingItem.vector" title="Link to this definition">¶</a></dt>
 <dd><p>A wrapper for a deferred-loading field. When the value is read from this
 object the first time, the query is executed.</p>
 </dd></dl>
@@ -458,42 +341,8 @@ object the first time, the query is executed.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="final_project_app.models.Comment">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Comment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/models.html#Comment"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.models.Comment" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Comment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">post</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/models.html#Comment"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.models.Comment" title="Link to this definition">¶</a></dt>
 <dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
-<p>Комментарии к постам пользователей.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="final_project_app.models.Comment.user">
-<span class="sig-name descname"><span class="pre">user</span></span><a class="headerlink" href="#final_project_app.models.Comment.user" title="Link to this definition">¶</a></dt>
-<dd><p>Автор комментария</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>User</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="final_project_app.models.Comment.content">
-<span class="sig-name descname"><span class="pre">content</span></span><a class="headerlink" href="#final_project_app.models.Comment.content" title="Link to this definition">¶</a></dt>
-<dd><p>Текст комментария (макс. 500 символов)</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="final_project_app.models.Comment.post">
-<span class="sig-name descname"><span class="pre">post</span></span><a class="headerlink" href="#final_project_app.models.Comment.post" title="Link to this definition">¶</a></dt>
-<dd><p>Связанный пост, к которому оставлен комментарий</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="#final_project_app.models.Post" title="final_project_app.models.Post">Post</a></p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py exception">
 <dt class="sig sig-object py" id="final_project_app.models.Comment.DoesNotExist">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#final_project_app.models.Comment.DoesNotExist" title="Link to this definition">¶</a></dt>
@@ -507,8 +356,8 @@ object the first time, the query is executed.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id9">
-<span class="sig-name descname"><span class="pre">content</span></span><a class="headerlink" href="#id9" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="final_project_app.models.Comment.content">
+<span class="sig-name descname"><span class="pre">content</span></span><a class="headerlink" href="#final_project_app.models.Comment.content" title="Link to this definition">¶</a></dt>
 <dd><p>A wrapper for a deferred-loading field. When the value is read from this
 object the first time, the query is executed.</p>
 </dd></dl>
@@ -541,8 +390,8 @@ class built by <code class="docutils literal notranslate"><span class="pre">crea
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id10">
-<span class="sig-name descname"><span class="pre">post</span></span><a class="headerlink" href="#id10" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="final_project_app.models.Comment.post">
+<span class="sig-name descname"><span class="pre">post</span></span><a class="headerlink" href="#final_project_app.models.Comment.post" title="Link to this definition">¶</a></dt>
 <dd><p>Accessor to the related object on the forward side of a many-to-one or
 one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <p>In the example:</p>
@@ -559,8 +408,8 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id11">
-<span class="sig-name descname"><span class="pre">user</span></span><a class="headerlink" href="#id11" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="final_project_app.models.Comment.user">
+<span class="sig-name descname"><span class="pre">user</span></span><a class="headerlink" href="#final_project_app.models.Comment.user" title="Link to this definition">¶</a></dt>
 <dd><p>Accessor to the related object on the forward side of a many-to-one or
 one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <p>In the example:</p>
@@ -580,42 +429,8 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="final_project_app.models.DislikedLook">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DislikedLook</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/models.html#DislikedLook"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.models.DislikedLook" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DislikedLook</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">look</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">created_at</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/models.html#DislikedLook"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.models.DislikedLook" title="Link to this definition">¶</a></dt>
 <dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
-<p>История дизлайков пользователей для улучшения рекомендаций.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="final_project_app.models.DislikedLook.user">
-<span class="sig-name descname"><span class="pre">user</span></span><a class="headerlink" href="#final_project_app.models.DislikedLook.user" title="Link to this definition">¶</a></dt>
-<dd><p>Пользователь, отклонивший комплект</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>User</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="final_project_app.models.DislikedLook.look">
-<span class="sig-name descname"><span class="pre">look</span></span><a class="headerlink" href="#final_project_app.models.DislikedLook.look" title="Link to this definition">¶</a></dt>
-<dd><p>Отклоненный комплект</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="#final_project_app.models.Looks" title="final_project_app.models.Looks">Looks</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="final_project_app.models.DislikedLook.created_at">
-<span class="sig-name descname"><span class="pre">created_at</span></span><a class="headerlink" href="#final_project_app.models.DislikedLook.created_at" title="Link to this definition">¶</a></dt>
-<dd><p>Дата и время дизлайка</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>datetime</p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py exception">
 <dt class="sig sig-object py" id="final_project_app.models.DislikedLook.DoesNotExist">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#final_project_app.models.DislikedLook.DoesNotExist" title="Link to this definition">¶</a></dt>
@@ -629,8 +444,8 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id12">
-<span class="sig-name descname"><span class="pre">created_at</span></span><a class="headerlink" href="#id12" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="final_project_app.models.DislikedLook.created_at">
+<span class="sig-name descname"><span class="pre">created_at</span></span><a class="headerlink" href="#final_project_app.models.DislikedLook.created_at" title="Link to this definition">¶</a></dt>
 <dd><p>A wrapper for a deferred-loading field. When the value is read from this
 object the first time, the query is executed.</p>
 </dd></dl>
@@ -653,8 +468,8 @@ object the first time, the query is executed.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id13">
-<span class="sig-name descname"><span class="pre">look</span></span><a class="headerlink" href="#id13" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="final_project_app.models.DislikedLook.look">
+<span class="sig-name descname"><span class="pre">look</span></span><a class="headerlink" href="#final_project_app.models.DislikedLook.look" title="Link to this definition">¶</a></dt>
 <dd><p>Accessor to the related object on the forward side of a many-to-one or
 one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <p>In the example:</p>
@@ -676,8 +491,8 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id14">
-<span class="sig-name descname"><span class="pre">user</span></span><a class="headerlink" href="#id14" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="final_project_app.models.DislikedLook.user">
+<span class="sig-name descname"><span class="pre">user</span></span><a class="headerlink" href="#final_project_app.models.DislikedLook.user" title="Link to this definition">¶</a></dt>
 <dd><p>Accessor to the related object on the forward side of a many-to-one or
 one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <p>In the example:</p>
@@ -697,42 +512,8 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="final_project_app.models.Info">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/models.html#Info"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.models.Info" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gender</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">about_me</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/models.html#Info"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.models.Info" title="Link to this definition">¶</a></dt>
 <dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
-<p>Дополнительная информация о пользователе профиля.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="final_project_app.models.Info.user">
-<span class="sig-name descname"><span class="pre">user</span></span><a class="headerlink" href="#final_project_app.models.Info.user" title="Link to this definition">¶</a></dt>
-<dd><p>Связь один-ко-многим с моделью User</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>User</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="final_project_app.models.Info.gender">
-<span class="sig-name descname"><span class="pre">gender</span></span><a class="headerlink" href="#final_project_app.models.Info.gender" title="Link to this definition">¶</a></dt>
-<dd><p>Пол пользователя (1 - мужской, 2 - женский)</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="final_project_app.models.Info.about_me">
-<span class="sig-name descname"><span class="pre">about_me</span></span><a class="headerlink" href="#final_project_app.models.Info.about_me" title="Link to this definition">¶</a></dt>
-<dd><p>Краткая биография или описание пользователя (макс. 300 символов)</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py exception">
 <dt class="sig sig-object py" id="final_project_app.models.Info.DoesNotExist">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#final_project_app.models.Info.DoesNotExist" title="Link to this definition">¶</a></dt>
@@ -746,15 +527,15 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id15">
-<span class="sig-name descname"><span class="pre">about_me</span></span><a class="headerlink" href="#id15" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="final_project_app.models.Info.about_me">
+<span class="sig-name descname"><span class="pre">about_me</span></span><a class="headerlink" href="#final_project_app.models.Info.about_me" title="Link to this definition">¶</a></dt>
 <dd><p>A wrapper for a deferred-loading field. When the value is read from this
 object the first time, the query is executed.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id16">
-<span class="sig-name descname"><span class="pre">gender</span></span><a class="headerlink" href="#id16" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="final_project_app.models.Info.gender">
+<span class="sig-name descname"><span class="pre">gender</span></span><a class="headerlink" href="#final_project_app.models.Info.gender" title="Link to this definition">¶</a></dt>
 <dd><p>A wrapper for a deferred-loading field. When the value is read from this
 object the first time, the query is executed.</p>
 </dd></dl>
@@ -772,8 +553,8 @@ object the first time, the query is executed.</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id17">
-<span class="sig-name descname"><span class="pre">user</span></span><a class="headerlink" href="#id17" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="final_project_app.models.Info.user">
+<span class="sig-name descname"><span class="pre">user</span></span><a class="headerlink" href="#final_project_app.models.Info.user" title="Link to this definition">¶</a></dt>
 <dd><p>Accessor to the related object on the forward side of a many-to-one or
 one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <p>In the example:</p>
@@ -808,42 +589,8 @@ class built by <code class="docutils literal notranslate"><span class="pre">crea
 
 <dl class="py class">
 <dt class="sig sig-object py" id="final_project_app.models.Item">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Item</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/models.html#Item"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.models.Item" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Item</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/models.html#Item"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.models.Item" title="Link to this definition">¶</a></dt>
 <dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
-<p>Пользовательские предметы/ссылки для системы рекомендаций.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="final_project_app.models.Item.user">
-<span class="sig-name descname"><span class="pre">user</span></span><a class="headerlink" href="#final_project_app.models.Item.user" title="Link to this definition">¶</a></dt>
-<dd><p>Владелец предмета</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>User</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="final_project_app.models.Item.url">
-<span class="sig-name descname"><span class="pre">url</span></span><a class="headerlink" href="#final_project_app.models.Item.url" title="Link to this definition">¶</a></dt>
-<dd><p>Ссылка на внешний ресурс с описанием предмета</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>URLField</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="final_project_app.models.Item.image">
-<span class="sig-name descname"><span class="pre">image</span></span><a class="headerlink" href="#final_project_app.models.Item.image" title="Link to this definition">¶</a></dt>
-<dd><p>Визуальное представление предмета</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>ImageField</p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py exception">
 <dt class="sig sig-object py" id="final_project_app.models.Item.DoesNotExist">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#final_project_app.models.Item.DoesNotExist" title="Link to this definition">¶</a></dt>
@@ -864,8 +611,8 @@ object the first time, the query is executed.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id18">
-<span class="sig-name descname"><span class="pre">image</span></span><a class="headerlink" href="#id18" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="final_project_app.models.Item.image">
+<span class="sig-name descname"><span class="pre">image</span></span><a class="headerlink" href="#final_project_app.models.Item.image" title="Link to this definition">¶</a></dt>
 <dd><p>Just like the FileDescriptor, but for ImageFields. The only difference is
 assigning the width/height to the width_field/height_field, if appropriate.</p>
 </dd></dl>
@@ -876,15 +623,15 @@ assigning the width/height to the width_field/height_field, if appropriate.</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id19">
-<span class="sig-name descname"><span class="pre">url</span></span><a class="headerlink" href="#id19" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="final_project_app.models.Item.url">
+<span class="sig-name descname"><span class="pre">url</span></span><a class="headerlink" href="#final_project_app.models.Item.url" title="Link to this definition">¶</a></dt>
 <dd><p>A wrapper for a deferred-loading field. When the value is read from this
 object the first time, the query is executed.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id20">
-<span class="sig-name descname"><span class="pre">user</span></span><a class="headerlink" href="#id20" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="final_project_app.models.Item.user">
+<span class="sig-name descname"><span class="pre">user</span></span><a class="headerlink" href="#final_project_app.models.Item.user" title="Link to this definition">¶</a></dt>
 <dd><p>Accessor to the related object on the forward side of a many-to-one or
 one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <p>In the example:</p>
@@ -919,31 +666,8 @@ class built by <code class="docutils literal notranslate"><span class="pre">crea
 
 <dl class="py class">
 <dt class="sig sig-object py" id="final_project_app.models.LikeComment">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LikeComment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/models.html#LikeComment"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.models.LikeComment" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LikeComment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comment</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/models.html#LikeComment"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.models.LikeComment" title="Link to this definition">¶</a></dt>
 <dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
-<p>Система лайков для комментариев.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="final_project_app.models.LikeComment.user">
-<span class="sig-name descname"><span class="pre">user</span></span><a class="headerlink" href="#final_project_app.models.LikeComment.user" title="Link to this definition">¶</a></dt>
-<dd><p>Пользователь, поставивший лайк</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>User</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="final_project_app.models.LikeComment.comment">
-<span class="sig-name descname"><span class="pre">comment</span></span><a class="headerlink" href="#final_project_app.models.LikeComment.comment" title="Link to this definition">¶</a></dt>
-<dd><p>Комментарий, который был лайкнут</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="#final_project_app.models.Comment" title="final_project_app.models.Comment">Comment</a></p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py exception">
 <dt class="sig sig-object py" id="final_project_app.models.LikeComment.DoesNotExist">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#final_project_app.models.LikeComment.DoesNotExist" title="Link to this definition">¶</a></dt>
@@ -957,8 +681,8 @@ class built by <code class="docutils literal notranslate"><span class="pre">crea
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id21">
-<span class="sig-name descname"><span class="pre">comment</span></span><a class="headerlink" href="#id21" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="final_project_app.models.LikeComment.comment">
+<span class="sig-name descname"><span class="pre">comment</span></span><a class="headerlink" href="#final_project_app.models.LikeComment.comment" title="Link to this definition">¶</a></dt>
 <dd><p>Accessor to the related object on the forward side of a many-to-one or
 one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <p>In the example:</p>
@@ -987,8 +711,8 @@ object the first time, the query is executed.</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id22">
-<span class="sig-name descname"><span class="pre">user</span></span><a class="headerlink" href="#id22" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="final_project_app.models.LikeComment.user">
+<span class="sig-name descname"><span class="pre">user</span></span><a class="headerlink" href="#final_project_app.models.LikeComment.user" title="Link to this definition">¶</a></dt>
 <dd><p>Accessor to the related object on the forward side of a many-to-one or
 one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <p>In the example:</p>
@@ -1008,31 +732,8 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="final_project_app.models.LikePost">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LikePost</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/models.html#LikePost"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.models.LikePost" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LikePost</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">post</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/models.html#LikePost"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.models.LikePost" title="Link to this definition">¶</a></dt>
 <dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
-<p>Система лайков для постов.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="final_project_app.models.LikePost.user">
-<span class="sig-name descname"><span class="pre">user</span></span><a class="headerlink" href="#final_project_app.models.LikePost.user" title="Link to this definition">¶</a></dt>
-<dd><p>Пользователь, поставивший лайк</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>User</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="final_project_app.models.LikePost.post">
-<span class="sig-name descname"><span class="pre">post</span></span><a class="headerlink" href="#final_project_app.models.LikePost.post" title="Link to this definition">¶</a></dt>
-<dd><p>Пост, который был лайкнут</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="#final_project_app.models.Post" title="final_project_app.models.Post">Post</a></p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py exception">
 <dt class="sig sig-object py" id="final_project_app.models.LikePost.DoesNotExist">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#final_project_app.models.LikePost.DoesNotExist" title="Link to this definition">¶</a></dt>
@@ -1058,8 +759,8 @@ object the first time, the query is executed.</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id23">
-<span class="sig-name descname"><span class="pre">post</span></span><a class="headerlink" href="#id23" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="final_project_app.models.LikePost.post">
+<span class="sig-name descname"><span class="pre">post</span></span><a class="headerlink" href="#final_project_app.models.LikePost.post" title="Link to this definition">¶</a></dt>
 <dd><p>Accessor to the related object on the forward side of a many-to-one or
 one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <p>In the example:</p>
@@ -1076,8 +777,8 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id24">
-<span class="sig-name descname"><span class="pre">user</span></span><a class="headerlink" href="#id24" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="final_project_app.models.LikePost.user">
+<span class="sig-name descname"><span class="pre">user</span></span><a class="headerlink" href="#final_project_app.models.LikePost.user" title="Link to this definition">¶</a></dt>
 <dd><p>Accessor to the related object on the forward side of a many-to-one or
 one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <p>In the example:</p>
@@ -1097,42 +798,8 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="final_project_app.models.LikedLook">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LikedLook</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/models.html#LikedLook"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.models.LikedLook" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LikedLook</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">look</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">created_at</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/models.html#LikedLook"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.models.LikedLook" title="Link to this definition">¶</a></dt>
 <dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
-<p>История лайков пользователей для системы рекомендаций.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="final_project_app.models.LikedLook.user">
-<span class="sig-name descname"><span class="pre">user</span></span><a class="headerlink" href="#final_project_app.models.LikedLook.user" title="Link to this definition">¶</a></dt>
-<dd><p>Пользователь, которому понравился комплект</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>User</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="final_project_app.models.LikedLook.look">
-<span class="sig-name descname"><span class="pre">look</span></span><a class="headerlink" href="#final_project_app.models.LikedLook.look" title="Link to this definition">¶</a></dt>
-<dd><p>Понравившийся комплект</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="#final_project_app.models.Looks" title="final_project_app.models.Looks">Looks</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="final_project_app.models.LikedLook.created_at">
-<span class="sig-name descname"><span class="pre">created_at</span></span><a class="headerlink" href="#final_project_app.models.LikedLook.created_at" title="Link to this definition">¶</a></dt>
-<dd><p>Дата и время лайка</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>datetime</p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py exception">
 <dt class="sig sig-object py" id="final_project_app.models.LikedLook.DoesNotExist">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#final_project_app.models.LikedLook.DoesNotExist" title="Link to this definition">¶</a></dt>
@@ -1146,8 +813,8 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id25">
-<span class="sig-name descname"><span class="pre">created_at</span></span><a class="headerlink" href="#id25" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="final_project_app.models.LikedLook.created_at">
+<span class="sig-name descname"><span class="pre">created_at</span></span><a class="headerlink" href="#final_project_app.models.LikedLook.created_at" title="Link to this definition">¶</a></dt>
 <dd><p>A wrapper for a deferred-loading field. When the value is read from this
 object the first time, the query is executed.</p>
 </dd></dl>
@@ -1170,8 +837,8 @@ object the first time, the query is executed.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id26">
-<span class="sig-name descname"><span class="pre">look</span></span><a class="headerlink" href="#id26" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="final_project_app.models.LikedLook.look">
+<span class="sig-name descname"><span class="pre">look</span></span><a class="headerlink" href="#final_project_app.models.LikedLook.look" title="Link to this definition">¶</a></dt>
 <dd><p>Accessor to the related object on the forward side of a many-to-one or
 one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <p>In the example:</p>
@@ -1193,8 +860,8 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id27">
-<span class="sig-name descname"><span class="pre">user</span></span><a class="headerlink" href="#id27" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="final_project_app.models.LikedLook.user">
+<span class="sig-name descname"><span class="pre">user</span></span><a class="headerlink" href="#final_project_app.models.LikedLook.user" title="Link to this definition">¶</a></dt>
 <dd><p>Accessor to the related object on the forward side of a many-to-one or
 one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <p>In the example:</p>
@@ -1214,55 +881,8 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="final_project_app.models.Looks">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Looks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/models.html#Looks"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.models.Looks" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Looks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temp_range</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">head</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">head_image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">head_color</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">head_material</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">head_style</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">head_vector</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outerwear</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outerwear_image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outerwear_color</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outerwear_material</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outerwear_style</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outerwear_vector</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_color</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_material</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_style</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_vector</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bottom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bottom_image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bottom_color</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bottom_material</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bottom_style</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bottom_vector</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shoes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shoes_image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shoes_color</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shoes_material</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shoes_style</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shoes_vector</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">general_vector</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/models.html#Looks"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.models.Looks" title="Link to this definition">¶</a></dt>
 <dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
-<p>Полные комплекты одежды с метаданными для рекомендаций.</p>
-<p>Содержит информацию о всех элементах комплекта:
-- Головные уборы
-- Верхняя одежда
-- Топы
-- Низы
-- Обувь</p>
-<p>Для каждого элемента хранятся:
-- Название
-- Изображение
-- Цвет
-- Материал
-- Стиль
-- Векторное представление</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="final_project_app.models.Looks.temp_range">
-<span class="sig-name descname"><span class="pre">temp_range</span></span><a class="headerlink" href="#final_project_app.models.Looks.temp_range" title="Link to this definition">¶</a></dt>
-<dd><p>Температурный диапазон для комплекта</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="final_project_app.models.Looks.general_vector">
-<span class="sig-name descname"><span class="pre">general_vector</span></span><a class="headerlink" href="#final_project_app.models.Looks.general_vector" title="Link to this definition">¶</a></dt>
-<dd><p>Объединенное векторное представление комплекта</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="final_project_app.models.Looks.saved_by">
-<span class="sig-name descname"><span class="pre">saved_by</span></span><a class="headerlink" href="#final_project_app.models.Looks.saved_by" title="Link to this definition">¶</a></dt>
-<dd><p>Пользователи, сохранившие комплект</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>ManyToManyField</p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py exception">
 <dt class="sig sig-object py" id="final_project_app.models.Looks.DoesNotExist">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#final_project_app.models.Looks.DoesNotExist" title="Link to this definition">¶</a></dt>
@@ -1333,8 +953,8 @@ class built by <code class="docutils literal notranslate"><span class="pre">crea
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id28">
-<span class="sig-name descname"><span class="pre">general_vector</span></span><a class="headerlink" href="#id28" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="final_project_app.models.Looks.general_vector">
+<span class="sig-name descname"><span class="pre">general_vector</span></span><a class="headerlink" href="#final_project_app.models.Looks.general_vector" title="Link to this definition">¶</a></dt>
 <dd><p>A wrapper for a deferred-loading field. When the value is read from this
 object the first time, the query is executed.</p>
 </dd></dl>
@@ -1342,70 +962,22 @@ object the first time, the query is executed.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.models.Looks.generate_from_preferences">
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">generate_from_preferences</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/models.html#Looks.generate_from_preferences"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.models.Looks.generate_from_preferences" title="Link to this definition">¶</a></dt>
-<dd><p>Генерирует новый комплект на основе предпочтений пользователя.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>user</strong> (<em>User</em>) – Целевой пользователь</p>
-</dd>
-<dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>Сгенерированный комплект или None при ошибке</p>
-</dd>
-<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="#final_project_app.models.Looks" title="final_project_app.models.Looks">Looks</a> or None</p>
-</dd>
-</dl>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.models.Looks.get_for_temperature">
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_for_temperature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temp</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/models.html#Looks.get_for_temperature"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.models.Looks.get_for_temperature" title="Link to this definition">¶</a></dt>
-<dd><p>Подбирает подходящий комплект для указанной температуры.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>temp</strong> (<em>int</em>) – Текущая температура в градусах Цельсия</p>
-</dd>
-<dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>Подходящий комплект или None если не найден</p>
-</dd>
-<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="#final_project_app.models.Looks" title="final_project_app.models.Looks">Looks</a> or None</p>
-</dd>
-</dl>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.models.Looks.get_recommendations">
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_recommendations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/models.html#Looks.get_recommendations"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.models.Looks.get_recommendations" title="Link to this definition">¶</a></dt>
-<dd><p>Генерирует персонализированные рекомендации комплектов на основе предпочтений.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>user</strong> (<em>User</em>) – Целевой пользователь</p></li>
-<li><p><strong>top_n</strong> (<em>int</em>) – Количество возвращаемых рекомендаций</p></li>
-</ul>
-</dd>
-<dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>Список рекомендованных комплектов</p>
-</dd>
-<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list[<a class="reference internal" href="#final_project_app.models.Looks" title="final_project_app.models.Looks">Looks</a>]</p>
-</dd>
-</dl>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="final_project_app.models.Looks.get_vector">
 <span class="sig-name descname"><span class="pre">get_vector</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/models.html#Looks.get_vector"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.models.Looks.get_vector" title="Link to this definition">¶</a></dt>
-<dd><p>Декодирует общий вектор комплекта из строки в numpy array.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Результат<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Векторное представление комплекта</p>
-</dd>
-<dt class="field-even">Тип результата<span class="colon">:</span></dt>
-<dd class="field-even"><p>np.ndarray or None</p>
-</dd>
-</dl>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="final_project_app.models.Looks.head">
@@ -1519,8 +1091,8 @@ object the first time, the query is executed.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id29">
-<span class="sig-name descname"><span class="pre">saved_by</span></span><a class="headerlink" href="#id29" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="final_project_app.models.Looks.saved_by">
+<span class="sig-name descname"><span class="pre">saved_by</span></span><a class="headerlink" href="#final_project_app.models.Looks.saved_by" title="Link to this definition">¶</a></dt>
 <dd><p>Accessor to the related objects manager on the forward and reverse sides of
 a many-to-many relation.</p>
 <p>In the example:</p>
@@ -1577,8 +1149,8 @@ object the first time, the query is executed.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id30">
-<span class="sig-name descname"><span class="pre">temp_range</span></span><a class="headerlink" href="#id30" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="final_project_app.models.Looks.temp_range">
+<span class="sig-name descname"><span class="pre">temp_range</span></span><a class="headerlink" href="#final_project_app.models.Looks.temp_range" title="Link to this definition">¶</a></dt>
 <dd><p>A wrapper for a deferred-loading field. When the value is read from this
 object the first time, the query is executed.</p>
 </dd></dl>
@@ -1629,53 +1201,8 @@ object the first time, the query is executed.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="final_project_app.models.Post">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/models.html#Post"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.models.Post" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/models.html#Post"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.models.Post" title="Link to this definition">¶</a></dt>
 <dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
-<p>Модель пользовательского поста с возможностью добавления изображения.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="final_project_app.models.Post.user">
-<span class="sig-name descname"><span class="pre">user</span></span><a class="headerlink" href="#final_project_app.models.Post.user" title="Link to this definition">¶</a></dt>
-<dd><p>Автор поста</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>User</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="final_project_app.models.Post.title">
-<span class="sig-name descname"><span class="pre">title</span></span><a class="headerlink" href="#final_project_app.models.Post.title" title="Link to this definition">¶</a></dt>
-<dd><p>Заголовок поста (макс. 50 символов)</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="final_project_app.models.Post.image">
-<span class="sig-name descname"><span class="pre">image</span></span><a class="headerlink" href="#final_project_app.models.Post.image" title="Link to this definition">¶</a></dt>
-<dd><p>Опциональное изображение для поста</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>ImageField</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="final_project_app.models.Post.description">
-<span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#final_project_app.models.Post.description" title="Link to this definition">¶</a></dt>
-<dd><p>Основной текст поста (макс. 5000 символов)</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py exception">
 <dt class="sig sig-object py" id="final_project_app.models.Post.DoesNotExist">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#final_project_app.models.Post.DoesNotExist" title="Link to this definition">¶</a></dt>
@@ -1704,8 +1231,8 @@ class built by <code class="docutils literal notranslate"><span class="pre">crea
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id31">
-<span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#id31" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="final_project_app.models.Post.description">
+<span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#final_project_app.models.Post.description" title="Link to this definition">¶</a></dt>
 <dd><p>A wrapper for a deferred-loading field. When the value is read from this
 object the first time, the query is executed.</p>
 </dd></dl>
@@ -1718,8 +1245,8 @@ object the first time, the query is executed.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id32">
-<span class="sig-name descname"><span class="pre">image</span></span><a class="headerlink" href="#id32" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="final_project_app.models.Post.image">
+<span class="sig-name descname"><span class="pre">image</span></span><a class="headerlink" href="#final_project_app.models.Post.image" title="Link to this definition">¶</a></dt>
 <dd><p>Just like the FileDescriptor, but for ImageFields. The only difference is
 assigning the width/height to the width_field/height_field, if appropriate.</p>
 </dd></dl>
@@ -1745,15 +1272,15 @@ class built by <code class="docutils literal notranslate"><span class="pre">crea
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id33">
-<span class="sig-name descname"><span class="pre">title</span></span><a class="headerlink" href="#id33" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="final_project_app.models.Post.title">
+<span class="sig-name descname"><span class="pre">title</span></span><a class="headerlink" href="#final_project_app.models.Post.title" title="Link to this definition">¶</a></dt>
 <dd><p>A wrapper for a deferred-loading field. When the value is read from this
 object the first time, the query is executed.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id34">
-<span class="sig-name descname"><span class="pre">user</span></span><a class="headerlink" href="#id34" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="final_project_app.models.Post.user">
+<span class="sig-name descname"><span class="pre">user</span></span><a class="headerlink" href="#final_project_app.models.Post.user" title="Link to this definition">¶</a></dt>
 <dd><p>Accessor to the related object on the forward side of a many-to-one or
 one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <p>In the example:</p>
@@ -1773,53 +1300,8 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="final_project_app.models.UserGrade">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">UserGrade</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/models.html#UserGrade"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.models.UserGrade" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">UserGrade</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grade</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/models.html#UserGrade"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.models.UserGrade" title="Link to this definition">¶</a></dt>
 <dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
-<p>Система оценки пользователей и предметов.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="final_project_app.models.UserGrade.user">
-<span class="sig-name descname"><span class="pre">user</span></span><a class="headerlink" href="#final_project_app.models.UserGrade.user" title="Link to this definition">¶</a></dt>
-<dd><p>Пользователь, выставляющий оценку</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>User</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="final_project_app.models.UserGrade.info">
-<span class="sig-name descname"><span class="pre">info</span></span><a class="headerlink" href="#final_project_app.models.UserGrade.info" title="Link to this definition">¶</a></dt>
-<dd><p>Связанная информация профиля</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="#final_project_app.models.Info" title="final_project_app.models.Info">Info</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="final_project_app.models.UserGrade.item">
-<span class="sig-name descname"><span class="pre">item</span></span><a class="headerlink" href="#final_project_app.models.UserGrade.item" title="Link to this definition">¶</a></dt>
-<dd><p>Оцениваемый предмет</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="#final_project_app.models.Item" title="final_project_app.models.Item">Item</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="final_project_app.models.UserGrade.grade">
-<span class="sig-name descname"><span class="pre">grade</span></span><a class="headerlink" href="#final_project_app.models.UserGrade.grade" title="Link to this definition">¶</a></dt>
-<dd><p>Значение оценки от 1 до 5</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py exception">
 <dt class="sig sig-object py" id="final_project_app.models.UserGrade.DoesNotExist">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#final_project_app.models.UserGrade.DoesNotExist" title="Link to this definition">¶</a></dt>
@@ -1833,8 +1315,8 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id35">
-<span class="sig-name descname"><span class="pre">grade</span></span><a class="headerlink" href="#id35" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="final_project_app.models.UserGrade.grade">
+<span class="sig-name descname"><span class="pre">grade</span></span><a class="headerlink" href="#final_project_app.models.UserGrade.grade" title="Link to this definition">¶</a></dt>
 <dd><p>A wrapper for a deferred-loading field. When the value is read from this
 object the first time, the query is executed.</p>
 </dd></dl>
@@ -1847,8 +1329,8 @@ object the first time, the query is executed.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id36">
-<span class="sig-name descname"><span class="pre">info</span></span><a class="headerlink" href="#id36" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="final_project_app.models.UserGrade.info">
+<span class="sig-name descname"><span class="pre">info</span></span><a class="headerlink" href="#final_project_app.models.UserGrade.info" title="Link to this definition">¶</a></dt>
 <dd><p>Accessor to the related object on the forward side of a many-to-one or
 one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <p>In the example:</p>
@@ -1865,8 +1347,8 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id37">
-<span class="sig-name descname"><span class="pre">item</span></span><a class="headerlink" href="#id37" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="final_project_app.models.UserGrade.item">
+<span class="sig-name descname"><span class="pre">item</span></span><a class="headerlink" href="#final_project_app.models.UserGrade.item" title="Link to this definition">¶</a></dt>
 <dd><p>Accessor to the related object on the forward side of a many-to-one or
 one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <p>In the example:</p>
@@ -1888,8 +1370,8 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id38">
-<span class="sig-name descname"><span class="pre">user</span></span><a class="headerlink" href="#id38" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="final_project_app.models.UserGrade.user">
+<span class="sig-name descname"><span class="pre">user</span></span><a class="headerlink" href="#final_project_app.models.UserGrade.user" title="Link to this definition">¶</a></dt>
 <dd><p>Accessor to the related object on the forward side of a many-to-one or
 one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <p>In the example:</p>
@@ -1910,19 +1392,7 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="final_project_app.models.get_current_weather">
 <span class="sig-name descname"><span class="pre">get_current_weather</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">city</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Moscow'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/models.html#get_current_weather"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.models.get_current_weather" title="Link to this definition">¶</a></dt>
-<dd><p>Получает текущую температуру для указанного города через OpenWeatherMap API.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>city</strong> (<em>str</em>) – Название города на английском языке</p>
-</dd>
-<dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>Температура в градусах Цельсия или None при ошибке</p>
-</dd>
-<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float or None</p>
-</dd>
-</dl>
-</dd></dl>
+<dd></dd></dl>
 
 </section>
 <section id="module-final_project_app.tests">
@@ -2815,6 +2285,37 @@ JsonResponse: Результат с названием города или ош�
 </dd></dl>
 
 </section>
+</section>
+<section id="ci-cd-configuration">
+<h1>CI/CD Configuration<a class="headerlink" href="#ci-cd-configuration" title="Link to this heading">¶</a></h1>
+<p>В проекте используется GitLab CI/CD для автоматизации сборки, тестирования и деплоя.</p>
+<p>Файл конфигурации пайплайна находится в корне проекта и называется <code class="docutils literal notranslate"><span class="pre">.gitlab-ci.yml</span></code>.</p>
+<p>Ниже приведено содержимое файла <code class="docutils literal notranslate"><span class="pre">.gitlab-ci.yml</span></code>:</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">.gitlab-ci.yml - конфигурация GitLab CI/CD</span><a class="headerlink" href="#id1" title="Link to this code">¶</a></div>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="nt">stages</span><span class="p">:</span>
+<span class="linenos"> 2</span><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="nt">variables</span><span class="p">:</span>
+<span class="linenos"> 5</span><span class="w">  </span><span class="nt">DJANGO_SETTINGS_MODULE</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">final_project.settings</span>
+<span class="linenos"> 6</span><span class="w">  </span><span class="nt">PYTHONDONTWRITEBYTECODE</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1&quot;</span>
+<span class="linenos"> 7</span><span class="w">  </span><span class="nt">PYTHONUNBUFFERED</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1&quot;</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="nt">test</span><span class="p">:</span>
+<span class="linenos">10</span><span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python:3.10</span>
+<span class="linenos">11</span><span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">test</span>
+<span class="linenos">12</span><span class="w">  </span><span class="nt">before_script</span><span class="p">:</span>
+<span class="linenos">13</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cd final_project</span>
+<span class="linenos">14</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo &quot;Current path:&quot; &amp;&amp; pwd</span>
+<span class="linenos">15</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pip install --upgrade pip</span>
+<span class="linenos">16</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pip install -r requirements.txt</span>
+<span class="linenos">17</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python manage.py makemigrations</span>
+<span class="linenos">18</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python manage.py migrate</span>
+<span class="linenos">19</span><span class="w">  </span><span class="nt">script</span><span class="p">:</span>
+<span class="linenos">20</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python manage.py test</span>
+</pre></div>
+</div>
+</div>
 <section id="module-final_project_app">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-final_project_app" title="Link to this heading">¶</a></h2>
 </section>
@@ -2841,6 +2342,7 @@ JsonResponse: Результат с названием города или ош�
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">final_project_app</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">final_project_app package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ci-cd-configuration">CI/CD Configuration</a></li>
 </ul>
 </li>
 </ul>

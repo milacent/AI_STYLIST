@@ -44,14 +44,6 @@
 <div class="viewcode-block" id="Info">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.forms.Info">[документация]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Info</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">       Дополнительная информация о пользователе профиля.</span>
-
-<span class="sd">       Attributes:</span>
-<span class="sd">           user (User): Связь один-ко-многим с моделью User</span>
-<span class="sd">           gender (int): Пол пользователя (1 - мужской, 2 - женский)</span>
-<span class="sd">           about_me (str): Краткая биография или описание пользователя (макс. 300 символов)</span>
-<span class="sd">       &quot;&quot;&quot;</span>
     <span class="n">user</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
     <span class="n">gender</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">()</span>
     <span class="n">about_me</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span></div>
@@ -60,15 +52,6 @@
 <div class="viewcode-block" id="Post">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.forms.Post">[документация]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Post</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Модель пользовательского поста с возможностью добавления изображения.</span>
-
-<span class="sd">        Attributes:</span>
-<span class="sd">            user (User): Автор поста</span>
-<span class="sd">            title (str): Заголовок поста (макс. 50 символов)</span>
-<span class="sd">            image (ImageField): Опциональное изображение для поста</span>
-<span class="sd">            description (str): Основной текст поста (макс. 5000 символов)</span>
-<span class="sd">        &quot;&quot;&quot;</span>
     <span class="n">user</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
     <span class="n">title</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
     <span class="n">image</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ImageField</span><span class="p">(</span><span class="n">upload_to</span><span class="o">=</span><span class="s1">&#39;post_images/&#39;</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -78,14 +61,6 @@
 <div class="viewcode-block" id="Comment">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.forms.Comment">[документация]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Comment</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Комментарии к постам пользователей.</span>
-
-<span class="sd">        Attributes:</span>
-<span class="sd">            user (User): Автор комментария</span>
-<span class="sd">            content (str): Текст комментария (макс. 500 символов)</span>
-<span class="sd">            post (Post): Связанный пост, к которому оставлен комментарий</span>
-<span class="sd">        &quot;&quot;&quot;</span>
     <span class="n">user</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
     <span class="n">content</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
     <span class="n">post</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Post</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span></div>
@@ -94,13 +69,6 @@
 <div class="viewcode-block" id="LikePost">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.forms.LikePost">[документация]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">LikePost</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Система лайков для постов.</span>
-
-<span class="sd">        Attributes:</span>
-<span class="sd">            user (User): Пользователь, поставивший лайк</span>
-<span class="sd">            post (Post): Пост, который был лайкнут</span>
-<span class="sd">        &quot;&quot;&quot;</span>
     <span class="n">user</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
     <span class="n">post</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Post</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span></div>
 
@@ -108,13 +76,6 @@
 <div class="viewcode-block" id="LikeComment">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.forms.LikeComment">[документация]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">LikeComment</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Система лайков для комментариев.</span>
-
-<span class="sd">        Attributes:</span>
-<span class="sd">            user (User): Пользователь, поставивший лайк</span>
-<span class="sd">            comment (Comment): Комментарий, который был лайкнут</span>
-<span class="sd">        &quot;&quot;&quot;</span>
     <span class="n">user</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
     <span class="n">comment</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Comment</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span></div>
 
@@ -122,14 +83,6 @@
 <div class="viewcode-block" id="Item">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.forms.Item">[документация]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Item</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Пользовательские предметы/ссылки для системы рекомендаций.</span>
-
-<span class="sd">        Attributes:</span>
-<span class="sd">            user (User): Владелец предмета</span>
-<span class="sd">            url (URLField): Ссылка на внешний ресурс с описанием предмета</span>
-<span class="sd">            image (ImageField): Визуальное представление предмета</span>
-<span class="sd">        &quot;&quot;&quot;</span>
     <span class="n">user</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
     <span class="n">url</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">URLField</span><span class="p">()</span>
     <span class="n">image</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ImageField</span><span class="p">()</span></div>
@@ -138,15 +91,6 @@
 <div class="viewcode-block" id="UserGrade">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.forms.UserGrade">[документация]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">UserGrade</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">       Система оценки пользователей и предметов.</span>
-
-<span class="sd">       Attributes:</span>
-<span class="sd">           user (User): Пользователь, выставляющий оценку</span>
-<span class="sd">           info (Info): Связанная информация профиля</span>
-<span class="sd">           item (Item): Оцениваемый предмет</span>
-<span class="sd">           grade (int): Значение оценки от 1 до 5</span>
-<span class="sd">       &quot;&quot;&quot;</span>
     <span class="n">user</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
     <span class="n">info</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Info</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
     <span class="n">item</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Item</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
@@ -156,25 +100,6 @@
 <div class="viewcode-block" id="ClothingItem">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.forms.ClothingItem">[документация]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ClothingItem</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        База данных элементов одежды с характеристиками для рекомендательной системы.</span>
-
-<span class="sd">        Attributes:</span>
-<span class="sd">            category (str): Категория одежды из предопределенного списка</span>
-<span class="sd">            name (str): Название элемента одежды</span>
-<span class="sd">            image_name (str): Название файла изображения элемента</span>
-<span class="sd">            min_temp (int): Минимальная рекомендованная температура ношения</span>
-<span class="sd">            max_temp (int): Максимальная рекомендованная температура ношения</span>
-<span class="sd">            color (str): Основной цвет элемента</span>
-<span class="sd">            style (str): Стилевая принадлежность из предопределенных вариантов</span>
-<span class="sd">            material (str): Материал изготовления из предопределенных вариантов</span>
-<span class="sd">            vector (str): Сериализованный вектор для расчетов схожести</span>
-
-<span class="sd">        Choices:</span>
-<span class="sd">            categories: Варианты категорий одежды</span>
-<span class="sd">            Styles: Доступные стилевые направления</span>
-<span class="sd">            Material: Типы материалов изготовления</span>
-<span class="sd">        &quot;&quot;&quot;</span>
     <span class="n">categories</span> <span class="o">=</span> <span class="p">[</span>
         <span class="p">(</span><span class="s1">&#39;hats&#39;</span><span class="p">,</span> <span class="s1">&#39;Головные уборы&#39;</span><span class="p">),</span>
         <span class="p">(</span><span class="s1">&#39;outerwear&#39;</span><span class="p">,</span> <span class="s1">&#39;Верхняя одежда&#39;</span><span class="p">),</span>
@@ -186,7 +111,6 @@
 <div class="viewcode-block" id="ClothingItem.Styles">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.forms.ClothingItem.Styles">[документация]</a>
     <span class="k">class</span><span class="w"> </span><span class="nc">Styles</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">TextChoices</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Доступные стилевые направления элементов одежды.&quot;&quot;&quot;</span>
         <span class="n">classic</span> <span class="o">=</span> <span class="s2">&quot;classic&quot;</span><span class="p">,</span> <span class="s2">&quot;classic&quot;</span>
         <span class="n">casual</span> <span class="o">=</span> <span class="s2">&quot;casual&quot;</span><span class="p">,</span> <span class="s2">&quot;casual&quot;</span>
         <span class="n">sport</span> <span class="o">=</span> <span class="s2">&quot;sport&quot;</span><span class="p">,</span> <span class="s2">&quot;sport&quot;</span>
@@ -202,7 +126,6 @@
 <div class="viewcode-block" id="ClothingItem.Material">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.forms.ClothingItem.Material">[документация]</a>
     <span class="k">class</span><span class="w"> </span><span class="nc">Material</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">TextChoices</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Типы материалов для элементов одежды.&quot;&quot;&quot;</span>
         <span class="n">cotton</span> <span class="o">=</span> <span class="s2">&quot;cotton&quot;</span><span class="p">,</span> <span class="s2">&quot;cotton&quot;</span>
         <span class="n">polyester</span> <span class="o">=</span> <span class="s2">&quot;polyester&quot;</span><span class="p">,</span> <span class="s2">&quot;polyester&quot;</span>
         <span class="n">wool</span> <span class="o">=</span> <span class="s2">&quot;wool&quot;</span><span class="p">,</span> <span class="s2">&quot;wool&quot;</span>
@@ -225,12 +148,6 @@
 <div class="viewcode-block" id="ClothingItem.get_vector">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.forms.ClothingItem.get_vector">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_vector</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">                Преобразует сериализованный вектор в numpy array.</span>
-
-<span class="sd">                Returns:</span>
-<span class="sd">                    np.ndarray or None: Векторное представление элемента одежды</span>
-<span class="sd">                &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">))</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
@@ -241,29 +158,6 @@
 <div class="viewcode-block" id="Looks">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.forms.Looks">[документация]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Looks</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Полные комплекты одежды с метаданными для рекомендаций.</span>
-
-<span class="sd">        Содержит информацию о всех элементах комплекта:</span>
-<span class="sd">        - Головные уборы</span>
-<span class="sd">        - Верхняя одежда</span>
-<span class="sd">        - Топы</span>
-<span class="sd">        - Низы</span>
-<span class="sd">        - Обувь</span>
-
-<span class="sd">        Для каждого элемента хранятся:</span>
-<span class="sd">        - Название</span>
-<span class="sd">        - Изображение</span>
-<span class="sd">        - Цвет</span>
-<span class="sd">        - Материал</span>
-<span class="sd">        - Стиль</span>
-<span class="sd">        - Векторное представление</span>
-
-<span class="sd">        Attributes:</span>
-<span class="sd">            temp_range (str): Температурный диапазон для комплекта</span>
-<span class="sd">            general_vector (str): Объединенное векторное представление комплекта</span>
-<span class="sd">            saved_by (ManyToManyField): Пользователи, сохранившие комплект</span>
-<span class="sd">        &quot;&quot;&quot;</span>
     <span class="n">temp_range</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;unknown_range&#39;</span><span class="p">)</span>
 
     <span class="n">head</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;no_head&#39;</span><span class="p">)</span>
@@ -272,6 +166,7 @@
     <span class="n">head_material</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;unknown&#39;</span><span class="p">)</span>
     <span class="n">head_style</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;unknown&#39;</span><span class="p">)</span>
     <span class="n">head_vector</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;no_vector&#39;</span><span class="p">)</span>
+
 
     <span class="n">outerwear</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;no_outerwear&#39;</span><span class="p">)</span>
     <span class="n">outerwear_image</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;default.png&#39;</span><span class="p">)</span>
@@ -307,12 +202,6 @@
 <div class="viewcode-block" id="Looks.get_vector">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.forms.Looks.get_vector">[документация]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_vector</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">                Декодирует общий вектор комплекта из строки в numpy array.</span>
-
-<span class="sd">                Returns:</span>
-<span class="sd">                    np.ndarray or None: Векторное представление комплекта</span>
-<span class="sd">                &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">general_vector</span><span class="p">))</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
@@ -323,17 +212,7 @@
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.forms.Looks.get_recommendations">[документация]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_recommendations</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">top_n</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">                Генерирует персонализированные рекомендации комплектов на основе предпочтений.</span>
-
-<span class="sd">                Args:</span>
-<span class="sd">                    user (User): Целевой пользователь</span>
-<span class="sd">                    top_n (int): Количество возвращаемых рекомендаций</span>
-
-<span class="sd">                Returns:</span>
-<span class="sd">                    list[Looks]: Список рекомендованных комплектов</span>
-<span class="sd">                &quot;&quot;&quot;</span>
-        <span class="n">liked_looks</span> <span class="o">=</span> <span class="n">LikedLook</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">)</span>
+        <span class="n">liked_looks</span> <span class="o">=</span> <span class="n">LikedLook</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">)</span>  <span class="c1"># pylint: disable=no-member</span>
         <span class="n">liked_vectors</span> <span class="o">=</span> <span class="p">[]</span>
 
         <span class="k">for</span> <span class="n">liked</span> <span class="ow">in</span> <span class="n">liked_looks</span><span class="p">:</span>
@@ -343,12 +222,15 @@
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">liked_vectors</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">exclude</span><span class="p">(</span>
-                <span class="n">id__in</span><span class="o">=</span><span class="n">DislikedLook</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">)</span><span class="o">.</span><span class="n">values_list</span><span class="p">(</span><span class="s1">&#39;look_id&#39;</span><span class="p">,</span> <span class="n">flat</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;?&#39;</span><span class="p">)[:</span><span class="n">top_n</span><span class="p">]</span>
+                <span class="n">id__in</span><span class="o">=</span><span class="n">DislikedLook</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">)</span><span class="o">.</span><span class="n">values_list</span><span class="p">(</span><span class="s1">&#39;look_id&#39;</span><span class="p">,</span> <span class="n">flat</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># pylint: disable=no-member</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;?&#39;</span><span class="p">)[:</span><span class="n">top_n</span><span class="p">]</span>  <span class="c1"># pylint: disable=no-member</span>
 
         <span class="n">user_pref_vector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">liked_vectors</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-
-        <span class="n">candidates</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">exclude</span><span class="p">(</span><span class="n">id__in</span><span class="o">=</span><span class="n">liked_looks</span><span class="o">.</span><span class="n">values_list</span><span class="p">(</span><span class="s1">&#39;look_id&#39;</span><span class="p">,</span> <span class="n">flat</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span><span class="o">.</span><span class="n">exclude</span><span class="p">(</span>
-            <span class="n">id__in</span><span class="o">=</span><span class="n">DislikedLook</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">)</span><span class="o">.</span><span class="n">values_list</span><span class="p">(</span><span class="s1">&#39;look_id&#39;</span><span class="p">,</span> <span class="n">flat</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+        <span class="n">candidates</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">exclude</span><span class="p">(</span>
+            <span class="n">id__in</span><span class="o">=</span><span class="n">liked_looks</span><span class="o">.</span><span class="n">values_list</span><span class="p">(</span><span class="s1">&#39;look_id&#39;</span><span class="p">,</span> <span class="n">flat</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">exclude</span><span class="p">(</span>
+            <span class="n">id__in</span><span class="o">=</span><span class="n">DislikedLook</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">)</span><span class="o">.</span><span class="n">values_list</span><span class="p">(</span><span class="s1">&#39;look_id&#39;</span><span class="p">,</span> <span class="n">flat</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># pylint: disable=no-member</span>
+        <span class="p">)</span>  <span class="c1"># pylint: disable=no-member</span>
 
         <span class="n">scored</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">look</span> <span class="ow">in</span> <span class="n">candidates</span><span class="p">:</span>
@@ -366,16 +248,7 @@
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.forms.Looks.generate_from_preferences">[документация]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">generate_from_preferences</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">user</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">                Генерирует новый комплект на основе предпочтений пользователя.</span>
-
-<span class="sd">                Args:</span>
-<span class="sd">                    user (User): Целевой пользователь</span>
-
-<span class="sd">                Returns:</span>
-<span class="sd">                    Looks or None: Сгенерированный комплект или None при ошибке</span>
-<span class="sd">                &quot;&quot;&quot;</span>
-        <span class="n">liked_looks</span> <span class="o">=</span> <span class="n">LikedLook</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">)</span><span class="o">.</span><span class="n">select_related</span><span class="p">(</span><span class="s1">&#39;look&#39;</span><span class="p">)</span>
+        <span class="n">liked_looks</span> <span class="o">=</span> <span class="n">LikedLook</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">)</span><span class="o">.</span><span class="n">select_related</span><span class="p">(</span><span class="s1">&#39;look&#39;</span><span class="p">)</span>  <span class="c1"># pylint: disable=no-member</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">liked_looks</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
             <span class="k">return</span> <span class="kc">None</span>
 
@@ -390,9 +263,10 @@
         <span class="n">top_style</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">styles</span><span class="p">)</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">top_material</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">materials</span><span class="p">)</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 
-        <span class="n">top</span> <span class="o">=</span> <span class="n">ClothingItem</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">category</span><span class="o">=</span><span class="s1">&#39;tops&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">top_style</span><span class="p">,</span> <span class="n">material</span><span class="o">=</span><span class="n">top_material</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
-        <span class="n">bottom</span> <span class="o">=</span> <span class="n">ClothingItem</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">category</span><span class="o">=</span><span class="s1">&#39;bottoms&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">top_style</span><span class="p">,</span> <span class="n">material</span><span class="o">=</span><span class="n">top_material</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
-        <span class="n">shoes</span> <span class="o">=</span> <span class="n">ClothingItem</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">category</span><span class="o">=</span><span class="s1">&#39;shoes&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">top_style</span><span class="p">,</span> <span class="n">material</span><span class="o">=</span><span class="n">top_material</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+
+        <span class="n">top</span> <span class="o">=</span> <span class="n">ClothingItem</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">category</span><span class="o">=</span><span class="s1">&#39;tops&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">top_style</span><span class="p">,</span> <span class="n">material</span><span class="o">=</span><span class="n">top_material</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>  <span class="c1"># pylint: disable=no-member</span>
+        <span class="n">bottom</span> <span class="o">=</span> <span class="n">ClothingItem</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">category</span><span class="o">=</span><span class="s1">&#39;bottoms&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">top_style</span><span class="p">,</span> <span class="n">material</span><span class="o">=</span><span class="n">top_material</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>  <span class="c1"># pylint: disable=no-member</span>
+        <span class="n">shoes</span> <span class="o">=</span> <span class="n">ClothingItem</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">category</span><span class="o">=</span><span class="s1">&#39;shoes&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">top_style</span><span class="p">,</span> <span class="n">material</span><span class="o">=</span><span class="n">top_material</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>  <span class="c1"># pylint: disable=no-member</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">top</span> <span class="ow">and</span> <span class="n">bottom</span> <span class="ow">and</span> <span class="n">shoes</span><span class="p">):</span>
             <span class="k">return</span> <span class="kc">None</span>
@@ -423,22 +297,13 @@
             <span class="n">shoes_material</span><span class="o">=</span><span class="n">shoes</span><span class="o">.</span><span class="n">material</span><span class="p">,</span>
 
             <span class="n">general_vector</span><span class="o">=</span><span class="n">general_vector</span>
-        <span class="p">)</span></div>
+        <span class="p">)</span>  <span class="c1"># pylint: disable=no-member</span></div>
 
 
 <div class="viewcode-block" id="Looks.get_for_temperature">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.forms.Looks.get_for_temperature">[документация]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_for_temperature</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">temp</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">                Подбирает подходящий комплект для указанной температуры.</span>
-
-<span class="sd">                Args:</span>
-<span class="sd">                    temp (int): Текущая температура в градусах Цельсия</span>
-
-<span class="sd">                Returns:</span>
-<span class="sd">                    Looks or None: Подходящий комплект или None если не найден</span>
-<span class="sd">                &quot;&quot;&quot;</span>
         <span class="n">temp_ranges</span> <span class="o">=</span> <span class="p">{</span>
             <span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">):</span> <span class="s2">&quot;-20_-10&quot;</span><span class="p">,</span>
             <span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span> <span class="s2">&quot;-10_0&quot;</span><span class="p">,</span>
@@ -449,7 +314,7 @@
 
         <span class="k">for</span> <span class="p">(</span><span class="n">min_t</span><span class="p">,</span> <span class="n">max_t</span><span class="p">),</span> <span class="n">range_str</span> <span class="ow">in</span> <span class="n">temp_ranges</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">min_t</span> <span class="o">&lt;=</span> <span class="n">temp</span> <span class="o">&lt;=</span> <span class="n">max_t</span><span class="p">:</span>
-                <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">temp_range</span><span class="o">=</span><span class="n">range_str</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+                <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">temp_range</span><span class="o">=</span><span class="n">range_str</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>  <span class="c1"># pylint: disable=no-member</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 </div>
 
@@ -457,15 +322,6 @@
 <div class="viewcode-block" id="get_current_weather">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.forms.get_current_weather">[документация]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_current_weather</span><span class="p">(</span><span class="n">city</span><span class="o">=</span><span class="s1">&#39;Moscow&#39;</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Получает текущую температуру для указанного города через OpenWeatherMap API.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            city (str): Название города на английском языке</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            float or None: Температура в градусах Цельсия или None при ошибке</span>
-<span class="sd">        &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;http://api.openweathermap.org/data/2.5/weather?q=</span><span class="si">{</span><span class="n">city</span><span class="si">}</span><span class="s2">&amp;appid=</span><span class="si">{</span><span class="n">settings</span><span class="o">.</span><span class="n">WEATHER_API_KEY</span><span class="si">}</span><span class="s2">&amp;units=metric&quot;</span>
         <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
@@ -478,14 +334,6 @@
 <div class="viewcode-block" id="LikedLook">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.forms.LikedLook">[документация]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">LikedLook</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        История лайков пользователей для системы рекомендаций.</span>
-
-<span class="sd">        Attributes:</span>
-<span class="sd">            user (User): Пользователь, которому понравился комплект</span>
-<span class="sd">            look (Looks): Понравившийся комплект</span>
-<span class="sd">            created_at (datetime): Дата и время лайка</span>
-<span class="sd">        &quot;&quot;&quot;</span>
     <span class="n">user</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">AUTH_USER_MODEL</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
     <span class="n">look</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Looks</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
     <span class="n">created_at</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="n">auto_now_add</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -497,14 +345,6 @@
 <div class="viewcode-block" id="DislikedLook">
 <a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.forms.DislikedLook">[документация]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">DislikedLook</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">       История дизлайков пользователей для улучшения рекомендаций.</span>
-
-<span class="sd">       Attributes:</span>
-<span class="sd">           user (User): Пользователь, отклонивший комплект</span>
-<span class="sd">           look (Looks): Отклоненный комплект</span>
-<span class="sd">           created_at (datetime): Дата и время дизлайка</span>
-<span class="sd">       &quot;&quot;&quot;</span>
     <span class="n">user</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">AUTH_USER_MODEL</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
     <span class="n">look</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Looks</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
     <span class="n">created_at</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="n">auto_now_add</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>

@@ -78,6 +78,20 @@ final\_project\_app.look_factory module
    :undoc-members:
 
 
+CI/CD Configuration
+====================================
+
+В проекте используется GitLab CI/CD для автоматизации сборки, тестирования и деплоя.
+
+Файл конфигурации пайплайна находится в корне проекта и называется ``.gitlab-ci.yml``.
+
+Ниже приведено содержимое файла ``.gitlab-ci.yml``:
+
+.. literalinclude:: .gitlab-ci.yml
+   :language: yaml
+   :linenos:
+   :caption: .gitlab-ci.yml - конфигурация GitLab CI/CD
+
 Module contents
 ---------------
 
