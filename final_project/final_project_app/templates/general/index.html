@@ -8,14 +8,19 @@
 </head>
 <body>
         <header>
-            <h1>Welcome to<br>AI Fashion Stylist!</h1>
-            <p>Your personal AI assistant for perfect outfits</p>
+            <h1>
+                <span class="highlight-large">Welcome</span> to<br>
+                <span class="highlight-medium">AI Fashion</span> <span class="highlight-medium">Stylist</span>!
+            </h1>
+            <p>Your <span class="highlight-color">personal</span> AI assistant for <span class="highlight-color">perfect</span> outfits</p>
         </header>
 
+
     <div class="buttons">
-        <a id="sign-up-a" href="{% url 'sign_up' %}"><button id="sign-up" class="first-register">Sign Up</button></a>
-        <a id="log-in-a" href="{% url 'log_in' %}"><button id="log-in" class="first-register" >Log In</button></a>
+        <a id="log-in" class="first-register" href="{% url 'log_in' %}"><span>Log In</span></a>
+        <a id="sign-up" class="first-register" href="{% url 'sign_up' %}"><span>Sign Up</span></a>
     </div>
+
     <div class="sections">
         <section class="section-animate">
             <h2>Post of the day</h2>
@@ -66,6 +71,9 @@
             </div>
         </section>
     </div>
+        <br>
+        <br>
+        <br>
     <footer>
         {% include 'general/footer.html' %}
     </footer>

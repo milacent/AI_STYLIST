@@ -27,9 +27,10 @@
                 {% endif %}
             {% endif %}
 
-            {% if is_own_profile %}
-                <p><a href="{% url 'profile_edit' %}">Edit Profile</a></p>
+           {% if is_own_profile %}
+                <p><a href="{% url 'profile_edit' %}" class="edit-profile-button">Edit Profile</a></p>
             {% endif %}
+
         </section>
 
         {% if user_posts %}

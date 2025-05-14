@@ -3,93 +3,80 @@
 <head>
     {% load static %}
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
     <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <h1>Sign Up</h1>
-    <!-- Сообщения/ошибки -->
-    {% if messages %}
-    <div class="messages-container">
-        {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}">
-            {{ message }}
+<div class="wrapper">
+    <div class="card">
+        <div class="image-side">
+            <img src="https://i.postimg.cc/wBh7v0GC/morn-edited-free-carve-photos-2.png">
         </div>
-        {% endfor %}
-    </div>
-    {% endif %}
-    <!-- Сообщения/ошибки -->
+        <div class="form-side">
+            <h1>Sign up</h1>
+            <p class="subtitle">Get personalized outfit recommendations instantly</p>
 
-    <br>
-    <form method="POST" action="{% url 'sign_up' %}">
-        {% csrf_token %}
-        <div id="step1">
-            <label for="username">Username:</label>
-            <input type="text" id="username" placeholder="Enter username" name="username" required><br>
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" placeholder="abc@gmail.com" name="email" required><br>
-            <ul>Password should be:
-                <li>At least 8 characters.</li>
-                <li>Contain at least 1 number.</li>
-                <li>Contain at least 1 special character.</li>
-                <li>Contain at least 1 uppercase letter.</li>
-            </ul>
-            <label for="password1">Password:</label>
-            <input type="password" id="password1" placeholder="Enter password" name="password1" required><br>
-
-            <label for="password2">Confirm Password:</label>
-            <input type="password" id="password2" placeholder="Enter password again" name="password2" required><br>
-
-            <p>Select your gender</p>
-            <input type="radio" id="male" value="1" name="gender" required>Male<br>
-            <input type="radio" id="female" value="0" name="gender" required>Female<br>
-
-            <button type="button" onclick="nextStep(1)">Next</button>
-
-        </div>
-
-        <div id="step2" style="display: none;">
-            <h2>About Yourself</h2>
-            <label for="about">Write something about yourself:</label><br>
-            <textarea id="about" name="about" rows="4" cols="50" placeholder="Tell us about yourself (you can change this later)" required></textarea><br>
-            <div class="onebyone">
-                <button type="button" onclick="prevStep(2)">Back</button>
-                <button type="submit">Sign Up</button>
+            <br>
+            <!-- Сообщения/ошибки -->
+            {% if messages %}
+            <div class="messages-container">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+                {% endfor %}
             </div>
+            {% endif %}
+            <!-- Сообщения/ошибки -->
+
+            <br>
+
+            <form method="POST" action="{% url 'sign_up' %}">
+                {% csrf_token %}
+                <div class="input-group">
+                    <i class="fa fa-user icon"></i>
+                    <input type="text" name="username" placeholder="Username" required>
+                </div>
+                <div class="input-group">
+                    <i class="fa fa-envelope icon"></i>
+                    <input type="email" name="email" placeholder="Email" required>
+                </div>
+                <ul>Password should be:
+                        <li>At least 8 characters.</li>
+                        <li>Contain at least 1 number.</li>
+                        <li>Contain at least 1 special character.</li>
+                        <li>Contain at least 1 uppercase letter.</li>
+                    </ul>
+                <div class="input-group">
+                    <i class="fa fa-lock icon"></i>
+                    <input type="password" name="password1" placeholder="Password" required>
+                </div>
+                <div class="input-group">
+                    <i class="fa fa-lock icon"></i>
+                    <input type="password" name="password2" placeholder="Confirm Password" required>
+                </div>
+
+                <div class="gender-group">
+                    <label><input type="radio" name="gender" value="1" required> Male</label>
+                    <label><input type="radio" name="gender" value="0" required> Female</label>
+                </div>
+
+                <textarea name="about" placeholder="Tell us about yourself..." rows="3" required></textarea>
+
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" name="terms_accepted" required>
+                        I agree to the <a class="author-link" href="{% url 'terms' %}" target="_blank">Terms and Privacy Policy</a>
+                    </label>
+                </div>
+
+                <button type="submit" class="submit-btn">Join now</button>
+                <p class="login-link">Already a member? <a href="{% url 'log_in' %}">Log in</a></p>
+            </form>
         </div>
-    </form>
-    <br>
-    <p>Already have an account? <a href="{% url 'log_in' %}">Log In here</a>.</p>
-    <p>By logging in, you agree to our <a href="{% url 'terms' %}">Terms and Conditions</a>.</p>
-
-    <script>
-        function nextStep(currentStep) {
-            let valid = true;
-            let step = document.getElementById('step' + currentStep);
-            let inputs = step.querySelectorAll('input, textarea');
-
-            inputs.forEach(input => {
-                if (!input.checkValidity()) {
-                    valid = false;
-                    input.reportValidity();
-                }
-            });
-
-            if (valid) {
-                document.getElementById('step' + currentStep).style.display = 'none';
-                document.getElementById('step' + (currentStep + 1)).style.display = 'block';
-            }
-        }
-
-        function prevStep(currentStep) {
-            document.getElementById('step' + currentStep).style.display = 'none';
-            document.getElementById('step' + (currentStep - 1)).style.display = 'block';
-        }
-    </script>
-
-    <footer>
-<!--        {% include 'general/footer.html' %}-->
-    </footer>
+    </div>
+</div>
 </body>
 </html>

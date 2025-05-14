@@ -383,7 +383,7 @@ def profile_edit_page(request):
             info.about_me = request.POST['about']
             info.save()
             login(request, user)
-            return redirect('/profile')
+            return redirect('profile', username=request.user.username)
         except:
             raise SystemError
 
@@ -653,6 +653,7 @@ def find_liked_disliked(disliked_look_ids, liked_look_ids):
             user_like_vectors.append(vec)
         except:
             continue
+
     # Получаем вектора не понравившихся образов
     disliked_looks = Looks.objects.filter(id__in=disliked_look_ids)
     user_dislike_vectors = []

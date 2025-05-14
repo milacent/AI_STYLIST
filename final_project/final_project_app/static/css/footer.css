@@ -1,12 +1,33 @@
 footer {
-    margin-top: 50px;
+    width: 100%;
     padding: 20px;
-    background-color: rgb(19, 30, 55);
+    background-color: #2a2a2a;
     font-size: 1.2em;
     color: white;
+    text-align: center;
+    margin-top: auto; /* Pushes footer to the bottom */
 }
 
-a {
-    color: #00ffe5;
+.footer-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px; /* Adds space between the text and the icon */
+    flex: 1 0 auto; /* Allows the content to grow and push the footer down */
+}
+
+.social-links a {
+    color: #4a90e2;
+    font-size: 1.5em;
     text-decoration: none;
+}
+
+.social-links a:hover {
+    color: #93c416;
+}
+
+/* Ensure the body takes up at least the full viewport height */
+html, body {
+    height: 100%;
 }
