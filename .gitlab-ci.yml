@@ -10,6 +10,7 @@ test:
   image: python:3.10
   stage: test
   before_script:
+    - cd final_project
     - pip install --upgrade pip
     - pip install -r requirements.txt
     - python manage.py makemigrations
