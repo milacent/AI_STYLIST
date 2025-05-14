@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <h1>Log In</h1>
     <!-- Сообщения/ошибки -->
     {% if messages %}
     <div class="messages-container">
@@ -23,10 +22,6 @@
     <!-- Сообщения/ошибки -->
 
     <br>
-    <form method="POST" action="{% url 'log_in' %}">
-        {% csrf_token %}
-        <label for="username">Username:</label>
-        <input type="text" id="username" placeholder="Enter username" name="username" required><br>
 <div class="wrapper">
     <div class="card">
         <div class="image-side">
