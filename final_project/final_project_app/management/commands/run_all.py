@@ -12,7 +12,7 @@ class Command(BaseCommand):
         self.stdout.write(self.style.SUCCESS('🚀 Запуск Django и Flask серверов...'))
 
         # Путь к manage.py (в корне проекта)
-        project_root = os.path.dirname(os.path.abspath("/home/prom/PycharmProjects/pythonProject/final_project/manage.py"))
+        project_root = os.path.dirname(os.path.abspath("manage.py"))
 
         # Путь к Flask app.py
         flask_app_path = os.path.join(project_root, "final_project_app", "flask", "app.py")

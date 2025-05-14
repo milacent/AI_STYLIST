@@ -1,20 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {% load static %}
+        {% load static %}
     <meta charset="UTF-8">
-    <title>Footer</title>
+    <title>Title</title>
     <link rel="stylesheet" href="{% static 'css/footer.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <footer>
-        <div class="footer-content">
-            <p>&copy; 2025 AI Fashion Stylist. All rights reserved.</p>
-            <div class="social-links">
-                <a href="https://t.me/alstylist" target="_blank"><i class="fab fa-telegram"></i></a>
-            </div>
-        </div>
-    </footer>
+    <p>&copy; 2025 AI Fashion Stylist. All rights reserved.</p>
+    <p>Follow us on <a href="https://t.me/alstylist">Telegram</a></p>
+    <p>
+        <a href="http://localhost:5000/getrec?data" target="_blank" style="text-decoration: none;">
+            <button type="button">Need help? Chat with our bot</button>
+        </a>
+    </p>
 </body>
 </html>
