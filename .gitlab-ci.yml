@@ -17,4 +17,4 @@ test:
     - python manage.py makemigrations
     - python manage.py migrate
   script:
-    - python manage.py tests 
+    - python manage.py test
