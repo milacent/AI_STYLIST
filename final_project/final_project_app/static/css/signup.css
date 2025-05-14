@@ -86,3 +86,44 @@ a:hover {
     display: flex;
     gap:50px;
 }
+
+/* Стили для сообщений */
+.messages-container {
+    margin: 15px 0;
+    width: 100%;
+}
+
+radio {
+    margin-top: 50px;
+}
+
+.alert {
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.alert-success {
+    background-color: #4CAF50; /* Зеленый для успешных операций */
+}
+
+.alert-error {
+    background-color: #f44336; /* Красный для ошибок */
+}
+
+.alert-warning {
+    background-color: #ff9800; /* Оранжевый для предупреждений */
+}
+
+.alert-info {
+    background-color: #2196F3; /* Голубой для информационных сообщений */
+}
+
+.alert-debug {
+    background-color: #607d8b; /* Серый для отладочных сообщений */
+}

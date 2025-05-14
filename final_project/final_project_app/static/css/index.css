@@ -21,11 +21,13 @@ header{
 header h1{
     font-size: 90px;
     opacity: 0.85;
+    text-align:center;
 }
 
 header p{
     font-size: 20px;
     opacity: 0.7;
+    text-align:center;
 }
 
 section {
@@ -80,12 +82,19 @@ section p {
     height: 55px;
     transition: background-color 0.3s, transform 0.3s;
 }
+
+.first-register {
+    width:115px;
+    height:85px;
+}
+
 .buttons{
     margin-top: 50px;
     justify-content: center;
-    display:flex;
-    gap:100px
+    display:center;
+    gap:100px;
 }
+
 button:hover {
     background-color: #00ffe5;
     color: #16213e;
@@ -201,26 +210,26 @@ button[id="log-in"], button[id="sign-up"] {
     transition: all 0.3s ease;
 }
 
-button[id="log-in"] {
+button[id="sign-up"] {
     background: linear-gradient(135deg, #d100d1, #6f21b8);
     color: white;
     border-top: 1px solid white;
     box-shadow: 0 4px 10px rgba(138, 43, 226, 0.5);
 }
 
-button[id="log-in"]:hover {
+button[id="sign-up"]:hover {
     background: linear-gradient(135deg, #ff00ff, #8e2aeb);
     transform: scale(1.07);
     box-shadow: 0 6px 15px rgba(138, 43, 226, 0.7);
 }
 
-button[id="sign-up"] {
+button[id="log-in"] {
     background: transparent;
     color: white;
     border: 2px solid white;
 }
 
-button[id="sign-up"]:hover {
+button[id="log-in"]:hover {
     background: rgba(255, 255, 255, 0.2);
     transform: scale(1.07);
     box-shadow: 0 6px 10px rgba(138, 43, 226, 0.5);

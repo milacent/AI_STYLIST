@@ -8,6 +8,18 @@
 </head>
 <body>
     <h1>Log In</h1>
+    <!-- Сообщения/ошибки -->
+    {% if messages %}
+    <div class="messages-container">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <!-- Сообщения/ошибки -->
+
     <br>
     <form method="POST" action="{% url 'log_in' %}">
         {% csrf_token %}

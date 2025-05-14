@@ -1,13 +1,17 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const cards = document.querySelectorAll('.outfit-card');
     let currentCardIndex = 0;
     let startX, startY, moveX, moveY;
     let currentCard = cards[currentCardIndex];
 
-    // Элементы управления
     const likeBtn = document.querySelector('.like-button');
     const dislikeBtn = document.querySelector('.dislike-button');
     const saveBtn = document.querySelector('.save-button');
+
+    if (cards.length === 0) {
+        showEndMessage();
+        return;
+    }
 
     function showNextCard() {
         currentCardIndex++;
@@ -20,7 +24,20 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function showEndMessage() {
-        document.getElementById('cardsContainer').innerHTML = '<p class="end-message">Все образы просмотрены</p>';
+        document.getElementById('cardsContainer').innerHTML = `
+            <div class="no-looks-message" style="text-align: center; margin-top: 20px;">
+                <button id="loadMoreButton" style="padding: 10px 20px; font-size: 16px; cursor: pointer;">
+                    Показать ещё
+                </button>
+            </div>
+        `;
+
+        const button = document.getElementById("loadMoreButton");
+        if (button) {
+            button.addEventListener("click", function () {
+                location.reload();
+            });
+        }
     }
 
     function getCookie(name) {
@@ -47,15 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
             method: 'POST',
             body: formData
         })
-        .then(response => {
-            if (!response.ok) {
-                console.error('Ошибка при сохранении оценки');
-            }
-            return response;
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+        .catch(error => console.error('Ошибка при отправке:', error));
     }
 
     function swipeCard(direction, card) {
@@ -73,16 +82,9 @@ document.addEventListener('DOMContentLoaded', function() {
             sendRatingToServer(lookId, 'dislike');
         }
 
-        currentCardIndex = Array.from(cards).indexOf(card);
-
         setTimeout(() => {
             card.style.display = 'none';
-            currentCard = cards[++currentCardIndex];
-            if (currentCard) {
-                currentCard.style.display = 'flex';
-            } else {
-                showEndMessage();
-            }
+            showNextCard();
         }, 500);
     }
 
@@ -108,38 +110,21 @@ document.addEventListener('DOMContentLoaded', function() {
                     }, 1000);
                 }
             }
-            return response;
         })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+        .catch(error => console.error('Ошибка при сохранении:', error));
     }
 
-    // Обработчики кнопок
-    if (likeBtn) {
-        likeBtn.addEventListener('click', function() {
-            if (currentCard) swipeCard('right', currentCard);
-        });
-    }
+    if (likeBtn) likeBtn.addEventListener('click', () => swipeCard('right', currentCard));
+    if (dislikeBtn) dislikeBtn.addEventListener('click', () => swipeCard('left', currentCard));
+    if (saveBtn) saveBtn.addEventListener('click', saveCurrentLook);
 
-    if (dislikeBtn) {
-        dislikeBtn.addEventListener('click', function() {
-            if (currentCard) swipeCard('left', currentCard);
-        });
-    }
-
-    if (saveBtn) {
-        saveBtn.addEventListener('click', saveCurrentLook);
-    }
-
-    // Обработчики свайпа для мобильных устройств
     cards.forEach(card => {
-        card.addEventListener('touchstart', function(e) {
+        card.addEventListener('touchstart', e => {
             startX = e.touches[0].clientX;
             startY = e.touches[0].clientY;
         });
 
-        card.addEventListener('touchmove', function(e) {
+        card.addEventListener('touchmove', e => {
             if (!startX || !startY) return;
 
             moveX = e.touches[0].clientX;
@@ -167,38 +152,31 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        card.addEventListener('touchend', function() {
+        card.addEventListener('touchend', () => {
             if (!startX || !moveX) return;
-
             const diffX = moveX - startX;
 
-            if (diffX > 100) {
-                swipeCard('right', card);
-            } else if (diffX < -100) {
-                swipeCard('left', card);
-            } else {
-                card.style.transform = '';
-            }
+            if (diffX > 100) swipeCard('right', card);
+            else if (diffX < -100) swipeCard('left', card);
+            else card.style.transform = '';
 
             startX = null;
             moveX = null;
         });
     });
 
-    // Обработчики для десктопа
     cards.forEach(card => {
-        card.addEventListener('mousedown', function(e) {
+        card.addEventListener('mousedown', e => {
             startX = e.clientX;
             startY = e.clientY;
             card.style.cursor = 'grabbing';
         });
 
-        document.addEventListener('mousemove', function(e) {
+        document.addEventListener('mousemove', e => {
             if (!startX || !currentCard) return;
 
             moveX = e.clientX;
             moveY = e.clientY;
-
             const diffX = moveX - startX;
             const diffY = moveY - startY;
 
@@ -221,18 +199,14 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        document.addEventListener('mouseup', function() {
+        document.addEventListener('mouseup', () => {
             if (!startX || !currentCard) return;
 
             const diffX = moveX - startX;
 
-            if (diffX > 100) {
-                swipeCard('right', currentCard);
-            } else if (diffX < -100) {
-                swipeCard('left', currentCard);
-            } else {
-                currentCard.style.transform = '';
-            }
+            if (diffX > 100) swipeCard('right', currentCard);
+            else if (diffX < -100) swipeCard('left', currentCard);
+            else currentCard.style.transform = '';
 
             currentCard.style.cursor = 'grab';
             startX = null;
@@ -240,10 +214,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Сначала показываем только первую карточку
+    // Показываем только первую карточку
     cards.forEach((card, index) => {
-        if (index !== 0) {
-            card.style.display = 'none';
-        }
+        if (index !== 0) card.style.display = 'none';
     });
 });

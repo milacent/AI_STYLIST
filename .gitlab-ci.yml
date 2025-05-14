@@ -1,0 +1,19 @@
+stages:
+  - test
+
+variables:
+  DJANGO_SETTINGS_MODULE: final_project.settings
+  PYTHONDONTWRITEBYTECODE: "1"
+  PYTHONUNBUFFERED: "1"
+
+test:
+  image: python:3.10
+  stage: test
+  before_script:
+    - cd final_project
+    - pip install --upgrade pip
+    - pip install -r requirements.txt
+    - python manage.py makemigrations
+    - python manage.py migrate
+  script:
+    - python manage.py test
