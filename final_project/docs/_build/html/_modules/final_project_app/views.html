@@ -37,7 +37,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">django.http</span><span class="w"> </span><span class="kn">import</span> <span class="n">HttpResponseRedirect</span><span class="p">,</span> <span class="n">JsonResponse</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">django.urls</span><span class="w"> </span><span class="kn">import</span> <span class="n">reverse</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib.auth.decorators</span><span class="w"> </span><span class="kn">import</span> <span class="n">login_required</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">final_project_app.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Info</span><span class="p">,</span> <span class="n">Comment</span><span class="p">,</span> <span class="n">Post</span><span class="p">,</span> <span class="n">LikePost</span><span class="p">,</span> <span class="n">LikeComment</span><span class="p">,</span> <span class="n">Looks</span><span class="p">,</span> <span class="n">LikedLook</span><span class="p">,</span> <span class="n">DislikedLook</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Info</span><span class="p">,</span> <span class="n">Comment</span><span class="p">,</span> <span class="n">Post</span><span class="p">,</span> <span class="n">LikePost</span><span class="p">,</span> <span class="n">Looks</span><span class="p">,</span> <span class="n">LikedLook</span><span class="p">,</span> <span class="n">DislikedLook</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib.auth.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">User</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib.auth</span><span class="w"> </span><span class="kn">import</span> <span class="n">authenticate</span><span class="p">,</span> <span class="n">login</span><span class="p">,</span> <span class="n">logout</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.forms</span><span class="w"> </span><span class="kn">import</span> <span class="n">PostForm</span>
@@ -45,8 +45,8 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics.pairwise</span><span class="w"> </span><span class="kn">import</span> <span class="n">cosine_similarity</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Looks</span><span class="p">,</span> <span class="n">LikedLook</span><span class="p">,</span> <span class="n">DislikedLook</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">checker</span>  <span class="c1"># Функция для проверки пароля</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.look_factory</span><span class="w"> </span><span class="kn">import</span> <span class="n">LookFactory</span>
 
 
 <span class="c1"># Create your views here.</span>
@@ -605,14 +605,17 @@
 <span class="nd">@login_required</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">for_you_page</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">       Персональные рекомендации образов на основе погоды.</span>
+<span class="sd">    Персональные рекомендации образов на основе погоды.</span>
 
-<span class="sd">       Args:</span>
-<span class="sd">           city (str): Город для погодного запроса</span>
+<span class="sd">    Используется паттерн проектирования &quot;Фабрика&quot; (Factory) для выбора стратегии подбора образа</span>
+<span class="sd">    в зависимости от критерия (в данном случае - температуры).</span>
 
-<span class="sd">       Returns:</span>
-<span class="sd">           HttpResponse: Рендер страницы с рекомендованным образом</span>
-<span class="sd">       &quot;&quot;&quot;</span>
+<span class="sd">    Args:</span>
+<span class="sd">        city (str): Город для погодного запроса, передаётся через GET-параметр &#39;city&#39;. По умолчанию &#39;Moscow&#39;.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        HttpResponse: Рендер страницы с рекомендованным образом, температурой, городом и возможной ошибкой.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">city</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;city&#39;</span><span class="p">,</span> <span class="s1">&#39;Moscow&#39;</span><span class="p">)</span>
     <span class="n">error</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">look</span> <span class="o">=</span> <span class="kc">None</span>
@@ -624,7 +627,8 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Не удалось получить данные о погоде&quot;</span><span class="p">)</span>
 
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[INFO] Текущая погода в городе </span><span class="si">{</span><span class="n">city</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">temperature</span><span class="si">}</span><span class="s2">°C&quot;</span><span class="p">)</span>
-        <span class="n">look</span> <span class="o">=</span> <span class="n">Looks</span><span class="o">.</span><span class="n">get_for_temperature</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span>
+        <span class="n">strategy</span> <span class="o">=</span> <span class="n">LookFactory</span><span class="o">.</span><span class="n">get_strategy</span><span class="p">(</span><span class="s2">&quot;temperature&quot;</span><span class="p">)</span>
+        <span class="n">look</span> <span class="o">=</span> <span class="n">strategy</span><span class="o">.</span><span class="n">get_look</span><span class="p">(</span><span class="n">temperature</span><span class="o">=</span><span class="n">temperature</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">look</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Не найдены подходящие образы для этой температуры&quot;</span><span class="p">)</span>
 

@@ -2374,12 +2374,14 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <dt class="sig sig-object py" id="final_project_app.views.for_you_page">
 <span class="sig-name descname"><span class="pre">for_you_page</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/views.html#for_you_page"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.views.for_you_page" title="Link to this definition">¶</a></dt>
 <dd><p>Персональные рекомендации образов на основе погоды.</p>
+<p>Используется паттерн проектирования «Фабрика» (Factory) для выбора стратегии подбора образа
+в зависимости от критерия (в данном случае - температуры).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>city</strong> (<em>str</em>) – Город для погодного запроса</p>
+<dd class="field-odd"><p><strong>city</strong> (<em>str</em>) – Город для погодного запроса, передаётся через GET-параметр „city“. По умолчанию „Moscow“.</p>
 </dd>
 <dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>Рендер страницы с рекомендованным образом</p>
+<dd class="field-even"><p>Рендер страницы с рекомендованным образом, температурой, городом и возможной ошибкой.</p>
 </dd>
 <dt class="field-odd">Тип результата<span class="colon">:</span></dt>
 <dd class="field-odd"><p>HttpResponse</p>
@@ -2724,6 +2726,92 @@ JsonResponse: Результат с названием города или ош�
 <dd class="field-even"><p>HttpResponse</p>
 </dd>
 </dl>
+</dd></dl>
+
+</section>
+<section id="final-project-app-utils-module">
+<h2>final_project_app.utils module<a class="headerlink" href="#final-project-app-utils-module" title="Link to this heading">¶</a></h2>
+<dl class="py function" id="module-final_project_app.utils">
+<dt class="sig sig-object py" id="final_project_app.utils.checker">
+<span class="sig-name descname"><span class="pre">checker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">password</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/utils.html#checker"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.utils.checker" title="Link to this definition">¶</a></dt>
+<dd><p>Функция для проверки пароля.
+Проверяет, что пароль содержит хотя бы одну заглавную букву,
+хотя бы одну цифру и имеет длину не менее 8 символов.</p>
+</dd></dl>
+
+</section>
+<section id="final-project-app-look-factory-module">
+<h2>final_project_app.look_factory module<a class="headerlink" href="#final-project-app-look-factory-module" title="Link to this heading">¶</a></h2>
+<dl class="py class" id="module-final_project_app.look_factory">
+<dt class="sig sig-object py" id="final_project_app.look_factory.LookFactory">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LookFactory</span></span><a class="reference internal" href="../_modules/final_project_app/look_factory.html#LookFactory"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.look_factory.LookFactory" title="Link to this definition">¶</a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Фабрика для получения стратегии выбора образа по заданному критерию.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="final_project_app.look_factory.LookFactory.get_strategy">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_strategy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">criteria</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/look_factory.html#LookFactory.get_strategy"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.look_factory.LookFactory.get_strategy" title="Link to this definition">¶</a></dt>
+<dd><p>Возвращает объект стратегии в зависимости от критерия.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>criteria</strong> (<em>str</em>) – Критерий выбора стратегии (например, «temperature»).</p>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Экземпляр соответствующей стратегии.</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#final_project_app.look_factory.LookStrategy" title="final_project_app.look_factory.LookStrategy">LookStrategy</a></p>
+</dd>
+<dt class="field-even">Исключение<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Если критерий неизвестен.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="final_project_app.look_factory.LookStrategy">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LookStrategy</span></span><a class="reference internal" href="../_modules/final_project_app/look_factory.html#LookStrategy"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.look_factory.LookStrategy" title="Link to this definition">¶</a></dt>
+<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Абстрактный базовый класс для стратегий выбора образа.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="final_project_app.look_factory.LookStrategy.get_look">
+<span class="sig-name descname"><span class="pre">get_look</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/look_factory.html#LookStrategy.get_look"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.look_factory.LookStrategy.get_look" title="Link to this definition">¶</a></dt>
+<dd><p>Метод для получения образа по заданным параметрам.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>**kwargs</strong> – Ключевые параметры для выбора образа.</p>
+</dd>
+<dt class="field-even">Исключение<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NotImplementedError</strong> – Если метод не переопределён в подклассе.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="final_project_app.look_factory.TemperatureLookStrategy">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TemperatureLookStrategy</span></span><a class="reference internal" href="../_modules/final_project_app/look_factory.html#TemperatureLookStrategy"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.look_factory.TemperatureLookStrategy" title="Link to this definition">¶</a></dt>
+<dd><p>Базовые классы: <a class="reference internal" href="#final_project_app.look_factory.LookStrategy" title="final_project_app.look_factory.LookStrategy"><code class="xref py py-class docutils literal notranslate"><span class="pre">LookStrategy</span></code></a></p>
+<p>Стратегия выбора образа на основе температуры.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="final_project_app.look_factory.TemperatureLookStrategy.get_look">
+<span class="sig-name descname"><span class="pre">get_look</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/final_project_app/look_factory.html#TemperatureLookStrategy.get_look"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#final_project_app.look_factory.TemperatureLookStrategy.get_look" title="Link to this definition">¶</a></dt>
+<dd><p>Возвращает образ, подходящий для указанной температуры.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>temperature</strong> (<em>float</em><em> or </em><em>int</em>) – Температура для выбора образа.</p>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Объект образа, подходящий под заданную температуру.</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#final_project_app.models.Looks" title="final_project_app.models.Looks">Looks</a></p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </section>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+
+<html lang="ru" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>final_project_app.look_factory &#8212; документация project </title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=12dfc556" />
+    <script src="../../_static/documentation_options.js?v=372fde1a"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/translations.js?v=29b1f277"></script>
+    <link rel="index" title="Алфавитный указатель" href="../../genindex.html" />
+    <link rel="search" title="Поиск" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Исходный код final_project_app.look_factory</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Looks</span>
+
+<div class="viewcode-block" id="LookStrategy">
+<a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.look_factory.LookStrategy">[документация]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">LookStrategy</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Абстрактный базовый класс для стратегий выбора образа.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="LookStrategy.get_look">
+<a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.look_factory.LookStrategy.get_look">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_look</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Метод для получения образа по заданным параметрам.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            **kwargs: Ключевые параметры для выбора образа.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            NotImplementedError: Если метод не переопределён в подклассе.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="TemperatureLookStrategy">
+<a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.look_factory.TemperatureLookStrategy">[документация]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">TemperatureLookStrategy</span><span class="p">(</span><span class="n">LookStrategy</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Стратегия выбора образа на основе температуры.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="TemperatureLookStrategy.get_look">
+<a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.look_factory.TemperatureLookStrategy.get_look">[документация]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_look</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Возвращает образ, подходящий для указанной температуры.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            temperature (float or int): Температура для выбора образа.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Looks: Объект образа, подходящий под заданную температуру.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">temperature</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;temperature&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Looks</span><span class="o">.</span><span class="n">get_for_temperature</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="LookFactory">
+<a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.look_factory.LookFactory">[документация]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">LookFactory</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Фабрика для получения стратегии выбора образа по заданному критерию.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="LookFactory.get_strategy">
+<a class="viewcode-back" href="../../source/final_project_app.html#final_project_app.look_factory.LookFactory.get_strategy">[документация]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_strategy</span><span class="p">(</span><span class="n">criteria</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Возвращает объект стратегии в зависимости от критерия.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            criteria (str): Критерий выбора стратегии (например, &quot;temperature&quot;).</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            LookStrategy: Экземпляр соответствующей стратегии.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: Если критерий неизвестен.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">criteria</span> <span class="o">==</span> <span class="s2">&quot;temperature&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">TemperatureLookStrategy</span><span class="p">()</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown criteria: </span><span class="si">{</span><span class="n">criteria</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">project</a></h1>
+
+
+
+
+
+
+
+
+<h3>Навигация</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/modules.html">final_project_app</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Код модуля</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Быстрый поиск</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Искать" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, Ratmir.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.2.6</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

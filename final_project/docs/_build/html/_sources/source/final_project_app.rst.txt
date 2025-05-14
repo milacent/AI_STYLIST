@@ -61,6 +61,23 @@ final\_project\_app.views module
    :show-inheritance:
    :undoc-members:
 
+final\_project\_app.utils module
+-------------------------------
+
+.. automodule:: final_project_app.utils
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+final\_project\_app.look_factory module
+--------------------------------------
+
+.. automodule:: final_project_app.look_factory
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+
 Module contents
 ---------------
 
