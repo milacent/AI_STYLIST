@@ -9,11 +9,13 @@ variables:
 test:
   image: python:3.10
   stage: test
-  working_directory: $CI_PROJECT_DIR/final_project
   before_script:
+    - cd final_project
+    - echo "Current path:" && pwd
     - pip install --upgrade pip
     - pip install -r requirements.txt
     - python manage.py makemigrations
     - python manage.py migrate
   script:
+    - cd final_project
     - python manage.py test
