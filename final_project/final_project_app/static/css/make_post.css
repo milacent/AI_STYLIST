@@ -1,31 +1,32 @@
 body {
     font-family: 'Lora', sans-serif;
-    background-image: radial-gradient(#610261 0%, #16213e 70%);
+    background-color: #161616; /* Dark background */
     color: white;
     text-align: center;
     margin: 0;
     padding: 0;
 }
 
-header{
+header {
     padding: 20px;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 2px;
-
 }
-header h1{
+
+header h1 {
     font-size: 70px;
     opacity: 0.85;
+    color: #4a90e2; /* Soft blue for the header */
 }
 
 form {
     margin: 50px auto;
     width: 50%;
     padding: 30px;
-    background-color: #16213e;
+    background-color: #1f1f1f; /* Dark form background */
     border-radius: 10px;
-    box-shadow: 0px 5px 20px rgba(255, 0, 255, 0.7);
+    box-shadow: 0px 5px 20px rgba(74, 144, 226, 0.7); /* Soft blue shadow */
 }
 
 label, input, textarea {
@@ -34,14 +35,8 @@ label, input, textarea {
     margin-bottom: 15px;
     font-size: 1.2em;
 }
-input[id="image"]{
-    display: block;
-    text-align: center;
-    width: 100%;
-    margin-bottom: 15px;
-    font-size: 1.2em;
-}
-input, textarea {
+
+input[id="image"], input, textarea {
     padding: 10px;
     border-radius: 5px;
     border: none;
@@ -57,14 +52,52 @@ button {
     cursor: pointer;
     font-weight: 600;
     transition: all 0.3s ease;
-    background: linear-gradient(135deg, #d100d1, #6f21b8);
+    background-color: #4a90e2; /* Solid soft blue */
     color: white;
     border-top: 1px solid white;
-    box-shadow: 0 4px 10px rgba(138, 43, 226, 0.5);
+    box-shadow: 0 4px 10px rgba(74, 144, 226, 0.5); /* Soft blue shadow */
 }
 
 button:hover {
-    background: linear-gradient(135deg, #ff00ff, #8e2aeb);
+    background-color: #93c416; /* Solid muted green on hover */
     transform: scale(1.07);
-    box-shadow: 0 6px 15px rgba(138, 43, 226, 0.7);
+    box-shadow: 0 6px 15px rgba(74, 144, 226, 0.7); /* Enhanced shadow on hover */
+}
+.file-input-container {
+    margin: 10px 0;
+    text-align: center;
+}
+
+.file-input-container label {
+    display: inline-block;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+    color: #ccc; /* Light gray text */
+}
+
+input[type="file"] {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+input[type="file"]::file-selector-button {
+    background-color: #4a90e2; /* Solid soft blue */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="file"]::file-selector-button:hover {
+    background-color: #93c416; /* Solid muted green on hover */
 }
