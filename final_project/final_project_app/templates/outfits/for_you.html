@@ -93,6 +93,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 <body>
+<!--        {% if weather_template %}-->
+<!--            {% include weather_template %}-->
+<!--        {% else %}-->
+<!--            <p>Погода не определена</p>-->
+<!--        {% endif %}-->
+        {%include 'weather/rain.html'%}
         {%include 'general/header.html' %}
         {% block content %}
         <div class="outfit-items">

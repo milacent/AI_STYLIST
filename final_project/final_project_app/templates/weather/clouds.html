@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .cloud {
+  font-size: 80px;
+  position: absolute;
+  top: 10%;
+  color: #ccc;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  opacity: 0.9;
+  animation-delay: 0s;
+}
+
+/* Траектории движения облаков */
+.cloud-1 {
+  left: -1%;
+  top: 20%;
+  animation-name: drift1;
+  animation-duration: 30s;
+}
+
+.cloud-2 {
+  top: 20%;
+  left: -10%;
+  animation-name: drift2;
+  animation-duration: 52s;
+}
+
+.cloud-3 {
+  top: 7%;
+  left: -5%;
+  animation-name: drift3;
+  animation-duration: 40s;
+}
+
+/* Анимации движения слева направо */
+@keyframes drift1 {
+  0% {
+    left: -20%;
+  }
+  100% {
+    left: 110%;
+  }
+}
+
+@keyframes drift2 {
+  0% {
+    left: -30%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes drift3 {
+  0% {
+    left: -25%;
+  }
+  100% {
+    left: 105%;
+  }
+}
+
+</style>
+<body>
+    <div class="cloud cloud-1">☁️</div>
+    <div class="cloud cloud-2">☁️</div>
+    <div class="cloud cloud-3">☁️</div>
+
+</body>
+</html>

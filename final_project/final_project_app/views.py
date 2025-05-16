@@ -14,7 +14,7 @@ import numpy as np
 import json
 from .utils import checker  # Функция для проверки пароля
 from .look_factory import LookFactory
-
+from django.conf import settings
 
 # Create your views here.
 
@@ -761,3 +761,41 @@ def get_city_by_coords(request):
 
 def for_you_redirect(request):
     return redirect('for_you', city='Moscow')
+
+#
+# def get_weather_template(weather_description):
+#     """
+#     Возвращает имя шаблона для текущей погоды.
+#     :param weather_description: строка, например 'Snow', 'Rain', 'Clouds', 'Clear'
+#     """
+#     weather_description = weather_description.lower()
+#     if 'snow' in weather_description or 'снег' in weather_description:
+#         return "weather/snow.html"
+#     elif 'rain' in weather_description or 'дожд' in weather_description:
+#         return "weather/rain.html"
+#     elif 'cloud' in weather_description or 'обла' in weather_description or 'пасмурно' in weather_description:
+#         return "weather/clouds.html"
+#     elif 'clear' in weather_description or 'ясно' in weather_description or 'sun' in weather_description or 'солнечно' in weather_description:
+#         return "weather/sun.html"
+#     else:
+#         # По умолчанию облака
+#         return "weather/clouds.html"
+#
+#
+# def weather_dashboard(request):
+#     city = request.GET.get('city', 'Moscow')
+#     url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={settings.WEATHER_API_KEY}&units=metric"
+#     response = requests.get(url)
+#     data = response.json()
+#     if response.status_code == 200:
+#         template = get_weather_template(data)
+#         context = {
+#             'city': city,
+#             'temp': data['main']['temp'],
+#             'description': data['weather'][0]['description'],
+#             'weather_template': template
+#         }
+#     else:
+#         context = {'error': 'City not found.'}
+#     return render(request, 'weather/dashboard.html', context)
+#

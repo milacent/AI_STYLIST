@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+
+.sun {
+  z-index: 0;
+  font-size: 100px;
+  color: orange;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: riseAndMove 20s linear infinite, sunColor 10s ease-in-out infinite alternate, pulse 3s ease-in-out infinite;
+}
+
+@keyframes riseAndMove {
+  0% {
+    top: 100%;
+    left: 20%;
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  50% {
+    top: 20%;
+    left: 50%;
+  }
+  80% {
+    top: 40%;
+    left: 80%;
+  }
+  100% {
+    top: 100%;
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes sunColor {
+  0% {
+    color: orange;
+  }
+  100% {
+    color: yellow;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    text-shadow: 0 0 10px yellow, 0 0 20px orange;
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    text-shadow: 0 0 20px yellow, 0 0 30px red;
+    transform: translateX(-50%) scale(1.1);
+  }
+}
+
+</style>
+<body>
+      <div class="sun">&#9728;</div>
+</body>
+</html>

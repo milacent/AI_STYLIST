@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .raindrop {
+  font-size: 30px;
+  color: #00bfff;
+  position: absolute;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  opacity: 0.8;
+}
+
+/* Индивидуальные траектории */
+.raindrop-1 {
+  top: -10%;
+  left: 20%;
+  animation-name: fall1;
+  animation-duration: 4s;
+}
+
+.raindrop-2 {
+  top: -10%;
+  left: 50%;
+  animation-name: fall2;
+  animation-duration: 3.5s;
+}
+
+.raindrop-3 {
+  top: -10%;
+  left: 75%;
+  animation-name: fall3;
+  animation-duration: 5s;
+}
+@keyframes fall1 {
+  0% {
+    top: -10%;
+    left: 20%;
+    opacity: 0.8;
+  }
+  100% {
+    top: 85%;
+    left: 25%;
+    opacity: 0;
+  }
+}
+
+@keyframes fall2 {
+  0% {
+    top: -10%;
+    left: 50%;
+    opacity: 0.8;
+  }
+  100% {
+    top: 85%;
+    left: 48%;
+    opacity: 0;
+  }
+}
+
+@keyframes fall3 {
+  0% {
+    top: -10%;
+    left: 75%;
+    opacity: 0.8;
+  }
+  100% {
+    top: 85%;
+    left: 70%;
+    opacity: 0;
+  }
+}
+
+</style>
+<body>
+    <div class="raindrop raindrop-1">💧</div>
+    <div class="raindrop raindrop-2">💧</div>
+    <div class="raindrop raindrop-3">💧</div>
+</body>
+</html>
