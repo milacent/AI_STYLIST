@@ -505,7 +505,7 @@ def terms_page(request):
     return render(request, "general/terms.html", context)
 
 @login_required
-def for_you_page(request):
+def for_you_page(request, city):
     """
     Персональные рекомендации образов на основе погоды.
 
@@ -518,7 +518,6 @@ def for_you_page(request):
     Returns:
         HttpResponse: Рендер страницы с рекомендованным образом, температурой, городом и возможной ошибкой.
     """
-    city = request.GET.get('city', 'Moscow')
     error = None
     look = None
     temperature = None
@@ -758,3 +757,7 @@ def get_city_by_coords(request):
             return JsonResponse({'error': 'City not found'}, status=404)
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
+
+
+def for_you_redirect(request):
+    return redirect('for_you', city='Moscow')

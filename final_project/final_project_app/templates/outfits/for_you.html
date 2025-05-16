@@ -42,15 +42,18 @@ document.addEventListener('DOMContentLoaded', function() {
         // Показываем модальное окно
         document.getElementById('cityModal').style.display = 'block';
     } else {
-        // Если город есть, перезагружаем страницу с параметром city
-        if (!window.location.search.includes('city=')) {
-            window.location.href = window.location.pathname + '?city=' + encodeURIComponent(savedCity);
+        // Проверяем, есть ли город в URL-пути (/for_you/<город>/)
+        let pathParts = window.location.pathname.split('/');
+        // pathParts: ["", "for_you", "Moscow", ""]
+        if (!(pathParts.length >= 3 && pathParts[2])) {
+            // Перенаправляем на /for_you/<город>/
+            window.location.href = '/for_you/' + encodeURIComponent(savedCity) + '/';
         }
     }
 
     document.getElementById('confirmMoscowBtn').onclick = function() {
         localStorage.setItem('userCity', 'Moscow');
-        window.location.href = window.location.pathname + '?city=Moscow';
+        window.location.href = '/for_you/Moscow/';
     };
 
     document.getElementById('chooseCityBtn').onclick = function() {
@@ -60,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('submitCityBtn').onclick = function() {
         let city = document.getElementById('citySelect').value;
         localStorage.setItem('userCity', city);
-        window.location.href = window.location.pathname + '?city=' + encodeURIComponent(city);
+        window.location.href = '/for_you/' + encodeURIComponent(city) + '/';
     };
 
     document.getElementById('useGeoBtn').onclick = function() {
@@ -72,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 .then(data => {
                     if (data.city) {
                         localStorage.setItem('userCity', data.city);
-                        window.location.href = window.location.pathname + '?city=' + encodeURIComponent(data.city);
+                        window.location.href = '/for_you/' + encodeURIComponent(data.city) + '/';
                     } else {
                         alert('Не удалось определить город по геолокации.');
                     }
@@ -176,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </form>
 
                 {% endif %}
-                <a href="{% url 'for_you' %}" class="regenerate-button">Новый образ</a>
+                <a href="{% url 'for_you' city=city %}" class="regenerate-button">Новый образ</a>
             </div>
 
                 {% if error %}
