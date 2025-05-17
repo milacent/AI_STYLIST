@@ -111,10 +111,11 @@
 
 /* Для мобильных экранов - упрощаем меню */
 @media (max-width: 768px) {
+
     .nav-container {
         flex-wrap: wrap;
         gap: 12px;
-        justify-content: center;
+        align-items: center;
     }
     .dropdown-content {
         left: 0;

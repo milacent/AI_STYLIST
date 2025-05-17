@@ -3,6 +3,7 @@
 <head>
     {% load static %}
     <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% if is_own_profile %}Your{% else %}{{ profile_user.username }}'s{% endif %} Profile</title>
     <link rel="stylesheet" href="{% static 'css/profile.css' %}">
 </head>

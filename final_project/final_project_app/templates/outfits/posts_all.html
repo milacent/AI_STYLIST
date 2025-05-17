@@ -3,6 +3,7 @@
 <head>
     {% load static %}
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Best Outfits</title>
     <link rel="stylesheet" href="{% static 'css/posts_all.css' %}">
 </head>
@@ -19,7 +20,7 @@
             <a href="{% url 'post' post.id %}" class="post-link">
                 <h2>{{ post.title }}</h2>
                 {% if post.image %}
-                    <img src="{{ post.image.url }}" alt="Post Image" width="300"><br>
+                    <img src="{{ post.image.url }}" alt="Post Image"><br>
                 {% endif %}
                 <div class="user_desc">
                     <p><b><a class="author-link" href="{% url 'profile' post.user.username %}">{{ post.user.username }}</a></b></p>

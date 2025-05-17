@@ -63,7 +63,6 @@ header p {
     max-width: 700px;
 }
 
-
 /* Секции */
 section {
     background-color: #1f1f1f;
@@ -162,7 +161,6 @@ section div#a a:focus {
     user-select: none;
 }
 
-
 .first-register a {
     color: #fff;
     text-decoration: none;
@@ -179,7 +177,6 @@ section div#a a:focus {
     box-shadow: 0 8px 25px rgba(147, 196, 22, 0.1);
     border: 2px solid rgba(255, 255, 255, 0.3);
 }
-
 
 #log-in:hover,
 #log-in:focus {
@@ -335,4 +332,84 @@ blockquote::after {
     h2 {
         font-size: 1.5em;
     }
+    .quotes {
+        flex-direction: column;
+    }
+    blockquote {
+        flex: 1 1 100%;
+    }
 }
+/* Адаптация под iPhone 12 (и схожие устройства) */
+@media screen and (max-width: 400px) and (orientation: landscape) {
+    header {
+        padding: 40px 15px 20px;
+    }
+
+    header h1 {
+        font-size: 2em;
+        line-height: 1.3;
+    }
+
+    header p {
+        font-size: 1em;
+    }
+
+    .sections {
+        gap: 30px;
+        margin-top: 40px;
+        padding: 0 10px;
+    }
+
+    section {
+        padding: 25px 20px;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    h2 {
+        font-size: 1.4em;
+    }
+
+    section p,
+    section h3 {
+        font-size: 1em;
+    }
+
+    .first-register {
+        width: 100%;
+        height: 50px;
+        font-size: 1.2em;
+    }
+
+    .buttons {
+        flex-direction: column;
+        gap: 20px;
+        margin: 40px 0;
+        width: 100%;
+        padding: 0 20px;
+    }
+
+    .quotes {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    blockquote {
+        font-size: 1em;
+        padding: 20px;
+    }
+
+    blockquote::before,
+    blockquote::after {
+        font-size: 2.5em;
+    }
+
+    .without-acc button,
+    .log-in-have-acc button {
+        font-size: 1.2em;
+        padding: 14px 25px;
+        width: 100%;
+    }
+}
+
+

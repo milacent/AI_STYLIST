@@ -111,27 +111,3 @@ a:hover {
 .section-animate.fade-in {
     animation: fadeIn 1.5s ease forwards;
 }
-
-/* Адаптивность */
-@media (max-width: 900px) {
-    .content {
-        flex-direction: column;
-        align-items: center;
-    }
-    section {
-        max-width: 90%;
-        flex: none;
-    }
-}
-
-@media (max-width: 480px) {
-    .head h1 {
-        font-size: 2.2em;
-    }
-    .head p {
-        font-size: 1em;
-    }
-    h2 {
-        font-size: 1.5em;
-    }
-}

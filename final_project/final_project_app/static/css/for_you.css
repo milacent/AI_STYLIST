@@ -341,18 +341,49 @@ body {
     margin-bottom: 12px;
     font-size: 1em;
 }
+@media (max-width: 600px) {
 
-@media (max-width: 480px) {
-    #cityModal .modal-content {
-        padding: 20px 8px 16px 8px;
-        max-width: 95vw;
+    /* Уменьшаем текст в footer или других местах */
+    .footer-content p {
+        font-size: 0.6em;
     }
-    #cityModal h2 {
-        font-size: 1.1em;
-    }
-}
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px);}
-    to   { opacity: 1; transform: translateY(0);}
+    /* Сдвиг значка Telegram влево */
+    .telegram-icon {
+        margin-left: -10px; /* или уменьшить padding/margin */
+        transform: translateX(-8px);
+    }
+
+    /* Сдвиг кнопки влево */
+    .save-button,
+    .regenerate-button {
+        margin-left: 10px;
+        width: 180px; /* чуть уже на мобилках */
+    }
+
+    /* Уменьшаем размер шрифта кнопок */
+    .save-button,
+    .regenerate-button {
+        font-size: 14px;
+        padding: 10px 0;
+    }
+
+    /* Центрируем контент плотнее */
+    .outfit-card {
+        width: 90%;
+        padding: 16px 8px;
+    }
+
+    .item-info h3 {
+        font-size: 12px;
+    }
+
+    .item-meta span {
+        font-size: 12px;
+    }
+
+    .sbros {
+        align-items: flex-start; /* левое выравнивание */
+        padding-left: 10px;
+    }
 }

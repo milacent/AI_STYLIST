@@ -200,3 +200,69 @@ form textarea {
 .author-paragraph strong {
     color: #fff; /* Основной текст белый */
 }
+@media (max-width: 768px)  and (orientation: landscape){
+    header h1 {
+        font-size: 42px;
+    }
+
+    main {
+        padding: 15px;
+    }
+
+    .post-image img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .post-content h2,
+    .comments-section h2 {
+        font-size: 24px;
+    }
+
+    .like-button,
+    .comment-submit-button {
+        font-size: 1.2em;
+        padding: 10px 20px;
+    }
+
+    form label, input, textarea {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px)  and (orientation: landscape){
+    header h1 {
+        font-size: 32px;
+    }
+
+    .post-image img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+    }
+
+    .author-paragraph {
+        font-size: 1em;
+    }
+
+    .like-button,
+    .comment-submit-button {
+        width: 100%;
+        font-size: 1em;
+        padding: 10px;
+    }
+
+    .post-content p,
+    .comment p {
+        font-size: 1em;
+    }
+
+    form label,
+    form textarea {
+        font-size: 0.95em;
+    }
+
+    .comment {
+        padding: 12px;
+    }
+}
