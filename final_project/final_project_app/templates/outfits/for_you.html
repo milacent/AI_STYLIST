@@ -93,16 +93,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 <body>
-<!--        {% if weather_template %}-->
-<!--            {% include weather_template %}-->
-<!--        {% else %}-->
-<!--            <p>Погодные данные недоступны или не определены.</p>-->
-<!--        {% endif %}-->
+        {% if weather_template %}
+            {% include weather_template %}
+        {% else %}
+            <p>Погодные данные недоступны или не определены.</p>
+        {% endif %}
 
-<!--        {% if error %}-->
-<!--            <p style="color:red;">Ошибка: {{ error }}</p>-->
-<!--        {% endif %}-->
-        {%include 'weather/snow.html' %}
+        {% if error %}
+            <p style="color:red;">Ошибка: {{ error }}</p>
+        {% endif %}
         {%include 'general/header.html' %}
         {% block content %}
         <div class="outfit-items">
