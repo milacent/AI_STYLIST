@@ -7,31 +7,31 @@
     <link rel="stylesheet" href="{% static 'css/for_you.css' %}">
 
 </head>
-
-<!-- Модальное окно выбора города -->
+<!-- City selection modal window -->
 <div id="cityModal" class="modal">
     <div class="modal-content">
-        <h2>Ваш город - Москва?</h2>
-        <button id="confirmMoscowBtn">Да</button>
-        <button id="chooseCityBtn">Нет, выбрать другой</button>
+        <h2>Is your city Moscow?</h2>
+        <button id="confirmMoscowBtn">Yes</button>
+        <button id="chooseCityBtn">No, choose another</button>
 
         <div id="citySelectDiv">
-            <label for="citySelect">Выберите город:</label>
+            <label for="citySelect">Choose a city:</label>
             <select id="citySelect">
-                <option value="Moscow">Москва</option>
-                <option value="Saint Petersburg">Санкт-Петербург</option>
-                <option value="Novosibirsk">Новосибирск</option>
-                <option value="Yekaterinburg">Екатеринбург</option>
-                <option value="Kazan">Казань</option>
+                <option value="Moscow">Moscow</option>
+                <option value="Saint Petersburg">Saint Petersburg</option>
+                <option value="Novosibirsk">Novosibirsk</option>
+                <option value="Yekaterinburg">Yekaterinburg</option>
+                <option value="Kazan">Kazan</option>
             </select>
-            <button id="submitCityBtn">Подтвердить</button>
+            <button id="submitCityBtn">Confirm</button>
         </div>
 
         <div>
-            <button id="useGeoBtn">Определить по геолокации</button>
+            <button id="useGeoBtn">Spot by geolocation</button>
         </div>
     </div>
 </div>
+
 
 
 <script>
@@ -88,6 +88,14 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('Геолокация не поддерживается вашим браузером.');
         }
     };
+    const resetBtn = document.getElementById('resetCityBtn');
+    if (resetBtn) {
+        resetBtn.onclick = function() {
+            localStorage.removeItem('userCity');
+            // Перезагрузка страницы для показа модального окна выбора города
+            window.location.href = '/for_you/';
+        };
+    }
 });
 </script>
 
@@ -104,6 +112,11 @@ document.addEventListener('DOMContentLoaded', function() {
         {% endif %}
         {%include 'general/header.html' %}
         {% block content %}
+        <div class="sbros">
+            <span>Your City: {{ city }}</span>
+            <button id="resetCityBtn" class="reset-city-btn">Reset</button>
+        </div>
+
         <div class="outfit-items">
             <div class="outfit-card">
                 <!-- Шапка -->

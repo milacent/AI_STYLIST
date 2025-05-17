@@ -18,23 +18,9 @@ import logging
 logger = logging.getLogger(__name__)
 
 # Create your views here.
+def custom_404_view(request, exception):
+    return render(request, "Handle/Error404.html", status=404)
 
-def Handle400(request, exception = None):
-    """
-        Обработчик ошибки 400 (Bad Request).
-
-        Args:
-            request (HttpRequest): Объект запроса
-            exception (Exception): Исключение, вызвавшее ошибку
-
-        Returns:
-            HttpResponseRedirect или HttpResponse: Редирект или страница ошибки
-        """
-    context = {}
-    print(request.path)
-    if not request.path.endswith('/'):
-        return HttpResponseRedirect(request.path + '/')
-    return render(request, "Handle/Error400.html", context)
 
 def index_page(request):
     """

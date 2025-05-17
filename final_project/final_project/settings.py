@@ -57,6 +57,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'final_project_app.middleware.custom_error_middleware.Custom404Middleware',
+
 ]
 
 ROOT_URLCONF = 'final_project.urls'

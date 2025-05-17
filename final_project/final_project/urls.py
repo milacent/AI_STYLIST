@@ -21,10 +21,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.shortcuts import render
 
-def custom_404_view(request, exception=None):
-    return render(request, '404.html', status=404)
-
-handler404 = custom_404_view
+handler404 = 'final_project_app.views.custom_404_view'
 
 urlpatterns = [
     path('admin/', admin.site.urls),

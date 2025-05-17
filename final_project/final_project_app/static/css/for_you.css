@@ -242,6 +242,27 @@ body {
     background-color: #9e9e9e;
     color: white;
 }
+.reset-city-btn {
+    margin: 10px 0;
+    padding: 6px 16px;
+    background: #4a90e2;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.reset-city-btn:hover {
+    color: white;
+    background-color: #3a7bc8; /* Темнее голубой */
+    transform: scale(1.07);
+    box-shadow: 0 6px 15px rgba(74, 144, 226, 0.7);
+}
+.sbros {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* выравнивание по левому краю */
+    gap: 8px; /* расстояние между элементами */
+}
 
 /* Modal styles */
 #cityModal.modal {
