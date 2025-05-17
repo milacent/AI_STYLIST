@@ -106,18 +106,18 @@ body {
 .style-badge, .material-badge {
     padding: 2px 6px;
     border-radius: 6px;
-    font-size: 11px;
+    font-size: 14px;
     white-space: nowrap;
 }
 
 .style-badge {
     background-color: #3498db;
-    color: white;
+    color: black;
 }
 
 .material-badge {
-    background-color: #2ecc71;
-    color: white;
+    background-color: rgba(147, 196, 22, 0.7);
+    color: black;
 }
 
 .outfit-actions {

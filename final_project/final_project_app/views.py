@@ -431,15 +431,13 @@ def post_page(request, id=0):
         comment = Comment(user=request.user, content=request.POST['text'], post=post)
         comment.save()
     context = {
-        'id':id,
-        'author':post.user,
-        'title':post.title,
-        'description':post.description,
-        'image':post.image,
-        'likes':len(LikePost.objects.filter(post=post)),
-        'comments':Comment.objects.filter(post=post),
+        'post': post,
+        'author': post.user,
+        'likes': LikePost.objects.filter(post=post).count(),
+        'comments': Comment.objects.filter(post=post),
+        'id': post.id,
     }
-    return render(request, "outfits/post.html", context)
+    return render(request, 'outfits/post.html', context)
 
 
 @login_required

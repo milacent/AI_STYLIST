@@ -101,6 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 <body>
+    {%include 'general/preloader.html' %}
         {% if weather_template %}
             {% include weather_template %}
         {% else %}

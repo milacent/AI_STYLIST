@@ -3,42 +3,50 @@
 <head>
     {% load static %}
     <meta charset="UTF-8">
-    <title>Post</title>
+    <title>{{ title }}</title>
     <link rel="stylesheet" href="{% static 'css/post.css' %}">
 </head>
 <body>
-    {%include 'general/header.html' %}
-    <h1>Title: {{ title }}</h1>
+    {% include 'general/preloader.html' %}
+    {% include 'general/header.html' %}
 
-    <section>
-        <h2>Content: {{ description }}</h2>
-        <p class="author-paragraph"><strong>Author:</strong> <a href="{% url 'profile' author %}" class="author-link"><i>{{ author }}</i></a></p>
+    <main>
 
-        <p><strong>Likes:</strong> <i>{{ likes }}</i></p>
-    </section>
+        {% if post.image %}
+        <section class="post-image">
+            <h1>{{ title }}</h1>
+            <p class="author-paragraph">
+                <strong>Author:</strong>
+                <a href="{% url 'profile' author.username %}" class="author-link"><i>{{ author.username }}</i></a>
+            </p>
+            <img src="{{ post.image.url }}" alt="Post Image" width="300">
+            <p>{{ post.description }}</p>
+        </section>
+        {% endif %}
 
-    <a href="/send_like_post/{{ id }}" class="like-button">Like</a>
+        <section class="post-content">
+            <p><strong>Likes:</strong> <i>{{ likes }}</i></p>
+            <a href="{% url 'like' id %}" class="like-button">Like</a>
+        </section>
 
-    <section>
-        <h2>Comments: </h2>
-        <form method="POST" action="">
-            {% csrf_token %}
-            <label for="text">Text:</label>
-            <textarea id="text" name="text" rows="4" cols="50" placeholder="Enter your text here" required></textarea><br>
+        <section class="comments-section">
+            <h2>Comments:</h2>
+            <form method="POST" action="">
+                {% csrf_token %}
+                <label for="text">Text:</label>
+                <textarea id="text" name="text" rows="4" placeholder="Enter your text here" required></textarea>
+                <button type="submit" class="comment-submit-button">Send comment</button>
+            </form>
 
-            <button type="submit" class="comment-submit-button">Send comment</button>
-        </form>
-        {% for comment in comments %}
-        <div class="comment">
-            <p><strong>Username: {{ comment.user.username }}</strong></p>
-            <p>{{ comment.content }}</p>
-        </div>
-        {% endfor %}
-
-    </section>
-
-    <footer>
-        {% include 'general/footer.html' %}
-    </footer>
+            {% for comment in comments %}
+            <div class="comment">
+                <p><strong>Username: {{ comment.user.username }}</strong></p>
+                <p>{{ comment.content }}</p>
+            </div>
+            {% empty %}
+            <p>No comments yet. Be the first to comment!</p>
+            {% endfor %}
+        </section>
+    </main>
 </body>
 </html>

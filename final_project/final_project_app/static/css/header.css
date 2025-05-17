@@ -49,8 +49,7 @@
 /* Ховер эффект для кнопок */
 .nav-container button:hover,
 .nav-container .dropbtn:hover {
-    background-color: #1de9b6; /* Акцент бирюзовый */
-    box-shadow: 0 0 15px #1de9b6;
+    background-color: rgba(147, 196, 22, 0.7); /* Акцент бирюзовый */
     transform: scale(1.05);
     color: #161616;
 }
@@ -106,7 +105,7 @@
 
 /* Ховер эффект для ссылок дропдауна */
 .dropdown-content a:hover {
-    background-color: #1de9b6;
+    background-color: rgba(147, 196, 22, 0.7);
     color: #161616;
 }
 

@@ -302,17 +302,17 @@ section p {
     font-weight: 600;
     text-align: center;
     text-decoration: none;
-    background-color: #4a90e2; /* Акцентный голубой */
+    background-color: rgba(147, 196, 22, 0.7); /* Акцентный голубой */
     color: white;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(74, 144, 226, 0.5);
+
 }
 
 .edit-profile-button:hover {
-    background-color: #3a7bc8; /* Темнее голубой */
+    background-color: #93c416; /* Темнее голубой */
     transform: scale(1.05);
-    box-shadow: 0 6px 15px rgba(74, 144, 226, 0.7);
+    box-shadow: 0 6px 15px #93c416;
 }

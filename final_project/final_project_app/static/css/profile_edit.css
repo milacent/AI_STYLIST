@@ -63,31 +63,37 @@ button[type="submit"] {
     display: inline-block;
     border-radius: 8px;
     cursor: pointer;
-    background-color: #4a90e2; /* Акцентный голубой */
+    background-color: rgba(147, 196, 22, 0.7);
     color: white;
     border: none;
     border-top: 1px solid white;
-    box-shadow: 0 4px 10px rgba(74, 144, 226, 0.5);
     margin-top: 20px;
     transition: all 0.3s ease;
 }
 
 button[type="submit"]:hover {
-    background-color: #3a7bc8; /* Темнее голубой */
+    background-color: #93c416; /* Темнее голубой */
     transform: scale(1.05);
-    box-shadow: 0 6px 15px rgba(74, 144, 226, 0.7);
+    box-shadow: 0 6px 15px #93c416
 }
 
-a {
-    color: #4a90e2; /* Акцентный голубой */
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease;
+.btn-blue {
+  background-color: #3a7bc8;
+  color: white;
+  padding: 12px 28px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 50px;
 }
 
-a:hover {
-    color: #3a7bc8; /* Темнее голубой */
-    text-decoration: underline;
+.btn-blue:hover {
+  background-color: #2f65b0;
 }
 
 footer {

@@ -17,7 +17,7 @@ header {
 header h1 {
     font-size: 70px;
     opacity: 0.85;
-    color: #4a90e2; /* Soft blue for the header */
+    color: #c26015; /* Soft blue for the header */
 }
 
 form {
@@ -52,16 +52,16 @@ button {
     cursor: pointer;
     font-weight: 600;
     transition: all 0.3s ease;
-    background-color: #4a90e2; /* Solid soft blue */
+    background-color: rgba(147, 196, 22, 0.7);
     color: white;
     border-top: 1px solid white;
-    box-shadow: 0 4px 10px rgba(74, 144, 226, 0.5); /* Soft blue shadow */
+    box-shadow: 0 4px 10px rgba(147, 196, 22, 0.7); /* Soft blue shadow */
 }
 
 button:hover {
     background-color: #93c416; /* Solid muted green on hover */
     transform: scale(1.07);
-    box-shadow: 0 6px 15px rgba(74, 144, 226, 0.7); /* Enhanced shadow on hover */
+    box-shadow: 0 6px 15px #93c416; /* Enhanced shadow on hover */
 }
 .file-input-container {
     margin: 10px 0;

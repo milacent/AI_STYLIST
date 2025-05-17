@@ -48,7 +48,7 @@ img {
 
 h2 {
     height: 50px;
-    color: #4a90e2; /* Акцентный голубой */
+    color: rgba(147, 196, 22, 0.7); /* Акцентный голубой */
     font-size: 50px;
     padding-bottom: 50px;
     margin: 0;
