@@ -244,19 +244,19 @@ def profile_page(request, username=None):
     if is_own_profile:
         look_sections = [
             {
-                'title': '⭐ Сохранённые образы',
+                'title': '⭐ Saved Looks',
                 'looks': request.user.saved_looks.all()[:4],
                 'status': 'saved',
                 'view_all_url': 'view_all_saved'
             },
             {
-                'title': '❤️ Понравившиеся образы',
+                'title': '❤️ Liked Looks',
                 'looks': Looks.objects.filter(likedlook__user=request.user)[:4],
                 'status': 'liked',
                 'view_all_url': 'view_all_liked'
             },
             {
-                'title': '💔 Не понравившиеся образы',
+                'title': '💔 Disliked Looks',
                 'looks': Looks.objects.filter(dislikedlook__user=request.user)[:4],
                 'status': 'disliked',
                 'view_all_url': 'view_all_disliked'
@@ -292,7 +292,7 @@ def unsave_look(request, look_id):
     if request.method == 'POST':
         look = get_object_or_404(Looks, id=look_id)
         request.user.saved_looks.remove(look)
-        messages.success(request, 'Образ удалён из сохранённых')
+        messages.success(request, 'Look is deleted from Saved')
         if request.POST.get('source') == 'view_all':
             return redirect('view_all_saved')
         return redirect('profile',request.user)
@@ -309,7 +309,7 @@ def view_all_saved(request):
     looks = request.user.saved_looks.all()
     return render(request, 'profile/view_all.html', {
         'looks': looks,
-        'title': 'Все сохранённые образы',
+        'title': 'Saved Looks',
         'status': 'saved'
     })
 
@@ -324,7 +324,7 @@ def view_all_liked(request):
     looks = Looks.objects.filter(likedlook__user=request.user)
     return render(request, 'profile/view_all.html', {
         'looks': looks,
-        'title': 'Все понравившиеся образы',
+        'title': 'Liked Looks',
         'status': 'liked'
     })
 
@@ -339,7 +339,7 @@ def view_all_disliked(request):
     looks = Looks.objects.filter(dislikedlook__user=request.user)
     return render(request, 'profile/view_all.html', {
         'looks': looks,
-        'title': 'Все не понравившиеся образы',
+        'title': 'Disliked Looks',
         'status': 'disliked'
     })
 
@@ -528,13 +528,13 @@ def for_you_page(request, city):
         temperature = get_current_weather(city)
         conditions = get_weather_conditions(city)
         if temperature is None:
-            raise ValueError("Не удалось получить данные о погоде")
+            raise ValueError("No data about weather")
 
         print(f"[INFO] Текущая погода в городе {city}: {temperature}°C, состояние: {conditions}")
         strategy = LookFactory.get_strategy("temperature")
         look = strategy.get_look(temperature=temperature)
         if not look:
-            raise ValueError("Не найдены подходящие образы для этой температуры")
+            raise ValueError("No Looks for this weather")
 
     except Exception as e:
         error = str(e)
@@ -572,7 +572,7 @@ def save_look_empty(request):
         look_id = request.POST.get('look_id')
         if not look_id:
             return render(request, 'outfits/for_you.html', {
-                'error': "Не удалось определить образ для сохранения.",
+                'error': "Couldn't identify the Look to save",
                 'look': None
             })
         try:
@@ -581,12 +581,12 @@ def save_look_empty(request):
             return redirect('for_you')
         except Looks.DoesNotExist:
             return render(request, 'outfits/for_you.html', {
-                'error': "Образ не найден.",
+                'error': "Look was not found",
                 'look': None
             })
         except Exception as e:
             return render(request, 'outfits/for_you.html', {
-                'error': f"Ошибка сохранения: {str(e)}",
+                'error': f"Saving error: {str(e)}",
                 'look': None
             })
     return redirect('for_you')
@@ -639,7 +639,7 @@ def scrolling_page(request):
 
     context = {
         'looks': looks,
-        'error': None if looks else "Не найдено ни одного нового образа"
+        'error': None if looks else "No Looks found"
     }
     return render(request, 'outfits/scrolling.html', context)
 
@@ -774,23 +774,3 @@ def get_city_by_coords(request):
 
 def for_you_redirect(request):
     return redirect('for_you', city='Moscow')
-
-#
-# def get_weather_template(weather_description):
-#     """
-#     Возвращает имя шаблона для текущей погоды.
-#     :param weather_description: строка, например 'Snow', 'Rain', 'Clouds', 'Clear'
-#     """
-#     weather_description = weather_description.lower()
-#     if 'snow' in weather_description or 'снег' in weather_description:
-#         return "weather/snow.html"
-#     elif 'rain' in weather_description or 'дожд' in weather_description:
-#         return "weather/rain.html"
-#     elif 'cloud' in weather_description or 'обла' in weather_description or 'пасмурно' in weather_description:
-#         return "weather/clouds.html"
-#     elif 'clear' in weather_description or 'ясно' in weather_description or 'sun' in weather_description or 'солнечно' in weather_description:
-#         return "weather/sun.html"
-#     else:
-#         # По умолчанию облака
-#         return "weather/clouds.html"
-#

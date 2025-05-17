@@ -64,7 +64,7 @@
                     <div class="section-header">
                         <h2 class="section-title">{{ section.title }}</h2>
                         {% if section.looks|length >= 4 %}
-                        <a href="{% url section.view_all_url %}" class="view-all-link">Показать все</a>
+                        <a href="{% url section.view_all_url %}" class="view-all-link">Show all</a>
                         {% endif %}
                     </div>
                     <div class="looks-container">
@@ -72,9 +72,9 @@
                         <div class="outfit-card">
                             <!-- Статус образа -->
                             <div class="status-badge {{ section.status }}-badge">
-                                {% if section.status == 'saved' %}⭐ Сохранён
-                                {% elif section.status == 'liked' %}❤️ Понравился
-                                {% else %}💔 Не понравился{% endif %}
+                                {% if section.status == 'saved' %}⭐ Saved
+                                {% elif section.status == 'liked' %}❤️ Liked
+                                {% else %}💔 Disliked{% endif %}
                             </div>
 
                             <!-- head -->
@@ -157,7 +157,7 @@
                                 {% if section.status == 'saved' %}
                                 <form method="post" action="{% url 'unsave_look' look.id %}">
                                     {% csrf_token %}
-                                    <button type="submit" class="save-button">Удалить из сохранённых</button>
+                                    <button type="submit" class="save-button">Delete from Saved</button>
                                 </form>
                                 {% endif %}
                             </div>
@@ -171,9 +171,9 @@
             {% if liked_posts %}
             <section class="look-section">
                 <div class="section-header">
-                    <h2 class="section-title">👍 Понравившиеся посты</h2>
+                    <h2 class="section-title">👍 Liked Posts</h2>
                     {% if liked_posts|length >= 4 %}
-                    <a href="{% url 'gallery_liked' %}" class="view-all-link">Показать все</a>
+                    <a href="{% url 'gallery_liked' %}" class="view-all-link">Show all</a>
                     {% endif %}
                 </div>
 

@@ -14,7 +14,7 @@ HTML_TEMPLATE = """
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Чат-бот поддержки</title>
+    <title>ChatBot for Support</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -88,15 +88,15 @@ HTML_TEMPLATE = """
     </style>
 </head>
 <body>
-    <h1>Опишите вашу проблему</h1>
+    <h1>Describe your problem</h1>
     <form method="get" action="/getrec">
         <input type="text" name="data" placeholder="Например: не работает кнопка оплаты" required style="width: 400px;">
-        <button type="submit">Отправить</button>
+        <button type="submit">Send</button>
     </form>
 
     {% if result %}
         <div class="solution-block">
-            <h2>Решение:</h2>
+            <h2>Solution:</h2>
             <p>{{ result }}</p>
         </div>
     {% endif %}
@@ -104,12 +104,12 @@ HTML_TEMPLATE = """
     {% if user_input %}
         <hr>
         <div class="problem-actions">
-            <h2>Или выберите проблему из списка:</h2>
+            <h2>Or select a problem from the list:</h2>
             <form method="get" action="/getrec">
                 {% for prob in problems %}
                     <div class="problem-item">
                         {{ prob }}
-                        <button class="problem-button" type="submit" name="data" value="{{ prob }}">Показать решение</button>
+                        <button class="problem-button" type="submit" name="data" value="{{ prob }}">Show Solution</button>
                     </div>
                 {% endfor %}
             </form>

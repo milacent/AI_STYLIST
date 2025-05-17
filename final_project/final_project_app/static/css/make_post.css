@@ -72,7 +72,7 @@ button:hover {
     display: inline-block;
     margin-bottom: 15px;
     font-size: 1.2em;
-    color: #ccc; /* Light gray text */
+    color: white
 }
 
 input[type="file"] {

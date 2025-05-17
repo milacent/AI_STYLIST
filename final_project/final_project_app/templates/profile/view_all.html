@@ -12,16 +12,16 @@
 
 
     <div class="profile-container">
-        <a href="{% url 'profile' request.user.username %}" class="back-to-profile">← Вернуться в профиль</a>
+        <a href="{% url 'profile' request.user.username %}" class="back-to-profile">← Back to profile</a>
         <h1>{{ title }}</h1>
 
         <div class="looks-container">
             {% for look in looks %}
             <div class="outfit-card">
                 <div class="status-badge {{ status }}-badge">
-                    {% if status == 'saved' %}⭐ Сохранён
-                    {% elif status == 'liked' %}❤️ Понравился
-                    {% else %}💔 Не понравился{% endif %}
+                    {% if status == 'saved' %}⭐ Saved
+                    {% elif status == 'liked' %}❤️ Liked
+                    {% else %}💔 Disliked{% endif %}
                 </div>
 
                 {% if look.head != 'no_head' %}
@@ -104,7 +104,7 @@
                     <form method="post" action="{% url 'unsave_look' look.id %}">
                         {% csrf_token %}
                         <input type="hidden" name="source" value="view_all">
-                        <button type="submit" class="save-button">Удалить из сохранённых</button>
+                        <button type="submit" class="save-button">Delete from Saved</button>
                     </form>
                 </div>
                 {% endif %}
@@ -113,6 +113,5 @@
         </div>
     </div>
 
-    {% include 'general/footer.html' %}
 </body>
 </html>

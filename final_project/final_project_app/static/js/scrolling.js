@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('cardsContainer').innerHTML = `
             <div class="no-looks-message" style="text-align: center; margin-top: 20px;">
                 <button id="loadMoreButton" style="padding: 10px 20px; font-size: 16px; cursor: pointer;">
-                    Показать ещё
+                    Show more
                 </button>
             </div>
         `;
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
             method: 'POST',
             body: formData
         })
-        .catch(error => console.error('Ошибка при отправке:', error));
+        .catch(error => console.error('Error while sending:', error));
     }
 
     function swipeCard(direction, card) {
@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
         })
-        .catch(error => console.error('Ошибка при сохранении:', error));
+        .catch(error => console.error('Error while saving:', error));
     }
 
     if (likeBtn) likeBtn.addEventListener('click', () => swipeCard('right', currentCard));

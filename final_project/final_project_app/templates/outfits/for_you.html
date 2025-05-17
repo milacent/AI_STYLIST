@@ -184,11 +184,11 @@ document.addEventListener('DOMContentLoaded', function() {
                         {% csrf_token %}
                         <input type="hidden" name="city" value="{{ city }}">
                         <input type="hidden" name="look_id" value="{{ look.id }}">
-                        <button type="submit" class="save-button">Сохранить образ</button>
+                        <button type="submit" class="save-button">Save look</button>
                     </form>
 
                 {% endif %}
-                <a href="{% url 'for_you' city=city %}" class="regenerate-button">Новый образ</a>
+                <a href="{% url 'for_you' city=city %}" class="regenerate-button">New look</a>
             </div>
 
                 {% if error %}
