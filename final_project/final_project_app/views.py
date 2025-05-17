@@ -12,9 +12,10 @@ from .models import get_current_weather
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 import json
-from .utils import checker  # Функция для проверки пароля
+from .utils import *
 from .look_factory import LookFactory
-from django.conf import settings
+import logging
+logger = logging.getLogger(__name__)
 
 # Create your views here.
 
@@ -521,13 +522,15 @@ def for_you_page(request, city):
     error = None
     look = None
     temperature = None
+    conditions = None
 
     try:
         temperature = get_current_weather(city)
+        conditions = get_weather_conditions(city)
         if temperature is None:
             raise ValueError("Не удалось получить данные о погоде")
 
-        print(f"[INFO] Текущая погода в городе {city}: {temperature}°C")
+        print(f"[INFO] Текущая погода в городе {city}: {temperature}°C, состояние: {conditions}")
         strategy = LookFactory.get_strategy("temperature")
         look = strategy.get_look(temperature=temperature)
         if not look:
@@ -536,11 +539,21 @@ def for_you_page(request, city):
     except Exception as e:
         error = str(e)
 
+    include_templates = {
+        'ясно': 'weather/sun.html',
+        'облачно': 'weather/clouds.html',
+        'дождь': 'weather/rain.html',
+        'снег': 'weather/snow.html',
+    }
+    weather_template = include_templates.get(conditions, None)
+
     context = {
         'look': look,
         'temperature': temperature,
+        'conditions': conditions,
         'city': city,
-        'error': error
+        'error': error,
+        'weather_template': weather_template
     }
     return render(request, 'outfits/for_you.html', context)
 
@@ -780,22 +793,4 @@ def for_you_redirect(request):
 #     else:
 #         # По умолчанию облака
 #         return "weather/clouds.html"
-#
-#
-# def weather_dashboard(request):
-#     city = request.GET.get('city', 'Moscow')
-#     url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={settings.WEATHER_API_KEY}&units=metric"
-#     response = requests.get(url)
-#     data = response.json()
-#     if response.status_code == 200:
-#         template = get_weather_template(data)
-#         context = {
-#             'city': city,
-#             'temp': data['main']['temp'],
-#             'description': data['weather'][0]['description'],
-#             'weather_template': template
-#         }
-#     else:
-#         context = {'error': 'City not found.'}
-#     return render(request, 'weather/dashboard.html', context)
 #

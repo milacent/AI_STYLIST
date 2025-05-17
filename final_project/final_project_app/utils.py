@@ -1,4 +1,7 @@
 import re
+import requests
+from django.conf import settings
+
 
 def checker(password):
     """
@@ -13,3 +16,30 @@ def checker(password):
     if not re.search(r'\d', password):
         return False
     return True
+
+def get_weather_conditions(city='Moscow'):
+    """
+    Получает погодные условия для любого города.
+    Возвращает строку: 'ясно', 'облачно', 'дождь', 'снег' или 'не определено'.
+    """
+    url = (
+        f"http://api.openweathermap.org/data/2.5/weather"
+        f"?q={city}&appid={settings.WEATHER_API_KEY}&units=metric"
+    )
+    try:
+        response = requests.get(url, timeout=5)
+        response.raise_for_status()
+        data = response.json()
+        weather_status = data.get('weather', [{}])[0].get('main', '').lower()
+
+        mapping = {
+            'rain': 'дождь',
+            'drizzle': 'дождь',
+            'thunderstorm': 'дождь',
+            'snow': 'снег',
+            'clear': 'ясно',
+            'clouds': 'облачно',
+        }
+        return mapping.get(weather_status, 'не определено')
+    except Exception:
+        return None

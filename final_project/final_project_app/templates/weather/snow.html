@@ -4,13 +4,6 @@
   <meta charset="UTF-8">
   <title>Snow Animation</title>
   <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      background-color: #000;
-      overflow: hidden; /* важно: убираем прокрутку */
-    }
-
     .snowflake {
       font-size: 30px;
       color: white;
@@ -19,6 +12,7 @@
       animation-iteration-count: infinite;
       opacity: 0.9;
       pointer-events: none;
+      z-index: -1;
     }
 
     .snowflake-1 {
