@@ -1,4 +1,4 @@
-FROM python:3.13
+FROM python:3.11
 
 WORKDIR /mshp-final-project-meow
 
@@ -9,4 +9,4 @@ COPY . .
 EXPOSE 8000
 EXPOSE 5000
 
-CMD ["sh", "-c", "cd final_project && python manage.py makemigrations && python manage.py migrate && python manage.py collectstatic --noinput && gunicorn --bind 0.0.0.0:8000 final_project.wsgi:application"]
+CMD ["sh", "-c", "cd final_project  && python manage.py collectstatic --noinput && gunicorn --bind 0.0.0.0:8000 final_project.wsgi:application"]

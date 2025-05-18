@@ -4,11 +4,11 @@ from django.contrib.auth.models import User
 
 class Info(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    height = models.IntegerField()
-    weight = models.IntegerField()
-    chest = models.IntegerField()
-    waist = models.IntegerField()
-    hips = models.IntegerField()
+    #height = models.IntegerField()
+    #weight = models.IntegerField()
+    #chest = models.CharField(max_length=100, default='default_value')
+    #waist = models.IntegerField()
+    #hips = models.IntegerField()
     gender = models.IntegerField()
     about_me = models.CharField(max_length=300)
 
@@ -16,7 +16,7 @@ class Post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     image = models.ImageField(upload_to='post_images/', blank=True, null=True)
-    description = models.CharField(max_length=5000)
+    description = models.CharField(max_length=5000, default='')
 
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -91,5 +91,5 @@ class ClothingItem(models.Model):
 class Looks(models.Model):
     items = models.ForeignKey(to=Item, on_delete=models.CASCADE)
     weather_grade = models.IntegerField()  # Насколько подходит по погоде -10 - зима +10 - жара
-    description = models.CharField(max_length=2058)
+    description = models.CharField(max_length=2058, default='')
     style = models.CharField(max_length=100, choices=ClothingItem.Styles.choices, default="classic")
