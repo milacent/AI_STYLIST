@@ -1,61 +1,166 @@
+/* Основные стили */
 body {
-    font-family: 'Lora', sans-serif;
-    background-image: radial-gradient(#610261 0%, #16213e 70%);
-    color: white;
-    text-align: center;
     margin: 0;
     padding: 0;
+    font-family: 'SF Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #161616;
+    color: #fff;
+    text-align: center;
+    overflow-x: hidden;
+    height: 100vh;
 }
 
-.head{
-    padding: 20px;
-    font-size: 3em;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    opacity: 0.9
-}
-
-/*
-nav {
+/* Контейнер для карточек */
+.cards-container {
+    position: relative;
+    width: 100%;
+    height: 80vh;
     display: flex;
     justify-content: center;
-    gap: 20px;
-    padding: 15px;
-    background-color: #16213e;
-    backdrop-filter: blur(10px);
+    align-items: center;
+    margin-top: 20px;
 }
-nav a {
-    color: #f932fc;
+
+/* Стиль карточки */
+.outfit-card {
+    position: absolute;
+    width: 320px;
+    background: #1f1f1f;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
+}
+
+/* Элементы образа */
+.outfit-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 280px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.item-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-right: 12px;
+}
+
+.item-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    color: #eee;
+    font-size: 13px;
+    flex-grow: 1;
+}
+
+.item-info h3 {
+    margin: 0;
+    font-size: 14px;
     font-weight: bold;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-nav a:hover {
-    color: #ff99cc;
-}
-*/
-section {
-    margin: 50px auto;
-    width: 80%;
-    padding: 30px;
-    background-color: #16213e;
-    border-radius: 15px;
-    box-shadow: 0px 5px 20px rgba(255, 0, 255, 0.7);
-}
-h2 {
-    color: #d400d4;
-    font-size: 3em
-}
-.content a {
-    color: #00ffe5;
-    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.content a:hover {
-    text-decoration: underline;
+.item-meta {
+    display: flex;
+    gap: 6px;
+    margin-top: 4px;
+    flex-wrap: wrap;
 }
 
-section p{
-    font-size: 1.5em
+.style-badge, .material-badge {
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.style-badge {
+    background-color: #3498db;
+    color: black;
+}
+
+.material-badge {
+    background-color: rgba(147, 196, 22, 0.7);
+    color: black;
+}
+/* Анимации */
+.swipe-right {
+    transform: translateX(200%) rotate(20deg);
+    opacity: 0;
+}
+
+.swipe-left {
+    transform: translateX(-200%) rotate(-20deg);
+    opacity: 0;
+}
+
+/* Индикаторы свайпа */
+.swipe-indicator {
+    position: absolute;
+    top: 20px;
+    font-size: 1.5em;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.like-indicator {
+    right: 20px;
+    color: #4CAF50;
+}
+
+.dislike-indicator {
+    left: 20px;
+    color: #F44336;
+}
+
+/* Заголовок */
+.page-title {
+    text-align: center;
+    font-size: 2em;
+    margin: 20px 0;
+    color: #c26015;
+}
+
+.no-looks-message {
+    text-align: center;
+}
+
+#loadMoreButton {
+    padding: 12px 24px;
+    font-size: 1.5em;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    background-color: rgba(147, 196, 22, 0.7);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+    text-transform: uppercase;
+    height: 82px;
+}
+
+#loadMoreButton:hover {
+    background-color: #93c416;
+    box-shadow: 0 12px 35px #93c416;
+    transform: scale(1.07);
+    outline: none;
+    color: black;
 }

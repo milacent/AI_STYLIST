@@ -1,8 +1,8 @@
 /* Основной стиль страницы */
 body {
     font-family: 'Lora', sans-serif;
-    background-image: radial-gradient(#610261 0%, #16213e 70%);
-    color: white;
+    background-color: #161616; /* Очень тёмный фон */
+    color: #fff; /* Основной текст белый */
     text-align: center;
     margin: 0;
     padding: 0;
@@ -12,88 +12,257 @@ body {
 header {
     padding: 20px;
     font-weight: bold;
-    text-transform: uppercase;
     letter-spacing: 2px;
 }
 
 header h1 {
     font-size: 70px;
     opacity: 0.85;
+    color: #fff; /* Основной текст белый */
 }
 
-/* Стили для формы */
-form {
-    margin: 50px auto;
-    width: 50%;
-    padding: 30px;
-    background-color: #16213e;
-    border-radius: 10px;
-    box-shadow: 0px 5px 20px rgba(255, 0, 255, 0.7);
+/* Основной контейнер */
+main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: left;
 }
 
-/* Стили для меток, полей ввода и textarea */
-label, input, textarea {
-    display: block;
-    width: 100%;
-    margin-bottom: 15px;
-    font-size: 1.2em;
+/* Секция заголовка поста */
+.post-header {
+    margin-bottom: 10px;
 }
 
-input[id="image"] {
-    display: block;
+.post-header h1 {
+    font-size: 48px;
+    margin-bottom: 5px;
+    color: #fff;
+}
+
+.post-header .author-paragraph {
+    font-size: 1.1em;
+    color: #ccc;
+}
+
+/* Секция с изображением */
+.post-image {
     text-align: center;
+    margin: 20px 0;
+}
+
+.post-image img {
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(74, 144, 226, 0.5);
+    max-width: 100%;
+    height: auto;
+}
+
+/* Секция контента */
+.post-content h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.post-content p {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: #ccc;
+}
+
+/* Кнопка Like */
+.like-button {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 12px 24px;
+    font-size: 1.5em;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: rgba(147, 196, 22, 0.7); /* Акцентный голубой */
+    color: white;
+    border-top: 1px solid white;
+    transition: all 0.3s ease;
+}
+
+.like-button:hover {
+    background-color: #93c416; /* Темнее голубой */
+    transform: scale(1.07);
+    box-shadow: 0 6px 15px #93c416;
+}
+
+/* Секция комментариев */
+.comments-section {
+    margin-top: 40px;
+}
+
+.comments-section h2 {
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+/* Форма комментариев */
+form label, input, textarea {
+    display: block;
     width: 100%;
     margin-bottom: 15px;
     font-size: 1.2em;
+    color: #fff;
 }
 
-/* Стили для input и textarea */
-input, textarea {
+form label {
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+form textarea {
     padding: 10px;
     border-radius: 5px;
     border: none;
     background-color: rgba(255, 255, 255, 0.2);
     color: white;
+    font-size: 1em;
+    resize: vertical;
 }
 
-
-/* Стили для секции комментариев и кнопки "Like" */
-.like-button {
+/* Кнопка отправки комментария */
+.comment-submit-button {
     padding: 12px 24px;
-    font-size: 1.5em;
+    font-size: 1.2em;
     font-weight: 600;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     border-radius: 8px;
     cursor: pointer;
-    background: linear-gradient(135deg, #d100d1, #6f21b8);
+    background-color: #4a90e2; /* Акцентный голубой */
     color: white;
+    border: none;
     border-top: 1px solid white;
-    box-shadow: 0 4px 10px rgba(138, 43, 226, 0.5);
+    box-shadow: 0 4px 10px rgba(74, 144, 226, 0.5);
     margin-top: 20px;
     transition: all 0.3s ease;
 }
 
-.like-button:hover {
-    background: linear-gradient(135deg, #ff00ff, #8e2aeb);
-    transform: scale(1.07);
-    box-shadow: 0 6px 15px rgba(138, 43, 226, 0.7);
+.comment-submit-button:hover {
+    background-color: #3a7bc8; /* Темнее голубой */
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(74, 144, 226, 0.7);
 }
 
-/* Стили для секции комментариев */
+.comment-submit-button:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 5px rgba(74, 144, 226, 0.7);
+}
+
+/* Отдельные комментарии */
 .comment {
-    background-color: #f9f9f9;
+    background-color: #2a2a2a; /* Темный фон для комментариев */
     padding: 15px;
-    margin-bottom: 15px;
+    margin-top: 15px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .comment p {
     margin: 5px 0;
+    color: #ccc; /* Светло-серый текст */
 }
 
 .comment strong {
-    color: #000000;
+    color: #fff; /* Основной текст белый */
+}
+
+/* Ссылка автора */
+.author-link {
+    color: #4a90e2; /* Акцентный голубой */
+    text-decoration: none;
+    font-weight: 600;
+    font-style: normal; /* Убираем курсив */
+    transition: color 0.3s ease;
+}
+
+.author-link:hover {
+    color: #3a7bc8; /* Темнее голубой */
+    text-decoration: underline;
+}
+
+/* Параграф автора */
+.author-paragraph {
+    margin: 10px 0;
+    font-size: 1.1em;
+}
+
+.author-paragraph strong {
+    color: #fff; /* Основной текст белый */
+}
+@media (max-width: 768px)  and (orientation: landscape){
+    header h1 {
+        font-size: 42px;
+    }
+
+    main {
+        padding: 15px;
+    }
+
+    .post-image img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .post-content h2,
+    .comments-section h2 {
+        font-size: 24px;
+    }
+
+    .like-button,
+    .comment-submit-button {
+        font-size: 1.2em;
+        padding: 10px 20px;
+    }
+
+    form label, input, textarea {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px)  and (orientation: landscape){
+    header h1 {
+        font-size: 32px;
+    }
+
+    .post-image img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+    }
+
+    .author-paragraph {
+        font-size: 1em;
+    }
+
+    .like-button,
+    .comment-submit-button {
+        width: 100%;
+        font-size: 1em;
+        padding: 10px;
+    }
+
+    .post-content p,
+    .comment p {
+        font-size: 1em;
+    }
+
+    form label,
+    form textarea {
+        font-size: 0.95em;
+    }
+
+    .comment {
+        padding: 12px;
+    }
 }

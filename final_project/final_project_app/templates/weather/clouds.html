@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .cloud {
+        font-size: 80px;
+        position: absolute;
+        color: #ccc;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        opacity: 0.9;
+        z-index: -1;
+    }
+
+    /* Траектории движения облаков */
+    .cloud-1 {
+        left: -10%;
+        top: 10%;
+        animation-name: drift1;
+        animation-duration: 25s;
+    }
+
+    .cloud-2 {
+        right: -10%;
+        top: 20%;
+        animation-name: drift2;
+        animation-duration: 40s;
+    }
+
+    .cloud-3 {
+        left: -5%;
+        top: 30%;
+        animation-name: drift3;
+        animation-duration: 40s;
+    }
+
+    .cloud-4 {
+        right: -5%;
+        top: 40%;
+        animation-name: drift4;
+        animation-duration: 25s;
+    }
+
+
+    /* Анимации движения */
+    @keyframes drift1 {
+        0% {
+            left: -10%;
+        }
+        100% {
+            left: 110%;
+        }
+    }
+
+    @keyframes drift2 {
+        0% {
+            right: -10%;
+        }
+        100% {
+            right: 110%;
+        }
+    }
+
+    @keyframes drift3 {
+        0% {
+            left: -5%;
+        }
+        100% {
+            left: 105%;
+        }
+    }
+
+    @keyframes drift4 {
+        0% {
+            right: -5%;
+        }
+        100% {
+            right: 105%;
+        }
+    }
+
+    @keyframes drift5 {
+        0% {
+            left: -15%;
+        }
+        100% {
+            left: 115%;
+        }
+    }
+</style>
+<body>
+    <div class="cloud cloud-1">☁️</div>
+    <div class="cloud cloud-2">☁️</div>
+    <div class="cloud cloud-3">☁️</div>
+    <div class="cloud cloud-4">☁️</div>
+
+</body>
+</html>

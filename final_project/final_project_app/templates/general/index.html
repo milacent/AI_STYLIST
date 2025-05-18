@@ -3,24 +3,37 @@
 <head>
     {% load static %}
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main Page</title>
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
 </head>
 <body>
         <header>
-            <h1>Welcome to<br>AI Fashion Stylist!</h1>
-            <p>Your personal AI assistant for perfect outfits</p>
+            <h1>
+                <span class="highlight-large">Welcome</span> to<br>
+                <span class="highlight-medium">AI Fashion</span> <span class="highlight-medium">Stylist</span>!
+            </h1>
+            <p>Your <span class="highlight-color">personal</span> AI assistant for <span class="highlight-color">perfect</span> outfits</p>
         </header>
 
+
     <div class="buttons">
-        <button id="log-in" class="first-register"><a id="log-in-a" href="{% url 'log_in' %}">Log In</a></button>
-        <button id="sign-up" class="first-register"><a id="sign-up-a" href="{% url 'sign_up' %}">Sign Up</a></button>
+        <a id="log-in" class="first-register" href="{% url 'log_in' %}"><span>Log In</span></a>
+        <a id="sign-up" class="first-register" href="{% url 'sign_up' %}"><span>Sign Up</span></a>
     </div>
+
     <div class="sections">
         <section class="section-animate">
-            <h2>Outfit of the day</h2>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmuUqkZ96bcMLggccaTiDcl5AUUSpGxYuu2w&s">
-            <p>Stay trendy with our AI-picked outfit of the day!</p>
+            <h2>Post of the day</h2>
+            {% if top_post %}
+                <img src="{{ top_post.image.url }}" alt="Top outfit">
+                <h3>{{ top_post.title }}</h3>
+                <p>{{ top_post.description }}</p>
+                <p>Likes: {{ max_likes }}</p>
+            {% else %}
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmuUqkZ96bcMLggccaTiDcl5AUUSpGxYuu2w&s">
+                <p>Stay trendy!</p>
+            {% endif %}
         </section>
 
         <section class="why-choose-us section-animate">
@@ -59,6 +72,9 @@
             </div>
         </section>
     </div>
+        <br>
+        <br>
+        <br>
     <footer>
         {% include 'general/footer.html' %}
     </footer>

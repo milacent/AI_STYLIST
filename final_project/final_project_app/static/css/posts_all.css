@@ -1,24 +1,22 @@
 body {
     font-family: 'Lora', sans-serif;
-    background-image: radial-gradient(#610261 0%, #16213e 70%);
-    color: white;
+    background-color: #161616; /* Очень тёмный фон */
+    color: #fff; /* Основной текст белый */
     text-align: center;
     margin: 0;
     padding: 0;
 }
 
-
-header{
+header {
     padding: 20px;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-
 }
-header h1{
+
+header h1 {
     font-size: 70px;
     opacity: 0.85;
+    color: #fff; /* Основной текст белый */
 }
+
 .post-list {
     list-style: none;
     padding: 0;
@@ -28,48 +26,46 @@ header h1{
 }
 
 .post-list li {
-    background-color: rgba(22, 33, 62, 0.9);
+    background-color: #1f1f1f; /* Темный фон для элементов списка */
     margin: 50px auto;
     width: 550px;
-    height: 700px;
+    height: auto;
     border-radius: 5px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .post-list li:hover {
     transform: scale(1.05);
-    box-shadow: 0px 15px 40px rgba(255, 0, 255, 0.9);
+    box-shadow: 0px 15px 40px rgba(74, 144, 226, 0.9); /* Голубой цвет для тени */
 }
 
 img {
-    width: 100%;
+    margin-top: 20px;
+    width: 400px;
     max-width: 550px;
-    height: 500px;
+    height: auto;
     object-fit: contain;
 }
-
-
-h2 {
-    height: 50px;
-    color: #e000e0;
-    font-size: 50px;
-    padding-bottom: 50px;
-    margin:0
-}
-
-
-.post-link {
-    text-decoration: none;
-    color: inherit;
-}
-
 .user_desc {
-    margin-left:20px;
+    margin-left: 0px;
     display: flex;
     gap: 10px;
     align-items: center;
 }
 
+
+h2 {
+    height: 50px;
+    color: rgba(147, 196, 22, 0.7); /* Акцентный голубой */
+    font-size: 50px;
+    padding-bottom: 50px;
+    margin: 0;
+}
+
+.post-link {
+    text-decoration: none;
+    color: inherit;
+}
 
 .button {
     padding: 12px 24px;
@@ -80,14 +76,78 @@ h2 {
     text-decoration: none;
     font-weight: 600;
     transition: all 0.3s ease;
-    background: linear-gradient(135deg, #d100d1, #6f21b8);
+    background-color: #4a90e2; /* Акцентный голубой */
     color: white;
     border-top: 1px solid white;
-    box-shadow: 0 4px 10px rgba(138, 43, 226, 0.5);
+    box-shadow: 0 4px 10px rgba(74, 144, 226, 0.5);
 }
 
 .button:hover {
-    background: linear-gradient(135deg, #ff00ff, #8e2aeb);
+    background-color: #3a7bc8; /* Темнее голубой */
     transform: scale(1.07);
-    box-shadow: 0 6px 15px rgba(138, 43, 226, 0.7);
+    box-shadow: 0 6px 15px rgba(74, 144, 226, 0.7);
+}
+.author-link {
+    color: #4a90e2; /* Акцентный голубой */
+    text-decoration: none;
+    font-style: normal; /* Убираем курсив */
+    transition: color 0.3s ease;
+}
+
+.author-link:hover {
+    color: #3a7bc8; /* Темнее голубой */
+    text-decoration: underline;
+}
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 44px;
+    }
+
+    .post-list li {
+        width: 90%;
+    }
+
+    .button {
+        font-size: 1em;
+        padding: 10px 20px;
+    }
+
+    h2 {
+        font-size: 30px;
+    }
+
+    img {
+        height: 350px;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 36px;
+    }
+
+    .post-list li {
+        width: 95%;
+        margin: 20px auto;
+    }
+
+
+    .button {
+        width: 80%;
+        font-size: 0.95em;
+        padding: 8px 16px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    img {
+        height: 250px;
+    }
+
+    .user_desc {
+        font-size: 0.9em;
+        margin: 10px;
+    }
 }

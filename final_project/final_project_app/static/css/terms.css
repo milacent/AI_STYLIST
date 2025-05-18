@@ -1,69 +1,89 @@
+/* Основной фон и шрифты */
 body {
-    font-family: 'Lora', sans-serif;
-    background-image: radial-gradient(#610261 0%, #16213e 70%);
-    color: white;
-    text-align: center;
     margin: 0;
-    padding: 0;
+    padding: 30px;
+    font-family: 'SF Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #161616; /* Очень тёмный фон */
+    color: #fff; /* Основной текст белый */
+    line-height: 1.6;
+}
+
+/* Заголовки */
+h1, h2 {
+    color: #4a90e2; /* Акцентный голубой */
+    margin-bottom: 20px;
 }
 
 h1 {
-    font-size: 60px;
-    opacity: 0.85;
-    margin-top: 30px;
+    font-size: 2.5em;
+    text-align: center;
+    margin-top: 20px;
+    border-bottom: 1px solid #4a90e2; /* Подчеркивание заголовка */
+    padding-bottom: 10px;
 }
 
 h2 {
-    font-size: 40px;
-    color: #e000e0;
+    font-size: 1.8em;
     margin-top: 30px;
 }
 
-p, ul {
-    font-size: 1.3em;
-    width: 60%;
-    margin: 20px auto;
-    text-align: left;
-    background-color: rgba(22, 33, 62, 0.8);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 5px 20px rgba(255, 0, 255, 0.7);
+/* Текст */
+p {
+    color: #ccc;
+    margin-bottom: 20px;
 }
 
+/* Списки */
 ul {
-    padding-left: 40px;
+    margin-bottom: 25px;
+    padding-left: 30px;
+    list-style-type: none;
 }
 
-li {
-    margin: 10px 0;
+ul li {
+    color: #aaa;
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 15px;
 }
 
-a {
-    color: #00ffe5;
-    text-decoration: none;
-    font-size: 1.2em;
+ul li::before {
+    content: "•";
+    color: #4a90e2;
+    position: absolute;
+    left: 0;
 }
 
-a:hover {
-    text-decoration: none;
-}
-
+/* Кнопка "Back" */
 .button {
-    padding: 12px 24px;
-    font-size: 1.5em;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
+    display: inline-block;
+    margin: 20px 0;
+    padding: 12px 25px;
+    background-color: #2a2a2a;
+    color: #fff;
     text-decoration: none;
+    border-radius: 8px;
     font-weight: 600;
-    transition: all 0.3s ease;
-    background: linear-gradient(135deg, #d100d1, #6f21b8);
-    color: white;
-    border-top: 1px solid white;
-    box-shadow: 0 4px 10px rgba(138, 43, 226, 0.5);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
+
 .button:hover {
-    background: linear-gradient(135deg, #ff00ff, #8e2aeb);
-    transform: scale(1.07);
-    box-shadow: 0 6px 15px rgba(138, 43, 226, 0.7);
+    background-color: #3a3a3a;
+    transform: translateY(-2px);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    body {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
 }

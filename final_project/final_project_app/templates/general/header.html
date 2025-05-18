@@ -3,21 +3,33 @@
 <head>
     {% load static %}
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Header</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-
-    <header>
+{% if user.is_authenticated %}
+    <header class="mainheader">
         <div class="nav-container">
             <button onclick="window.location.href='{% url 'for_you' %}'">For you</button>
             <button onclick="window.location.href='{% url 'scrolling' %}'">Scrolling</button>
             <button onclick="window.location.href='{% url 'posts_all' %}'">Posts</button>
-            <button onclick="window.location.href='{% url 'profile' %}'">Profile</button>
+            <div class="dropdown">
+                <a href="{% url 'profile' request.user.username %}" class="dropbtn">Profile</a>
+                <div class="dropdown-content">
+                    <a href="{% url 'profile' request.user.username %}">Go to Profile</a>
+                    <a href="{% url 'profile_edit' %}">Edit Profile</a>
+                    <a href="{% url 'view_all_saved' %}">Saved Looks</a>
+                    <a href="{% url 'view_all_liked' %}">Liked Looks</a>
+                    <a href="{% url 'view_all_disliked' %}">Disliked Looks</a>
+                    <a href="{% url 'gallery_liked' %}">Liked Posts</a>
+                </div>
+            </div>
             <button onclick="window.location.href='{% url 'about' %}'">About</button>
             <button onclick="window.location.href='{% url 'log_out' %}'">Log out</button>
         </div>
     </header>
-
+        {% endif %}
 </body>
 </html>

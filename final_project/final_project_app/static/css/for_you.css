@@ -1,61 +1,389 @@
 body {
-    font-family: 'Lora', sans-serif;
-    background-image: radial-gradient(#610261 0%, #16213e 70%);
-    color: white;
-    text-align: center;
     margin: 0;
     padding: 0;
+    font-family: 'SF Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #161616;
+    color: #fff;
+    text-align: center;
 }
 
-.head{
+.head {
     padding: 20px;
     font-size: 3em;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 2px;
-    opacity: 0.9
+    opacity: 0.9;
 }
 
-/*
-nav {
+.outfit-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.error-message {
+    color: #721c24;
+    background-color: #f8d7da;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.weather-info {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.weather-info h1 {
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.city-label {
+    color: #7f8c8d;
+    font-style: italic;
+}
+
+.outfit-card {
+    width: 320px;
+    margin: 40px auto;
+    background: #1f1f1f;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.outfit-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 280px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.item-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-right: 12px;
+}
+
+.item-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    color: #eee;
+    font-size: 13px;
+    flex-grow: 1;
+}
+
+.item-info h3 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.item-meta {
+    display: flex;
+    gap: 6px;
+    margin-top: 4px;
+    flex-wrap: wrap;
+}
+
+.style-badge, .material-badge {
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.style-badge {
+    background-color: #3498db;
+    color: black;
+}
+
+.material-badge {
+    background-color: rgba(147, 196, 22, 0.7);
+    color: black;
+}
+
+.outfit-actions {
     display: flex;
     justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.save-button,
+.regenerate-button {
+    padding: 12px 0;
+    width: 200px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+}
+
+.save-button {
+    background-color: rgba(147, 196, 22, 0.7);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+    font-size: 20px;
+    text-transform: uppercase;
+    height: 82px;
+}
+
+.save-button:hover,
+.save-button:focus {
+    background-color: #93c416;
+    box-shadow: 0 12px 35px #93c416;
+    transform: scale(1.07);
+    outline: none;
+    color: black
+}
+
+.regenerate-button {
+    background: transparent;
+    color: #c26015;
+    border: 1px solid #c26015;
+    height: 37px;
+    text-align: center;
+    align-items: center;
+    padding-top: 30px;
+    font-size: 20px;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+}
+
+.regenerate-button:hover {
+    background: rgba(224, 101, 13, 0.08);
+    color: white
+}
+
+.regenerate-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #d17a00;
+    z-index: -1;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+.regenerate-button:hover::before {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.look-section {
+    margin-bottom: 40px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+}
+
+.section-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.looks-container {
+    display: flex;
+    flex-wrap: wrap;
     gap: 20px;
-    padding: 15px;
-    background-color: #16213e;
-    backdrop-filter: blur(10px);
 }
-nav a {
-    color: #f932fc;
-    font-weight: bold;
-    text-decoration: none;
-    transition: color 0.3s;
+
+.look-actions {
+    margin-top: 15px;
 }
-nav a:hover {
-    color: #ff99cc;
-}
-*/
-section {
-    margin: 50px auto;
-    width: 80%;
-    padding: 30px;
-    background-color: #16213e;
+
+.status-badge {
+    padding: 5px 10px;
     border-radius: 15px;
-    box-shadow: 0px 5px 20px rgba(255, 0, 255, 0.7);
-}
-h2 {
-    color: #d400d4;
-    font-size: 3em
-}
-.content a {
-    color: #00ffe5;
-    text-decoration: none;
+    font-size: 14px;
+    margin-right: 10px;
 }
 
-.content a:hover {
-    text-decoration: underline;
+.saved-badge {
+    background-color: #ffeb3b;
+    color: #000;
 }
 
-section p{
-    font-size: 1.5em
+.liked-badge {
+    background-color: #f44336;
+    color: white;
+}
+
+.disliked-badge {
+    background-color: #9e9e9e;
+    color: white;
+}
+.reset-city-btn {
+    margin: 10px 0;
+    padding: 6px 16px;
+    background: #4a90e2;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.reset-city-btn:hover {
+    color: white;
+    background-color: #3a7bc8; /* Темнее голубой */
+    transform: scale(1.07);
+    box-shadow: 0 6px 15px rgba(74, 144, 226, 0.7);
+}
+.sbros {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* выравнивание по левому краю */
+    gap: 8px; /* расстояние между элементами */
+}
+
+/* Modal styles */
+#cityModal.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+#cityModal .modal-content {
+    background: #1f1f1f;
+    margin: 0 auto;
+    padding: 32px 24px 24px 24px;
+    width: 90%;
+    max-width: 360px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.15);
+    position: relative;
+    animation: fadeIn 0.3s;
+}
+
+#cityModal h2 {
+    font-size: 1.5em;
+    margin-bottom: 24px;
+    color: #4a90e2;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+#cityModal button {
+    width: 100%;
+    padding: 12px 0;
+    margin: 8px 0;
+    background: #161616;
+    color: #4a90e2;
+    border: 1px solid #4a90e2;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(74, 144, 226, 0.08);
+}
+
+#cityModal button:hover,
+#cityModal button:focus {
+    background: #4a90e2;
+    box-shadow: 0 4px 16px rgba(74, 144, 226, 0.15);
+    color: black
+}
+
+#cityModal #citySelectDiv {
+    margin-top: 20px;
+    display: none;
+}
+
+#cityModal label {
+    display: block;
+    margin-bottom: 8px;
+    color: #ccc;
+    font-size: 1em;
+}
+
+#cityModal select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #4a90e2;
+    margin-bottom: 12px;
+    font-size: 1em;
+}
+@media (max-width: 600px) {
+
+    /* Уменьшаем текст в footer или других местах */
+    .footer-content p {
+        font-size: 0.6em;
+    }
+
+    /* Сдвиг значка Telegram влево */
+    .telegram-icon {
+        margin-left: -10px; /* или уменьшить padding/margin */
+        transform: translateX(-8px);
+    }
+
+    /* Сдвиг кнопки влево */
+    .save-button,
+    .regenerate-button {
+        margin-left: 10px;
+        width: 180px; /* чуть уже на мобилках */
+    }
+
+    /* Уменьшаем размер шрифта кнопок */
+    .save-button,
+    .regenerate-button {
+        font-size: 14px;
+        padding: 10px 0;
+    }
+
+    /* Центрируем контент плотнее */
+    .outfit-card {
+        width: 90%;
+        padding: 16px 8px;
+    }
+
+    .item-info h3 {
+        font-size: 12px;
+    }
+
+    .item-meta span {
+        font-size: 12px;
+    }
+
+    .sbros {
+        align-items: flex-start; /* левое выравнивание */
+        padding-left: 10px;
+    }
 }

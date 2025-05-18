@@ -3,42 +3,62 @@
 <head>
     {% load static %}
     <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us</title>
     <link rel="stylesheet" href="{% static 'css/about.css' %}">
 </head>
 <body>
-    {%include 'general/header.html' %}
-    <header class="head">
+    {%include 'general/preloader.html' %}
+    {% include 'general/header.html' %}
+    <div class="head">
         <h1>AI Fashion Stylist</h1>
         <p>Your personal fashion assistant powered by AI</p>
-    </header>
-<!--
-    <nav>
-        <a href="#about">About Us</a> |
-        <a href="#contact">Contact</a> |
-        <a href="#promote">Promote</a>
-    </nav>
--->
-<main class="content">
-    <section id="about">
-        <h2>About Us</h2>
-        <p>At AI Fashion Stylist, we use AI technology to help you choose the perfect outfit for every occasion...</p>
-    </section>
+    </div>
 
-    <section id="contact">
-        <h2>Contact</h2>
-        <p>Email: <a href="mailto:support@aifashion.com">support@aifashion.com</a></p>
-    </section>
 
-    <section id="promote">
-        <h2>Promote</h2>
-        <p>Want to partner with us and promote your clothing brand on our platform? We offer exciting opportunities for collaborations. Reach out to us for promotional packages and partnership details.</p>
-        <p>Email: <a href="mailto:promotions@aifashion.com">promotions@aifashion.com</a></p>
-    </section>
-</main>
+    <main class="content">
+        <section id="about" class="section-animate">
+            <h2>About Us</h2>
+            <p>At AI Fashion Stylist, we use AI technology to help you choose the perfect outfit for every occasion...</p>
+        </section>
 
+        <section id="contact" class="section-animate">
+            <h2>Contact</h2>
+            <p>Email: <a href="mailto:support@aifashion.com">support@aifashion.com</a></p>
+        </section>
+
+        <section id="promote" class="section-animate">
+            <h2>Promote</h2>
+            <p>Want to partner with us and promote your clothing brand on our platform? We offer exciting opportunities for collaborations. Reach out to us for promotional packages and partnership details.</p>
+            <p>Email: <a href="mailto:promotions@aifashion.com">promotions@aifashion.com</a></p>
+        </section>
+    </main>
+    <br>
+    <br>
+    <br>
     <footer>
         {% include 'general/footer.html' %}
     </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const sections = document.querySelectorAll(".section-animate");
+
+            const checkVisibility = () => {
+                sections.forEach((section) => {
+                    const sectionTop = section.getBoundingClientRect().top;
+                    const sectionBottom = section.getBoundingClientRect().bottom;
+
+                    if (sectionTop < window.innerHeight && sectionBottom > 0) {
+                        section.classList.add("fade-in");
+                    }
+                });
+            };
+
+            window.addEventListener("scroll", checkVisibility);
+            window.addEventListener("resize", checkVisibility);
+            checkVisibility();
+        });
+    </script>
 </body>
 </html>

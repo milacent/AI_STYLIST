@@ -3,49 +3,215 @@
 <head>
     {% load static %}
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Title</title>
     <link rel="stylesheet" href="{% static 'css/for_you.css' %}">
 
 </head>
-<body>
-    {%include 'general/header.html' %}
-    <h1>Choose your outfit!</h1>
-    <label for="event">Event type:</label>
-    <select id="event">
-        <option value="casual">Casual</option>
-        <option value="formal">Formal</option>
-        <option value="party">Party</option>
-        <option value="sport">Sport</option>
-    </select>
-    <br><br>
-    <label for="mood">Mood:</label>
-    <select id="mood">
-        <option value="bright">Bright</option>
-        <option value="dark">Dark</option>
-        <option value="neutral">Neutral</option>
-    </select>
-    <br><br>
-    <button onclick="generateOutfit()">Create outfit</button>
-    <div id="model"></div>
-    <h2 id="outfit"></h2>
+<!-- City selection modal window -->
+<div id="cityModal" class="modal">
+    <div class="modal-content">
+        <h2>Is your city Moscow?</h2>
+        <button id="confirmMoscowBtn">Yes</button>
+        <button id="chooseCityBtn">No, choose another</button>
 
-    <img src="{{ item.image_url }}" alt="{{ item.name }}" class="clothing-image">
+        <div id="citySelectDiv">
+            <label for="citySelect">Choose a city:</label>
+            <select id="citySelect">
+                <option value="Moscow">Moscow</option>
+                <option value="Saint Petersburg">Saint Petersburg</option>
+                <option value="Novosibirsk">Novosibirsk</option>
+                <option value="Yekaterinburg">Yekaterinburg</option>
+                <option value="Kazan">Kazan</option>
+            </select>
+            <button id="submitCityBtn">Confirm</button>
+        </div>
 
-    <script>
-        function generateOutfit() {
-            const event = document.getElementById('event').value;
-            const mood = document.getElementById('mood').value;
+        <div>
+            <button id="useGeoBtn">Spot by geolocation</button>
+        </div>
+    </div>
+</div>
 
-            const outfits = {
-                casual: { bright: 'T-shirt', dark: 'Hoodie', neutral: 'Shirt' },
-                formal: { bright: 'Red suit', dark: 'Black suit', neutral: 'Gray suit' },
-                party: { bright: 'Red dress', dark: 'Black dress', neutral: 'Grey dress'},
-                sport: {bright: 'Neon top', dark: 'Black shirt', neutral: 'Gray sportswear'}
-            };
 
-            document.getElementById('outfit').innerText = outfits[event][mood];
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Проверяем, есть ли сохраненный город в localStorage
+    let savedCity = localStorage.getItem('userCity');
+    if (!savedCity) {
+        // Показываем модальное окно
+        document.getElementById('cityModal').style.display = 'block';
+    } else {
+        // Проверяем, есть ли город в URL-пути (/for_you/<город>/)
+        let pathParts = window.location.pathname.split('/');
+        // pathParts: ["", "for_you", "Moscow", ""]
+        if (!(pathParts.length >= 3 && pathParts[2])) {
+            // Перенаправляем на /for_you/<город>/
+            window.location.href = '/for_you/' + encodeURIComponent(savedCity) + '/';
         }
-    </script>
+    }
 
+    document.getElementById('confirmMoscowBtn').onclick = function() {
+        localStorage.setItem('userCity', 'Moscow');
+        window.location.href = '/for_you/Moscow/';
+    };
+
+    document.getElementById('chooseCityBtn').onclick = function() {
+        document.getElementById('citySelectDiv').style.display = 'block';
+    };
+
+    document.getElementById('submitCityBtn').onclick = function() {
+        let city = document.getElementById('citySelect').value;
+        localStorage.setItem('userCity', city);
+        window.location.href = '/for_you/' + encodeURIComponent(city) + '/';
+    };
+
+    document.getElementById('useGeoBtn').onclick = function() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                // Отправляем координаты на сервер для определения города
+                fetch(`/get_city_by_coords/?lat=${position.coords.latitude}&lon=${position.coords.longitude}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.city) {
+                        localStorage.setItem('userCity', data.city);
+                        window.location.href = '/for_you/' + encodeURIComponent(data.city) + '/';
+                    } else {
+                        alert('Не удалось определить город по геолокации.');
+                    }
+                })
+                .catch(() => alert('Ошибка при определении города.'));
+            }, function() {
+                alert('Геолокация отклонена пользователем.');
+            });
+        } else {
+            alert('Геолокация не поддерживается вашим браузером.');
+        }
+    };
+    const resetBtn = document.getElementById('resetCityBtn');
+    if (resetBtn) {
+        resetBtn.onclick = function() {
+            localStorage.removeItem('userCity');
+            // Перезагрузка страницы для показа модального окна выбора города
+            window.location.href = '/for_you/';
+        };
+    }
+});
+</script>
+
+
+<body>
+    {%include 'general/preloader.html' %}
+        {% if weather_template %}
+            {% include weather_template %}
+        {% else %}
+            <p>Погодные данные недоступны или не определены.</p>
+        {% endif %}
+
+        {% if error %}
+            <p style="color:red;">Ошибка: {{ error }}</p>
+        {% endif %}
+        {%include 'general/header.html' %}
+        {% block content %}
+        <div class="sbros">
+            <span>Your City: {{ city }}</span>
+            <button id="resetCityBtn" class="reset-city-btn">Reset</button>
+        </div>
+
+        <div class="outfit-items">
+            <div class="outfit-card">
+                <!-- Шапка -->
+                {% if look.head %}
+                <div class="outfit-item head-item">
+                    <img src="{% static 'images/default_clothes/head/' %}{{look.temp_range}}/{{ look.head_image }}" alt="{{ look.head }}" class="item-image">
+                    <div class="item-info">
+                        <h3>{{ look.head }}</h3>
+                        <div class="item-meta">
+                            <span class="style-badge">{{ look.head_style }}</span>
+                            <span class="material-badge">{{ look.head_material }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Верхняя одежда -->
+                {% if look.outerwear and look.outerwear_image and look.outerwear_image != 'nan' %}
+                <div class="outfit-item outerwear-item">
+                    <img src="{% static 'images/default_clothes/outerwear/' %}{{look.temp_range}}/{{ look.outerwear_image }}" alt="{{ look.outerwear }}" class="item-image">
+                    <div class="item-info">
+                        <h3>{{ look.outerwear }}</h3>
+                        <div class="item-meta">
+                            <span class="style-badge">{{ look.outerwear_style }}</span>
+                            <span class="material-badge">{{ look.outerwear_material }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Верх -->
+                {% if look.top %}
+                <div class="outfit-item top-item">
+                    <img src="{% static 'images/default_clothes/tops/' %}{{look.temp_range}}/{{ look.top_image }}" alt="{{ look.top }}" class="item-image">
+                    <div class="item-info">
+                        <h3>{{ look.top }}</h3>
+                        <div class="item-meta">
+                            <span class="style-badge">{{ look.top_style }}</span>
+                            <span class="material-badge">{{ look.top_material }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Низ -->
+                {% if look.bottom %}
+                <div class="outfit-item bottom-item">
+                    <img src="{% static 'images/default_clothes/bottoms/' %}{{look.temp_range}}/{{ look.bottom_image }}" alt="{{ look.bottom }}" class="item-image">
+                    <div class="item-info">
+                        <h3>{{ look.bottom }}</h3>
+                        <div class="item-meta">
+                            <span class="style-badge">{{ look.bottom_style }}</span>
+                            <span class="material-badge">{{ look.bottom_material }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Обувь -->
+                {% if look.shoes %}
+                <div class="outfit-item shoes-item">
+                    <img src="{% static 'images/default_clothes/shoes/' %}{{look.temp_range}}/{{ look.shoes_image }}" alt="{{ look.shoes }}" class="item-image">
+                    <div class="item-info">
+                        <h3>{{ look.shoes }}</h3>
+                        <div class="item-meta">
+                            <span class="style-badge">{{ look.shoes_style }}</span>
+                            <span class="material-badge">{{ look.shoes_material }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+            <div class="outfit-actions">
+                {% if look %}
+                    <form method="post" action="{% url 'save_look_empty' %}" class="save-form">
+                        {% csrf_token %}
+                        <input type="hidden" name="city" value="{{ city }}">
+                        <input type="hidden" name="look_id" value="{{ look.id }}">
+                        <button type="submit" class="save-button">Save look</button>
+                    </form>
+
+                {% endif %}
+                <a href="{% url 'for_you' city=city %}" class="regenerate-button">New look</a>
+            </div>
+
+                {% if error %}
+            <div class="error-message" style="color: red; padding: 20px;">
+                Ошибка: {{ error }}
+            </div>
+
+            {% endif %}
+            {% endblock %}
 </body>
 </html>

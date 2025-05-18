@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Snow Animation</title>
+  <style>
+    .snowflake {
+      font-size: 30px;
+      color: white;
+      position: absolute;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      opacity: 0.9;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .snowflake-1 {
+      top: -10%;
+      left: 10%;
+      animation-name: snowFall1;
+      animation-duration: 10s;
+    }
+
+    .snowflake-2 {
+      top: -10%;
+      left: 45%;
+      animation-name: snowFall2;
+      animation-duration: 12s;
+    }
+
+    .snowflake-3 {
+      top: -10%;
+      left: 75%;
+      animation-name: snowFall3;
+      animation-duration: 9s;
+    }
+
+    /* Анимации падения снежинок */
+    @keyframes snowFall1 {
+      0% {
+        top: -10%;
+        left: 10%;
+        opacity: 1;
+      }
+      100% {
+        top: 85%;
+        left: 14%;
+        opacity: 0;
+      }
+    }
+
+    @keyframes snowFall2 {
+      0% {
+        top: -10%;
+        left: 45%;
+        opacity: 1;
+      }
+      100% {
+        top: 85%;
+        left: 40%;
+        opacity: 0;
+      }
+    }
+
+    @keyframes snowFall3 {
+      0% {
+        top: -10%;
+        left: 75%;
+        opacity: 1;
+      }
+      100% {
+        top: 85%;
+        left: 70%;
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="snowflake snowflake-1">❄️</div>
+  <div class="snowflake snowflake-2">❄️</div>
+  <div class="snowflake snowflake-3">❄️</div>
+
+</body>
+</html>

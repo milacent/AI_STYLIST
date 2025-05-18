@@ -1,11 +1,71 @@
 footer {
-    margin-top: 50px;
+    width: 100%;
     padding: 20px;
-    background-color: rgb(19, 30, 55);
+    background-color: #2a2a2a;
     font-size: 1.2em;
-    color: white
+    color: white;
+    text-align: center;
+    margin-top: auto; /* Pushes footer to the bottom */
 }
-a {
-    color: #00ffe5;
+
+.footer-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px; /* Adds space between the text and the icon */
+    flex: 1 0 auto; /* Allows the content to grow and push the footer down */
+}
+
+.social-links a {
+    color: #4a90e2;
+    font-size: 1.5em;
     text-decoration: none;
+}
+
+.social-links a:hover {
+    color: #93c416;
+}
+
+/* Button styling */
+.help-button {
+    background-color: #4a90e2; /* Button background color */
+    color: white; /* Text color */
+    border: none; /* Remove default border */
+    padding: 10px 20px; /* Padding around text */
+    font-size: 1em; /* Font size */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.help-button:hover {
+    background-color: #93c416; /* Background color on hover */
+}
+
+/* Ensure the body takes up at least the full viewport height */
+html, body {
+    height: 100%;
+}
+@media (max-width: 600px) {
+    footer {
+        font-size: 1em; /* Меньше общий размер текста */
+        padding: 14px;
+    }
+    .footer-content {
+        flex-direction: column;
+        gap: 8px;
+    }
+    .footer-text {
+        font-size: 0.8em; /* Ещё меньше текст */
+    }
+    .social-links a {
+        font-size: 1.1em;
+    }
+    .help-button {
+        align-self: flex-start;
+        width: auto;
+        font-size: 0.9em;
+        margin-top: 8px; /* Кнопка чуть ниже блока с текстом и иконкой */
+    }
 }

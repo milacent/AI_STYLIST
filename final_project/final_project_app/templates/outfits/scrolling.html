@@ -4,44 +4,104 @@
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Discover</title>
+    <title>Scrolling</title>
     <link rel="stylesheet" href="{% static 'css/scrolling.css' %}">
 </head>
 <body>
-    {%include 'general/header.html' %}
+    {%include 'general/preloader.html' %}
+    {% include 'general/header.html' %}
 
-    <h1>Discover Fashion</h1>
-    <p>Swipe to choose your favorite looks!</p>
+    <h1 class="page-title">SWIPE</h1>
+    <br>
 
-    <div>
-        <div id="card1">
-            <img>
-            <h3>User 1</h3>
-            <p>Stylish casual look, perfect for a weekend getaway!</p>
-            <button>Like</button>
-            <button>Dislike</button>
-        </div>
+    <div class="cards-container" id="cardsContainer">
+        {% if looks %}
+            {% for look in looks %}
+            <div class="outfit-card" data-look-id="{{ look.id }}">
+                <div class="swipe-indicator like-indicator">👍</div>
+                <div class="swipe-indicator dislike-indicator">👎</div>
 
-        <div id="card2">
-            <img>
-            <h3>User 2</h3>
-            <p>Classic formal style with a modern twist!</p>
-            <button>Like</button>
-            <button>Dislike</button>
-        </div>
+                {% if look.head %}
+                <div class="outfit-item head-item">
+                    <img src="{% static 'images/default_clothes/head/' %}{{ look.temp_range }}/{{ look.head_image }}"
+                         alt="{{ look.head }}" class="item-image">
+                    <div class="item-info">
+                        <h3>{{ look.head }}</h3>
+                        <div class="item-meta">
+                            <span class="style-badge">{{ look.head_style }}</span>
+                            <span class="material-badge">{{ look.head_material }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
 
-        <div id="card3">
-            <img>
-            <h3>User 3</h3>
-            <p>Casual and comfy, perfect for a day at the park!</p>
-            <button>Like</button>
-            <button>Dislike</button>
-        </div>
+                {% if look.outerwear and look.outerwear_image and look.outerwear_image != 'nan' %}
+                <div class="outfit-item outerwear-item">
+                    <img src="{% static 'images/default_clothes/outerwear/' %}{{ look.temp_range }}/{{ look.outerwear_image }}"
+                         alt="{{ look.outerwear }}" class="item-image">
+                    <div class="item-info">
+                        <h3>{{ look.outerwear }}</h3>
+                        <div class="item-meta">
+                            <span class="style-badge">{{ look.outerwear_style }}</span>
+                            <span class="material-badge">{{ look.outerwear_material }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
 
+                {% if look.top %}
+                <div class="outfit-item top-item">
+                    <img src="{% static 'images/default_clothes/tops/' %}{{ look.temp_range }}/{{ look.top_image }}"
+                         alt="{{ look.top }}" class="item-image">
+                    <div class="item-info">
+                        <h3>{{ look.top }}</h3>
+                        <div class="item-meta">
+                            <span class="style-badge">{{ look.top_style }}</span>
+                            <span class="material-badge">{{ look.top_material }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if look.bottom %}
+                <div class="outfit-item bottom-item">
+                    <img src="{% static 'images/default_clothes/bottoms/' %}{{ look.temp_range }}/{{ look.bottom_image }}"
+                         alt="{{ look.bottom }}" class="item-image">
+                    <div class="item-info">
+                        <h3>{{ look.bottom }}</h3>
+                        <div class="item-meta">
+                            <span class="style-badge">{{ look.bottom_style }}</span>
+                            <span class="material-badge">{{ look.bottom_material }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if look.shoes %}
+                <div class="outfit-item shoes-item">
+                    <img src="{% static 'images/default_clothes/shoes/' %}{{ look.temp_range }}/{{ look.shoes_image }}"
+                         alt="{{ look.shoes }}" class="item-image">
+                    <div class="item-info">
+                        <h3>{{ look.shoes }}</h3>
+                        <div class="item-meta">
+                            <span class="style-badge">{{ look.shoes_style }}</span>
+                            <span class="material-badge">{{ look.shoes_material }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="no-looks-message" style="text-align: center; margin-top: 20px;">
+                <p>No new looks</p>
+                <button id="loadMoreButton" style="font-size: 16px; cursor: pointer;">
+                    Show more
+                </button>
+            </div>
+        {% endif %}
     </div>
 
-    <footer>
-        {% include 'general/footer.html' %}
-    </footer>
+    <script src="{% static 'js/scrolling.js' %}"></script>
 </body>
 </html>
