@@ -25,7 +25,7 @@ Follow these steps to set up the AI-Stylist application locally:
 Open your terminal and run:
 ```
 git clone https://gitlab.informatics.ru/2024-2025/hse/s101/mshp-final-project-meow.git
-cd first_project
+cd final_project
 ```
 
 ### 2. Create and activate a virtual environment
