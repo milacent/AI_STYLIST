@@ -12,7 +12,7 @@
 {% if user.is_authenticated %}
     <header class="mainheader">
         <div class="nav-container">
-            <button onclick="window.location.href='{% url 'for_you' %}'">For you</button>
+            <button onclick="window.location.href='{% url 'for_you' city='Moscow' %}'">For you</button>
             <button onclick="window.location.href='{% url 'scrolling' %}'">Scrolling</button>
             <button onclick="window.location.href='{% url 'posts_all' %}'">Posts</button>
             <div class="dropdown">

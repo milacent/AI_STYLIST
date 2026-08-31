@@ -78,13 +78,31 @@ document.addEventListener('DOMContentLoaded', function() {
                         localStorage.setItem('userCity', data.city);
                         window.location.href = '/for_you/' + encodeURIComponent(data.city) + '/';
                     } else {
-                        alert('Не удалось определить город по геолокации.');
+                        alert('Не удалось определить город ' + (data.error || 'Неизвестная ошибка'));
                     }
                 })
-                .catch(() => alert('Ошибка при определении города.'));
-            }, function() {
-                alert('Геолокация отклонена пользователем.');
-            });
+                .catch(error => {
+                    console.error('Fetch error:', error);
+                    alert('Ошибка при определении города: ' + error.message);
+                });
+            }, 
+            function(error) {
+                let errorMsg = '';
+                switch(error.code) {
+                    case error.PERMISSION_DENIED:
+                        errorMsg = 'Вы отклонили запрос геолокации. Пожалуйста, разрешите доступ в настройках браузера.';
+                        break;
+                    case error.POSITION_UNAVAILABLE:
+                        errorMsg = 'Информация о местоположении недоступна.';
+                        break;
+                    case error.TIMEOUT:
+                        errorMsg = 'Истекло время ожидания при определении местоположения.';
+                        break;
+                }
+                alert('Геолокация: ' + errorMsg);
+            },
+            {timeout: 10000}  // Добавить timeout
+        );
         } else {
             alert('Геолокация не поддерживается вашим браузером.');
         }

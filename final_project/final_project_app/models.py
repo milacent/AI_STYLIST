@@ -4,11 +4,6 @@ from django.contrib.auth.models import User
 
 class Info(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    #height = models.IntegerField()
-    #weight = models.IntegerField()
-    #chest = models.CharField(max_length=100, default='default_value')
-    #waist = models.IntegerField()
-    #hips = models.IntegerField()
     gender = models.IntegerField()
     about_me = models.CharField(max_length=300)
 
@@ -89,7 +84,44 @@ class ClothingItem(models.Model):
 
 
 class Looks(models.Model):
-    items = models.ForeignKey(to=Item, on_delete=models.CASCADE)
-    weather_grade = models.IntegerField()  # Насколько подходит по погоде -10 - зима +10 - жара
+    temp_range = models.CharField(max_length=20, default='0_10')  # "-20_-10", "-10_0", "0_10", etc.
+    
+    # Head
+    head = models.CharField(max_length=200, default='')
+    head_image = models.CharField(max_length=200, default='')
+    head_color = models.CharField(max_length=50, default='')
+    head_material = models.CharField(max_length=50, default='')
+    head_style = models.CharField(max_length=50, default='')
+    
+    # Outerwear
+    outerwear = models.CharField(max_length=200, default='')
+    outerwear_image = models.CharField(max_length=200, default='')
+    outerwear_color = models.CharField(max_length=50, default='')
+    outerwear_material = models.CharField(max_length=50, default='')
+    outerwear_style = models.CharField(max_length=50, default='')
+    
+    # Top
+    top = models.CharField(max_length=200, default='')
+    top_image = models.CharField(max_length=200, default='')
+    top_color = models.CharField(max_length=50, default='')
+    top_material = models.CharField(max_length=50, default='')
+    top_style = models.CharField(max_length=50, default='')
+    
+    # Bottom
+    bottom = models.CharField(max_length=200, default='')
+    bottom_image = models.CharField(max_length=200, default='')
+    bottom_color = models.CharField(max_length=50, default='')
+    bottom_material = models.CharField(max_length=50, default='')
+    bottom_style = models.CharField(max_length=50, default='')
+    
+    # Shoes
+    shoes = models.CharField(max_length=200, default='')
+    shoes_image = models.CharField(max_length=200, default='')
+    shoes_color = models.CharField(max_length=50, default='')
+    shoes_material = models.CharField(max_length=50, default='')
+    shoes_style = models.CharField(max_length=50, default='')
+    
+    # Vectors for ML
+    general_vector = models.CharField(max_length=2058, default='')
     description = models.CharField(max_length=2058, default='')
     style = models.CharField(max_length=100, choices=ClothingItem.Styles.choices, default="classic")
